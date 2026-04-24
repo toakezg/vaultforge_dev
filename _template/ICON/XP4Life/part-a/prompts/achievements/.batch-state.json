@@ -1,0 +1,25 @@
+{
+  "entries": {
+    "Trail Initiate.md": {
+      "last_output": "E:\\tools\\vaultforge\\_template\\ICON\\XP4Life\\part-a\\generated\\achievements\\20260411-154531-trail-initiate.png",
+      "last_run_at": "2026-04-11T15:46:17",
+      "request_hash": "eb578d42493e8f6398585f571d4c26ea4069fc93d74054318922fae24b7b9f2b"
+    },
+    "laurel-badge.md": {
+      "last_output": "E:\\tools\\vaultforge\\_template\\ICON\\XP4Life\\part-a\\generated\\achievements\\20260411-095409-laurel-badge.png",
+      "last_run_at": "2026-04-11T09:54:44",
+      "request_hash": "c0363f1e70cef8bd8e58defb080ad89d5377d7c6f2c92acb8736441f3435fe0c"
+    },
+    "medal-star.md": {
+      "last_output": "E:\\tools\\vaultforge\\_template\\ICON\\XP4Life\\part-a\\generated\\achievements\\20260411-095444-medal-star.png",
+      "last_run_at": "2026-04-11T09:55:32",
+      "request_hash": "ee7b37cdeff499406b22406056d13de3f24bbe93a93cde58b4e1272ada094799"
+    },
+    "shield-star.md": {
+      "last_output": "E:\\tools\\vaultforge\\_template\\ICON\\XP4Life\\part-a\\generated\\achievements\\20260411-095532-shield-star.png",
+      "last_run_at": "2026-04-11T09:56:11",
+      "request_hash": "0fd784df4cafb698a38932b57036ed7755dfc8eef43b88b03a364d33663de36c"
+    }
+  },
+  "version": 1
+}

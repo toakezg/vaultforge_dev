@@ -1,0 +1,71 @@
+# CHANGELOG
+
+## 2026-04-16
+
+- Activated `vaultforge-xp4l` as an XP4Life interpretation/progression section
+  in the root coordination docs and thread map.
+- Added XP4L-aware routing language to root docs so execution stays with
+  `vaultforge-coding` while interpretation lives in `vaultforge-xp4l`.
+
+- Promoted `vaultforge-coding` into the VaultForge Code section and added the
+  first local section doc set: `README.md`, `CODEX_START.md`, `SYSTEM.md`,
+  `PLAN.md`, `TASKS.md`, `CHANGELOG.md`, and `SIGN_UP.md`.
+- Updated root coordination docs so `vaultforge-coding` is no longer treated as
+  a parked folder and now routes code-bridge work through its own section.
+- Tightened the coding-section contract around the v2 bridge spec: the section
+  now owns execution, logging, usage tracking, and neutral event emission while
+  leaving XP interpretation to a future sibling lane.
+
+- Added a wrapper-owned ICON placeholder pool system under `ICON/` so prompt files can use generic `{name}` placeholders backed by matching pool files such as `weapon_type.md`, with clear missing-pool errors, resolved-value logging, and wrapper-level loop support via `--limit`.
+- Rewired `run-icons-part-a.bat` and `run_loop_rewards.bat` to use the new local ICON wrapper instead of handing raw batch folders straight to the external art generator.
+- Converted the XP4Life rewards `weapon.md` prompt into a placeholder-driven template and added the first dedicated `ICON\XP4Life\part-a\pools\` files for weapon type, element, theme, and tier values.
+
+- Added the task-property rule across root and promoted section docs: active and next tasks should carry stable `🆔` ids, recurring loops should use `🔁`, and dependency chains should use `⛔` for `before this` and reverse-linked follow-up tasks for `after this`.
+- Kept `due`, `scheduled`, `start`, and `created` out of the standard task format for now so section priorities stay clean before date-driven urgency rules are adopted.
+- Backfilled stable ids, recurrence markers, and dependency links into the current open root, engine, business, and art task pools where the sequencing or repeat pattern is clear.
+
+## 2026-04-14
+
+- Added the task-query rule: root and promoted section `TASKS.md` files should use automatic `tasks` code blocks above manual active/next lists.
+
+## 2026-04-13
+
+- Added the section-local task priority rule and marked current open root tasks with Obsidian Tasks priority markers.
+- Hard-set the task tag rule across root and promoted section docs: every task should include at least one section tag and one task-type tag.
+- Added the root/section thread model: root now acts as overhead coordinator while promoted section folders act as focused worker bases.
+- Added `THREAD_MAP.md` to route new threads between root, engine, business, and art.
+- Added section sign-up expectations and refreshed root docs around dedicated section thread startup.
+- Added a root `vaultforge-art` coordination base while leaving the actual sibling art runtime at `E:\tools\image_generation\vaultforge-art`.
+- Filled the placeholder sections in Nath's orchestration note with root, business, art, and thread-routing requirements.
+
+## 2026-04-12
+
+- Refreshed root docs to reflect that `vaultforge-engine\src\generate.py` is now the verified shared engine prototype while XP4Life root wrappers still use the sibling art generator.
+- Cleaned up business engine wording after the retarget: `run_business.ps1` now uses `EngineRoot` as the primary parameter name with `ArtRoot` preserved as an alias, and the business docs/helper terminal text now describe the shared engine accurately.
+- Renamed the shared engine entrypoint from `vaultforge-engine\src\generate_art.py` to `vaultforge-engine\src\generate.py` and updated engine wrappers, business wrappers, tests, and compatibility docs to use the neutral core name.
+- Retargeted `vaultforge-business\run_business.ps1` from the old art-owned generator path to `vaultforge-engine\src\generate.py` with no change to business output routing, prompt composition, preset/style mapping, or metadata writing.
+- Added `vaultforge-engine\COMPATIBILITY_BUSINESS.md` with business dry-run parity findings and a recommendation to retarget business directly to `vaultforge-engine\src\generate.py` in a later pass.
+- Verified business smoke and multi-variant dry-runs against direct engine equivalents without changing business defaults.
+- Added a compatibility bridge: `vaultforge-art\run_art.bat` now delegates to `vaultforge-engine\src\generate.py` while preserving `vaultforge-art` as the effective project root.
+- Added `VAULTFORGE_ENGINE_PROJECT_ROOT` support to the copied engine so lane wrappers can preserve their own default input/output paths.
+- Added `vaultforge-engine\COMPATIBILITY.md` with parity findings, dry-run commands, results, cleanup note, and remaining blockers before business retargeting.
+- Added the first copy-based `vaultforge-engine` prototype with copied generator source, copied/adapted tests, packaging metadata, engine smoke prompt, verification notes, and `run_engine.bat`.
+- Verified the copied engine with unit tests, direct dry-run, batch-smoke dry-run, and launcher dry-run.
+
+## 2026-04-11
+
+- Added `ARCHITECTURE - engine extraction.md` to document the staged move from `vaultforge-art` as de facto engine toward a dedicated `vaultforge-engine`.
+- Added the first `vaultforge-engine/` documentation skeleton with README, SYSTEM, PLAN, TASKS, and CODEX_START.
+- Updated root docs to frame `vaultforge-engine` as the future shared core while preserving current sibling generator behavior.
+- Recorded the first successful XP4Life Icons Part A live generation run and copied the generated examples from `_template/` into the workspace output folders.
+- Added `NOTE/Icons - part A - output review.md` with generated example embeds and first-pass tuning notes.
+- Rewrote `NOTE/How to - Create XP4Life Icon set (obsidian).md` as a transferable Obsidian icon-set workflow and listed the required `iconic` plugin ID.
+- Added `NOTE/VaultForge Icons - branch plan.md` to capture the broader client/logo-pack direction from the phone notes.
+- Added draft reference notes for client intake, usage stats, pricing, and Facebook ad copy under `Reference/`.
+- Added the core workspace docs: `README.md`, `SYSTEM.md`, `PLAN.md`, `TASKS.md`, and `CODEX_START.md`.
+- Added XP4Life Icons Part A reference docs under `NOTE/`.
+- Added a local XP4Life Icons Part A prompt bank under `ICON/XP4Life/part-a/prompts/`.
+- Added `run-icons-part-a.bat` to route this vault's prompt folders into the existing `vaultforge-art` image generator while keeping outputs in this workspace.
+- Verified the local launcher in `--dry-run` mode across all four Part A categories.
+- Reserved `ICON/XP4Life/part-a/generated/` as the local output destination for this lane.
+- Mirrored the operator-facing Part A assets into `_template/` and added `_template/Home.md` as a simple entry point for newly created vaults.

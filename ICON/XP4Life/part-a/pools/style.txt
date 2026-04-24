@@ -1,0 +1,10 @@
+Pixel
+Minimal
+Line-art
+Engraved
+Blueprint
+Holographic
+Glyphic
+Runic
+UI-icon
+Emblem

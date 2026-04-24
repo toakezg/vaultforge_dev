@@ -1,0 +1,12 @@
+Iron
+Gold
+Obsidian
+Crystal
+Glass
+Marble
+Bone
+Energy
+Liquid
+Plasma
+Stone
+Neon

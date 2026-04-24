@@ -1,0 +1,1222 @@
+Below is a convo about the next step we gotta start on before proceding with vaultforge-business threads. && below the conversation is your prompt, please read through throroughly.
+______
+CONVO:
+
+CLI.md
+File
+Do u recall vaultforge-business as being the root for all business related generating icons logos brands ect. i saved your packs cover, icon, logo, with a client-pack readme. I want to start progress in setting this vaultforge\vaultforge-business\where all goes like the XP4Life mini branch like as it worked well being hooked into vaultforge-art. want to help with a prompt for codex to head in this direction and if u want, first provide any more files for codex to scope in on aswell like CLI that will have to be implemented. maybe a Bundle of --presets & --styles & --mods that are business or will work real well. also include new command such as --tweak and --input-image maybe other editing commands. so far we have this built in: see attaached. and also touch on the method i have started using with run_bank.bat using prompts-template.txt tho preferebly md in the .\my-prompts-bank. And all that comes from vaultforge-business should have a different output pipline in place as to not mix with the playground - hook back into vaultforge-business\generated\client[or other info used]-taggedwith-preset-usedand-style for clarity when sorting through generated images especially from batch or bank prompts. We can also start to touch on a better gallery style viewing system for images either in -art or -business first. tho that should come with when the -business pipline is sorted
+
+
+Thought
+
+Thought for 16s
+Yeah — that direction makes sense.
+
+vaultforge-business feels like the right root for the business-facing lane, while vaultforge-art stays the core engine it hooks into. That matches the XP4Life mini-branch idea well: keep the generator centralized, but give business work its own prompt bank, config, wrappers, output routing, and later its own gallery/view layer. Your current CLI already has a solid base for presets, styles, mods, batch folders, .md prompt notes, @conf files, reruns, and batch-state tracking, so this is more of a scoped extension than a rebuild. 
+
+
+What I’d have Codex build next is:
+
+a business wrapper lane around vaultforge-art
+
+business-only preset/style/mod libraries
+
+separate output routing
+
+prompt-bank-first workflow using .md
+
+new edit-oriented flags like --tweak and --input-image
+
+a later gallery/index step for browsing client output
+
+The current CLI already supports repeatable presets, styles, mods, batch folders, .md prompts, reruns, and config files, which gives Codex a good foundation to extend rather than replace. 
+
+
+Files I’d add first
+In E:\tools\vaultforge\vaultforge-business\
+
+README.md
+SYSTEM.md
+PLAN.md
+TASKS.md
+CHANGELOG.md
+CODEX_START.md
+
+run_business.bat
+run_business_bank.bat
+run_business_smoke.bat
+open_business_venv_terminal.bat
+
+business_defaults.conf
+business_smoke.conf
+
+my-prompts-bank\
+  _template\
+    client-pack-template.md
+    logo-template.md
+    icon-template.md
+    cover-template.md
+    brand-board-template.md
+  client-name\
+    logo\
+    icon\
+    cover\
+    brand-board\
+
+generated\
+  _index\
+  _gallery\
+  _contact-sheets\
+And in vaultforge-art, likely these implementation touchpoints:
+
+generate_art.py
+preset_library.py
+style_library.py
+mod_library.py
+output_paths.py
+batch_parser.py
+gallery_builder.py   # new or future
+Business preset/style/mod bundle to add
+I’d start with these.
+
+Presets
+
+business-logo
+
+business-icon
+
+business-cover
+
+brand-mark
+
+brand-board
+
+client-pack
+
+social-brand-tile
+
+mascot-logo
+
+wordmark
+
+badge-emblem
+
+Styles
+
+clean-corporate
+
+luxury-minimal
+
+modern-startup
+
+bold-retro-brand
+
+friendly-flat
+
+premium-3d
+
+mono-mark
+
+vector-crisp
+
+editorial-brand
+
+neon-signage
+
+Mods
+
+trustworthy
+
+premium
+
+playful
+
+bold
+
+elegant
+
+local-friendly
+
+high-contrast
+
+small-size-readable
+
+print-safe
+
+transparent-bg-ready
+
+Those sit nicely beside your existing preset/style/mod model rather than fighting it. The current CLI already treats --style and --mod as repeatable, which is exactly what you want for brand generation passes. 
+
+
+New commands/flags worth adding
+These are the next useful ones:
+
+--tweak "make it more minimal and premium"
+--input-image ".\refs\logo-rough.png"
+--input-mask ".\refs\mask.png"
+--reference-image ".\refs\moodboard-1.png"
+--reference-strength 30
+--client "acme"
+--job "pack-01"
+--tag "luxury-minimal"
+--out-dir "custom path"
+--gallery
+--contact-sheet
+--variants 4
+--seed 1234
+--edit-mode tweak|remix|upscale|vector-clean
+--transparent-safe
+--no-timestamp
+--slug-from prompt|client|file
+Best practical meaning:
+
+--tweak = same source prompt/image, directed refinement pass
+
+--input-image = edit or remix from a supplied image
+
+--reference-image = style/mood guidance without strict edit mode
+
+--client and --job = routing + naming + sorting
+
+--gallery = rebuild HTML/MD gallery after run
+
+--contact-sheet = quick visual compare board
+
+--variants = same prompt, multiple outputs
+
+--transparent-safe = bias for logo/icon work
+
+Output pipeline I’d have Codex enforce
+Yes, separate this from playground output.
+
+I’d use:
+
+vaultforge-business\
+  generated\
+    {client}\
+      {asset-type}\
+        {preset}\
+          {style}\
+            2026-04-11\
+              job-{job-or-auto}\
+                images...
+                run.json
+                prompt.txt
+                prompt.source.md
+                contact-sheet.jpg
+                gallery-entry.json
+Example:
+
+vaultforge-business\generated\anton\logo\business-logo\luxury-minimal\2026-04-11\job-pack-01\
+And filenames like:
+
+anton__logo__business-logo__luxury-minimal__premium-bold__v01.png
+anton__logo__business-logo__luxury-minimal__premium-bold__v02.png
+That gives you sorting by:
+
+client
+
+asset type
+
+preset
+
+style
+
+run date
+
+job/batch
+
+Way clearer than mixing everything into the playground.
+
+Prompt-bank method
+Yep — shift from prompts-template.txt toward markdown banks.
+
+Your CLI already supports .md prompt files in batch folders, with frontmatter and one opening H1 before the body, and uses the source filename stem for output naming. That makes .md the right format for the business lane. 
+
+
+I’d structure each prompt note like this:
+
+---
+client: anton
+asset_type: logo
+preset: business-logo
+styles:
+  - luxury-minimal
+  - vector-crisp
+mods:
+  - premium
+  - small-size-readable
+tags:
+  - barber
+  - local
+  - masculine
+background: transparent
+quality: high
+size: 1024x1024
+---
+
+# Anton Logo Option 01
+
+Create a premium but approachable barbershop logo for "Anton".
+Use a strong emblem or monogram that reads clearly at small sizes.
+Keep it clean, bold, masculine, and local-business friendly.
+Avoid clutter, extra text, mockup backgrounds, and overly literal scissors unless elegantly integrated.
+Focus on brand identity, silhouette, and strong contrast.
+That lets Codex later parse frontmatter automatically.
+
+Codex prompt to kick this off
+Use this as the main handoff prompt:
+
+We are extending E:\tools\vaultforge\vaultforge-business as the business-facing branch that hooks into the existing vaultforge-art generator, similar in spirit to the XP4Life mini-branch pattern.
+
+Goal:
+Build vaultforge-business into the root lane for all business-related generation: logos, icons, covers, brand marks, client packs, and future branded asset workflows. Keep vaultforge-art as the core engine. Do not fork or duplicate the generator unless absolutely necessary. Prefer wrappers, config, prompt banks, and path-routing around the existing art pipeline.
+
+Current known CLI base:
+- run_art.bat exists and launches generate_art.py through the local venv
+- CLI already supports:
+  --preset
+  --style (repeatable)
+  --mod (repeatable)
+  --batch [folder]
+  --batch-smoke
+  --rerun
+  --dry-run
+  @config.conf files
+- Batch mode already supports .txt, .md, .markdown, and extensionless prompt files
+- Markdown prompt files may include frontmatter and one opening H1 before the prompt body
+- Batch state tracking already exists through .batch-state.json
+- Existing presets/styles/mods include icon, obsidian-cover, vaultforge, artifact-card, sacred-scene, and styles like blueprint, cinematic, painterly, photoreal, etc.
+
+What to implement:
+1. Create a vaultforge-business wrapper workflow around vaultforge-art
+2. Add business-specific presets, styles, and mods
+3. Add separate output routing so business outputs never mix with playground/art outputs
+4. Prefer markdown prompt banks in .\my-prompts-bank over txt templates
+5. Add support planning and initial CLI plumbing for:
+   --tweak
+   --input-image
+   --reference-image
+   --client
+   --job
+   --tag
+   --gallery
+   --contact-sheet
+   --variants
+   --transparent-safe
+6. Add starter batch wrappers and config files for business runs
+7. Add starter docs so this branch is understandable and reusable
+
+Business preset bundle to add:
+- business-logo
+- business-icon
+- business-cover
+- brand-mark
+- brand-board
+- client-pack
+- social-brand-tile
+- mascot-logo
+- wordmark
+- badge-emblem
+
+Business styles:
+- clean-corporate
+- luxury-minimal
+- modern-startup
+- bold-retro-brand
+- friendly-flat
+- premium-3d
+- mono-mark
+- vector-crisp
+- editorial-brand
+- neon-signage
+
+Business mods:
+- trustworthy
+- premium
+- playful
+- bold
+- elegant
+- local-friendly
+- high-contrast
+- small-size-readable
+- print-safe
+- transparent-bg-ready
+
+Output routing target:
+vaultforge-business\generated\{client}\{asset-type}\{preset}\{style}\{date}\job-{job}\
+
+Include saved metadata alongside images:
+- run.json
+- prompt.txt
+- prompt.source.md when available
+- gallery-entry.json
+- contact-sheet.jpg when requested
+
+Files to create in vaultforge-business:
+- README.md
+- SYSTEM.md
+- PLAN.md
+- TASKS.md
+- CHANGELOG.md
+- CODEX_START.md
+- run_business.bat
+- run_business_bank.bat
+- run_business_smoke.bat
+- open_business_venv_terminal.bat
+- business_defaults.conf
+- business_smoke.conf
+- my-prompts-bank\_template\client-pack-template.md
+- my-prompts-bank\_template\logo-template.md
+- my-prompts-bank\_template\icon-template.md
+- my-prompts-bank\_template\cover-template.md
+- my-prompts-bank\_template\brand-board-template.md
+
+Implementation preference:
+- minimal invasive changes to vaultforge-art
+- use wrappers and helper modules where possible
+- keep Windows batch-first UX
+- keep dry-run support
+- keep config-file support
+- keep future extensibility for gallery/index generation
+
+Also:
+- propose a simple gallery/index system for later, ideally HTML or markdown generated from run metadata
+- document any assumptions
+- if exact edit API behavior is not yet available in the current generator, stub the flags cleanly and document them for future wiring
+- preserve naming clarity and client sorting
+
+Please first inspect the current repo layout and CLI implementation, then make a concrete plan, then implement the safest high-value slice first.
+Best first slice for Codex
+I’d have it do this in order:
+
+run_business.bat wrapper
+
+business output routing
+
+markdown prompt-bank folder + templates
+
+business preset/style/mod libraries
+
+--client, --job, --tag
+
+stub --tweak and --input-image
+
+basic gallery manifest output
+
+That gets the lane alive fast without overcommitting to edit internals too early.
+
+Tiny design call I’d make now
+I’d keep:
+
+vaultforge-art = engine
+
+vaultforge-business = operator lane / client work lane
+
+That separation is clean and will age well.
+
+Also, yes, I’d move hard toward .md prompt banks instead of .txt for business work because you’ll want frontmatter, notes, client tags, and rerunnable packs, and your current CLI already supports markdown prompt files for batch input. 
+
+
+If you want, next I can turn this into the actual starter files bundle content too — like README.md, SYSTEM.md, PLAN.md, TASKS.md, and the first .bat wrappers.
+
+
+would dataview help with sorting organizing viewing and stuff? 
+
+Short answer: yeah — Dataview will be insanely useful for vaultforge-business.
+It basically turns your Obsidian vault into a live database of your generated assets.
+
+And with how you're structuring things (clients, presets, styles, batches), it’s actually a perfect fit.
+
+🔧 What Dataview will give you (in YOUR setup)
+Instead of digging through folders like:
+
+generated\anton\logo\business-logo\luxury-minimal\...
+You can create notes that auto-show things like:
+
+all logos for a client
+
+all “luxury-minimal” styles across clients
+
+latest batch runs
+
+compare variants
+
+track which prompts worked best
+
+🧠 The key idea (this is the unlock)
+Each image = a data point
+
+Dataview reads:
+
+YAML frontmatter (in your .md prompt files)
+
+OR inline fields
+
+OR folder structure (optional)
+
+So your prompt files become your control + tracking system
+
+✅ Example: Your prompt file (perfect for Dataview)
+---
+client: anton
+asset_type: logo
+preset: business-logo
+styles:
+  - luxury-minimal
+  - vector-crisp
+mods:
+  - premium
+  - small-size-readable
+status: generated
+rating: 8
+tags:
+  - barber
+  - local
+---
+
+# Anton Logo v1
+
+Create a premium but approachable barbershop logo...
+🔍 Now Dataview turns that into a dashboard
+📊 Example 1 — All logos for a client
+table preset, styles, rating
+from "my-prompts-bank"
+where client = "anton" and asset_type = "logo"
+sort rating desc
+🎯 Example 2 — Find your best styles
+table client, asset_type, rating
+from "my-prompts-bank"
+where contains(styles, "luxury-minimal")
+sort rating desc
+⚡ Example 3 — What still needs generating
+list
+from "my-prompts-bank"
+where status != "generated"
+🔥 Example 4 — Recent work (auto feed)
+table client, asset_type, preset
+from "my-prompts-bank"
+sort file.ctime desc
+limit 10
+🖼️ Viewing images inside Dataview
+If you store output paths in your note:
+
+image: generated/anton/logo/.../logo_v1.png
+You can do:
+
+table client, asset_type, embed(image)
+from "my-prompts-bank"
+Now you’ve got a visual gallery inside Obsidian 🤯
+
+🧩 Where this fits your system
+You’ll have 3 layers:
+
+1. Prompt Layer (your .md files)
+Source of truth
+
+Editable
+
+Tagged + structured
+
+2. Generation Layer (vaultforge-art)
+Runs CLI
+
+Outputs images
+
+3. View Layer (Dataview)
+Dashboards
+
+Galleries
+
+Sorting/filtering
+
+🧠 Why this is PERFECT for you specifically
+You already:
+
+like structured data (YAML ✔️)
+
+like visual systems (graph view ✔️)
+
+are building pipelines (vaultforge ✔️)
+
+want reusable packs ✔️
+
+Dataview basically becomes:
+
+your client manager + asset browser + experiment tracker
+
+⚡ Next-level ideas (later)
+Once you're comfy, you can:
+
+⭐ rate outputs → auto sort best designs
+
+🧠 track which presets/styles perform best
+
+📦 group full client packs
+
+📈 build "success patterns" (like your numerology logic but for design)
+
+🔁 rerun only low-rated prompts
+
+🧾 auto-generate client delivery sheets
+
+🔥 My recommendation (simple start)
+Start with just this:
+
+Switch prompt bank → .md (you already leaning this way)
+
+Add YAML like:
+
+client
+
+asset_type
+
+preset
+
+styles
+
+Create ONE dashboard note:
+
+“VaultForge Business Dashboard”
+
+If you want next step, I can:
+
+👉 build you a ready-to-paste Dataview dashboard page
+👉 or hook it into your generated folder + gallery system
+👉 or even tie it into your XP4Life icon pipeline style
+
+This is one of those upgrades that quietly turns everything into a system 😄
+
+
+does the generator pick up on random tags such as barber, model, plumber, carpenter, gas , air-balloon-pilot; entries and understand what their referencing when it comes into generating the image, or does all industries/jobs/rolls/services have to be proper set in and defined before it picks up on it?
+
+Short answer:
+👉 Yes — it does understand tags like barber, plumber, carpenter, etc. without you pre-defining them.
+But… 👉 how well it uses them depends on where and how you feed them in.
+
+🧠 What’s actually happening under the hood
+The model already has built-in knowledge of:
+
+professions (barber, plumber, carpenter)
+
+objects (scissors, pipes, tools)
+
+vibes (premium, modern, rustic)
+
+contexts (logo, icon, brand)
+
+So when it sees:
+
+“barber logo”
+
+It already knows:
+
+clippers ✂️
+
+scissors
+
+barbershop poles
+
+masculine/local branding vibe
+
+You don’t need to “register” industries beforehand.
+
+⚠️ BUT — tags alone aren’t enough (important)
+If you just have:
+
+tags:
+  - barber
+  - premium
+  - modern
+👉 The generator won’t automatically use them
+UNLESS your system injects them into the prompt.
+
+🔑 This is the real rule
+Tags = data
+Prompt = what the model actually sees
+
+So you need a bridge like:
+
+Create a {tags} themed {preset}...
+🧩 How to make it work in VaultForge (proper way)
+Option 1 — Inject tags automatically (BEST)
+Modify your generator logic like:
+
+industry = ", ".join(frontmatter.get("tags", []))
+
+prompt = f"""
+Create a {preset} for a {industry} business.
+{user_prompt}
+"""
+Now this:
+
+tags:
+  - barber
+  - local
+  - masculine
+Becomes:
+
+Create a business-logo for a barber, local, masculine business...
+🔥 Now it WORKS every time.
+
+🧪 Option 2 — Keep tags but reference manually
+Inside your prompt:
+
+Create a premium logo for a barber business.
+Tags just help Dataview + sorting.
+
+⚡ Option 3 — Hybrid (what I recommend for you)
+Use both:
+
+tags:
+  - barber
+  - local
+  - masculine
+AND your prompt stays clean:
+
+Create a premium logo for this business.
+Then your system auto-injects:
+
+Industry: barber, local, masculine
+🧠 How smart is it with random roles?
+It handles:
+
+✅ Common jobs
+
+barber, plumber, electrician, carpenter
+
+✅ Niche jobs
+
+blacksmith, tattoo artist, tarot reader
+
+✅ Weird/fun
+
+air-balloon-pilot
+
+dungeon master
+
+relic trader
+
+But:
+
+⚠️ If it’s too abstract:
+
+tags:
+  - flow
+  - essence
+  - resonance
+👉 It gets vague unless guided.
+
+🎯 Best practice for your system
+Use structured meaning like:
+industry: barber
+style_tags:
+  - premium
+  - minimal
+vibe:
+  - masculine
+Then inject cleanly:
+
+Create a premium, minimal logo for a barber business with a masculine tone.
+🔥 VaultForge-level upgrade idea (you’ll like this)
+Add a mapping layer:
+
+industry: barber
+→ expands to:
+
+INDUSTRY_MAP = {
+  "barber": "barber shop, hair clippers, scissors, grooming tools, classic barbershop identity"
+}
+Now your prompt becomes:
+
+Create a logo for a barber shop, hair clippers, scissors, grooming tools...
+💥 Way more consistent outputs.
+
+🧩 Final takeaway
+❌ You do NOT need to predefine industries
+
+✅ The model already understands them
+
+⚠️ BUT your generator must inject tags into the prompt
+
+🔥 Best system = tags + auto prompt expansion
+
+If you want next step, I can:
+
+👉 design your VaultForge tag → prompt injection system
+👉 or build a business industry dictionary (barber, plumber, etc.)
+👉 or wire it directly into your CLI (--tags, --industry)
+
+This is one of those small systems that massively levels up consistency 👌
+
+
+The current high-value slice is to keep improving the business wrapper without disturbing the dirty vaultforge-art worktree.
+
+ive been thinking vaultforge-art has gotten messy and might not be bet route but what we hook into generate_art  and that is solid, we kinda need to solid 'generating engine' out of -art and into -engine for art to go to what it should be as experimental art prompts ect. what u think?
+
+Yeah — I think that’s the cleaner long-term move.
+
+Right now vaultforge-art sounds like it’s doing two jobs at once:
+
+the actual generation engine
+
+the art playground / experimental branch
+
+That usually gets messy fast, because the stable bits and the experimental bits start leaning on each other.
+
+My take
+You’ll likely get a better structure by splitting it into:
+
+vaultforge-engine → the reusable generation core
+
+vaultforge-art → the art-facing lane, presets, experiments, prompt packs
+
+vaultforge-business → the business/client-facing lane, wrappers, prompt banks, output routing
+
+So instead of:
+
+vaultforge-art = engine + art lane + experimental zone
+you get:
+
+vaultforge-engine = core generator
+vaultforge-art = creative lane
+vaultforge-business = client/business lane
+That is way more sane.
+
+Why this is a good idea
+Because the thing you actually want to protect is not “art,” it’s the engine.
+
+The core bits are things like:
+
+generate_art.py
+
+CLI parsing
+
+batch handling
+
+prompt file loading
+
+preset/style/mod plumbing
+
+output writing
+
+metadata saving
+
+future image edit hooks
+
+Those are not really “art” features. They are engine features.
+
+So naming them under -art makes the repo pull in too much responsibility.
+
+What this fixes
+If you split it properly:
+
+vaultforge-engine
+becomes the stable dependency layer
+
+vaultforge-art
+can go wild with:
+
+strange presets
+
+art prompt banks
+
+weird style experiments
+
+playground outputs
+
+unstable prompt hacks
+
+vaultforge-business
+can stay cleaner and more controlled:
+
+client packs
+
+logos
+
+icons
+
+covers
+
+brand boards
+
+output sorting
+
+gallery/index later
+
+That way, experimental art work no longer risks muddying the thing business depends on.
+
+Best architecture
+I’d aim for this:
+
+E:\tools\vaultforge\
+  vaultforge-engine\
+  vaultforge-art\
+  vaultforge-business\
+vaultforge-engine
+Contains:
+
+core generator code
+
+shared CLI
+
+preset/style/mod loading system
+
+batch parser
+
+metadata writer
+
+output router base
+
+image input/edit plumbing later
+
+install/setup logic if you want one engine venv
+
+vaultforge-art
+Contains:
+
+art-specific wrappers
+
+art prompt banks
+
+art presets/styles/mods
+
+experimental outputs
+
+playground/gallery ideas
+
+vaultforge-business
+Contains:
+
+business wrappers
+
+client prompt banks
+
+business preset/style/mod bundle
+
+business outputs
+
+client sorting/gallery/dashboard layer
+
+Important caution
+I would not do a huge rewrite first.
+
+Best move is probably:
+
+Phase 1
+Extract the stable engine pieces from vaultforge-art into vaultforge-engine
+
+Phase 2
+Make vaultforge-art call into vaultforge-engine
+
+Phase 3
+Make vaultforge-business call into vaultforge-engine
+
+So for a while both lanes use the new engine, and vaultforge-art becomes just another consumer of it.
+
+What not to do
+I would avoid:
+
+renaming everything all at once
+
+moving every file before you know boundaries
+
+trying to “perfect” the engine before extracting it
+
+breaking current wrappers while cleaning structure
+
+Because that’s how you lose momentum.
+
+Safer practical approach
+Treat it like this:
+
+Step A — identify engine files
+
+what is truly reusable and not art-specific?
+
+Step B — copy/extract
+
+move those into vaultforge-engine
+
+Step C — thin compatibility layer
+
+leave vaultforge-art wrappers working, but now they call the engine
+
+Step D — build business on top of engine
+
+no touching dirty vaultforge-art worktree more than needed
+
+A good boundary test
+Ask this for each file:
+
+“Would business need this too?”
+
+If yes, it probably belongs in vaultforge-engine.
+
+Examples that likely belong in engine:
+
+prompt loader
+
+CLI arg parser
+
+batch mode
+
+frontmatter parsing
+
+request builder
+
+output naming
+
+metadata writer
+
+Examples that likely stay in art:
+
+fantasy/art presets
+
+experimental style fragments
+
+smoke prompts specific to art
+
+playground wrappers
+
+Examples that likely stay in business:
+
+client pack templates
+
+business presets
+
+client folder routing rules
+
+future gallery/dashboard notes
+
+Naming thought
+I like vaultforge-engine more than trying to keep pretending vaultforge-art is the root.
+
+Because later you may end up with more lanes too:
+
+vaultforge-icons
+
+vaultforge-social
+
+vaultforge-print
+
+vaultforge-xp4life
+
+And they can all hook into the same engine.
+
+My recommendation
+Yes — I think you should do it.
+
+Not as a dramatic rewrite, but as a controlled extraction.
+
+A very clean target would be:
+
+vaultforge-engine   = stable shared generation core
+vaultforge-art      = experimental/creative lane
+vaultforge-business = client/business lane
+That feels much more aligned with what the project is becoming.
+
+If you want, I can draft the Codex extraction prompt for moving from -art to -engine in a safe staged way.
+________
+PROMPT:
+You are operating from the VaultForge root workspace.
+
+Current top priority:
+Improve project structure without disturbing the messy/dirty `vaultforge-art` worktree more than necessary.
+
+## Context
+
+VaultForge has been evolving in a way where `vaultforge-art` is currently doing too many jobs at once:
+
+* acting like the generation engine
+* acting like the art playground
+* carrying experimental presets/prompts/wrappers
+* being the thing newer branches hook into
+
+That is no longer the cleanest structure.
+
+We want to move toward a clearer separation of responsibilities:
+
+* `vaultforge-engine` = stable shared generation core
+* `vaultforge-art` = art-facing / experimental / playground lane
+* `vaultforge-business` = business / client-facing generation lane
+
+## Architectural intention
+
+The actual reusable image-generation core should not live under `vaultforge-art` long term.
+
+The reusable parts should be extracted into a new shared root project:
+
+`vaultforge-engine`
+
+Then both:
+
+* `vaultforge-art`
+* `vaultforge-business`
+
+should become consumers of that engine.
+
+This is similar to how a stable engine supports multiple lanes, instead of one lane pretending to be the engine.
+
+## Important constraints
+
+1. Do **not** perform a destructive rewrite.
+2. Do **not** disturb the current dirty `vaultforge-art` worktree unless required.
+3. Prefer a staged extraction approach.
+4. Preserve working behavior wherever possible.
+5. Favor wrappers, adapters, and compatibility shims over risky refactors.
+6. Keep Windows-first usability in mind.
+7. Keep existing CLI behavior and conventions in scope where practical.
+8. If exact implementation details are unclear, inspect first and produce a concrete plan before changing anything.
+
+## High-level goal
+
+We want to identify what belongs to a reusable shared engine versus what is art-lane-specific or business-lane-specific.
+
+### Likely engine concerns
+
+These are examples of things that probably belong in `vaultforge-engine` if they are currently embedded in `vaultforge-art`:
+
+* core generator entrypoint
+* CLI parsing
+* config / argument-file support
+* batch mode logic
+* prompt file loading
+* markdown/frontmatter prompt parsing
+* preset/style/mod plumbing
+* output naming helpers
+* metadata writing
+* API request building
+* future image edit / input-image plumbing
+* common utilities
+
+### Likely art-lane concerns
+
+These are examples of things that should likely remain in or move under `vaultforge-art`:
+
+* art playground wrappers
+* experimental prompt packs
+* fantasy/creative presets
+* experimental styles/mods
+* art-specific smoke tests
+* playground output routing
+
+### Likely business-lane concerns
+
+These are examples of things that should likely remain in or move under `vaultforge-business`:
+
+* client prompt banks
+* business presets/styles/mods
+* client-oriented output routing
+* gallery/index plans for business assets
+* client pack wrappers
+* business metadata conventions
+
+## What I want you to do
+
+### Phase 1 — inspect
+
+Inspect the current VaultForge root structure and identify:
+
+* current repo/folder layout
+* where the real reusable engine logic currently lives
+* what `vaultforge-business` is currently depending on
+* what `vaultforge-art` contains that is actually engine code
+* what can be extracted safely first
+
+### Phase 2 — propose
+
+Create a concrete staged extraction plan with minimal risk.
+
+The plan should answer:
+
+* what should move into `vaultforge-engine`
+* what should stay in `vaultforge-art`
+* what should stay in `vaultforge-business`
+* what compatibility layer or wrapper approach should be used
+* what should be copied first versus deferred
+* what files should be created at the root level
+
+### Phase 3 — implement the safest high-value slice
+
+Prefer the smallest valuable slice that moves the project in the right direction.
+
+Examples of acceptable first-slice work:
+
+* create `vaultforge-engine` skeleton/docs
+* create a plan document
+* identify and extract non-controversial shared modules
+* add compatibility wrappers so `vaultforge-art` still works
+* prep `vaultforge-business` to target `vaultforge-engine` later
+* document assumptions and boundaries
+
+## What I do NOT want
+
+* no giant rename-everything rewrite
+* no breaking current working wrappers casually
+* no assuming `vaultforge-art` should remain the long-term root
+* no deleting experimental art material just because it is messy
+* no mixing business output back into playground output
+
+## Deliverables I want
+
+At minimum, produce and/or update suitable root-level documentation such as:
+
+* `README.md`
+* `SYSTEM.md`
+* `PLAN.md`
+* `TASKS.md`
+* `CHANGELOG.md`
+* `CODEX_START.md`
+
+If helpful, add one dedicated architecture note such as:
+
+* `ARCHITECTURE - engine extraction.md`
+
+I also want a clear statement of:
+
+* proposed directory structure
+* staged migration path
+* first recommended implementation slice
+
+## Root-level framing
+
+Assume VaultForge root may soon look more like:
+
+* `vaultforge-engine`
+* `vaultforge-art`
+* `vaultforge-business`
+
+and possibly later additional lanes.
+
+The key shift is:
+
+`vaultforge-art` should become what its name suggests:
+an art/experimental lane
+
+while `vaultforge-engine` becomes the shared stable generator core.
+
+## Decision rule
+
+Use this rule when classifying code/files:
+
+“If both art and business would need it, it probably belongs in `vaultforge-engine`.”
+
+## Execution style
+
+Be careful, scoped, and practical.
+Inspect first.
+Plan second.
+Then implement the safest high-value slice.
+Prefer clarity and long-term maintainability over cleverness.
+
+At the end, summarize:
+
+* what you found
+* what you classified as engine/art/business
+* what you changed
+* what remains for later
+* any risks or open questions
+
+
+

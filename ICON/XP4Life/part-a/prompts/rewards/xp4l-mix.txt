@@ -1,0 +1,4 @@
+{rarity} {theme} icon, made of {material}, 
+with {state} energy, {shape} silhouette, 
+in {style} style, representing {function}, 
+visual behavior: {behavior}

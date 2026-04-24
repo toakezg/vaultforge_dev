@@ -1,0 +1,11 @@
+Common
+Uncommon
+Rare
+Epic
+Legendary
+Mythic
+Exotic
+Ancient
+Corrupted
+Divine
+Prototype

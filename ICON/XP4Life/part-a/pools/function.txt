@@ -1,0 +1,12 @@
+Quest
+Achievement
+Title
+Reward
+Skill
+Upgrade
+Milestone
+Currency
+Modifier
+Buff
+Key
+Unlock

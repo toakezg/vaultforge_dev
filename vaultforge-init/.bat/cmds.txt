@@ -1,0 +1,143 @@
+cd
+cd ..
+cd /d E:\XP4Life
+dir /b
+dir /s /b
+tree /f
+where codex
+cls
+
+Where am I?
+cd
+List current folder
+Files + folders
+dir
+Clean list
+dir /b
+Folders only
+dir /ad /b
+Files only
+dir /a-d /b
+Everything recursively
+dir /s /b
+Folders only recursively
+dir /ad /s /b
+Move around
+Go into a folder
+cd foldername
+Move up one level
+cd ..
+Move up two levels
+cd ..\..
+Jump to an exact path
+cd /d E:\tools\image_generation\vaultforge-art
+
+/d matters when changing drive too.
+
+Quick structure view
+Folder tree only
+tree
+Folder tree with files
+tree /f
+Make folders
+mkdir NewFolder
+
+or
+
+md NewFolder
+Create nested folders
+mkdir prompts\icons\rewards\rare
+Open current folder in Explorer
+start .
+Open a file
+start README.md
+Open Obsidian-style work folders quickly
+start E:\XP4Life
+Copy paths out neatly
+Save all files and folders to a text file
+dir /s /b > filelist.txt
+Save folders only
+dir /ad /s /b > folders.txt
+Save files only
+dir /a-d /s /b > files.txt
+Search
+Find a file by name from current folder down
+dir /s /b *dashboard*
+Find all .md files
+dir /s /b *.md
+Find all .bat files
+dir /s /b *.bat
+Delete carefully
+Delete a file
+del file.txt
+Delete folder and contents
+rmdir /s foldername
+Delete folder without prompt
+rmdir /s /q foldername
+
+Be careful with /s /q.
+
+Rename
+Rename file
+ren oldname.txt newname.txt
+Rename folder
+ren OldFolder NewFolder
+Move and copy
+Move file
+move file.txt E:\target\
+Move folder
+move MyFolder E:\target\
+Copy file
+copy file.txt E:\target\
+Copy folder recursively
+xcopy MyFolder E:\target\MyFolder /e /i
+Useful terminal quality-of-life
+Clear screen
+cls
+Command history in current session
+doskey /history
+Re-run previous commands
+
+Use keyboard:
+
+↑ = previous
+↓ = next
+Tab = autocomplete
+
+# Very useful for your workflow
+
+## Check if command exists
+where codex
+where python
+where node
+where npm
+
+##Check versions
+python --version
+node -v
+npm -v
+codex --version
+
+## Run a batch from current folder
+run_loop_rewards.bat
+or
+ .\run_loop_rewards.bat
+
+## Run Python script directly
+python script.py
+## Run project venv Python directly
+E:\tools\image_generation\vaultforge-art\.venv\Scripts\python.exe generate_art.py
+Best habits for your setup
+
+For your kind of projects, these are the most useful patterns:
+
+1. “Go there”
+cd /d E:\XP4Life
+2. “What’s here”
+dir /b
+3. “What’s here recursively”
+dir /s /b
+4. “Find that file”
+dir /s /b *xp4l*
+5. “Dump structure to a text file”
+tree /f > structure.txt

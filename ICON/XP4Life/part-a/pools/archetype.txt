@@ -1,0 +1,10 @@
+Warrior
+Scholar
+Builder
+Seeker
+Guardian
+Trickster
+Architect
+Oracle
+King
+Wanderer

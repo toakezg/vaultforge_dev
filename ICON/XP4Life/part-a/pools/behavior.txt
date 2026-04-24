@@ -1,0 +1,10 @@
+Expanding
+Collapsing
+Orbiting
+Rotating
+Splitting
+Merging
+Charging
+Discharging
+Anchored
+Floating

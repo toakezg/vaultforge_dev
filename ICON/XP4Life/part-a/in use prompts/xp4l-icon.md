@@ -1,0 +1,1 @@
+Generate an icon for the main XP4Life directory. the Image must be easily seen and distinguished as small sizes and may include inspiration from {theme} with the colors Blue and Gold being the Main colors of XP4life

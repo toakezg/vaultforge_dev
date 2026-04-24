@@ -1,0 +1,1 @@
+Minimal colored Glyph of batch generation of scripts with Colors made to stand out and grab the eye 

@@ -1,0 +1,65 @@
+{
+  "entries": {
+    "Icon-diff-type-generator-test.md": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260416-123628-icon-diff-type-generator-test.png",
+      "last_run_at": "2026-04-16T12:37:21",
+      "request_hash": "1ada8a307dff16fd4211c438832979c1bc6a0b643ddb63f44fbe1d9145c505f5"
+    },
+    "an EPIC weapon.md": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260416-123549-an-epic-weapon.png",
+      "last_run_at": "2026-04-16T12:36:28",
+      "request_hash": "edc04cd7260bf5c13e83b28887eff0b8a2c1d5601034f4af6212dc0838dff076"
+    },
+    "an epic gear piece.md": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260416-123506-an-epic-gear-piece.png",
+      "last_run_at": "2026-04-16T12:35:49",
+      "request_hash": "9745f61d5f62aadf528796ecbc36b95072ed2781b9817706d50b381e4f4a3030"
+    },
+    "gear.md": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260417-000522-gear.png",
+      "last_run_at": "2026-04-17T00:06:10",
+      "request_hash": "f9b21a6f04f34e0c9c7f373cc605396f1553807bf82eeaab7f3f3951681bf0b6"
+    },
+    "keys.md": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260417-000610-keys.png",
+      "last_run_at": "2026-04-17T00:07:00",
+      "request_hash": "f5645d08ef0489db7c1952ee08bf087022348ccb1526fad3d87980a0c95516b3"
+    },
+    "magic-item.md": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260416-141254-magic-item.png",
+      "last_run_at": "2026-04-16T14:14:10",
+      "request_hash": "2ba5d9d8fb4da294df40244377ce8f8730cedabe7f5cfc48ea853cca15d9727f"
+    },
+    "weapon.md": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260417-000700-weapon.png",
+      "last_run_at": "2026-04-17T00:07:58",
+      "request_hash": "e6d6e2948e963cba9513ccb49d7f1759e3bfb990bab7cec08e34fe4a20cd7d8f"
+    },
+    "xp4l-icon-theme-element.txt": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260417-021226-xp4l-icon-theme-element.png",
+      "last_run_at": "2026-04-17T02:13:33",
+      "request_hash": "d8c6bb4a84f408b3190367fffad0e586f675a8635f59cf02c3f3188221961fb7"
+    },
+    "xp4l-icon-weapon-elemental.txt": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260417-021333-xp4l-icon-weapon-elemental.png",
+      "last_run_at": "2026-04-17T02:14:33",
+      "request_hash": "7f9b2e6d5629137e3d3ea4d20adab3f59e9c3e01598ed49212a92022c47c8e62"
+    },
+    "xp4l-icon-weapon.txt": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260417-021433-xp4l-icon-weapon.png",
+      "last_run_at": "2026-04-17T02:15:27",
+      "request_hash": "77c816d46e214ef0825a62ac7898f876e43acf192b1dea125fb6c7acd261a418"
+    },
+    "xp4l-icon.md": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260417-021527-xp4l-icon.png",
+      "last_run_at": "2026-04-17T02:16:22",
+      "request_hash": "1c8f28a4a952b8aa7ebccc5f6809c81f3c528e3d04d74f6de130f04cb08342a9"
+    },
+    "xp4l-mix.txt": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260417-110555-xp4l-mix.png",
+      "last_run_at": "2026-04-17T11:06:54",
+      "request_hash": "6d477670a5feb26c2de31d906688d80f08ee69c7224af8ec17fe994e6e668463"
+    }
+  },
+  "version": 1
+}

@@ -1,0 +1,10 @@
+Circular
+Hexagonal
+Triangular
+Fractal
+Spiral
+Grid-based
+Symmetrical
+Asymmetrical
+Layered
+Core-with-ring

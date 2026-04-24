@@ -1,0 +1,322 @@
+{
+  "main": {
+    "id": "5e3d18df9677a65e",
+    "type": "split",
+    "children": [
+      {
+        "id": "8b607647d0212d0f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0baff03773806c9b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "vaultforge-business/vaultforge-business.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "vaultforge-business"
+            }
+          },
+          {
+            "id": "8f5687d1fa99cf52",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "vaultforge-xp4l/TASKS.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "TASKS"
+            }
+          },
+          {
+            "id": "39ce1a6e95452dd4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "TASKS.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "TASKS"
+            }
+          },
+          {
+            "id": "c92954bb78415b15",
+            "type": "leaf",
+            "state": {
+              "type": "mc-sidecar",
+              "state": {
+                "file": "_template/ICON/XP4Life/part-a/generated/rewards/20260411-095816-energy-orb.png"
+              },
+              "icon": "image",
+              "title": "20260411-095816-energy-orb"
+            }
+          },
+          {
+            "id": "aa96545dfc2ede27",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ICON/ICON.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "ICON"
+            }
+          },
+          {
+            "id": "8919180bb1484d32",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "vaultforge-business/my-prompts-bank/_template/brand-board-template.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "brand-board-template"
+            }
+          },
+          {
+            "id": "9c878751892d0163",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "vaultforge-business/my-prompts-bank/_template/client-pack-template.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "client-pack-template"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "35f0df04def62ec9",
+    "type": "split",
+    "children": [
+      {
+        "id": "2e934c951e7f811a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "06da1dc1f51b4679",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "3c5369ebc7154b5f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "73189d4a049fa51c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 392.5
+  },
+  "right": {
+    "id": "254f5f07ad245f22",
+    "type": "split",
+    "children": [
+      {
+        "id": "da19cf88a68ad794",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "4ce664710d0d72a9",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "ICON/XP4Life/part-a/generated/rewards/20260416-124426-weapon.png",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 20260416-124426-weapon"
+            }
+          },
+          {
+            "id": "1f342ce2b165e209",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "vaultforge-engine/CODEX_START.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from CODEX_START"
+            }
+          },
+          {
+            "id": "b3d664ae72f991eb",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "88ca4dda2e0e5e71",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "8721b0d2fc194322",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "vaultforge-engine/CODEX_START.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of CODEX_START"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "start-page:Open start page": false
+    }
+  },
+  "active": "aa96545dfc2ede27",
+  "lastOpenFiles": [
+    "vaultforge-business/NATHS_NOTES_BUSINESS/How to Setup Loop Run - Packs.md",
+    "vaultforge-business/my-prompts-bank/_template/client-pack-template.md",
+    "vaultforge-business/my-prompts-bank/_template/brand-board-template.md",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-142924-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png",
+    "vaultforge-business/NATHS_NOTES_BUSINESS",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-142924-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png.sidecar.md",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143011-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143011-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png.sidecar.md",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-142827-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-142827-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png.sidecar.md",
+    "ICON/ICON.md",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143711-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png.sidecar.md",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143711-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143621-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png.sidecar.md",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143621-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143507-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png.sidecar.md",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143507-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143403-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png.sidecar.md",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143403-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143248-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png.sidecar.md",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143248-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143157-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png.sidecar.md",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143157-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143114-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png.sidecar.md",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/20260424-143114-gallable__icon__business-icon__mono-mark__local-service-business-image-viewer-rating-images-gallary__v01.png",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/run.json",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/prompt.txt",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/prompt.source.md",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01/gallery-entry.json",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24/job-icon-pack-01",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark/2026-04-24",
+    "vaultforge-business/generated/gallable/icon/business-icon/mono-mark",
+    "vaultforge-business/generated/gallable/icon/business-icon",
+    "vaultforge-business/generated/gallable/icon",
+    "vaultforge-business/generated/gallable",
+    "vaultforge-business/my-prompts-bank/vaultforge/icon-01.md",
+    "vaultforge-business/my-prompts-bank/vaultforge/client-pack-01.md",
+    "vaultforge-business/my-prompts-bank/Gallable/gallable-app-icon.md",
+    "vaultforge-business/my-prompts-bank/example-client/icon-01.md",
+    "vaultforge-business/my-prompts-bank/example-client/brand-board-01.md",
+    "vaultforge-business/vaultforge-business.md",
+    "vaultforge-business/prompt template/prompt template.md",
+    "_template/Home.md",
+    "Reference/VaultForge Icons - price guide.md",
+    "Reference/Reference.md",
+    "vaultforge-business/my-prompts-bank/_template/icon-template.md",
+    "vaultforge-business/generated/vaultforge/Untitled.canvas",
+    "Untitled.canvas",
+    "Untitled 1.canvas"
+  ]
+}

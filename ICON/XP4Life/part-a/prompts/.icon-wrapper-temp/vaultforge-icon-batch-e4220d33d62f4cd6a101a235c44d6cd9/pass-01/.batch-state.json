@@ -1,0 +1,40 @@
+{
+  "entries": {
+    "Icon-diff-type-generator-test.md": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260416-123628-icon-diff-type-generator-test.png",
+      "last_run_at": "2026-04-16T12:37:21",
+      "request_hash": "1ada8a307dff16fd4211c438832979c1bc6a0b643ddb63f44fbe1d9145c505f5"
+    },
+    "an EPIC weapon.md": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260416-123549-an-epic-weapon.png",
+      "last_run_at": "2026-04-16T12:36:28",
+      "request_hash": "edc04cd7260bf5c13e83b28887eff0b8a2c1d5601034f4af6212dc0838dff076"
+    },
+    "an epic gear piece.md": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260416-123506-an-epic-gear-piece.png",
+      "last_run_at": "2026-04-16T12:35:49",
+      "request_hash": "9745f61d5f62aadf528796ecbc36b95072ed2781b9817706d50b381e4f4a3030"
+    },
+    "gear.md": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260416-190808-gear.png",
+      "last_run_at": "2026-04-16T19:09:06",
+      "request_hash": "047127ee66206137c8c1d4929b1a8b0021d9a0b5193d345639f4146a2955542c"
+    },
+    "keys.md": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260416-190906-keys.png",
+      "last_run_at": "2026-04-16T19:10:00",
+      "request_hash": "8a1caf33bdf09e82673ade210f263b37c9687368a8db8acbcd8f1bcc59ffc0c9"
+    },
+    "magic-item.md": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260416-141254-magic-item.png",
+      "last_run_at": "2026-04-16T14:14:10",
+      "request_hash": "2ba5d9d8fb4da294df40244377ce8f8730cedabe7f5cfc48ea853cca15d9727f"
+    },
+    "weapon.md": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260416-191000-weapon.png",
+      "last_run_at": "2026-04-16T19:10:42",
+      "request_hash": "927b0062be548f29d2f587477c7fe1ed5bc0ca1641cfa4a34fdb801896528fd1"
+    }
+  },
+  "version": 1
+}

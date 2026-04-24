@@ -1,0 +1,253 @@
+{
+  "main": {
+    "id": "f793593b5e3fb23c",
+    "type": "split",
+    "children": [
+      {
+        "id": "ceb57d245bc5fb9b",
+        "type": "tabs",
+        "dimension": 59.34959349593496,
+        "children": [
+          {
+            "id": "1409065ba3b9fed7",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "ICON/XP4Life/part-a/selected/achievements/xp4l-rune-sigil-0.png"
+              },
+              "icon": "lucide-image",
+              "title": "xp4l-rune-sigil-0"
+            }
+          }
+        ]
+      },
+      {
+        "id": "b5a1d81d531bc993",
+        "type": "tabs",
+        "dimension": 40.65040650406504,
+        "children": [
+          {
+            "id": "49348e18eb1ccf5a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NOTE/How to - Create XP4Life Icon set (obsidian).md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "How to - Create XP4Life Icon set (obsidian)"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "895b2f32d7b8de30",
+    "type": "split",
+    "children": [
+      {
+        "id": "2b4aec92ea4d168b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "830b11d02e08b3a7",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "5c50c5614171a823",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "1e74a8cf8dd4d5ef",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 423.5
+  },
+  "right": {
+    "id": "0b08fc6098bfe1c5",
+    "type": "split",
+    "children": [
+      {
+        "id": "32be3757bd9ba3f7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d6e7345f1c8594e4",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "3f62e2d7aceed294",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "b50e56967aaf7982",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "3a4bb302f9507f3f",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "dd54c50cb5529497",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "css-editor:Open CSS editor quick switcher": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "830b11d02e08b3a7",
+  "lastOpenFiles": [
+    "ICON/XP4Life/part-a/selected/achievements/xp4l-trail-initiate.png",
+    "ICON/XP4Life/part-a/selected/achievements/xp4l-rune-sigil-0.png",
+    "ICON/XP4Life/part-a/selected/achievements/xp4l-achievement-medal.png",
+    "ICON/XP4Life/part-a/generated/achievements/20260411-154531-trail-initiate.png",
+    "ICON/XP4Life/part-a/prompts-used/achievements/Trail Initiate.md",
+    "ICON/XP4Life/part-a/prompts-used/titles/master-generator.md",
+    "ICON/XP4Life/part-a/generated/quests/20260411-095241-forward-compass.png",
+    "ICON/XP4Life/part-a/generated/quests/20260411-095315-quest-scroll.png",
+    "ICON/XP4Life/part-a/generated/quests/20260411-095154-footsteps-path.png",
+    "ICON/XP4Life/part-a/selected/titles/xp4l-reward-master-generator.png",
+    "ICON/XP4Life/part-a/prompts-used/titles/crown-emblem.md",
+    "ICON/XP4Life/part-a/prompts-used/rewards/coin-reward.md",
+    "ICON/XP4Life/part-a/prompts-used/quests/footsteps-path.md",
+    "ICON/XP4Life/part-a/prompts-used/achievements/laurel-badge.md",
+    "ICON/XP4Life/part-a/generated/achievements/20260411-095409-laurel-badge.png",
+    "ICON/XP4Life/part-a/generated/rewards/20260411-095737-coin-reward.png",
+    "ICON/XP4Life/part-a/generated/achievements/20260411-095444-medal-star.png",
+    "ICON/XP4Life/part-a/prompts-used/titles",
+    "ICON/XP4Life/part-a/prompts-used/rewards",
+    "ICON/XP4Life/part-a/prompts-used/quests",
+    "ICON/XP4Life/part-a/prompts-used/achievements",
+    "ICON/XP4Life/part-a/prompts-used",
+    "ICON/XP4Life/XP4Life-Iconset-0/titles",
+    "ICON/XP4Life/XP4Life-Iconset-0/rewards",
+    "ICON/XP4Life/XP4Life-Iconset-0/quests",
+    "ICON/XP4Life/XP4Life-Iconset-0/achievements",
+    "ICON/XP4Life/XP4Life-Iconset-0/xp4l-iconset-0",
+    "ICON/XP4Life/XP4Life-Iconset-0/part-a 1/prompts/titles/rune-sigil.md",
+    "ICON/XP4Life/XP4Life-Iconset-0/part-a 1/prompts/titles/crown-emblem.md",
+    "ICON/XP4Life/XP4Life-Iconset-0/part-a 1/prompts/rewards/energy-orb.md",
+    "ICON/XP4Life/XP4Life-Iconset-0/part-a 1/prompts/rewards/coin-reward.md",
+    "ICON/XP4Life/XP4Life-Iconset-0/part-a 1/prompts/quests/quest-scroll.md",
+    "ICON/XP4Life/XP4Life-Iconset-0/part-a 1/prompts/quests/quest-scroll 1.md",
+    "ICON/XP4Life/XP4Life-Iconset-0/part-a 1/prompts/quests/forward-compass.md",
+    "ICON/XP4Life/XP4Life-Iconset-0/part-a 1/prompts/quests/footsteps-path.md",
+    "ICON/XP4Life/XP4Life-Iconset-0/part-a 1/prompts/achievements/shield-star.md",
+    "ICON/XP4Life/XP4Life-Iconset-0/part-a 1/prompts/achievements/medal-star.md",
+    "ICON/XP4Life/XP4Life-Iconset-0/part-a 1/prompts/achievements/laurel-badge.md",
+    "NOTE/test.md",
+    "NOTE/How to - Create XP4Life Icon set (obsidian).md",
+    "ICON/XP4Life/part-a/prompts-used/quests/quest-scroll 1.md",
+    "Home.md",
+    "NOTE/Icons - part A - output review.md",
+    "ICON/XP4Life/part-a/prompts-used/rewards/energy-orb.md",
+    "ICON/XP4Life/part-a/prompts-used/achievements/shield-star.md",
+    "ICON/XP4Life/part-a/prompts-used/achievements/medal-star.md"
+  ]
+}
