@@ -1,0 +1,6 @@
+# 5-direction logo exploration pack
+.\run_business.ps1 "{INPUT}" -Client "{CLIENT}" -AssetType "logo" -Job "{PROJECT}" -Tag "{TAG}" -Preset "business-logo" -Style "modern-startup" -Mod "trustworthy" -Tweak "{TWEAK}"
+.\run_business.ps1 "{INPUT}" -Client "{CLIENT}" -AssetType "logo" -Job "{PROJECT}" -Tag "{TAG}" -Preset "business-logo" -Style "luxury-minimal" -Mod "premium" -Tweak "{TWEAK}"
+.\run_business.ps1 "{INPUT}" -Client "{CLIENT}" -AssetType "logo" -Job "{PROJECT}" -Tag "{TAG}" -Preset "business-logo" -Style "vector-crisp" -Mod "small-size-readable" -Tweak "{TWEAK}"
+.\run_business.ps1 "{INPUT}" -Client "{CLIENT}" -AssetType "logo" -Job "{PROJECT}" -Tag "{TAG}" -Preset "badge-emblem" -Style "clean-corporate" -Mod "high-contrast" -Tweak "{TWEAK}"
+.\run_business.ps1 "{INPUT}" -Client "{CLIENT}" -AssetType "logo" -Job "{PROJECT}" -Tag "{TAG}" -Preset "wordmark" -Style "mono-mark" -Mod "print-safe" -Tweak "{TWEAK}"

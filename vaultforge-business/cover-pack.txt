@@ -1,0 +1,6 @@
+# 5-direction cover exploration pack
+.\run_business.ps1 "{INPUT}" -Client "{CLIENT}" -AssetType "cover" -Job "{PROJECT}" -Tag "{TAG}" -Preset "business-cover" -Style "modern-startup" -Mod "trustworthy" -Tweak "{TWEAK}"
+.\run_business.ps1 "{INPUT}" -Client "{CLIENT}" -AssetType "cover" -Job "{PROJECT}" -Tag "{TAG}" -Preset "business-cover" -Style "editorial-brand" -Mod "elegant" -Tweak "{TWEAK}"
+.\run_business.ps1 "{INPUT}" -Client "{CLIENT}" -AssetType "cover" -Job "{PROJECT}" -Tag "{TAG}" -Preset "business-cover" -Style "premium-3d" -Mod "premium" -Tweak "{TWEAK}"
+.\run_business.ps1 "{INPUT}" -Client "{CLIENT}" -AssetType "cover" -Job "{PROJECT}" -Tag "{TAG}" -Preset "social-brand-tile" -Style "friendly-flat" -Mod "local-friendly" -Tweak "{TWEAK}"
+.\run_business.ps1 "{INPUT}" -Client "{CLIENT}" -AssetType "cover" -Job "{PROJECT}" -Tag "{TAG}" -Preset "brand-board" -Style "clean-corporate" -Mod "print-safe" -Tweak "{TWEAK}"

@@ -1,0 +1,6 @@
+# 5-direction icon exploration pack
+.\run_business.ps1 "{INPUT}" -Client "{CLIENT}" -AssetType "icon" -Job "{PROJECT}" -Tag "{TAG}" -Preset "business-icon" -Style "mono-mark" -Mod "transparent-bg-ready" -Tweak "{TWEAK}"
+.\run_business.ps1 "{INPUT}" -Client "{CLIENT}" -AssetType "icon" -Job "{PROJECT}" -Tag "{TAG}" -Preset "business-icon" -Style "vector-crisp" -Mod "high-contrast" -Tweak "{TWEAK}"
+.\run_business.ps1 "{INPUT}" -Client "{CLIENT}" -AssetType "icon" -Job "{PROJECT}" -Tag "{TAG}" -Preset "brand-mark" -Style "friendly-flat" -Mod "playful" -Tweak "{TWEAK}"
+.\run_business.ps1 "{INPUT}" -Client "{CLIENT}" -AssetType "icon" -Job "{PROJECT}" -Tag "{TAG}" -Preset "brand-mark" -Style "clean-corporate" -Mod "trustworthy" -Tweak "{TWEAK}"
+.\run_business.ps1 "{INPUT}" -Client "{CLIENT}" -AssetType "icon" -Job "{PROJECT}" -Tag "{TAG}" -Preset "mascot-logo" -Style "bold-retro-brand" -Mod "bold" -Tweak "{TWEAK}"

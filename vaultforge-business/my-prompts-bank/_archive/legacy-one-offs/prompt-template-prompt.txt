@@ -1,0 +1,17 @@
+$prompt = @'
+A simple, minimal logo for "Test Plumbing Co".
+
+Flat vector style.
+Black and white.
+No texture.
+No lighting.
+No depth.
+No background.
+Centered icon only.
+
+Simple pipe or wrench symbol.
+Clean geometric shapes.
+Readable at small size.
+'@
+
+.\run_business.bat $prompt

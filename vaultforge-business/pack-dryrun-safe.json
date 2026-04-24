@@ -1,0 +1,28 @@
+{
+  "formatVersion": 1,
+  "commands": [
+    {
+      "command": ".\\run_business.ps1",
+      "args": [
+        "{INPUT}",
+        "-Client",
+        "{CLIENT}",
+        "-AssetType",
+        "logo",
+        "-Job",
+        "{PROJECT}",
+        "-Tag",
+        "{TAG}",
+        "-Preset",
+        "business-logo",
+        "-Style",
+        "modern-startup",
+        "-Mod",
+        "trustworthy",
+        "-Tweak",
+        "{TWEAK}",
+        "-DryRun"
+      ]
+    }
+  ]
+}

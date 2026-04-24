@@ -1,0 +1,9 @@
+
+# Generated outputs
+vaultforge-business/generated/
+vaultforge-art/assets/generated/
+
+# Secrets
+**/.env
+**/.venv/
+**/__pycache__/
