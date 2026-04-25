@@ -8,3 +8,8 @@ Symmetrical
 Asymmetrical
 Layered
 Core-with-ring
+Radial
+Segmented
+Tapered
+Interlocked
+Crescent

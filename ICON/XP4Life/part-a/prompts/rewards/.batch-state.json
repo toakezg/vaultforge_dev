@@ -30,6 +30,16 @@
       "last_run_at": "2026-04-16T14:14:10",
       "request_hash": "2ba5d9d8fb4da294df40244377ce8f8730cedabe7f5cfc48ea853cca15d9727f"
     },
+    "ring.txt": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260425-083445-ring.png",
+      "last_run_at": "2026-04-25T08:35:12",
+      "request_hash": "ecbd266080868873f411a82916b150c072238f5bb85577fc4d42e341b362ceda"
+    },
+    "trinket.txt": {
+      "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260425-083512-trinket.png",
+      "last_run_at": "2026-04-25T08:35:37",
+      "request_hash": "a989e72aeae832e080b58e177a86ffa04c467f63f112c6ec210770d942123cd3"
+    },
     "weapon.md": {
       "last_output": "E:\\tools\\vaultforge\\ICON\\XP4Life\\part-a\\generated\\rewards\\20260417-000700-weapon.png",
       "last_run_at": "2026-04-17T00:07:58",

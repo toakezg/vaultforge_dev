@@ -1,0 +1,24 @@
+{rarity} magical ring, forged from {material}, infused with {magic} and {elemental} essence,
+
+design language: {shape} geometry, subtle engraving patterns, clean silhouette,
+core concept: {concept}, expressed through {behavior} energy flow,
+
+visual features:
+- central focus element tied to {spells}
+- energy state: {state}
+- aura or emission reflecting {magic} + {elemental}
+- fine detail appropriate to {rarity} tier (not cluttered, readable)
+
+style direction:
+{style}, {style}, {style}
+
+rendering rules:
+high clarity, sharp focus, centered composition,
+dark neutral background,
+no text, no watermark,
+icon-ready, game asset style,
+consistent lighting, soft glow effects,
+balanced detail (not overdesigned, not flat)
+
+avoid messy composition, avoid excessive particles, avoid blurred details,
+focus on strong silhouette and clear identity,
