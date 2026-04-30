@@ -74,9 +74,11 @@ REM Example:
 REM run.bat art --rerun --style pixel
 
 REM Edit Between %ROOT$\edit-here\.venv\Scripts..
-set "PYTHON_EXE=E:\tools\image_generation\vaultforge-art\.venv\Scripts\python.exe"
+set "ART_ROOT=F:\tools\image_generation\vaultforge-art"
+set "WORKDIR=%ART_ROOT%"
+set "PYTHON_EXE=%ART_ROOT%\.venv\Scripts\python.exe"
 REM Edit after %ROOT%\path-to-script-from-root.file
-set "PY_FILE=E:\tools\image_generation\vaultforge-art\generate_art.py"
+set "PY_FILE=%ART_ROOT%\generate_art.py"
 
 goto run_python
 
@@ -85,10 +87,18 @@ goto run_python
 REM Example:
 REM run.bat xp4l --dry-run
 
-set "PYTHON_EXE=%ROOT%\vaultforge-xp4l\.venv\Scripts\python.exe"
-set "PY_FILE=%ROOT%\vaultforge-xp4l\main.py"
+set "XP4L_ROOT=%ROOT%\vaultforge-xp4l"
+set "WORKDIR=%XP4L_ROOT%"
+set "PYTHON_EXE=%XP4L_ROOT%\.venv\Scripts\python.exe"
+if not exist "%PYTHON_EXE%" set "PYTHON_EXE=python"
+set "PY_MODULE=vaultforge_xp4l"
+if defined PYTHONPATH (
+    set "PYTHONPATH=%XP4L_ROOT%\src;%PYTHONPATH%"
+) else (
+    set "PYTHONPATH=%XP4L_ROOT%\src"
+)
 
-goto run_python
+goto run_python_module
 
 
 :coding
@@ -97,6 +107,7 @@ REM run.bat coding --debug
 
 set "PYTHON_EXE=%ROOT%\vaultforge-coding\.venv\Scripts\python.exe"
 set "PY_FILE=%ROOT%\vaultforge-coding\main.py"
+set "WORKDIR=%ROOT%\vaultforge-coding"
 
 goto run_python
 
@@ -117,9 +128,21 @@ echo ========================================
 echo Running lane: %LANE%
 echo Python: %PYTHON_EXE%
 echo Script: %PY_FILE%
+echo Workdir: %WORKDIR%
 echo Args:   %ARGS%
 echo ========================================
 echo.
+
+if defined WORKDIR (
+    if not exist "%WORKDIR%" (
+        echo ERROR: Working directory not found:
+        echo %WORKDIR%
+        echo.
+        pause
+        exit /b 1
+    )
+    pushd "%WORKDIR%"
+)
 
 if not exist "%PYTHON_EXE%" (
     echo ERROR: Python venv not found:
@@ -138,11 +161,62 @@ if not exist "%PY_FILE%" (
 )
 
 "%PYTHON_EXE%" "%PY_FILE%" %ARGS%
+set "RUN_EXIT=%ERRORLEVEL%"
+if defined WORKDIR popd
 
 echo.
 echo Finished lane: %LANE%
 pause
-exit /b %ERRORLEVEL%
+exit /b %RUN_EXIT%
+
+
+:run_python_module
+echo ========================================
+echo Running lane: %LANE%
+echo Python: %PYTHON_EXE%
+echo Module: %PY_MODULE%
+echo Workdir: %WORKDIR%
+echo Args:   %ARGS%
+echo ========================================
+echo.
+
+if defined WORKDIR (
+    if not exist "%WORKDIR%" (
+        echo ERROR: Working directory not found:
+        echo %WORKDIR%
+        echo.
+        pause
+        exit /b 1
+    )
+    pushd "%WORKDIR%"
+)
+
+if /I "%PYTHON_EXE%"=="python" (
+    where python >nul 2>nul
+    if errorlevel 1 (
+        echo ERROR: Python was not found on PATH.
+        echo.
+        pause
+        exit /b 1
+    )
+) else (
+    if not exist "%PYTHON_EXE%" (
+        echo ERROR: Python venv not found:
+        echo %PYTHON_EXE%
+        echo.
+        pause
+        exit /b 1
+    )
+)
+
+"%PYTHON_EXE%" -m "%PY_MODULE%" %ARGS%
+set "RUN_EXIT=%ERRORLEVEL%"
+if defined WORKDIR popd
+
+echo.
+echo Finished lane: %LANE%
+pause
+exit /b %RUN_EXIT%
 
 
 :help
