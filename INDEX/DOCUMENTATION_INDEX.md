@@ -9,6 +9,9 @@ tags:
 [[vaultforge-business/CODEX_START|BUSINESS]]
 [[vaultforge-art/CODEX_START|ART ]]
 
+## CURRENT_STATE
+[[CURRENT_STATE|ROOT]]
+
 ## README
 [[README|ROOT]]
 [[vaultforge-engine/README|ENGINE]]

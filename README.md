@@ -9,13 +9,13 @@ It now uses a root/section thread model:
 - `vaultforge-business\` = client/business workflow lane
 - `vaultforge-coding\` = local-first code bridge and API-driven coding lane
 - `vaultforge-xp4l\` = XP4Life interpretation and progression lane
-- `vaultforge-art\` = art/playground coordination base, with the current runtime art worktree still at `E:\tools\image_generation\vaultforge-art`
+- `vaultforge-art\` = planned fresh art lane, with the old runtime/reference prototype being harvested from `F:\tools\image_generation\vaultforge-art`
 
 This workspace currently does six useful things:
 
 - keeps vault creation and launcher scripts in one place
 - stores reusable notes and planning docs for future Codex threads
-- hosts local pipeline wrappers that can hand work off to sibling tools such as `E:\tools\image_generation\vaultforge-art`
+- hosts local pipeline wrappers that can hand work off to sibling tools such as the old art runtime/reference prototype at `F:\tools\image_generation\vaultforge-art`
 - hosts the first shared generation prototype under `vaultforge-engine`
 - carries the first dedicated code-automation bridge section under
   `vaultforge-coding`
@@ -33,12 +33,13 @@ VaultForge is moving toward a cleaner split:
 The first shared engine prototype now lives at `vaultforge-engine\src\generate.py`.
 `vaultforge-business` targets that shared engine directly. Some older/root
 wrappers, including the XP4Life icon launcher, still call the sibling
-`E:\tools\image_generation\vaultforge-art` generator until they get their own
+`F:\tools\image_generation\vaultforge-art` generator until they get their own
 explicit compatibility pass. See `ARCHITECTURE - engine extraction.md`.
 
 ## Key Docs
 
 - `SYSTEM.md` explains how this workspace is meant to operate
+- `CURRENT_STATE.md` is the quick recovery anchor when Codex app project/thread visibility gets confusing
 - `PLAN.md` tracks the current direction
 - `TASKS.md` holds the active work pool
 - `THREAD_MAP.md` tells new threads which section should own a task
@@ -59,7 +60,7 @@ The first implemented design lane is an XP4Life icon pipeline.
 
 The image engine is not duplicated in the XP4Life lane. This root launcher still
 delegates to the existing Python generator in
-`E:\tools\image_generation\vaultforge-art`.
+`F:\tools\image_generation\vaultforge-art`.
 
 ## Quick Start
 

@@ -26,7 +26,7 @@ Root also acts as the overhead coordinator for dedicated section threads.
 - `THREAD_MAP.md` decides which section should own a task.
 - Reusable prompt banks and output folders live under purpose-named folders such as `ICON/`.
 - Shared reusable generation code now lives in `vaultforge-engine`.
-- Some older/root wrappers still delegate to `E:\tools\image_generation\vaultforge-art` until each lane gets an explicit compatibility pass.
+- Some older/root wrappers may still delegate to the old art runtime/reference prototype at `F:\tools\image_generation\vaultforge-art` until each lane gets an explicit compatibility pass.
 - Treat `vaultforge-art` as the art/playground lane, not the permanent shared engine.
 - If a wrapper depends on another local project, the dependency path must be explicit and documented.
 
@@ -34,6 +34,7 @@ Root also acts as the overhead coordinator for dedicated section threads.
 
 - `PLAN.md` tracks direction, intent, tradeoffs, and watchpoints.
 - `TASKS.md` tracks the actionable work pool.
+- `CURRENT_STATE.md` records the current recovery snapshot for app UI/thread-list drift.
 - `THREAD_MAP.md` maps thread roles, section ownership, and handoff rules.
 - `CHANGELOG.md` records notable structural changes with newest entries first.
 - `NOTE/` holds topic notes, implementation notes, and quick guides.

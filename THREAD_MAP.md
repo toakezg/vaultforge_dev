@@ -1,10 +1,12 @@
 # VaultForge Thread Map
 
-Date: 2026-04-13
+Date: 2026-04-27
 
 VaultForge now uses a root/section thread model.
 
 Root is overhead coordination. Section folders are focused worker bases.
+
+If the Codex app sidebar, project list, or thread list loses visible history, do not treat that as evidence that the project is empty. Reopen from `F:\vaultforge`, read `CURRENT_STATE.md`, then use this file to route the next thread.
 
 ## Root Thread
 
@@ -22,6 +24,7 @@ Read first:
 - `CODEX_START.md`
 - `README.md`
 - `SYSTEM.md`
+- `CURRENT_STATE.md`
 - `PLAN.md`
 - `TASKS.md`
 - `THREAD_MAP.md`
@@ -49,6 +52,7 @@ Read first:
 
 - `..\CODEX_START.md`
 - `..\SYSTEM.md`
+- `..\CURRENT_STATE.md`
 - `..\THREAD_MAP.md`
 - `CODEX_START.md`
 - `SYSTEM.md`
@@ -79,6 +83,7 @@ Read first:
 
 - `..\CODEX_START.md`
 - `..\SYSTEM.md`
+- `..\CURRENT_STATE.md`
 - `..\THREAD_MAP.md`
 - `CODEX_START.md`
 - `SYSTEM.md`
@@ -117,6 +122,7 @@ Read first:
 
 - `..\CODEX_START.md`
 - `..\SYSTEM.md`
+- `..\CURRENT_STATE.md`
 - `..\THREAD_MAP.md`
 - `README.md`
 - `SYSTEM.md`
@@ -157,6 +163,7 @@ Read first:
 
 - `..\CODEX_START.md`
 - `..\SYSTEM.md`
+- `..\CURRENT_STATE.md`
 - `..\THREAD_MAP.md`
 - `README.md`
 - `SYSTEM.md`
@@ -186,13 +193,14 @@ Use `vaultforge-art` for:
 Current status:
 
 - `vaultforge-art\` under this root is a coordination base.
-- The current runtime art worktree is still `E:\tools\image_generation\vaultforge-art`.
+- The old runtime/reference art worktree is `F:\tools\image_generation\vaultforge-art`; the planned fresh art lane is `F:\vaultforge\vaultforge-art`.
 - Do not migrate or rewrite the sibling art worktree without an explicit art migration task.
 
 Read first:
 
 - `..\CODEX_START.md`
 - `..\SYSTEM.md`
+- `..\CURRENT_STATE.md`
 - `..\THREAD_MAP.md`
 - `CODEX_START.md`
 - `SYSTEM.md`

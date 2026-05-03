@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 2026-04-27
+
+- Added `CURRENT_STATE.md` as a root recovery anchor for cases where the Codex app sidebar, project list, or thread list loses visible VaultForge context.
+- Updated root startup, routing, system, plan, and README docs so new threads read the recovery snapshot before routing into a section.
+- Refreshed `THREAD_MAP.md` date and read-order guidance so root/section coordination remains recoverable from the repo even when the app UI grouping changes.
+
 ## 2026-04-16
 
 - Activated `vaultforge-xp4l` as an XP4Life interpretation/progression section
@@ -35,7 +41,7 @@
 - Added the root/section thread model: root now acts as overhead coordinator while promoted section folders act as focused worker bases.
 - Added `THREAD_MAP.md` to route new threads between root, engine, business, and art.
 - Added section sign-up expectations and refreshed root docs around dedicated section thread startup.
-- Added a root `vaultforge-art` coordination base while leaving the actual sibling art runtime at `E:\tools\image_generation\vaultforge-art`.
+- Added a root `vaultforge-art` coordination base while leaving the sibling art runtime/reference prototype at `F:\tools\image_generation\vaultforge-art`.
 - Filled the placeholder sections in Nath's orchestration note with root, business, art, and thread-routing requirements.
 
 ## 2026-04-12

@@ -8,10 +8,11 @@ This note keeps the active direction, implementation decisions, and watchpoints 
 
 ## Current Direction
 
-Date: 2026-04-13
+Date: 2026-04-27
 
 - Keep this repo focused on reusable vault structure, launcher helpers, and note-first workflow setup.
 - Run VaultForge through a root/section thread model: root coordinates, sections execute focused work.
+- Keep `CURRENT_STATE.md` as the app-UI-independent recovery anchor when Codex project or thread visibility drifts.
 - Use `THREAD_MAP.md` before cross-section edits so dedicated threads know where to operate.
 - Promote active worker bases with section docs: `CODEX_START.md`, `SYSTEM.md`, `PLAN.md`, `TASKS.md`, `CHANGELOG.md`, and `SIGN_UP.md`.
 - Use sibling tools when they already do the heavy lifting well.
@@ -37,10 +38,11 @@ Date: 2026-04-13
 - Quick operator guidance lives in `NOTE/Icons - part A - quick use guide.md`.
 - Recommended prompts live in `ICON/XP4Life/part-a/prompts/`.
 - The local launcher lives in `run-icons-part-a.bat`.
-- The launcher still delegates image generation directly to `E:\tools\image_generation\vaultforge-art\generate_art.py`.
+- The launcher may still delegate image generation directly to the old runtime/reference prototype at `F:\tools\image_generation\vaultforge-art\generate_art.py`.
 
 ## Watchpoints
 
+- The Codex app sidebar can lose or regroup visible project/thread history; repo docs must remain strong enough to recover coordination without relying on that UI.
 - Dedicated section threads can drift if they skip root `THREAD_MAP.md` or fail to update their section changelog.
 - Root should not quietly become the worker space for tasks that belong in engine, business, or art.
 - The coding bridge section can sprawl if it starts acting like the general
@@ -49,7 +51,7 @@ Date: 2026-04-13
   into a future interpretation lane.
 - XP4L can sprawl if it starts absorbing execution concerns before its event and
   output contracts are stable.
-- `vaultforge-art` now has a root coordination base, but the actual runtime art project is still the sibling `E:\tools\image_generation\vaultforge-art`.
+- `vaultforge-art` now has a root coordination base; the old runtime/reference prototype is `F:\tools\image_generation\vaultforge-art`, and the planned fresh lane is `F:\vaultforge\vaultforge-art`.
 - The XP4Life launcher currently depends on a fixed sibling project path.
 - The shared engine prototype is in this workspace, but the XP4Life launcher has not been retargeted to it yet.
 - Prompt quality has one successful live Part A run, but Part B selection and packaging still need operator review.

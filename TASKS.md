@@ -30,6 +30,7 @@ sort by priority
 
 ## Landed Work
 
+- [x] Add `CURRENT_STATE.md` as a root recovery anchor for Codex app project/thread visibility drift, and link it from startup and routing docs #root #threading #docs 2026-04-27
 - [x] Activate `vaultforge-xp4l` as an active section in root coordination docs
   and thread routing #xp4l #docs 2026-04-16
 - [x] Promote `vaultforge-coding` into the VaultForge Code section and add its first local doc set #coding #docs 2026-04-16
