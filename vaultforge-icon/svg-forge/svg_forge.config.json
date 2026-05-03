@@ -1,0 +1,6 @@
+{
+  "default_preset": "icon-clean",
+  "default_output": "output",
+  "skip_existing": false,
+  "recursive": false
+}

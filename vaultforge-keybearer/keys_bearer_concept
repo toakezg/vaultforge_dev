@@ -1,0 +1,30 @@
+# Keybearer Key Management Module
+# This module is responsible for managing the various keys used in the VaultForge system. It allows for secure storage and retrieval of keys based on their type (admin, dev, business, icon, art).
+
+# These keys are used for authentication and access control in the VaultForge system. Please ensure that they are kept secure and updated as necessary.
+
+import from %LANE% %KEY_REQUEST%
+
+set ADMIN_KEY= # MAKE SURE TO UPDATE THIS KEY IN THE README AS WELL
+set DEV_KEY= # MAKE SURE TO UPDATE THIS KEY IN THE README AS WELL
+set BUSINESS_KEY= # MAKE SURE TO UPDATE THIS KEY IN THE README AS WELL
+set ICON_KEY=  # MAKE SURE TO UPDATE THIS KEY IN THE README AS WELL
+set ART_KEY= # MAKE SURE TO UPDATE THIS KEY IN THE README AS WELL
+
+if key_request== true (   
+    set /p key_type=="Enter the key type (admin, dev, business, icon, art): "
+    if key_type "%1"=="admin" (
+        echo %ADMIN_KEY%
+    ) else if "%1"=="dev" (
+        echo %DEV_KEY%
+    ) else if "%1"=="business" (
+        echo %BUSINESS_KEY%
+    ) else if "%1"=="icon" (
+        echo %ICON_KEY%
+    ) else if "%1"=="art" (
+        echo %ART_KEY%
+    ) else (
+        echo Invalid key type. Please specify 'admin', 'dev', 'business', 'icon', or 'art'.
+)
+
+
