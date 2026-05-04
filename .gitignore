@@ -35,4 +35,7 @@ vaultforge-art/__pycache__/
 vaultforge-art/*.pyc
 vaultforge-art/*.log
 
+# Pack documentation
+vaultforge-iconn/pack/
+vaultforge-keybearer/
 

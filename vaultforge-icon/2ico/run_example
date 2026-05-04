@@ -1,0 +1,1 @@
+run_2ico.bat --batch --input "F:\some\images" --output "F:\some\icons"

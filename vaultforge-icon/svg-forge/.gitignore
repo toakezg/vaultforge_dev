@@ -1,6 +1,7 @@
-.venv/
-__pycache__/
+*.venv/
+* pycache__/
 *.pyc
-output/
 *.log
-svgforge/output 
+output/
+samples/
+ 

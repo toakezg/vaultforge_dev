@@ -4,6 +4,8 @@ SVG-Forge is a small Windows-friendly raster-to-SVG batch converter for icon,
 logo, and glyph workflows. It uses VTracer as the vector tracing engine and
 keeps the wrapper simple: folder in, SVG files out, with presets and a log.
 
+All commands below assume the current folder is `vaultforge-icon\svg-forge`.
+
 ## Install
 
 From this folder:
@@ -14,11 +16,11 @@ py -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-Or run the helper:
+There is no setup batch helper in this folder yet. Use the commands above when
+you need to rebuild the local environment.
 
-```bat
-setup_venv.bat
-```
+If a future `setup_venv.bat` is added, keep it as a thin wrapper around those
+same commands.
 
 ## Quick Start
 
@@ -76,6 +78,24 @@ Dry-run without writing output or a log file:
 run_svg_forge.bat --input ".\samples" --preset icon-clean --dry-run
 ```
 
+Stable dry-run smoke check when generated sample rasters are absent:
+
+```bat
+run_svg_forge.bat --input ".\samples\dry-run-only" --output ".\output\dry-run-check" --preset icon-clean --dry-run
+```
+
+Expected result:
+
+```text
+planned: ...dry-run-placeholder.png -> ...dry-run-placeholder.svg
+Dry run complete. No folders, SVG files, or logs were written.
+  planned: 1
+```
+
+The `samples\dry-run-only` placeholder is intentionally not a real image. Use it
+only with `--dry-run`; run `tools\make_samples.py` first when you need real
+conversion samples.
+
 Skip files that already have an SVG output:
 
 ```bat
@@ -128,7 +148,9 @@ The repo includes a small helper for creating local sample rasters:
 .\.venv\Scripts\python.exe .\tools\make_samples.py
 ```
 
-It writes PNG, JPG, and WebP sample files into `.\samples`.
+It writes PNG, JPG, and WebP sample files into `.\samples`. This is a real file
+creation step. For no-write checks, use the `samples\dry-run-only` command in
+Useful Flags instead.
 
 ## Troubleshooting
 
@@ -144,5 +166,5 @@ If WebP conversion fails, reinstall Pillow:
 .\.venv\Scripts\python.exe -m pip install --force-reinstall Pillow
 ```
 
-If an older `.venv` points at a missing Python path, delete only this tool's
-local `.venv` folder and rerun `setup_venv.bat`.
+If an older `.venv` points at a missing Python path, rebuild only this tool's
+local `.venv` folder with the Install commands above.
