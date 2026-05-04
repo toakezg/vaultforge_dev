@@ -21,7 +21,11 @@ Current rule:
 
 - This lane owns icon workflow coordination and icon-specific tooling notes.
 - `svg-forge` is the first existing subtool in this lane.
+- Local file/folder writes are approved only when the task explicitly scopes
+  them and every written path stays inside the lane/write scope.
 - Do not move, delete, regenerate, or rewrite existing icon assets without an
   explicit icon-lane task.
+- Do not create generated artifacts or generated output folders unless the task
+  explicitly approves those outputs by path.
 - Use dry-run checks before live generation, conversion, paid API calls, or
   asset cleanup.

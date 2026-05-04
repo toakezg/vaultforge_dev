@@ -110,7 +110,8 @@ Keep `make_icon.py` parked until all of these are true:
 - the metadata draft has survived at least one review without major changes
 - the no-write interface plan has been reviewed and accepted
 - the no-paid-call dry-run behavior is defined and accepted
-- output folders and filenames are agreed
+- text output paths are agreed for preview and a later approved write task
+  explicitly allows creating them
 - generation ownership is clear between icon lane, art lane, and engine
 - Nath approves moving from contract to script
 

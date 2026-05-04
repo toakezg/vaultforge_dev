@@ -1,5 +1,9 @@
 # How to - Create an XP4Life Icon Set for Obsidian
 
+> Current lane note: this XP4Life icon-set guide is reference and inspiration
+> material for the renewed icon lane. Do not treat it as direct build
+> requirements or the current `$make-icon` planning contract.
+
 This guide explains how to turn the generated XP4Life icon outputs into a reusable icon set that can travel into the separate XP4Life vault or any other Obsidian vault.
 
 ## Goal

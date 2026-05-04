@@ -132,8 +132,10 @@ A transcript fails if it:
 
 - This is a text-only acceptance check.
 - The first passing transcript should still not create `make_icon.py`.
-- The planned output folders remain assumptions until a later approved task
-  accepts or revises them.
+- The planned text output folders are accepted as no-write preview defaults by
+  `documents/reviews/MAKE_ICON_OUTPUT_PATH_REVIEW.md`, but remain parked and uncreated until a
+  later approved implementation or artifact-writing task explicitly allows
+  writes.
 
 ## Recorder Handoff
 

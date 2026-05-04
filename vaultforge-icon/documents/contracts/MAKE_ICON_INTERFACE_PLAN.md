@@ -141,7 +141,9 @@ It should not:
 
 ## Output Path Assumptions
 
-These paths are assumptions for future planning only:
+These paths are assumptions for future planning only. The later output-path
+review accepted the two text paths as no-write preview defaults while keeping
+the actual folder tree parked and uncreated:
 
 - planned briefs: `vaultforge-icon/generated/briefs/`
 - planned metadata: `vaultforge-icon/generated/metadata/`
@@ -149,7 +151,8 @@ These paths are assumptions for future planning only:
 - planned applied icons: parked until `$apply-icon` has an approved apply-plan
 
 The `generated/` folder should not be created by this task. A later approved
-implementation task must decide whether those paths are correct.
+implementation or artifact-writing task must explicitly allow writes before
+these planned paths become real folders.
 
 ## Reviewer Decision
 

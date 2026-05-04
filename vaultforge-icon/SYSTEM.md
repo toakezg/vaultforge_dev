@@ -20,7 +20,13 @@ helper tools together without turning the lane into a second engine.
 ## Rules
 
 - Keep this lane note-first and tool-light.
-- Do not spend API money or run live generation unless Nath explicitly asks.
+- Do not spend API money or run live generation unless a task explicitly allows
+  it.
+- Local file/folder writes are approved when the task explicitly scopes them
+  and every written path stays inside the lane/write scope. Record the intended
+  write scope before proceeding.
+- Do not create generated artifacts or generated output folders unless the task
+  explicitly approves those outputs by path.
 - Do not move or delete existing assets unless Nath explicitly asks.
 - Prefer dry-run validation and documented blockers over speculative rewrites.
 - Treat build-note role and skill ideas as process prompts first; create real
@@ -35,9 +41,17 @@ helper tools together without turning the lane into a second engine.
 - A normal rotation may land the active task plus up to two small related
   additional tasks when they are docs-only, share the same lane scope, and do
   not trigger stop gates.
-- When a review finds a future Nath decision, park that decision as a `#nath`
-  task instead of stopping the whole run if an approved docs-only or dry-run
-  task can continue safely.
+- When a review finds a future live/non-dry-run need, park it as
+  `#live-required` and state the missing live run instead of stopping the whole
+  run if approved dry-run or build work can continue safely.
+- Use `#nath` only for hard gates: direction changes from the main icon
+  generator goal, ownership changes, secrets/cloud permissions, paid/live work
+  that cannot be deferred, asset moves/deletes, folder icon application, or real
+  taste decisions.
+- Scoped local writes inside an explicitly approved lane/write scope are not a
+  hard gate by themselves. Secrets/cloud auth, paid/API work, asset moves or
+  deletes, generated artifacts without path approval, folder-icon application,
+  ownership changes, and taste decisions remain hard gates.
 - Record icon-lane changes in `CHANGELOG.md`.
 - Record new icon threads or handoffs in `SIGN_UP.md`.
 - Add new `SIGN_UP.md` dated entries and new `CHANGELOG.md` entries above
@@ -45,8 +59,10 @@ helper tools together without turning the lane into a second engine.
 - Update root routing docs when icon-lane ownership changes.
 - Every icon task line must include at least one section tag and one task-type
   tag, for example `#icon #docs`, `#icon #validation`, or `#icon #tools`.
-- Any task that requires Nath to approve, decide, unblock, or step in must also
-  include `#nath`.
+- Any task that requires Nath to approve, decide, unblock, or step in at a hard
+  gate must also include `#nath`.
+- Any task that needs future non-dry-run validation must include
+  `#live-required` and state the missing live run.
 - Use `#approved` as the approval stamp for tasks Nath has explicitly cleared.
   Keep it as a separate tag with a space before the task id marker.
 - Active and next icon tasks should use Obsidian Tasks priority markers by

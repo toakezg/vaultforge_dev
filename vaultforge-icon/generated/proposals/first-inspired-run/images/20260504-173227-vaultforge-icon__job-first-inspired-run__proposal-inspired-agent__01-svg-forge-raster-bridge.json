@@ -1,0 +1,30 @@
+{
+  "background": "transparent",
+  "client": "VaultForge Icon",
+  "client_slug": "vaultforge-icon",
+  "composed_prompt": "Small clean app icon proposal for SVG-Forge, a raster-to-SVG conversion helper. Show a compact pixel grid on the left resolving into a crisp vector outline with two or three subtle anchor points on the right. Practical utility style, strong silhouette, restrained two-color palette, transparent background, readable at small folder-icon size, no text, no letters, no watermark.. single centered icon subject, clean emblem silhouette, minimal background distraction, readable small-format design. geometric construction, crisp vector-like edges, balanced shapes, strong symbolic clarity",
+  "created_at": "2026-05-04T17:34:42",
+  "format": "png",
+  "job": "first-inspired-run",
+  "job_slug": "first-inspired-run",
+  "mod": [],
+  "model": "gpt-5",
+  "models_to_try": [
+    "gpt-5",
+    "gpt-4.1"
+  ],
+  "output_path": "F:\\vaultforge\\vaultforge-icon\\generated\\proposals\\first-inspired-run\\images\\20260504-173227-vaultforge-icon__job-first-inspired-run__proposal-inspired-agent__01-svg-forge-raster-bridge.png",
+  "preset": "icon",
+  "prompt": "Small clean app icon proposal for SVG-Forge, a raster-to-SVG conversion helper. Show a compact pixel grid on the left resolving into a crisp vector outline with two or three subtle anchor points on the right. Practical utility style, strong silhouette, restrained two-color palette, transparent background, readable at small folder-icon size, no text, no letters, no watermark.",
+  "prompt_file": "F:\\vaultforge\\vaultforge-icon\\generated\\proposals\\first-inspired-run\\prompts\\01-svg-forge-raster-bridge.txt",
+  "quality": "low",
+  "size": "1024x1024",
+  "style": [
+    "geometric"
+  ],
+  "tag": "proposal,inspired-agent",
+  "tag_slug": "proposal-inspired-agent",
+  "variant": 1,
+  "variants": 1,
+  "version": 1
+}

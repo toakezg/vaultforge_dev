@@ -2,6 +2,7 @@
 **/.env
 **/.venv/
 **/__pycache__/
+vaultforge-icon/svg-forge/.env
 vaultforge-icon/svg-forge/.venv/
 vaultforge-icon/svg-forge/__pycache__/  
 vaultforge-icon/svg-forge/*.pyc

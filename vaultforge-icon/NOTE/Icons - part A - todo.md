@@ -1,5 +1,9 @@
 # Icons - Part A - Todo
 
+> Current lane note: this Part A todo is reference and inspiration material.
+> Do not treat it as direct build requirements or the current `$make-icon`
+> planning contract.
+
 ## Objective
 
 Turn the XP4Life icon idea into a vault-local, repeatable pipeline that can be run from prompt notes without rebuilding the art engine.

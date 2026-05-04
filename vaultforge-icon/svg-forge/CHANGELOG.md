@@ -1,5 +1,15 @@
 # SVG-Forge Changelog
 
+## 2026-05-04
+
+- Ran the real sample smoke path after explicit approval: generated
+  `samples\icon-star.png`, `samples\logo-blocks.jpg`, and
+  `samples\glyph-bolt.webp`, then converted them with `icon-clean` into
+  `output\real-sample-smoke\icon-star.svg`,
+  `output\real-sample-smoke\logo-blocks.svg`,
+  `output\real-sample-smoke\glyph-bolt.svg`, and
+  `output\real-sample-smoke\svg-forge.log`.
+
 ## 2026-05-03
 
 - Added a `samples\dry-run-only` fixture path and README guidance so dry-run

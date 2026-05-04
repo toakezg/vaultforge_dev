@@ -17,24 +17,201 @@ Use this shape:
 
 ## Multi-Agent Handoff
 
-- Task: review planned `$make-icon` output path assumptions
-- Current role: Recorder after workflow continuation adjustment
-- Last verified state: `MAKE_ICON_DRY_RUN_TRANSCRIPT_CHECK.md` defines the
-  exact no-write transcript shape and pass/fail criteria; workflow rules now
-  park soft gates as `#nath` tasks and continue into approved docs-only or
-  dry-run work when safe; `make_icon.py` remains parked
-- Files touched: `MULTI_AGENT_WORKFLOW.md`, `PLAN.md`, `SYSTEM.md`,
-  `TASKS.md`, `CHANGELOG.md`, and `SIGN_UP.md`
-- Verification run: docs-only workflow-rule review; no scripts created, no
-  output folders created, no generated artifacts written, no API calls, no
-  assets moved/deleted, no images generated, and no folder icons applied
-- Blocker or decision: hard gates still stop for Nath, but soft gates should be
-  recorded and the run can continue to the next approved safe task
+- Task: cleanup and proposal-readiness approval record
+- Current role: Recorder after proposal inbox/icon-set setup
+- Last verified state: `generated/proposals/first-inspired-run/` now contains
+  proposal Markdown, three prompt files, three generated PNG proposal images,
+  three JSON metadata files, batch state, an `images/` folder, and `RUN_LOG.md`.
+  `run_icon_proposal.ps1` uses `ICON_KEY` from the icon-lane `.env` and calls
+  the shared engine without printing secrets. `generated/proposals/inbox/` now
+  exists for rough ideas, folder lists, scoped directory descriptions, and style
+  notes.
+- Files touched: `run_icon_proposal.ps1`,
+  `generated/proposals/first-inspired-run/`, `generated/proposals/inbox/`,
+  `documents/contracts/ICON_SET_GENERATION_WORKFLOW_CONTRACT.md`, `PLAN.md`,
+  `TASKS.md`, `CHANGELOG.md`, and `SIGN_UP.md`.
+- Verification run: `.\run_icon_proposal.ps1 -DryRun` exited 0, then
+  `.\run_icon_proposal.ps1` exited 0. Three PNGs were written at `1024x1024`,
+  and three metadata JSON files record `model: gpt-5`, `quality: low`, and
+  `background: transparent`.
+- Blocker or decision: lane-local key management works. No selected/applied
+  outputs, asset moves/deletes, folder-icon application, secret printing/new
+  auth, or final taste decisions happened.
 - Resume prompt: Continue from `vaultforge-icon/TASKS.md` task
-  `icon-make-output-path-review`; review the planned `$make-icon` output path
-  assumptions and decide whether `vaultforge-icon/generated/briefs/` and
-  `vaultforge-icon/generated/metadata/` should stay, change, or remain parked
-  without creating folders or generated artifacts.
+  `icon-media-style-set-proposal`, or drop more `.md`/`.txt` ideas into
+  `generated/proposals/inbox/`. Do not select/apply folder icons without a
+  separate approved task.
+
+## 2026-05-04 - proposal inbox and icon-set workflow
+
+- Role: Coordinator -> Builder -> Recorder
+- Scope: set up an inbox for rough proposal ideas and define how directory or
+  style-guide inputs can become generated icon sets
+- Read: user style guide at `f:\media\icons\my_icons\style-guide.txt`, proposal
+  output docs, apply-plan contract, current task board, and icon plan
+- Changed: added `generated/proposals/inbox/README.md`, added
+  `generated/proposals/inbox/media-style-guide-note.md`, added
+  `documents/contracts/ICON_SET_GENERATION_WORKFLOW_CONTRACT.md`, and queued
+  media-style proposal plus directory-scout checklist tasks
+- Handoff: ideas can be dropped into `generated/proposals/inbox/`; future set
+  runs can scout scoped directories, write descriptions, generate proposal
+  images, and later hand off to apply-plan work. Folder-icon application remains
+  separate.
+
+## 2026-05-04 - lane env proposal retry
+
+- Role: Builder -> Recorder
+- Scope: let the icon lane use `vaultforge-icon\.env` for proposal generation
+  while still delegating image generation to the shared engine
+- Read: engine key contract, icon `.env` variable names without printing
+  values, first proposal run log, and current proposal prompts
+- Changed: added `run_icon_proposal.ps1`, reran the first proposal batch through
+  the lane key, wrote three proposal images plus three metadata files, and
+  marked the proposal task landed
+- Handoff: use `run_icon_proposal.ps1` for future icon-lane proposal batches so
+  `ICON_KEY` stays lane-local. Review/selection/application remain separate
+  tasks.
+
+## 2026-05-04 - first inspired-agent proposal attempt
+
+- Role: Builder -> Recorder
+- Scope: create the first inspired-agent proposal run under
+  `generated/proposals/first-inspired-run/`, then dry-run and live-run the
+  shared engine for three proposal images using the existing key mapping only
+- Read: build-note agent roles and cycle notes, the SVG-Forge and Build Notes
+  manual briefs, the inspired-agent proposal decision, engine CLI help, and
+  current icon lane task/plan/handoff docs
+- Changed: added `PROPOSAL.md`, `RUN_LOG.md`, three prompt files, and an
+  `images/` output folder; updated task, changelog, plan, and handoff records
+- Handoff: clean dry-run passed, key presence was confirmed without printing
+  the key, and the live run was blocked by missing `api.responses.write` scope;
+  no images or metadata were generated.
+
+## 2026-05-04 - cleanup and proposal readiness
+
+- Role: Coordinator -> Explorer -> Builder -> Recorder
+- Scope: record Nath's clarifications, clean icon root doc sprawl, mark Part A
+  as reference-only, and approve the proposal-document output home
+- Read: icon task/plan/handoff docs, root workflow docs, Part A notes,
+  documents moved under `documents/`, and inspired-agent proposal guidance
+- Changed: moved contracts/reviews/decisions under `documents/`, added
+  `documents/README.md`, added `generated/proposals/README.md`, added
+  `documents/decisions/INSPIRED_AGENT_PROPOSALS_DECISION.md`, updated Part A
+  notes with reference-only warnings, revised `$review-handoff-writer`
+  conditions for root-doc cooperation, and queued the first proposal-doc run
+- Handoff: proposal Markdown, supporting metadata, generated proposal images,
+  and run metadata may be written under `generated/proposals/`; selected/applied
+  outputs, asset operations, folder-icon application, new cloud auth/secret
+  printing, and final taste decisions remain gated.
+
+## 2026-05-04 - skill-condition decision
+
+- Role: Builder -> Recorder
+- Scope: decide the two remaining docs-only skill-condition tasks without
+  creating skills, scripts, artifacts, images, APIs, asset moves/deletes, or
+  folder icons
+- Read: root/icon routing docs, icon task/plan/changelog/handoff docs,
+  build-note skill references, no-write transcript check, and recent smoke
+  recording
+- Changed: added `documents/decisions/ICON_SKILL_CONDITIONS_DECISION.md`, marked both skill
+  condition tasks landed, and revised parked activation gates in `PLAN.md`
+- Handoff: both candidates remain parked. `$review-handoff-writer` needs
+  cross-lane reuse, missed-field pain, or Nath request before promotion.
+  `$smoke-test-recorder` needs at least two more repeated checks across
+  different cases, including one wrapper or no-write check.
+
+## 2026-05-04 - SVG-Forge real-sample live smoke
+
+- Role: Builder -> Recorder
+- Scope: run the explicitly approved SVG-Forge sample/output smoke without API
+  calls, AI image generation, folder-icon application, or asset move/delete
+- Read: root/icon dirty worktree status, icon task/changelog/handoff docs,
+  `documents/decisions/SVG_FORGE_REAL_SAMPLES_DECISION.md`, `svg-forge` docs, sample listings, and
+  `tools\make_samples.py`
+- Changed: generated `samples\icon-star.png`, `samples\logo-blocks.jpg`,
+  `samples\glyph-bolt.webp`, generated `output\real-sample-smoke\*.svg` plus
+  `svg-forge.log`, marked the live smoke task landed, and recorded command
+  evidence in lane/subtool docs
+- Handoff: both approved commands exited 0. SVG/log files are inspectable in
+  `svg-forge\output\real-sample-smoke`; do not clean them up unless a later
+  task explicitly approves removal.
+
+## 2026-05-04 - local write scope policy
+
+- Role: Builder -> Recorder
+- Scope: update the icon-lane no-write policy so scoped local file/folder
+  writes are allowed before the next agent workflow step
+- Read: root multi-agent workflow, icon system/plan/task/changelog/handoff docs,
+  current dirty worktree status, and recent make/apply icon contracts
+- Changed: recorded that local writes are approved only when task-scoped and
+  lane/write-scope local, while preserving hard gates for secrets/cloud auth,
+  paid/API work, generated artifacts, asset move/delete, folder-icon
+  application, ownership changes, and taste decisions
+- Handoff: continue with the agent workflow using scoped local writes where the
+  task explicitly allows them; generated artifacts and hard-gate actions still
+  need separate approval.
+
+## 2026-05-04 - SVG-Forge real samples decision
+
+- Role: Builder -> Recorder
+- Scope: decide whether real SVG-Forge sample rasters should be generated for
+  conversion smoke tests after reviewing write scope and cleanup expectations
+- Read: root and icon coordination docs, SVG-Forge README/changelog,
+  `samples` docs, `tools\make_samples.py`, and current local sample/output
+  listings
+- Changed: added `documents/decisions/SVG_FORGE_REAL_SAMPLES_DECISION.md`, marked
+  `icon-svg-forge-real-samples-decision` landed, and queued the exact future
+  live smoke validation as `#live-required`
+- Handoff: no real sample generation happened. Future validation should use the
+  documented two-command run and dedicated `output\real-sample-smoke` folder,
+  leaving cleanup/removal as a separate explicit task.
+
+## 2026-05-04 - apply-icon apply-plan contract
+
+- Role: Coordinator -> Builder -> Reviewer -> Recorder
+- Scope: draft the approved `$apply-icon` apply-plan format before any
+  `apply_icon.py` or `$apply-icon` implementation
+- Read: icon task/plan/handoff docs, `$make-icon` contract/output-path docs,
+  and build-note references for `apply_icon.py plan`, dry-run, apply, and
+  apply-plan artifacts
+- Changed: added `documents/contracts/APPLY_ICON_APPLY_PLAN_CONTRACT.md`, marked
+  `icon-apply-tool-contract` landed, and updated the parked `$apply-icon`
+  conditions in plan, changelog, and handoff
+- Handoff: the apply-plan format is planning-only; do not implement
+  `apply_icon.py`, create generated apply-plan artifacts, apply folder icons,
+  move/delete assets, generate images, or call APIs without a later approved
+  task.
+
+## 2026-05-04 - make-icon output path review
+
+- Role: Coordinator -> Builder -> Reviewer -> Recorder
+- Scope: review planned `$make-icon` output path assumptions without creating
+  folders, artifacts, scripts, images, or API calls
+- Read: root workflow/routing docs, icon system/plan/task/handoff docs, and the
+  `$make-icon` contract, interface, review, and dry-run transcript docs
+- Changed: added `documents/reviews/MAKE_ICON_OUTPUT_PATH_REVIEW.md`, recorded that
+  `vaultforge-icon/generated/briefs/` and
+  `vaultforge-icon/generated/metadata/` stay as planned no-write preview
+  defaults, and marked the review task landed
+- Handoff: continue with the approved `$apply-icon` apply-plan contract if no
+  newer Nath direction appears; keep all writes, scripts, live generation,
+  asset operations, and folder-icon application parked. The `#live-required`
+  workflow-rule edits were a prior recorded rotation, not a new output-path
+  decision.
+
+## 2026-05-04 - live-required soft gate rule
+
+- Role: Coordinator -> Builder -> Reviewer -> Recorder
+- Scope: retune approval rules so dry-run/build work can continue toward the
+  icon-generator goal without treating every future live run as a hard stop
+- Read: root workflow docs, icon system/plan/task/handoff docs, and current
+  approved task list
+- Changed: reserved `#nath` for hard gates, added `#live-required` for missing
+  live validation, removed hard-gate tags from approved non-hard-gate tasks, and
+  kept `#approved` as the clearance stamp
+- Handoff: continue with output-path review; if a live run is needed later,
+  create a `#live-required` task that names the exact live run, then keep moving
+  through safe dry-run/build work unless the main icon-generator goal changes
 
 ## 2026-05-04 - workflow continuation adjustment
 
@@ -45,18 +222,18 @@ Use this shape:
   current workflow-memory notes
 - Changed: added root and icon-lane continuation rules, recorded soft-gate vs
   hard-gate behavior, and marked the adjustment landed
-- Handoff: continue with the already approved output-path review task; stop
-  only for hard gates such as live generation, paid calls, secrets, asset
-  operations, folder icon application, ownership change, or taste decisions
+- Handoff: continue with the already approved output-path review task; later
+  retuned by the live-required rule so future live validation is only a hard
+  stop when it cannot be deferred or changes the main icon-generator goal
 
 ## 2026-05-03 - make-icon dry-run transcript check
 
 - Role: Coordinator -> Builder -> Reviewer -> Recorder
 - Scope: define the no-write `$make-icon` dry-run transcript acceptance check
   and preserve `#approved` as the approval stamp
-- Read: `MAKE_ICON_INTERFACE_PLAN.md`, `MAKE_ICON_INTERFACE_REVIEW.md`,
+- Read: `documents/contracts/MAKE_ICON_INTERFACE_PLAN.md`, `documents/reviews/MAKE_ICON_INTERFACE_REVIEW.md`,
   `TASKS.md`, `SYSTEM.md`, `PLAN.md`, changelog, and handoff
-- Changed: added `MAKE_ICON_DRY_RUN_TRANSCRIPT_CHECK.md`, marked the transcript
+- Changed: added `documents/contracts/MAKE_ICON_DRY_RUN_TRANSCRIPT_CHECK.md`, marked the transcript
   check landed, recorded the `#approved` stamp rule, fixed approval-tag spacing,
   and queued output path review
 - Handoff: review output path assumptions next; implementation, generated
@@ -68,9 +245,9 @@ Use this shape:
 - Role: Coordinator -> Builder -> Reviewer -> Recorder
 - Scope: review the no-write `$make-icon` interface plan and add the `#nath`
   task-tag rule before proceeding
-- Read: `MAKE_ICON_INTERFACE_PLAN.md`, `TASKS.md`, `SYSTEM.md`, `PLAN.md`,
+- Read: `documents/contracts/MAKE_ICON_INTERFACE_PLAN.md`, `TASKS.md`, `SYSTEM.md`, `PLAN.md`,
   changelog, and handoff
-- Changed: added `MAKE_ICON_INTERFACE_REVIEW.md`, clarified `$make-icon` as a
+- Changed: added `documents/reviews/MAKE_ICON_INTERFACE_REVIEW.md`, clarified `$make-icon` as a
   workflow label rather than a runnable command, marked the review landed,
   tagged Nath-gated open tasks, and queued the dry-run transcript check
 - Handoff: define the dry-run transcript acceptance check next; implementation,
@@ -81,9 +258,9 @@ Use this shape:
 - Role: Coordinator -> Builder -> Reviewer -> Recorder
 - Scope: complete the no-write `$make-icon` interface plan and record the new
   rotation scope limit
-- Read: `MAKE_ICON_CONTRACT.md`, `MAKE_ICON_BRIEF_REVIEW.md`, `TASKS.md`,
+- Read: `documents/contracts/MAKE_ICON_CONTRACT.md`, `documents/reviews/MAKE_ICON_BRIEF_REVIEW.md`, `TASKS.md`,
   `PLAN.md`, `SYSTEM.md`, changelog, and handoff
-- Changed: added `MAKE_ICON_INTERFACE_PLAN.md`, updated `$make-icon`
+- Changed: added `documents/contracts/MAKE_ICON_INTERFACE_PLAN.md`, updated `$make-icon`
   activation gates, recorded the two-small-related-docs task rotation limit,
   marked the interface-plan task landed, and queued interface review
 - Handoff: review the interface plan before implementation; no script,
@@ -94,9 +271,9 @@ Use this shape:
 - Role: Coordinator -> Builder -> Reviewer -> Recorder
 - Scope: compare the two manual `$make-icon` briefs and decide whether the
   metadata/output shape is stable enough to plan a no-write interface
-- Read: `MAKE_ICON_CONTRACT.md`, both manual brief notes, current task board,
+- Read: `documents/contracts/MAKE_ICON_CONTRACT.md`, both manual brief notes, current task board,
   changelog, plan, and handoff
-- Changed: added `MAKE_ICON_BRIEF_REVIEW.md`, marked the two-brief review
+- Changed: added `documents/reviews/MAKE_ICON_BRIEF_REVIEW.md`, marked the two-brief review
   landed, and queued a no-write interface-plan task
 - Handoff: no-write interface planning is allowed next; `make_icon.py` remains
   parked until dry-run/output/ownership gates and Nath approval are satisfied
@@ -106,7 +283,7 @@ Use this shape:
 - Role: Coordinator -> Builder -> Reviewer -> Recorder
 - Scope: write a second Markdown-only `$make-icon` brief for a different
   existing lane folder
-- Read: `MAKE_ICON_CONTRACT.md`, current task board, handoff, and
+- Read: `documents/contracts/MAKE_ICON_CONTRACT.md`, current task board, handoff, and
   `build-notes` file list
 - Changed: added `NOTE/Make Icon Brief - Build Notes.md`, marked the second
   manual brief task landed, and queued a two-brief contract review
@@ -118,7 +295,7 @@ Use this shape:
 - Role: Coordinator -> Builder -> Reviewer -> Recorder
 - Scope: resume the manual `$make-icon` brief task and include the clarified
   cycle rule
-- Read: icon lane docs, `MAKE_ICON_CONTRACT.md`, task board, and handoff
+- Read: icon lane docs, `documents/contracts/MAKE_ICON_CONTRACT.md`, task board, and handoff
 - Changed: added `NOTE/Make Icon Brief - SVG-Forge.md`, clarified one-cycle vs
   7-cycle estimation in lane docs, marked the manual brief task landed, and
   queued a second manual brief test
@@ -132,7 +309,7 @@ Use this shape:
   should remain parked
 - Read: icon lane docs, build-note tool/skill notes, current task board, and
   handoff
-- Changed: added `MAKE_ICON_CONTRACT.md`, marked `icon-make-tool-contract`
+- Changed: added `documents/contracts/MAKE_ICON_CONTRACT.md`, marked `icon-make-tool-contract`
   landed, and queued one manual docs-only brief test
 - Handoff: `make_icon.py` remains parked; prove the contract with manual briefs
   before considering any script

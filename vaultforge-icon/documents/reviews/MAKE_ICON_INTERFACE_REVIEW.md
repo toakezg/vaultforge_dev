@@ -4,7 +4,7 @@ Status: accepted for no-write planning. Not accepted for implementation.
 
 ## Scope
 
-Review `MAKE_ICON_INTERFACE_PLAN.md` and decide whether the planned no-write
+Review `documents/contracts/MAKE_ICON_INTERFACE_PLAN.md` and decide whether the planned no-write
 `$make-icon` command shape should be accepted, revised, or rejected before any
 script implementation is considered.
 
@@ -49,7 +49,8 @@ using `$make-icon` as the workflow label, but should not imply it can be run.
 Keep `make_icon.py` parked until all of these are true:
 
 - dry-run transcript acceptance check is defined
-- output paths are accepted or revised
+- text output paths are accepted for preview and a later approved write task
+  explicitly allows creating them
 - ownership between icon, art, and engine lanes is confirmed
 - Nath approves script implementation
 

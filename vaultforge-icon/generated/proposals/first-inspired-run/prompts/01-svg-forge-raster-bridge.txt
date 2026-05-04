@@ -1,0 +1,1 @@
+Small clean app icon proposal for SVG-Forge, a raster-to-SVG conversion helper. Show a compact pixel grid on the left resolving into a crisp vector outline with two or three subtle anchor points on the right. Practical utility style, strong silhouette, restrained two-color palette, transparent background, readable at small folder-icon size, no text, no letters, no watermark.

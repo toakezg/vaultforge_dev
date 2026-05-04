@@ -1,5 +1,9 @@
 # Icons - Part A
 
+> Current lane note: this Part A note is reference and inspiration material for
+> the renewed icon lane. Do not treat it as direct build requirements or the
+> current `$make-icon` planning contract.
+
 ## Intent
 
 XP4Life Icons Part A establishes the first reusable icon lane for XP4Life.

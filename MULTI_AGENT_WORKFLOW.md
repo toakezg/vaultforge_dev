@@ -49,19 +49,29 @@ Use this split:
 - Hard gate: stop and ask Nath.
 - Soft gate: record the blocker or decision need as a task, then continue if
   there is an approved safe next slice.
+- Live-required gate: record the needed live run as a `#live-required` task and
+  continue with dry-run or build work if the live run is not required for the
+  current safe milestone.
+- Scoped local write: allowed when the task explicitly names the write scope
+  and every written path stays inside that scope.
 
 A run may continue into another Coordinator -> Builder -> Reviewer -> Recorder
 rotation when all of these are true:
 
 - the next slice is already scoped in `TASKS.md`
 - the next slice is docs-only, dry-run, or otherwise safe
-- the next slice does not require a new Nath decision
+- any local writes are explicitly scoped and stay inside the approved
+  lane/write scope
+- the next slice does not change the main goal or require a new hard-gate Nath
+  decision
 - the current handoff stays updated
 - the run remains inside its stated cycle budget
 
-When a task requires Nath to approve, decide, unblock, or step in, tag it with
-`#nath` in the relevant `TASKS.md`. When Nath has explicitly cleared a task,
-tag it with `#approved`.
+When a task requires Nath to approve, decide, unblock, or step in at a hard
+gate, tag it with `#nath` in the relevant `TASKS.md`. When Nath has explicitly
+cleared a task, tag it with `#approved`. When a task only needs a future
+non-dry-run/live validation, tag it with `#live-required` and state what live
+run is missing.
 
 For tiny docs-only runs, a single rotation may land the active task plus up to
 two small related tasks. Larger runs should state the intended cycle budget up
@@ -72,12 +82,22 @@ front and continue until that budget is spent or a hard gate appears.
 Stop and ask Nath when the workflow reaches one of these gates:
 
 - the next step changes architecture or ownership between sections
-- a live/non-dry-run action could cost money or create hard-to-clean outputs
+- the task changes direction away from the agreed main goal
 - a secret, account, or external service needs a new permission
 - there are two reasonable paths and the tradeoff is product/workflow taste
 - there are two reasonable paths and the tradeoff is quantity/quality taste
 - the task needs cloud notifications, remote runners, or persistent background
   work
+
+Do not stop only because a future live run will eventually be needed. Record the
+missing live step as `#live-required`, say exactly what live run is needed, and
+continue with dry-run/build work when possible.
+
+Do not treat scoped local file/folder writes as a hard gate by themselves when
+the task explicitly approves them and the paths stay inside the lane/write
+scope. This does not approve secrets/cloud auth, paid/API work, generated
+artifacts without path approval, asset move/delete, folder-icon application,
+ownership changes, or taste decisions.
 
 When a gate happens, leave a short decision note with:
 
@@ -88,9 +108,10 @@ When a gate happens, leave a short decision note with:
 - esitmated token usage so far and to contnue toward next milestone 
 - the exact command or prompt to resume
 
-If the gate is not blocking the current safe work, park it as a `#nath` task and
-continue with the next `#approved` docs-only or dry-run task instead of ending
-the run immediately.
+If the gate is not blocking the current safe work, park it as `#nath` only when
+it is a true hard gate. Otherwise use `#live-required` or a normal follow-up
+task and continue with the next `#approved` docs-only, dry-run, or build task
+instead of ending the run immediately.
 
 ## Handoff File Pattern
 

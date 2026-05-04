@@ -1,5 +1,9 @@
 # Icons - Part A - Quick Use Guide
 
+> Current lane note: this Part A guide is reference and inspiration material.
+> Do not treat it as direct build requirements or the current `$make-icon`
+> planning contract.
+
 This guide is the short operator version of the XP4Life Icons Part A pipeline.
 
 ## What This Pipeline Does

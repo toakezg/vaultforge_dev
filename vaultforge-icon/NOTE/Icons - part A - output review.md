@@ -1,5 +1,9 @@
 # Icons - Part A - Output Review
 
+> Current lane note: this Part A output review is reference and inspiration
+> material. Do not treat it as direct build requirements or the current
+> `$make-icon` planning contract.
+
 Date: 2026-04-11
 
 ## Status
