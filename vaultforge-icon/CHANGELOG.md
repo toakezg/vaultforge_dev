@@ -2,6 +2,16 @@
 
 ## 2026-05-04
 
+- Added `documents/contracts/DIRECTORY_SCOUT_PROPOSAL_INTAKE_CHECKLIST.md` so
+  future scoped folder or project scouts can classify icon candidates with the
+  compatible-filetypes reference and write proposal-ready inbox Markdown without
+  applying icons.
+- Generated the Gallable launcher proposal from
+  `generated/proposals/inbox/gallable-launcher-geometric-gallery.md` into
+  `generated/proposals/gallable-launcher-geometric-gallery/`. The run wrote one
+  prompt file, one PNG proposal image, one JSON metadata file, target/style
+  notes, and a run log; no target-project writes, icon selection, asset
+  movement/deletion, or folder/file icon application happened.
 - Added `generated/proposals/inbox/` for user or agent idea drops, including a
   media color style guide note sourced from `f:\media\icons\my_icons\style-guide.txt`.
 - Added `documents/contracts/ICON_SET_GENERATION_WORKFLOW_CONTRACT.md` to define

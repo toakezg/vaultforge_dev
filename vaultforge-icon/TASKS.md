@@ -15,11 +15,13 @@ different slice.
 ## Next
 
 - [ ] 🔼 Run a small media-folder icon-set proposal batch from `generated/proposals/inbox/media-style-guide-note.md`, using the icon-set workflow contract and stopping before selection or folder-icon application #icon #proposals #approved 🆔 icon-media-style-set-proposal 2026-05-04
-- [ ] 🔽 Draft a directory-scout proposal intake checklist that can inspect a scoped target folder, summarize folders/subfolders, and write proposal-ready descriptions into `generated/proposals/inbox/` #icon #proposals #approved 🆔 icon-directory-scout-intake-checklist 2026-05-04
 - [ ] 🔽 Draft the root-cooperative `$review-handoff-writer` spec/checklist for icon-to-root recording, without creating a real skill file until the spec is reviewed #icon #skills #approved 🆔 icon-review-handoff-root-coop-spec 2026-05-04
+- [ ] 🔽 Review the Gallable generated proposal image for taste and decide whether to reroll, resize-check further, or create a separate target-project build/apply task #icon #proposals #nath 🆔 icon-gallable-proposal-selection 2026-05-04
 
 ## Landed Work
 
+- [x] Draft `documents/contracts/DIRECTORY_SCOUT_PROPOSAL_INTAKE_CHECKLIST.md` so future scoped folder/project scouts can summarize targets, use the compatible-filetypes reference, and write proposal-ready descriptions into `generated/proposals/inbox/` without applying icons #icon #proposals #approved 🆔 icon-directory-scout-intake-checklist 2026-05-04 ✅ 2026-05-04
+- [x] Run the Gallable inbox proposal through `run_icon_proposal.ps1` into `generated/proposals/gallable-launcher-geometric-gallery/`, producing one PNG proposal image, one JSON metadata file, run docs, target notes, and prompt material without writing into `F:\projects\gallable-html`, selecting winners, or applying icons #icon #proposals #approved 🆔 icon-gallable-launcher-proposal-run 2026-05-04 ✅ 2026-05-04
 - [x] Set up `generated/proposals/inbox/` for user/agent idea drops and add the media color style guide as reference input for future proposal runs #icon #proposals #approved 🆔 icon-proposal-inbox-setup 2026-05-04 ✅ 2026-05-04
 - [x] Add `documents/contracts/ICON_SET_GENERATION_WORKFLOW_CONTRACT.md` to define directory/style-guide input, Directory Scout, set generation, review, and later apply-plan flow without applying folder icons #icon #proposals #docs #approved 🆔 icon-set-generation-workflow-contract 2026-05-04 ✅ 2026-05-04
 - [x] Add `run_icon_proposal.ps1` so the icon lane can load `ICON_KEY` from `vaultforge-icon/.env`, map it to the engine's expected image-generation key variable for the child process only, and manage proposal generation without printing secrets #icon #tools #approved 🆔 icon-proposal-env-runner 2026-05-04 ✅ 2026-05-04

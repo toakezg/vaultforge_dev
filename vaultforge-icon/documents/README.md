@@ -7,6 +7,7 @@ root of `vaultforge-icon`.
   or apply-plan formats.
 - `reviews/`: review notes for contract/interface decisions.
 - `decisions/`: lane decisions, approval records, and parked-scope notes.
+- `reference/`: supporting reference material for scouts and reviewers.
 
 Keep operational files such as `SYSTEM.md`, `PLAN.md`, `TASKS.md`,
 `CHANGELOG.md`, and `SIGN_UP.md` at the icon-lane root.

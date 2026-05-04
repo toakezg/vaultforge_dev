@@ -17,30 +17,53 @@ Use this shape:
 
 ## Multi-Agent Handoff
 
-- Task: cleanup and proposal-readiness approval record
-- Current role: Recorder after proposal inbox/icon-set setup
-- Last verified state: `generated/proposals/first-inspired-run/` now contains
-  proposal Markdown, three prompt files, three generated PNG proposal images,
-  three JSON metadata files, batch state, an `images/` folder, and `RUN_LOG.md`.
-  `run_icon_proposal.ps1` uses `ICON_KEY` from the icon-lane `.env` and calls
-  the shared engine without printing secrets. `generated/proposals/inbox/` now
-  exists for rough ideas, folder lists, scoped directory descriptions, and style
-  notes.
-- Files touched: `run_icon_proposal.ps1`,
-  `generated/proposals/first-inspired-run/`, `generated/proposals/inbox/`,
-  `documents/contracts/ICON_SET_GENERATION_WORKFLOW_CONTRACT.md`, `PLAN.md`,
-  `TASKS.md`, `CHANGELOG.md`, and `SIGN_UP.md`.
-- Verification run: `.\run_icon_proposal.ps1 -DryRun` exited 0, then
-  `.\run_icon_proposal.ps1` exited 0. Three PNGs were written at `1024x1024`,
-  and three metadata JSON files record `model: gpt-5`, `quality: low`, and
-  `background: transparent`.
-- Blocker or decision: lane-local key management works. No selected/applied
-  outputs, asset moves/deletes, folder-icon application, secret printing/new
-  auth, or final taste decisions happened.
-- Resume prompt: Continue from `vaultforge-icon/TASKS.md` task
-  `icon-media-style-set-proposal`, or drop more `.md`/`.txt` ideas into
-  `generated/proposals/inbox/`. Do not select/apply folder icons without a
+- Task: Gallable proposal generation plus directory-scout checklist
+- Current role: Recorder after two rotations
+- Last verified state:
+  `generated/proposals/gallable-launcher-geometric-gallery/` contains run docs,
+  one prompt file, one generated PNG proposal image, one JSON metadata file, and
+  batch state. `documents/contracts/DIRECTORY_SCOUT_PROPOSAL_INTAKE_CHECKLIST.md`
+  now defines how future scoped scouts use `documents/reference/compatable_file-types.md`
+  to write proposal-ready inbox notes.
+- Files touched:
+  `generated/proposals/gallable-launcher-geometric-gallery/`,
+  `documents/contracts/DIRECTORY_SCOUT_PROPOSAL_INTAKE_CHECKLIST.md`,
+  `documents/README.md`, `TASKS.md`, `CHANGELOG.md`, and `SIGN_UP.md`.
+- Verification run:
+  `.\run_icon_proposal.ps1 -Batch "generated\proposals\gallable-launcher-geometric-gallery\prompts" -Output "generated\proposals\gallable-launcher-geometric-gallery\images" -Client "VaultForge Icon" -Job "gallable-launcher-geometric-gallery" -Tag "proposal,gallable,launcher" -Quality "low" -DryRun`
+  exited 0. The matching live command exited 0 and saved one image with 0
+  skipped. The PNG is `1024x1024`, `Format32bppArgb`, with transparent corner
+  samples and opaque center sample. Metadata records `model: gpt-5`,
+  `quality: low`, and `background: transparent`.
+- Blocker or decision:
+  no hard blocker. The generated image has a broad glow and needs Nath taste
+  review before reroll, selection, target-project build work, or icon
+  application.
+- Resume prompt:
+  Continue from `vaultforge-icon/TASKS.md` task `icon-media-style-set-proposal`
+  for a small media-folder set, or review `icon-gallable-proposal-selection` if
+  Nath wants to pick/reroll the Gallable mark. Do not write into
+  `F:\projects\gallable-html`, select final winners, or apply icons without a
   separate approved task.
+
+## 2026-05-04 - Gallable proposal and scout checklist
+
+- Role: Coordinator -> Scout -> Builder -> Reviewer -> Recorder, then
+  Coordinator -> Builder -> Reviewer -> Recorder
+- Scope: turn the Gallable inbox proposal into one generated proposal image,
+  then continue into the approved directory-scout intake checklist task
+- Read: root and icon workflow docs, icon task/plan/changelog/handoff docs, the
+  Gallable inbox proposal and SVG, the media style note, the compatible
+  filetypes reference, and the icon-set workflow contract
+- Changed: added `generated/proposals/gallable-launcher-geometric-gallery/`
+  with proposal/run/target/style docs, one prompt, one generated PNG, JSON
+  metadata, and batch state; added
+  `documents/contracts/DIRECTORY_SCOUT_PROPOSAL_INTAKE_CHECKLIST.md`; updated
+  task, changelog, index, and handoff records
+- Handoff: SVG was treated as reference-only because the current engine path is
+  text-prompt based. Gallable output is ready for visual review; target-project
+  writes, selection, reroll decisions, `.ico` build checks, and icon application
+  remain separate tasks.
 
 ## 2026-05-04 - proposal inbox and icon-set workflow
 
