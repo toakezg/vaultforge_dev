@@ -15,7 +15,7 @@ If the visible Codex project/thread list looks empty or incomplete, assume UI gr
 - Workspace root: `F:\vaultforge`
 - Git root: `F:\vaultforge`
 - Current branch during this refresh: `master`
-- Active section in this cleanup pass: root coordination
+- Active section in this cleanup pass: `vaultforge-icon` lane promotion
 - Current engine folder: `F:\vaultforge\vaultforge-engine`
 - Codex session storage exists separately under `C:\Users\nvn4_\.codex\sessions`
 - Codex memory records exist for prior `vaultforge-engine` threads
@@ -39,6 +39,7 @@ If the visible Codex project/thread list looks empty or incomplete, assume UI gr
 - `vaultforge-engine` owns shared generator behavior, CLI/config contracts, dry-run behavior, metadata, compatibility, and tests.
 - `vaultforge-business` owns client/business workflows, prompt banks, wrappers, output routing, galleries, and review surfaces.
 - `vaultforge-art` is the planned fresh art lane under `F:\vaultforge\vaultforge-art`; the old runtime/reference prototype is being harvested from `F:\tools\image_generation\vaultforge-art`.
+- `vaultforge-icon` owns icon workflow coordination, icon notes, icon asset review, and the existing `svg-forge` raster-to-SVG subtool.
 - `vaultforge-coding` owns the local-first code bridge and factual run/event reporting.
 - `vaultforge-xp4l` owns interpretation, XP/progression, quests, achievements, and dashboard-ready outputs.
 - `vaultforge-core`, `vaultforge-design`, `vaultforge-system`, and `vaultforge-init` are still supporting or parked areas unless root promotes them.

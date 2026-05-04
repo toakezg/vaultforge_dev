@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-05-03
+
+- Promoted `vaultforge-icon` into a lightweight active icon lane with its own
+  section docs and routed `svg-forge` as the first existing subtool.
+- Added `MULTI_AGENT_WORKFLOW.md` as a lightweight root guide for simple Codex build runs with coordinator, builder, reviewer, recorder, decision gates, and handoff prompts.
+- Linked the multi-agent workflow from `CODEX_START.md` and `THREAD_MAP.md` so future threads know when to read it.
+
 ## 2026-04-27
 
 - Added `CURRENT_STATE.md` as a root recovery anchor for cases where the Codex app sidebar, project list, or thread list loses visible VaultForge context.

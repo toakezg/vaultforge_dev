@@ -57,6 +57,7 @@ Root also acts as the overhead coordinator for dedicated section threads.
 - `vaultforge-coding` is the local-first coding bridge section.
 - `vaultforge-xp4l` is the XP4Life interpretation and progression section.
 - `vaultforge-art` is the art/playground coordination section; its runtime worktree is still a sibling dependency until an explicit migration task changes that.
+- `vaultforge-icon` is the icon workflow section; it owns icon notes, icon review, and the existing `svg-forge` subtool.
 - Parked folders such as `vaultforge-core`, `vaultforge-design`, `vaultforge-system`, and `vaultforge-init` are not active thread bases until root promotes them.
 
 ## Current Design Decision

@@ -1,6 +1,6 @@
 # VaultForge Thread Map
 
-Date: 2026-04-27
+Date: 2026-05-03
 
 VaultForge now uses a root/section thread model.
 
@@ -16,6 +16,7 @@ Use root for:
 - architecture decisions
 - section promotion or parking
 - thread routing
+- multi-agent/simple-build workflow coordination
 - handoffs between engine, business, art, coding, and xp4l
 - high-level changelog updates
 
@@ -25,6 +26,7 @@ Read first:
 - `README.md`
 - `SYSTEM.md`
 - `CURRENT_STATE.md`
+- `MULTI_AGENT_WORKFLOW.md` when a run uses agent roles or decision gates
 - `PLAN.md`
 - `TASKS.md`
 - `THREAD_MAP.md`
@@ -214,6 +216,44 @@ Report changes to:
 - `vaultforge-art\CHANGELOG.md`
 - root `CHANGELOG.md` when the change affects coordination or engine contracts
 - engine tasks when art needs shared behavior moved into the engine
+
+## Icon Thread
+
+Use `vaultforge-icon` for:
+
+- icon workflow coordination
+- XP4Life icon notes and follow-up planning
+- VaultForge Icons branch notes before they become business/client work
+- icon asset review and local icon pack handoffs
+- SVG-Forge validation and small improvements
+
+Current status:
+
+- `vaultforge-icon\` is an active lightweight section.
+- `vaultforge-icon\svg-forge\` is the first existing subtool in the lane.
+- Do not rewrite SVG-Forge, move/delete icon assets, or run live generation
+  without an explicit icon-lane task and Nath approval when a gate applies.
+
+Read first:
+
+- `..\CODEX_START.md`
+- `..\SYSTEM.md`
+- `..\CURRENT_STATE.md`
+- `..\THREAD_MAP.md`
+- `CODEX_START.md`
+- `SYSTEM.md`
+- `PLAN.md`
+- `TASKS.md`
+- `CHANGELOG.md`
+- `SIGN_UP.md`
+- `svg-forge\README.md` and `svg-forge\CHANGELOG.md` when touching SVG-Forge
+
+Report changes to:
+
+- `vaultforge-icon\CHANGELOG.md`
+- root `CHANGELOG.md` when the change affects coordination or routing
+- engine, art, or business tasks only when icon work needs shared behavior,
+  art experiments, or client packaging
 
 ## Parked Or Supporting Folders
 

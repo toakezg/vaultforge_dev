@@ -22,6 +22,8 @@ Date: 2026-04-27
   section around the Codex/OpenAI API bridge spec.
 - Activate `vaultforge-xp4l` as the XP4Life interpretation and progression
   section that consumes structured upstream events without taking over execution.
+- Promote `vaultforge-icon` as the lightweight icon workflow section with
+  SVG-Forge as its first existing subtool.
 - Keep VaultForge Code on the execution/reporting side and leave deeper XP
   interpretation for a future sibling section instead of folding it into the
   bridge lane.
@@ -33,9 +35,9 @@ Date: 2026-04-27
 
 ## XP4Life Icons Part A Implementation Shape
 
-- Source of truth for the concept lives in `NOTE/Icons - part A.md`.
-- Execution planning lives in `NOTE/Icons - part A - todo.md`.
-- Quick operator guidance lives in `NOTE/Icons - part A - quick use guide.md`.
+- Source of truth for the concept lives in `vaultforge-icon/NOTE/Icons - part A.md`.
+- Execution planning lives in `vaultforge-icon/NOTE/Icons - part A - todo.md`.
+- Quick operator guidance lives in `vaultforge-icon/NOTE/Icons - part A - quick use guide.md`.
 - Recommended prompts live in `ICON/XP4Life/part-a/prompts/`.
 - The local launcher lives in `run-icons-part-a.bat`.
 - The launcher may still delegate image generation directly to the old runtime/reference prototype at `F:\tools\image_generation\vaultforge-art\generate_art.py`.
@@ -56,6 +58,8 @@ Date: 2026-04-27
 - The shared engine prototype is in this workspace, but the XP4Life launcher has not been retargeted to it yet.
 - Prompt quality has one successful live Part A run, but Part B selection and packaging still need operator review.
 - The current art project has a general `icon` preset, not a dedicated XP4Life preset yet.
+- `vaultforge-icon/svg-forge` should be validated with dry-run checks before
+  any feature work or cleanup.
 - If XP4Life grows beyond Part A, prompt organization and naming rules will matter more than raw prompt volume.
 - `_template/` now carries the optional icon lane, so future vault creation should be reviewed to make sure that remains helpful rather than noisy.
 - Generated examples currently exist in `_template/` because the successful run was launched there; decide later whether template seed examples are helpful or should be moved into a separate demo pack.

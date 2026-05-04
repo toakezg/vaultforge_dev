@@ -30,6 +30,8 @@ sort by priority
 
 ## Landed Work
 
+- [x] Promote `vaultforge-icon` as a lightweight active icon lane with section docs and SVG-Forge routed as the first existing subtool #icon #docs #threading 2026-05-03
+- [x] Add `MULTI_AGENT_WORKFLOW.md` as a lightweight root guide for simple Codex build runs with coordinator, builder, reviewer, recorder, decision gates, and handoff prompts #root #threading #docs 2026-05-03
 - [x] Add `CURRENT_STATE.md` as a root recovery anchor for Codex app project/thread visibility drift, and link it from startup and routing docs #root #threading #docs 2026-04-27
 - [x] Activate `vaultforge-xp4l` as an active section in root coordination docs
   and thread routing #xp4l #docs 2026-04-16

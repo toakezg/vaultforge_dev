@@ -10,8 +10,9 @@ It now uses a root/section thread model:
 - `vaultforge-coding\` = local-first code bridge and API-driven coding lane
 - `vaultforge-xp4l\` = XP4Life interpretation and progression lane
 - `vaultforge-art\` = planned fresh art lane, with the old runtime/reference prototype being harvested from `F:\tools\image_generation\vaultforge-art`
+- `vaultforge-icon\` = lightweight icon workflow lane, including SVG-Forge
 
-This workspace currently does six useful things:
+This workspace currently does seven useful things:
 
 - keeps vault creation and launcher scripts in one place
 - stores reusable notes and planning docs for future Codex threads
@@ -21,6 +22,7 @@ This workspace currently does six useful things:
   `vaultforge-coding`
 - carries the first dedicated XP4Life interpretation section under
   `vaultforge-xp4l`
+- carries the first lightweight icon lane under `vaultforge-icon`
 
 ## Engine Direction
 
@@ -50,11 +52,11 @@ explicit compatibility pass. See `ARCHITECTURE - engine extraction.md`.
 
 The first implemented design lane is an XP4Life icon pipeline.
 
-- reference note: `NOTE/Icons - part A.md`
-- attack plan: `NOTE/Icons - part A - todo.md`
-- quick guide: `NOTE/Icons - part A - quick use guide.md`
-- Obsidian use guide: `NOTE/How to - Create XP4Life Icon set (obsidian).md`
-- first output review: `NOTE/Icons - part A - output review.md`
+- reference note: `vaultforge-icon/NOTE/Icons - part A.md`
+- attack plan: `vaultforge-icon/NOTE/Icons - part A - todo.md`
+- quick guide: `vaultforge-icon/NOTE/Icons - part A - quick use guide.md`
+- Obsidian use guide: `vaultforge-icon/NOTE/How to - Create XP4Life Icon set (obsidian).md`
+- first output review: `vaultforge-icon/NOTE/Icons - part A - output review.md`
 - prompt bank: `ICON/XP4Life/part-a/prompts/`
 - launcher: `run-icons-part-a.bat`
 
@@ -87,7 +89,7 @@ ICON\XP4Life\part-a\generated\
 The broader client/logo-pack idea is captured in:
 
 ```text
-NOTE\VaultForge Icons - branch plan.md
+vaultforge-icon\NOTE\VaultForge Icons - branch plan.md
 ```
 
 Supporting draft references live in `Reference/`.
