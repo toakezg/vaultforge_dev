@@ -30,6 +30,46 @@ Use this shape:
 - Changed: recorded this reviewer handoff and run-packet review note only
 - Handoff: no blocking findings. Reviewer reran 24 unit tests, the committed smoke config dry-run, normal empty gallery-index smoke to a temp file, and `--gallery-index --dry-run` rejection. The contact-sheet renderer remains correctly parked as `#live-required`; no live generation, generated art, fixture-policy decision, or renderer implementation was approved.
 
+## 2026-05-10 - workflow b root recorder 005900 engine closure
+
+- Role: Root recorder closing the Workflow B cycle 1 engine slice
+- Scope: affected section handoff note only
+- Read: active run packet status/checkpoints, coordinator output, engine builder output, engine reviewer output, current engine `SIGN_UP.md`, root `CHANGELOG.md`, and reviewed engine commit metadata
+- Changed: recorded that the reviewed engine verification/evidence pass is closed for this cycle and committed as `d400135`
+- Handoff: no new engine hard gate was created. `engine-contact-sheet-renderer` remains `#live-required` until real sidecar examples or a root-approved contact-sheet fixture strategy exists. Verification passed with 24 unit tests OK, smoke config dry-run no-live/no-write behavior, normal empty gallery-index output to a temp zero-entry JSON, and `--gallery-index --dry-run` rejection without output. Next safe Workflow B work should route away from engine or fix the root resume `--execute` flag unless new approved engine inputs appear.
+
+## 2026-05-10 - workflow b 005900 cycle 2 engine builder
+
+- Role: Builder for Workflow B cycle 2, engine lane
+- Scope: section-local verification and handoff evidence for run `20260510T005900-run-approved-section-local-build-slices-while-an`
+- Read: cycle 2 root coordinator routing note, refreshed workflow review guidance, current run packet plan/status/checkpoints, dirty baseline, engine `TASKS.md`, `SIGN_UP.md`, `VERIFICATION.md`, and current `assets\generated`
+- Changed: recorded verification evidence only; no renderer implementation because the coordinator kept `engine-contact-sheet-renderer` parked as `#live-required` and routed this engine-only slot as evidence-only
+- Handoff: no hard gate was triggered in engine. Unit tests passed, the committed smoke config dry-run stayed no-live/no-write, normal gallery-index over empty `assets\generated` wrote a temp zero-entry index, and `--gallery-index --dry-run` rejected without creating output. No safe engine implementation slice remains until real sidecar examples or a root-approved contact-sheet fixture strategy exists; the next productive approved slice is root-capable Workflow B resume-command work, outside this engine builder scope.
+
+## 2026-05-10 - workflow b 005900 cycle 2 engine reviewer
+
+- Role: Reviewer for Workflow B cycle 2, engine lane
+- Scope: review the evidence-only engine builder pass for run `20260510T005900-run-approved-section-local-build-slices-while-an`
+- Read: cycle 2 coordinator routing note, builder last message, current workflow review guidance, dirty baseline, engine `TASKS.md`, `SIGN_UP.md`, `VERIFICATION.md`, `src\generate.py`, `tests\test_generate.py`, and current `assets\generated`
+- Changed: recorded this reviewer handoff and run-packet review note only
+- Handoff: no blocking findings. Reviewer reran 24 unit tests, the committed smoke config dry-run, normal empty gallery-index smoke to a temp file, and `--gallery-index --dry-run` rejection. The contact-sheet renderer remains correctly parked as `#live-required`; no live generation, generated art, fixture-policy decision, cross-lane ownership change, or renderer implementation was approved.
+
+## 2026-05-10 - workflow b root recorder 005900 cycle 2 engine closure
+
+- Role: Root recorder closing the Workflow B cycle 2 engine evidence slice
+- Scope: affected section handoff note only
+- Read: cycle 2 run packet status/checkpoints, coordinator output, engine builder output, engine reviewer output, current engine `SIGN_UP.md`, and root `CHANGELOG.md`
+- Changed: recorded that the cycle 2 evidence-only engine pass is closed without a commit because engine docs were already dirty with mixed pre-existing Workflow B entries
+- Handoff: no new engine hard gate was created. `engine-contact-sheet-renderer` remains `#live-required` until real sidecar examples or a root-approved contact-sheet fixture strategy exists. Verification passed with 24 unit tests OK, smoke config dry-run no-live/no-write behavior, normal empty gallery-index output to a temp zero-entry JSON, and `--gallery-index --dry-run` rejection without output. Next productive Workflow B work should route to the root resume-command fix or another approved safe slice unless new approved engine inputs appear.
+
+## 2026-05-10 - workflow b 004631 cycle 2 engine builder
+
+- Role: Builder for Workflow B cycle 2, engine lane
+- Scope: section-local verification and handoff evidence for run `20260510T004631-run-approved-section-local-build-slices-while-an`
+- Read: current run packet plan/status, cycle 2 root coordinator routing note, dirty baseline, engine `TASKS.md`, `SIGN_UP.md`, `VERIFICATION.md`, and current `assets\generated`
+- Changed: recorded verification evidence only; no renderer implementation because `engine-contact-sheet-renderer` remains `#live-required` and `assets\generated` still has no real sidecar examples to consume
+- Handoff: no hard gate was triggered in engine. Unit tests passed, the committed smoke config dry-run stayed no-live/no-write, normal gallery-index over empty `assets\generated` wrote a temp zero-entry index, and `--gallery-index --dry-run` rejected without creating output. No safe engine implementation slice remains until real sidecar examples or a root-approved contact-sheet fixture strategy exists; route the next safe Workflow B slice away from engine unless new approved inputs appear.
+
 ## 2026-05-10 - workflow b 004631 engine live-required evidence
 
 - Role: Builder for Workflow B cycle 1, engine lane
@@ -45,6 +85,14 @@ Use this shape:
 - Read: active run packet routing and builder output, dirty baseline, builder diff, `TASKS.md`, `SIGN_UP.md`, `VERIFICATION.md`, `RUN_MANIFEST.md`, `src\generate.py`, `tests\test_generate.py`, and current `assets\generated`
 - Changed: recorded this reviewer handoff only
 - Handoff: no blocking findings. Reviewer reran the unit suite, smoke config dry-run, normal empty gallery-index smoke, and `--gallery-index --dry-run` rejection. The contact-sheet renderer remains correctly parked as `#live-required`; no live generation, generated art, fixture-policy decision, or renderer implementation was approved.
+
+## 2026-05-10 - workflow b root recorder 004631 engine closure
+
+- Role: Root recorder closing the Workflow B cycle 1 engine slice
+- Scope: affected section handoff note only
+- Read: active run packet status/checkpoints, coordinator output, engine builder output, engine reviewer output, current engine `SIGN_UP.md`, current engine `TASKS.md`, and recent commit log
+- Changed: recorded that the reviewed engine live-required gate evidence is closed for this cycle and committed as `a7e92e3`
+- Handoff: no new engine hard gate was created. `engine-contact-sheet-renderer` remains `#live-required` until real sidecar examples or a root-approved contact-sheet fixture strategy exists. Verification passed with 24 unit tests OK, smoke config dry-run no-live/no-write behavior, normal empty gallery-index output to a temp zero-entry index, and `--gallery-index --dry-run` rejection without output.
 
 ## 2026-05-09 - workflow b 235211 engine live-required gate
 
