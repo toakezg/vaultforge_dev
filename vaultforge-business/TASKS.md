@@ -45,7 +45,15 @@ ____
 - [x] 🔽 Fix or decide the `run-client-pack.ps1 -WhatIf` logging side effect so preview commands do not append `logs/run-log.csv` rows unless that is explicitly wanted #business #cli #dry-run 🆔 business-pack-whatif-log-side-effect ✅ 2026-05-09
 - [x] 🔼 Pass `-InputImage` through to the engine once shared edit plumbing exists #business #engine #api 🆔 business-input-image-support ⛔ engine-input-image-plumbing ✅ 2026-05-09
 - [x] 🔼 Pass `-ReferenceImage` through to the engine once the shared reference-image contract exists #business #engine #api 🆔 business-reference-image-support ⛔ engine-reference-image-plumbing ✅ 2026-05-09
-- [ ] 🔼 Move stable business preset/style/mod fragments into engine libraries once the native metadata pass is stable #business #engine #libraries 🆔 business-fragment-library-move ⛔ business-wrapper-backcompat
+- [x] 🔼 Prepare a business-owned preset/style/mod fragment candidate review before any engine-library migration #business #engine #libraries #planning 🆔 business-fragment-library-candidates ⛔ business-wrapper-backcompat ✅ 2026-05-09
+- [ ] 🔼 Decide engine/business ownership and registry shape before moving stable business preset/style/mod fragments into engine libraries #business #engine #libraries #nath 🆔 business-fragment-library-ownership-gate ⛔ business-fragment-library-candidates
+- [ ] 🔼 Move stable business preset/style/mod fragments into engine libraries after the registry shape is approved #business #engine #libraries 🆔 business-fragment-library-move ⛔ business-fragment-library-ownership-gate
+- [x] 🔼 Define what makes VaultForge Business finished and primed for real client use before building paid-service packaging #business #planning 🆔 business-client-ready-definition ✅ 2026-05-09
+- [ ] 🔼 Add a repeatable client intake markdown template for paid-service style requests #business #clients #prompts 🆔 business-client-intake-template ⛔ business-client-ready-definition
+- [ ] 🔼 Add a delivery package skeleton with export folders and a client-facing README template #business #packaging 🆔 business-client-package-skeleton ⛔ business-client-ready-definition
+- [ ] 🔼 Create a preset/style/mod service catalog from current business wrapper names and prompt-bank usage #business #docs #clients 🆔 business-service-catalog ⛔ business-client-ready-definition
+- [ ] 🔼 Add a client-ready output review checklist for gallery/contact-sheet selection #business #review #packaging 🆔 business-client-output-review-checklist ⛔ business-client-ready-definition
+- [ ] 🔼 Prepare Nath-facing pricing, licensing, publication, and paid-service launch decision note #business #planning #nath 🆔 business-paid-launch-decision-gate ⛔ business-service-catalog
 
 ____
 ## All Tasks

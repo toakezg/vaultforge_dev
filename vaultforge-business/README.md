@@ -4,6 +4,10 @@ VaultForge Business is the client-facing generation lane for logos, icons, cover
 
 Business now targets the sibling shared generator at `..\vaultforge-engine` by default. This folder provides business wrappers, prompt banks, metadata, and output routing so client work does not mix with playground output.
 
+`BUSINESS_CLIENT_READY_CRITERIA.md` defines the current paid-client readiness
+target and separates safe packaging/intake work from pricing, licensing,
+publication, live generation, and cross-lane approval gates.
+
 ## Prompt Bank Map
 
 - Root `*-pack.txt` files are the current runnable text packs for `run-client-pack.ps1`.

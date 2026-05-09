@@ -2,6 +2,8 @@
 
 ## 2026-05-09
 
+- Added `BUSINESS_CLIENT_READY_CRITERIA.md` to define the business lane's paid-client readiness target and split the next safe packaging/intake/catalog slices from Nath-gated launch decisions.
+- Added `BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md` to review business preset/style/mod migration candidates and record the hard gate before moving lane-owned fragments into shared engine libraries.
 - Fixed `run-client-pack.ps1 -WhatIf` so pack previews no longer create or append `logs/run-log.csv` by default; added `-LogWhatIf` for intentional preview audit rows.
 - Recorded the manifest ownership decision after native metadata adoption: business `run.json` and `gallery-entry.json` stay authoritative for client/job/gallery review, while engine image sidecars remain per-image technical provenance.
 - Passed business `-InputImage` and `-ReferenceImage` through to the shared engine's native `--input-image` and `--reference-image` flags now that the engine exposes them, resolving relative paths before the engine call.

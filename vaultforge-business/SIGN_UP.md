@@ -119,3 +119,35 @@ Use this shape:
 - Read: active run packet status/checkpoints, business builder output, business reviewer output, reviewer note, current business `SIGN_UP.md`, current business `TASKS.md`, and current git status/diff state
 - Changed: recorded that the reviewed `run-client-pack.ps1 -WhatIf` logging fix is closed and committed as `2279fcb`
 - Handoff: no hard gate remains for `business-pack-whatif-log-side-effect`. Default `-WhatIf` should stay no-write for `logs\run-log.csv`; `-LogWhatIf` is the explicit audit-row opt-in. No live generation was run or approved in this recorder pass. The remaining business-safe work is `business-fragment-library-move`, which should stay scoped to planning or review until engine/business ownership is clear.
+
+## 2026-05-09 - workflow-b business fragment candidate review
+
+- Role: builder for Workflow B cycle 1 business-lane approved local slices
+- Scope: `vaultforge-business` section files only
+- Read: live `git status --short`, business docs/tasks/changelog/sign-up, `run_business.ps1`, `run_business_md_bank.ps1`, engine `generate.py` registry shape, engine `TASKS.md`, engine `PLAN.md`, prompt-bank usage, and Workflow B run packet plan/status
+- Changed: added `BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md`, updated business plan/task/changelog notes, and split the fragment migration task into a completed business candidate review plus an ownership/registry hard gate before any engine-library move
+- Handoff: do not move business mods into engine `MOOD_PROMPTS` directly. The next step needs root/engine approval for a registry shape that can distinguish lane aliases, production constraints, business tone modifiers, and engine moods.
+- Workflow B observation: active run packet launched with `Execute: True`, `commit mode: review`, `hard gate mode: switch-safe`, and the business builder started with estimated usage `$0.3200` of `$1.0000`; the generated resume command in `workflow-b-plan.md` still omits `--execute` even though the active plan is executable.
+- Blocker or decision: hard gate recorded for the actual cross-lane engine-library move; no live generation was run
+- Resume prompt: `Continue Workflow B for vaultforge-business as reviewer. Review BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md and the task split, verify no engine files were changed, and keep the actual fragment move blocked until root/engine approve the registry shape.`
+
+## 2026-05-09 - workflow-b business client-ready definition
+
+- Role: builder for Workflow B cycle 1 business-lane safe docs slice after the fragment migration gate
+- Scope: `vaultforge-business` section files only
+- Read: live `git status --short`, business docs/tasks/changelog/sign-up, `BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md`, root run packet plan/status/checkpoints, root/business prompt snapshots, `business-if-done.txt`, and business memory summary
+- Changed: added `BUSINESS_CLIENT_READY_CRITERIA.md`, added Phase 5 client-ready service shape to `PLAN.md`, and split next safe business work into intake, package skeleton, service catalog, output review checklist, and a Nath-gated paid launch decision note
+- Handoff: the fragment library move remains blocked on root/engine/Nath approval. The next safe business-local slice is either `business-client-intake-template` or `business-client-package-skeleton`; do not run live generation or make paid-service publication/pricing claims in the next builder pass.
+- Workflow B observation: checkpoint logging, status JSONL, live status, and `switch-safe` hard-gate handling were readable. The controller recorded the earlier hard gate and continued through engine builder/reviewer before this business builder slot. The generated resume command still omits `--execute` despite the run plan saying `Execute: True`.
+- Blocker or decision: no new hard gate for the docs slice; paid launch pricing/licensing/publication remains a future Nath gate
+- Resume prompt: `Continue Workflow B for vaultforge-business as reviewer. Review BUSINESS_CLIENT_READY_CRITERIA.md plus the Phase 5 task split, verify the fragment move is still blocked, and confirm the next safe slice is client intake or delivery package skeleton work only.`
+
+## 2026-05-09 - workflow-b business client-ready reviewer
+
+- Role: reviewer for Workflow B cycle 1 business-lane safe docs slice
+- Scope: `vaultforge-business` verification and review findings
+- Read: live `git status --short`, run packet status/checkpoint outputs, builder handoff, `BUSINESS_CLIENT_READY_CRITERIA.md`, `BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md`, `README.md`, `PLAN.md`, `TASKS.md`, `CHANGELOG.md`, and `SIGN_UP.md`
+- Findings: no blocking findings in the client-ready criteria or task split. The fragment-library move remains blocked on root/engine/Nath approval, and pricing, licensing, publication, and live generation remain Nath gates.
+- Verification: docs diff review; business/engine status scope check; `git diff --check` for touched business files reported only LF-to-CRLF warnings.
+- Blocker or decision: no new hard gate for this docs slice; the pre-existing fragment migration gate remains recorded.
+- Resume prompt: `Continue Workflow B for vaultforge-business as recorder. Record the reviewed client-ready criteria docs, keep fragment migration blocked until root/engine/Nath approval, and choose client intake template or delivery package skeleton as the next safe business-local slice.`

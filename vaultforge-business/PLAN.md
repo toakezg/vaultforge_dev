@@ -32,7 +32,7 @@
 - ~~Pass native `--input-image` and `--reference-image` fields through from business now that shared engine plumbing exists.~~
 - The business wrapper now calls the shared engine once per business run and lets engine-native `--variants` fan out image outputs while business keeps its own output routing, prompt composition, `run.json`, and `gallery-entry.json`.
 - Keep `--tweak` as business-owned prompt context until a shared edit contract makes it worth moving into the engine.
-- Move business preset/style/mod fragments into engine libraries when stable.
+- Business fragment migration has a business-owned candidate review in `BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md`; do not move fragments into engine libraries until root/engine approve a registry shape for lane aliases and production constraints.
 - Keep backward compatibility with the current wrappers.
 
 ## Phase 4 - Gallery
@@ -41,3 +41,15 @@
 - ~~Start with markdown or HTML.~~
 - ~~Add contact sheets for visual comparison.~~
 - ~~Add Dataview dashboards for Obsidian browsing.~~
+
+## Phase 5 - Client-Ready Service Shape
+
+- `BUSINESS_CLIENT_READY_CRITERIA.md` defines the business-local meaning of
+  finished and primed for real client use: repeatable intake, dependable prompt
+  packs, reviewed output quality, packaging, reproducibility, delivery notes,
+  and explicit human curation.
+- The next safe work is business-local packaging and operator workflow:
+  client-intake template, delivery package skeleton, preset/style service
+  catalog, and output review checklist.
+- Pricing, licensing, public publication, paid-service positioning, and live
+  generation remain Nath gates.
