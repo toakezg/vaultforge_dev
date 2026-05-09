@@ -2,6 +2,8 @@
 
 ## 2026-05-09
 
+- Recorded Workflow B cycle 1 for run `20260509T233547-run-approved-section-local-build-slices-while-an`: root recorded a hard gate on the business fragment-library ownership/registry move, engine verified the contact-sheet renderer remains `#live-required` and committed the live-required gate evidence as `a50bc48`, and business added the delivery package skeleton committed as `d574b8c`. No live generation was recorded.
+- Recorded Workflow B cycle 1 for run `20260509T231222-run-approved-section-local-build-slices-while-an`: root recorded a hard gate on moving business fragments into shared engine registries, engine gallery `--dry-run` guard verification passed for commit `cd9a86d`, and business client-ready criteria passed reviewer checks and was committed as `e89fe60`. No live generation was recorded.
 - Recorded Workflow B cycle 1 for run `20260509T223050-run-approved-section-local-build-slices-while-an`: business pack `-WhatIf` logging passed reviewer checks and was committed as `2279fcb`, while the engine gallery-index hook was reopened for a safe dry-run guard because `--gallery-index --dry-run` still writes JSON output. No hard gate or live generation was recorded.
 - Recorded Workflow B cycle 1 for run `20260509T204905-run-approved-section-local-build-slices`: engine dry-run smoke/manifest work and business native metadata bridge both passed reviewer checks with no hard gates and no live generation.
 - Recorded a Workflow B cycle 1 root-recorder blocker for run `20260509T201250-run-approved-section-local-build-slices`: local shell inspection failed before PowerShell started with `windows sandbox: CryptUnprotectData failed: 2148073483`, so the recorder handoff explicitly avoids inferring builder or reviewer results.

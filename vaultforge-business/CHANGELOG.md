@@ -2,6 +2,12 @@
 
 ## 2026-05-09
 
+- Added `BUSINESS_OUTPUT_REVIEW_CHECKLIST.md` to define the curation path from
+  gallery/contact-sheet review into selected, rejected, archived, and packaged
+  client-ready files.
+- Added `BUSINESS_SERVICE_CATALOG.md` as an internal preset/style/mod service
+  menu from current wrapper names and prompt-bank usage, while keeping pricing,
+  licensing, publication, live generation, and engine registry changes gated.
 - Added `delivery-package-template\` with export, preview, source, review,
   archive, and usage-note folders plus a client-facing README template for
   reviewed business delivery packages.

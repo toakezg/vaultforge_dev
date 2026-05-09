@@ -1,5 +1,17 @@
 # Icon Changelog
 
+## 2026-05-09
+
+- Recorded `documents/decisions/MEDIA_STYLE_PROPOSAL_STATUS_GATE.md` for the
+  blocked media-style proposal slice: the task is approved, but
+  `generated/proposals/inbox/media-style-guide-note.md` still says the style
+  must not be applied in runs until its status is active, so no paid/API
+  proposal generation was run.
+- Added `documents/contracts/REVIEW_HANDOFF_WRITER_ROOT_COOP_SPEC.md` as a
+  docs-only root-cooperative `$review-handoff-writer` checklist/spec for
+  icon-to-root recording. No real skill, script, generated artifact, asset
+  operation, folder-icon application, root rewrite, or commit was created.
+
 ## 2026-05-04
 
 - Added `documents/contracts/DIRECTORY_SCOUT_PROPOSAL_INTAKE_CHECKLIST.md` so

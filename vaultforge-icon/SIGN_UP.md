@@ -17,34 +17,50 @@ Use this shape:
 
 ## Multi-Agent Handoff
 
-- Task: Gallable proposal generation plus directory-scout checklist
-- Current role: Recorder after two rotations
+- Task: Workflow B cycle 1 icon builder gate and switch-safe fallback for run
+  `20260509T235058-run-approved-section-local-build-slices-while-an`
+- Current role: Builder
 - Last verified state:
-  `generated/proposals/gallable-launcher-geometric-gallery/` contains run docs,
-  one prompt file, one generated PNG proposal image, one JSON metadata file, and
-  batch state. `documents/contracts/DIRECTORY_SCOUT_PROPOSAL_INTAKE_CHECKLIST.md`
-  now defines how future scoped scouts use `documents/reference/compatable_file-types.md`
-  to write proposal-ready inbox notes.
+  `icon-media-style-set-proposal` is still blocked because
+  `generated/proposals/inbox/media-style-guide-note.md` says the style should
+  not be applied in runs until its status is active. The switch-safe fallback
+  `icon-review-handoff-root-coop-spec` was completed as docs-only work.
 - Files touched:
-  `generated/proposals/gallable-launcher-geometric-gallery/`,
-  `documents/contracts/DIRECTORY_SCOUT_PROPOSAL_INTAKE_CHECKLIST.md`,
+  `documents/decisions/MEDIA_STYLE_PROPOSAL_STATUS_GATE.md`,
+  `documents/contracts/REVIEW_HANDOFF_WRITER_ROOT_COOP_SPEC.md`,
   `documents/README.md`, `TASKS.md`, `CHANGELOG.md`, and `SIGN_UP.md`.
 - Verification run:
-  `.\run_icon_proposal.ps1 -Batch "generated\proposals\gallable-launcher-geometric-gallery\prompts" -Output "generated\proposals\gallable-launcher-geometric-gallery\images" -Client "VaultForge Icon" -Job "gallable-launcher-geometric-gallery" -Tag "proposal,gallable,launcher" -Quality "low" -DryRun`
-  exited 0. The matching live command exited 0 and saved one image with 0
-  skipped. The PNG is `1024x1024`, `Format32bppArgb`, with transparent corner
-  samples and opaque center sample. Metadata records `model: gpt-5`,
-  `quality: low`, and `background: transparent`.
+  `git status --short` recorded the dirty baseline before edits. The media
+  inbox note was read directly. Post-edit verification inspected the scoped
+  icon-lane diff, confirmed the two task ids now have the expected open/landed
+  status, and reread the new handoff-writer spec.
 - Blocker or decision:
-  no hard blocker. The generated image has a broad glow and needs Nath taste
-  review before reroll, selection, target-project build work, or icon
-  application.
+  hard gate remains on the media-style proposal until Nath or a later approved
+  task changes the source note status to active. No API/paid generation,
+  selected/applied outputs, asset moves/deletes, folder-icon application, root
+  rewrite, real skill file, staging, or commit happened.
 - Resume prompt:
-  Continue from `vaultforge-icon/TASKS.md` task `icon-media-style-set-proposal`
-  for a small media-folder set, or review `icon-gallable-proposal-selection` if
-  Nath wants to pick/reroll the Gallable mark. Do not write into
-  `F:\projects\gallable-html`, select final winners, or apply icons without a
-  separate approved task.
+  Review and commit the scoped icon-lane docs if accepted. Then ask Nath whether
+  `generated/proposals/inbox/media-style-guide-note.md` should become active
+  before running `icon-media-style-set-proposal`, or continue with a different
+  approved docs-only icon slice.
+
+## 2026-05-09 - Workflow B icon builder gate fallback
+
+- Role: Builder
+- Scope: record the blocked media-style proposal gate, then complete the
+  approved docs-only root-cooperative `$review-handoff-writer` fallback without
+  creating a real skill file
+- Read: root Workflow A/B guidance, icon task/plan/changelog/handoff docs,
+  `generated/proposals/inbox/media-style-guide-note.md`, the icon-set workflow
+  contract, and the prior skill-condition decision
+- Changed: added the media-style status gate decision note, added
+  `documents/contracts/REVIEW_HANDOFF_WRITER_ROOT_COOP_SPEC.md`, indexed both
+  docs, marked the fallback task landed, and updated changelog/handoff records
+- Handoff: media-style proposal generation remains blocked until the inbox note
+  status is active. The handoff-writer spec is checklist-only; no skill,
+  automation, API call, generated artifact, asset operation, folder-icon
+  application, root rewrite, staging, or commit was performed.
 
 ## 2026-05-04 - Gallable proposal and scout checklist
 

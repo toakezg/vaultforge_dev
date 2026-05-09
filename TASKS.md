@@ -27,6 +27,7 @@ sort by priority
 - [ ] 🔼 Prototype `VaultForge Icons` client job storage with `client.yaml`, references, generated, selected, delivery, and usage files #root #vaultforge-icons #clients 🆔 root-vaultforge-icons-client-storage 2026-04-11
 - [ ] 🔽 Plan image-input and tweak/edit flags for VaultForge Icons after reviewing what belongs in `vaultforge-engine` versus lane wrappers #root #vaultforge-icons #api 🆔 root-vaultforge-icons-edit-flags 2026-04-11
 - [ ] 🔽 Decide whether usage stats should start as CSV only or become JSON/YAML plus CSV exports #root #vaultforge-icons #stats 🆔 root-vaultforge-icons-stats-format ⛔ root-vaultforge-icons-client-storage 2026-04-11
+- [ ] 🔼 Fix Workflow B generated resume commands so executable plans include `--execute` when `Execute: True` #root #threading #ops 🆔 root-workflow-b-resume-execute-flag 2026-05-09
 
 ## Landed Work
 

@@ -21,7 +21,7 @@ set "WATCH_CMD=%TEMP%\vaultforge_workflow_b_watch_%RANDOM%_%RANDOM%.cmd"
 >> "%WATCH_CMD%" echo echo Started: %%DATE%% %%TIME%%
 >> "%WATCH_CMD%" echo echo ========================================
 >> "%WATCH_CMD%" echo echo.
->> "%WATCH_CMD%" echo call "%ROOT%\run_workflow_b.bat" --terminal-detail verbose %*
+>> "%WATCH_CMD%" echo call "%ROOT%\run_workflow_b.bat" --terminal-detail verbose --terminal-color always %*
 >> "%WATCH_CMD%" echo set "WF_EXIT=%%ERRORLEVEL%%"
 >> "%WATCH_CMD%" echo echo.
 >> "%WATCH_CMD%" echo echo ========================================

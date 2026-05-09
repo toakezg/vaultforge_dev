@@ -1,0 +1,48 @@
+{
+  "run_id": "20260509T213911-verify-timebox-stop-prints-handoff",
+  "created_at": "2026-05-09T21:39:11+10:00",
+  "root": "F:\\vaultforge",
+  "cycles": 2,
+  "task": "Verify timebox stop prints handoff",
+  "execute": false,
+  "parallel": false,
+  "commit_mode": "review",
+  "commit_prefix": "workflow-b",
+  "workflow_review_every": 2,
+  "watch_workflows": true,
+  "watch_workflow_files": [
+    "F:\\vaultforge\\MULTI_AGENT_WORKFLOW.md",
+    "F:\\vaultforge\\MULTI_AGENT_WORKFLOW_B.md",
+    "F:\\vaultforge\\WORKFLOW_REVIEW.md",
+    "F:\\vaultforge\\THREAD_MAP.md",
+    "F:\\vaultforge\\TASKS.md",
+    "F:\\vaultforge\\business-if-done.txt",
+    "F:\\toakezg\\workflows\\workflow-types.md"
+  ],
+  "timebox_minutes": 1e-06,
+  "usage_budget_usd": 0.0,
+  "estimated_agent_usd": 0.0,
+  "hard_gate_mode": "switch-safe",
+  "agents": [
+    {
+      "name": "root-coordinator",
+      "lane": "root",
+      "role": "coordinator",
+      "workdir": "F:\\vaultforge",
+      "write_scope": "root coordination docs and the active Workflow B run packet",
+      "tasks": [
+        "Verify timebox stop prints handoff"
+      ]
+    },
+    {
+      "name": "root-recorder",
+      "lane": "root",
+      "role": "recorder",
+      "workdir": "F:\\vaultforge",
+      "write_scope": "root handoff, root changelog, and affected section handoff notes only",
+      "tasks": [
+        "Record factual cycle results, gates, files touched, checks, and resume prompt."
+      ]
+    }
+  ]
+}

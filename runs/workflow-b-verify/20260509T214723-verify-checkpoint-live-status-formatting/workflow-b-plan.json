@@ -1,0 +1,48 @@
+{
+  "run_id": "20260509T214723-verify-checkpoint-live-status-formatting",
+  "created_at": "2026-05-09T21:47:23+10:00",
+  "root": "F:\\vaultforge",
+  "cycles": 1,
+  "task": "Verify checkpoint live status formatting",
+  "execute": false,
+  "parallel": false,
+  "commit_mode": "review",
+  "commit_prefix": "workflow-b",
+  "workflow_review_every": 0.5,
+  "watch_workflows": true,
+  "watch_workflow_files": [
+    "F:\\vaultforge\\MULTI_AGENT_WORKFLOW.md",
+    "F:\\vaultforge\\MULTI_AGENT_WORKFLOW_B.md",
+    "F:\\vaultforge\\WORKFLOW_REVIEW.md",
+    "F:\\vaultforge\\THREAD_MAP.md",
+    "F:\\vaultforge\\TASKS.md",
+    "F:\\vaultforge\\business-if-done.txt",
+    "F:\\toakezg\\workflows\\workflow-types.md"
+  ],
+  "timebox_minutes": 120.0,
+  "usage_budget_usd": 3.0,
+  "estimated_agent_usd": 0.08,
+  "hard_gate_mode": "switch-safe",
+  "agents": [
+    {
+      "name": "root-coordinator",
+      "lane": "root",
+      "role": "coordinator",
+      "workdir": "F:\\vaultforge",
+      "write_scope": "root coordination docs and the active Workflow B run packet",
+      "tasks": [
+        "Verify checkpoint live status formatting"
+      ]
+    },
+    {
+      "name": "root-recorder",
+      "lane": "root",
+      "role": "recorder",
+      "workdir": "F:\\vaultforge",
+      "write_scope": "root handoff, root changelog, and affected section handoff notes only",
+      "tasks": [
+        "Record factual cycle results, gates, files touched, checks, and resume prompt."
+      ]
+    }
+  ]
+}

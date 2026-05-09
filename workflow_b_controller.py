@@ -11,6 +11,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -58,6 +59,72 @@ ROLE_ORDER = ("coordinator", "builder", "reviewer", "recorder")
 DEFAULT_EXTERNAL_WORKFLOW_FILE = Path(r"F:\toakezg\workflows\workflow-types.md")
 DEFAULT_ESCAPE_HATCH_FILE = Path(r"F:\toakezg\workflows\esape-hatch.md")
 TERMINAL_DETAIL = "compact"
+TERMINAL_COLOR = "auto"
+
+ANSI_RESET = "\033[0m"
+ANSI = {
+    "workflow": "\033[1;36m",
+    "success": "\033[1;32m",
+    "warning": "\033[1;33m",
+    "danger": "\033[1;31m",
+    "handoff": "\033[1;35m",
+    "path": "\033[0;32m",
+    "file": "\033[0;34m",
+    "filetype": "\033[0;36m",
+    "command": "\033[1;33m",
+    "arg": "\033[0;36m",
+    "fence": "\033[0;90m",
+    "budget": "\033[0;33m",
+}
+
+TERMINAL_COLOR_PATTERNS = (
+    (
+        "fence",
+        re.compile(r"(```(?:text|json|bat|powershell|python|md)?```|```(?:text|json|bat|powershell|python|md)?)", re.I),
+    ),
+    ("path", re.compile(r"\b[A-Za-z]:\\[^\s`\"')\]]+")),
+    (
+        "command",
+        re.compile(
+            r"\b(?:run_workflow_b_watch\.bat|run_workflow_b\.bat|python|py|codex|git|"
+            r"run_workflow_b_watch|workflow_b_controller\.py)\b",
+            re.I,
+        ),
+    ),
+    ("arg", re.compile(r"(?<!\w)--[a-zA-Z0-9][a-zA-Z0-9-]*")),
+    (
+        "danger",
+        re.compile(
+            r"\b(?:hard gate|cancelled|canceled|failed|failure|error|unsafe|stop|stopped|"
+            r"do not repeat|do not rerun|force-unlock|permission denied|access is denied)\b",
+            re.I,
+        ),
+    ),
+    (
+        "success",
+        re.compile(
+            r"\b(?:agent_finished|cycle_finished|run_finished|completed|complete|verified|"
+            r"approved|pass|ok)\b",
+            re.I,
+        ),
+    ),
+    (
+        "warning",
+        re.compile(
+            r"\b(?:changed|dirty|modified|partial|uncertain|risk|warning|manual interrupt|"
+            r"operator cancellation|no final signal block|budget_stop|timebox)\b",
+            re.I,
+        ),
+    ),
+    ("handoff", re.compile(r"\b(?:handoff|workflow-b-(?:stop|cancel)-handoff\.md)\b", re.I)),
+    ("workflow", re.compile(r"(\[workflow-b\]|\bWorkflow B\b|\bWorkflow A\b|\bWORKFLOW_B_[A-Z_]+\b)", re.I)),
+    ("budget", re.compile(r"\$\d+(?:\.\d+)?(?:/\$\d+(?:\.\d+)?)?|(?:\d+(?:\.\d+)?m/\d+(?:\.\d+)?m)")),
+    (
+        "file",
+        re.compile(r"\b[\w.-]+\.(?:md|jsonl|json|py|bat|ps1|txt|yml|yaml|toml|cfg)\b", re.I),
+    ),
+    ("filetype", re.compile(r"\b(?:markdown|jsonl|json|python|batch|powershell|text)\b", re.I)),
+)
 
 
 class WorkflowBCancelled(Exception):
@@ -231,6 +298,15 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         ),
     )
     parser.add_argument(
+        "--terminal-color",
+        default="auto",
+        choices=("auto", "always", "never"),
+        help=(
+            "ANSI-color Workflow B controller terminal output. Auto uses color "
+            "only for an interactive terminal and respects NO_COLOR."
+        ),
+    )
+    parser.add_argument(
         "--model",
         help="Optional Codex model override passed to codex exec.",
     )
@@ -275,6 +351,103 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         help="Remove a stale Workflow B lock before starting.",
     )
     return parser.parse_args(argv)
+
+
+def terminal_color_enabled() -> bool:
+    if TERMINAL_COLOR == "never" or os.environ.get("NO_COLOR"):
+        return False
+    if TERMINAL_COLOR == "always":
+        return True
+    return sys.stdout.isatty()
+
+
+def ansi_wrap(text: str, style: str) -> str:
+    return f"{ANSI[style]}{text}{ANSI_RESET}"
+
+
+def colorize_terminal_text(text: str) -> str:
+    if not terminal_color_enabled() or not text:
+        return text
+
+    parts: list[str] = []
+    index = 0
+    while index < len(text):
+        next_match: tuple[str, re.Match[str]] | None = None
+        for style, pattern in TERMINAL_COLOR_PATTERNS:
+            match = pattern.search(text, index)
+            if match is None:
+                continue
+            if (
+                next_match is None
+                or match.start() < next_match[1].start()
+                or (
+                    match.start() == next_match[1].start()
+                    and match.end() > next_match[1].end()
+                )
+            ):
+                next_match = (style, match)
+
+        if next_match is None:
+            parts.append(text[index:])
+            break
+
+        style, match = next_match
+        if match.start() > index:
+            parts.append(text[index : match.start()])
+        parts.append(ansi_wrap(match.group(0), style))
+        index = match.end()
+
+    return "".join(parts)
+
+
+def tprint(*values: object, sep: str = " ", end: str = "\n", file=None, flush: bool = False) -> None:
+    stream = sys.stdout if file is None else file
+    text = sep.join(str(value) for value in values)
+    if stream is sys.stdout:
+        text = colorize_terminal_text(text)
+    print(text, end=end, file=stream, flush=flush)
+
+
+def run_process_with_terminal_color(
+    command: Sequence[str],
+    prompt_text: str,
+) -> tuple[subprocess.Popen[str], int]:
+    """Run a child process while colorizing only its live terminal stream."""
+
+    if not terminal_color_enabled():
+        process = subprocess.Popen(
+            command,
+            stdin=subprocess.PIPE,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+        process.communicate(prompt_text)
+        return process, process.returncode
+
+    process = subprocess.Popen(
+        command,
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+    try:
+        if process.stdin is not None:
+            process.stdin.write(prompt_text)
+            process.stdin.close()
+    except (BrokenPipeError, OSError):
+        pass
+
+    if process.stdout is not None:
+        for line in process.stdout:
+            sys.stdout.write(colorize_terminal_text(line))
+            sys.stdout.flush()
+
+    returncode = process.wait()
+    return process, returncode
 
 
 def resolve_codex_bin(explicit_path: str | None = None) -> str:
@@ -716,7 +889,7 @@ def handle_hard_gate_signal(
         state=state,
         next_action=next_action,
     )
-    print(f"Workflow B stopped for hard gate. Run packet: {run_dir}")
+    tprint(f"Workflow B stopped for hard gate. Run packet: {run_dir}")
     append_status(
         status_path,
         {
@@ -1217,7 +1390,7 @@ def print_checkpoint(payload: dict[str, object]) -> None:
         else f"{money_or_none(usage['estimated_used_usd'])}/no usage budget"
     )
     agent_text = f" | agent {agent['name']}" if isinstance(agent, dict) else ""
-    print(
+    tprint(
         "[workflow-b] "
         f"{payload['phase']} | cycle {cycle_text} | elapsed {time_text} | "
         f"est usage {usage_text} | agents {payload['agents']['started']}/"
@@ -1226,24 +1399,24 @@ def print_checkpoint(payload: dict[str, object]) -> None:
     if TERMINAL_DETAIL != "verbose":
         return
 
-    print(
+    tprint(
         "  runtime: "
         f"remaining {runtime['remaining_human']} | "
         f"timebox used {runtime['timebox_used_percent']}%"
     )
-    print(
+    tprint(
         "  usage: "
         f"reported {money_or_none(usage['reported_used_usd'])} | "
         f"remaining est {money_or_none(usage['remaining_estimated_usd'])} | "
         f"used {usage['estimated_used_percent']}%"
     )
-    print(
+    tprint(
         "  cycles: "
         f"remaining after current {cycle['remaining_after_current']} | "
         f"progress {cycle['percent_of_max']}%"
     )
     if isinstance(agent, dict):
-        print(
+        tprint(
             "  agent: "
             f"lane {agent['lane']} | role {agent['role']} | workdir {agent['workdir']}"
         )
@@ -1251,7 +1424,7 @@ def print_checkpoint(payload: dict[str, object]) -> None:
     if isinstance(extra, dict) and extra:
         for key in ("output", "handoff", "reason", "path"):
             if key in extra:
-                print(f"  {key}: {extra[key]}")
+                tprint(f"  {key}: {extra[key]}")
 
 
 def write_live_status(run_dir: Path, payload: dict[str, object]) -> None:
@@ -1415,14 +1588,14 @@ def explain_codex_failure(
 
 
 def print_failure_explanation(explanation: dict[str, object]) -> None:
-    print("[workflow-b] Codex failure explanation")
-    print(f"  issue: {explanation['issue']}")
-    print(f"  returncode: {explanation['returncode']}")
-    print(f"  meaning: {explanation['meaning']}")
+    tprint("[workflow-b] Codex failure explanation")
+    tprint(f"  issue: {explanation['issue']}")
+    tprint(f"  returncode: {explanation['returncode']}")
+    tprint(f"  meaning: {explanation['meaning']}")
     for step in explanation["next_steps"]:
-        print(f"  next: {step}")
+        tprint(f"  next: {step}")
     if explanation.get("output_path"):
-        print(f"  output: {explanation['output_path']}")
+        tprint(f"  output: {explanation['output_path']}")
 
 
 def stop_child_process(process: subprocess.Popen[str], *, label: str) -> None:
@@ -1430,16 +1603,16 @@ def stop_child_process(process: subprocess.Popen[str], *, label: str) -> None:
 
     if process.poll() is not None:
         return
-    print(f"[workflow-b] stopping active Codex process for {label}...")
+    tprint(f"[workflow-b] stopping active Codex process for {label}...")
     try:
         process.terminate()
         process.wait(timeout=8)
     except subprocess.TimeoutExpired:
-        print(f"[workflow-b] Codex process for {label} did not stop; killing it.")
+        tprint(f"[workflow-b] Codex process for {label} did not stop; killing it.")
         process.kill()
         process.wait(timeout=8)
     except OSError as exc:
-        print(f"[workflow-b] could not stop Codex process for {label}: {exc}")
+        tprint(f"[workflow-b] could not stop Codex process for {label}: {exc}")
 
 
 def write_error_guide(
@@ -1551,15 +1724,7 @@ def run_agent(
     prompt_text = prompt_path.read_text(encoding="utf-8")
     process: subprocess.Popen[str] | None = None
     try:
-        process = subprocess.Popen(
-            command,
-            stdin=subprocess.PIPE,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-        )
-        process.communicate(prompt_text)
-        returncode = process.returncode
+        process, returncode = run_process_with_terminal_color(command, prompt_text)
     except KeyboardInterrupt:
         if process is not None:
             stop_child_process(process, label=agent.name)
@@ -1687,9 +1852,10 @@ def lane_docs(root: Path, lane: str) -> dict[str, str]:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    global TERMINAL_DETAIL
+    global TERMINAL_COLOR, TERMINAL_DETAIL
     args = parse_args(argv)
     TERMINAL_DETAIL = args.terminal_detail
+    TERMINAL_COLOR = args.terminal_color
     if args.cycles < 1:
         raise SystemExit("--cycles must be 1 or greater.")
     if args.workflow_review_every < 0:
@@ -1799,7 +1965,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     cycle=cycle,
                     extra={"reason": cycle_stop_reason, "handoff": str(handoff)},
                 )
-                print(f"Workflow B stopped for budget/timebox. Handoff: {handoff}")
+                tprint(f"Workflow B stopped for budget/timebox. Handoff: {handoff}")
                 return 0
             cycle_dir = run_dir / f"cycle-{cycle:02d}"
             outputs_dir = cycle_dir / "outputs"
@@ -1951,7 +2117,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                                 agent=agent,
                                 extra={"reason": start_reason, "handoff": str(handoff)},
                             )
-                            print(f"Workflow B stopped for budget/timebox. Handoff: {handoff}")
+                            tprint(f"Workflow B stopped for budget/timebox. Handoff: {handoff}")
                             return 0
                         budget_state.agent_runs_started += 1
                         if budget_state.estimated_agent_usd:
@@ -2149,7 +2315,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                                 agent=agent,
                                 extra={"reason": start_reason, "handoff": str(handoff)},
                             )
-                            print(f"Workflow B stopped for budget/timebox. Handoff: {handoff}")
+                            tprint(f"Workflow B stopped for budget/timebox. Handoff: {handoff}")
                             return 0
                         returncode, signal = run_agent(
                             args=args,
@@ -2211,13 +2377,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             cycle=args.cycles,
             extra={"run_dir": str(run_dir)},
         )
-        print(f"Workflow B run packet: {run_dir}")
+        tprint(f"Workflow B run packet: {run_dir}")
         if not args.execute:
-            print("Plan/dry-run only. Add --execute to launch codex exec agents.")
+            tprint("Plan/dry-run only. Add --execute to launch codex exec agents.")
         return 0
     except (KeyboardInterrupt, WorkflowBCancelled):
-        print()
-        print("[workflow-b] cancellation requested; writing handoff and clearing lock.")
+        tprint()
+        tprint("[workflow-b] cancellation requested; writing handoff and clearing lock.")
         if plan is not None:
             handoff = write_cancel_handoff(
                 run_dir=run_dir,
@@ -2246,9 +2412,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                 agent=current_agent,
                 extra={"handoff": str(handoff)},
             )
-            print(f"Workflow B cancelled. Handoff: {handoff}")
+            tprint(f"Workflow B cancelled. Handoff: {handoff}")
         else:
-            print("Workflow B cancelled before the run plan was fully created.")
+            tprint("Workflow B cancelled before the run plan was fully created.")
         return 130
     finally:
         if lock_path.exists():

@@ -62,19 +62,17 @@ the workflow itself is still behaving well.
 <!-- workflow-b-controller-snapshot:start -->
 ## Controller Review Snapshot
 
-- Updated: `2026-05-09T22:50:11+10:00`
-- Reason: workflow file change detected
-- Run id: `20260509T223050-run-approved-section-local-build-slices-while-an`
-- Cycle: `2` of `8`
-- Run packet: `F:\vaultforge\runs\workflow-b\20260509T223050-run-approved-section-local-build-slices-while-an`
+- Updated: `2026-05-09T23:52:11+10:00`
+- Reason: cycle review cadence
+- Run id: `20260509T235211-run-approved-section-local-build-slices-while-an`
+- Cycle: `1` of `8`
+- Run packet: `F:\vaultforge\runs\workflow-b\20260509T235211-run-approved-section-local-build-slices-while-an`
 - Commit mode: `review`
 - Timebox minutes: `20.0`
 - Usage budget USD: `1.0`
 - Hard gate mode: `switch-safe`
 - Watched workflow changes this cycle:
-- `F:\vaultforge\MULTI_AGENT_WORKFLOW_B.md`
-- `F:\vaultforge\WORKFLOW_REVIEW.md`
-- `F:\vaultforge\TASKS.md`
+- none detected
 
 ## Current Workflow Lessons
 
@@ -88,15 +86,22 @@ the workflow itself is still behaving well.
 <!-- workflow-b-controller-snapshot:end -->
 
 
+
+
+
+
+
+
+
 ## Multi-Agent Handoff
 
-- Task: Workflow B cycle 1 recorder closure for run `20260509T223050-run-approved-section-local-build-slices-while-an`
+- Task: Workflow B cycle 1 recorder closure for run `20260509T233547-run-approved-section-local-build-slices-while-an`
 - Current role: root recorder
-- Last verified state: controller launched six cycle prompts, no watched workflow document changes were detected before the cycle, checkpoint/status streams were readable, business reviewer committed `2279fcb`, and the active run had reached this recorder slot with estimated usage `$0.4800` of `$1.0000`.
-- Files touched: root `CHANGELOG.md`, root `WORKFLOW_REVIEW.md`, `vaultforge-engine/SIGN_UP.md`, and `vaultforge-business/SIGN_UP.md`.
-- Verification run: inspected `workflow-b-plan.md`, `workflow-b-live-status.md`, `status.jsonl`, `checkpoints.jsonl`, cycle output notes, `git status --short -uno`, `git diff --stat`, and `git log --oneline -5`.
-- Blocker or decision: no Workflow B hard gate was recorded. Safe work remains because the engine gallery-index slice needs `--gallery-index --dry-run` rejected or made preview-only before the slice is considered clean. Coordinator also found a root workflow follow-up: generated resume commands omit `--execute` even when the active plan says `Execute: True`.
-- Resume prompt: continue Workflow B with the engine safe fix first: guard `--gallery-index --dry-run`, add a regression test, rerun unit/gallery-index checks, then review and commit only scoped engine changes. After that, continue business only with already scoped safe work such as the preset/style/mod fragment migration planning task.
+- Last verified state: controller created the run packet, refreshed the workflow review snapshot, produced six cycle prompts, and reached the root recorder slot. Status and checkpoint streams are readable. No watched workflow document changes were detected before the cycle. Root coordinator reported a hard gate and `switch-safe` continued to scoped safe work. Engine reviewer committed live-required contact-sheet gate evidence as `a50bc48`. Business reviewer committed the delivery package skeleton as `d574b8c`.
+- Files touched: root `CHANGELOG.md`, root `WORKFLOW_REVIEW.md`, `vaultforge-engine/SIGN_UP.md`, and `vaultforge-business/SIGN_UP.md` by this recorder pass. Cycle commits also touched `vaultforge-engine/VERIFICATION.md` and business delivery package docs/template files.
+- Verification run: inspected `workflow-b-plan.md`, `workflow-b-live-status.md`, `status.jsonl`, `checkpoints.jsonl`, all cycle output notes, `git status --short`, `git diff --stat`, `git show --stat a50bc48`, `git show --stat d574b8c`, and `git log --oneline -8`.
+- Blocker or decision: hard gate remains recorded for moving business fragments into shared engine registries because that changes engine/business ownership and registry shape. Engine contact-sheet rendering remains `#live-required` until real sidecar examples or a root-approved fixture strategy exists. No live generation was run or approved.
+- Resume prompt: continue Workflow B with a safe business-local builder slice such as `business-service-catalog` or `business-client-output-review-checklist`; keep `business-fragment-library-ownership-gate`, pricing/licensing/publication, live generation, and engine contact-sheet rendering gated until their approvals or evidence exist, and include `--execute` manually if resuming from the generated command before `root-workflow-b-resume-execute-flag` is fixed.
 
 
 

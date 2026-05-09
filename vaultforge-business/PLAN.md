@@ -51,5 +51,12 @@
 - The next safe work is business-local packaging and operator workflow:
   client-intake template, delivery package skeleton, preset/style service
   catalog, and output review checklist.
+- `BUSINESS_SERVICE_CATALOG.md` now defines the internal preset/style/mod
+  service menu from wrapper names and prompt-bank usage while keeping pricing,
+  licensing, publication, live generation, and cross-lane registry changes
+  gated.
+- `BUSINESS_OUTPUT_REVIEW_CHECKLIST.md` now defines the curation step from
+  gallery/contact-sheet review into selected, rejected, archived, and packaged
+  client-ready files.
 - Pricing, licensing, public publication, paid-service positioning, and live
   generation remain Nath gates.

@@ -12,6 +12,14 @@ publication, live generation, and cross-lane approval gates.
 client jobs. It includes export, preview, source, review, archive, and usage
 note folders plus a client-facing README template.
 
+`BUSINESS_SERVICE_CATALOG.md` documents the current preset, style, and mod
+service menu from wrapper names and prompt-bank usage. It is an internal
+operator catalog, not a price sheet or launch approval.
+
+`BUSINESS_OUTPUT_REVIEW_CHECKLIST.md` defines how generated outputs move from
+gallery/contact-sheet review into selected, rejected, archived, and packaged
+client-ready files.
+
 ## Prompt Bank Map
 
 - Root `*-pack.txt` files are the current runnable text packs for `run-client-pack.ps1`.
@@ -105,6 +113,16 @@ delivery-package-template\
 Copy this skeleton for a real package only after outputs are selected from the
 gallery or contact sheets. Keep `exports\final` for approved client files and
 keep prompts/manifests under `sources` for reproducibility.
+
+Review generated outputs before packaging:
+
+```text
+BUSINESS_OUTPUT_REVIEW_CHECKLIST.md
+```
+
+Use the checklist with `gallery-entry.json`, `run.json`, contact sheets, the
+HTML gallery, and delivery-package folders so final exports stay separated from
+raw generations and rejected alternates.
 
 Update a markdown prompt note after review:
 

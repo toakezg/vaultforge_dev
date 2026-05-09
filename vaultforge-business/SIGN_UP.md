@@ -201,3 +201,35 @@ Use this shape:
 - Verification: listed `delivery-package-template` recursively; inspected `CLIENT_README.md` and `PACKAGE_MAP.md`; searched touched business files for pricing/licensing/publication language; `git diff --check` on touched tracked business docs reported only LF-to-CRLF warnings
 - Blocker or decision: no new hard gate hit; no live generation was run
 - Resume prompt: `Continue Workflow B for vaultforge-business. The next safe business-local slice is either business-service-catalog or business-client-output-review-checklist; keep pricing/licensing/publication, live generation, and fragment-library movement gated.`
+
+## 2026-05-09 - workflow-b business delivery package skeleton recorder closure
+
+- Role: root recorder closing the Workflow B cycle 1 business delivery package slice
+- Scope: affected section handoff note only
+- Read: active run packet output notes for root coordinator, business builder, and business reviewer; current business `SIGN_UP.md`; recent commit log
+- Changed: recorded that the reviewed delivery package skeleton is closed and committed as `d574b8c`
+- Handoff: no new business hard gate was created by the packaging skeleton. The next safe business-local slice is `business-service-catalog` or `business-client-output-review-checklist`; keep pricing, licensing, publication, live generation, and fragment-library movement gated.
+
+## 2026-05-09 - workflow-b business service catalog builder
+
+- Role: builder for Workflow B cycle 2 business-lane safe local docs slice
+- Scope: `vaultforge-business` section files only
+- Read: live `git status --short`, root Workflow A/B review docs, business docs/tasks/changelog/sign-up, `BUSINESS_CLIENT_READY_CRITERIA.md`, `BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md`, prompt-bank usage, delivery package skeleton, and active run packet live status
+- Changed: added `BUSINESS_SERVICE_CATALOG.md` as an internal preset/style/mod service menu from wrapper names and prompt-bank usage; updated README, PLAN, TASKS, and CHANGELOG
+- Handoff: the service catalog is ready for reviewer verification. The next safe business-local slice is `business-client-output-review-checklist`; pricing, licensing, publication, live generation, and fragment-library movement remain gated.
+- Verification: counted current prompt-bank preset/style/mod usage; reviewed catalog scope against the client-ready criteria and fragment migration gate; `git diff --check` on touched tracked docs reported only LF-to-CRLF warnings; checked the new catalog for trailing whitespace
+- Workflow B observation: the assigned run packet `20260509T233547-run-approved-section-local-build-slices-while-an` showed execute true, commit mode review, hard-gate mode `switch-safe`, estimated usage `$0.8000` of `$1.0000`, and the business builder slot active with about 2.1 minutes remaining when inspected. Live `WORKFLOW_REVIEW.md` had already advanced to a later run snapshot, so root workflow files were treated as concurrent/out-of-scope dirty state.
+- Blocker or decision: no new hard gate hit; no live generation was run
+- Resume prompt: `Continue Workflow B for vaultforge-business as reviewer. Review BUSINESS_SERVICE_CATALOG.md against current wrapper names and prompt-bank usage, verify the docs do not make pricing/licensing/publication/live-generation claims, and keep the next safe slice to business-client-output-review-checklist.`
+
+## 2026-05-09 - workflow-b business output review checklist builder
+
+- Role: builder for Workflow B cycle 1 business-lane safe local review slice
+- Scope: `vaultforge-business` section files only
+- Read: live `git status --short`, business docs/tasks/changelog/sign-up, `BUSINESS_CLIENT_READY_CRITERIA.md`, `BUSINESS_SERVICE_CATALOG.md`, delivery package docs, and gallery/contact-sheet/review-summary helpers
+- Changed: added `BUSINESS_OUTPUT_REVIEW_CHECKLIST.md` as the business-local curation checklist for selecting, rejecting, packaging, and archiving generated outputs; updated README, PLAN, TASKS, CHANGELOG, and this handoff
+- Handoff: reviewer should check the checklist against the current gallery/contact-sheet/review-summary tools and delivery package skeleton. Pricing, licensing, publication, live generation, and fragment-library movement remain gated.
+- Verification: reviewed the docs diff, scanned gated language, and ran `git diff --check` on touched business docs; it reported only existing LF-to-CRLF warnings. No live generation was run.
+- Workflow B observation: assigned run packet `20260509T235211-run-approved-section-local-build-slices-while-an` showed execute true, commit mode review, hard-gate mode `switch-safe`, estimated usage `$0.3200` of `$1.0000`, and the business builder slot active when inspected.
+- Blocker or decision: no new hard gate hit
+- Resume prompt: `Continue Workflow B for vaultforge-business as reviewer. Review BUSINESS_OUTPUT_REVIEW_CHECKLIST.md against the existing gallery/contact-sheet/review-summary helpers and delivery package skeleton, verify it does not make pricing/licensing/publication/live-generation claims, and keep the next business item to the Nath-facing paid launch decision note only.`

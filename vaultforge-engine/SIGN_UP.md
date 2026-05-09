@@ -46,6 +46,14 @@ Use this shape:
 - Changed: recorded this reviewer handoff only
 - Handoff: no blocking findings. The contact-sheet renderer remains correctly parked as `#live-required`; unit tests pass, smoke config dry-run remains no-write, normal gallery-index writes a temp zero-entry index, and `--gallery-index --dry-run` rejects without creating output. Safe engine implementation work does not remain until real sidecar examples or a root-approved fixture strategy exists.
 
+## 2026-05-09 - workflow b root recorder 233547 engine closure
+
+- Role: Root recorder closing the Workflow B cycle 1 engine slice
+- Scope: affected section handoff note only
+- Read: active run packet output notes for root coordinator, engine builder, and engine reviewer; current engine `SIGN_UP.md`; recent commit log
+- Changed: recorded that the reviewed engine live-required gate evidence is closed for this cycle and committed as `a50bc48`
+- Handoff: no new engine hard gate was created. `engine-contact-sheet-renderer` remains `#live-required` until real sidecar examples or a root-approved contact-sheet fixture strategy exists. The dry-run guard remains intact: `--gallery-index --dry-run` rejects without creating output, while normal explicit gallery-index output is still allowed.
+
 ## 2026-05-09 - workflow b engine build slices
 
 - Role: Builder for Workflow B cycle 1, engine lane
