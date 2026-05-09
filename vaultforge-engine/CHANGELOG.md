@@ -2,6 +2,8 @@
 
 ## 2026-05-09
 
+- Added engine-local `.env` API-key loading, direct `--api-key` overrides, and lane-oriented `--api-key-env` overrides.
+- Switched the default image generation model to the GPT Image 2 snapshot `gpt-image-2-2026-04-21`, with fallbacks for the alias and current Responses-capable mainline models.
 - Added native local image references with `--input-image` and `--reference-image`, including dry-run visibility and sidecar metadata.
 - Added Markdown batch prompt image extraction for standard Markdown embeds, Obsidian wiki embeds, and simple HTML image tags.
 - Updated batch hashing so changed reference images trigger reruns instead of being treated as unchanged prompt text.

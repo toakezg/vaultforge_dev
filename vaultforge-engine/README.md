@@ -62,6 +62,8 @@ The engine now accepts native low-risk business handoff flags:
 --variants
 --input-image
 --reference-image
+--api-key
+--api-key-env
 ```
 
 The context and variant fields affect output naming, variant count, dry-run
@@ -76,6 +78,23 @@ inputs. Markdown batch prompt notes can also embed images with standard
 `<img src="path.png">` tags; the engine removes the embed syntax from the text
 prompt and sends the image file beside the composed prompt. Relative Markdown
 image paths resolve from the prompt note's folder first.
+
+By default, direct engine runs look for an OpenAI key in
+`vaultforge-engine\.env`:
+
+```text
+VAULTFORGE_ENGINE_OPENAI_API_KEY=sk-your-key
+```
+
+Lane wrappers can override that per run with `--api-key`, or by passing one or
+more lane-owned environment variable names with `--api-key-env`, for example
+`--api-key-env VAULTFORGE_ICON_OPENAI_API_KEY`. For backward compatibility, the
+engine also still accepts `IMAGE_GENERATION_KEY_B_OPENAI_API_KEY` and
+`OPENAI_API_KEY` if they are already present.
+
+The default generation model is pinned to `gpt-image-2-2026-04-21`. That is the
+snapshot for GPT Image 2, the current state-of-the-art image generation model in
+the OpenAI docs. Fallbacks are `gpt-image-2`, `gpt-5.5`, and `gpt-5.2`.
 
 ## Execution For Now
 

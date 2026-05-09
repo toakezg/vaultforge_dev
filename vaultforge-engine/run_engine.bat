@@ -22,11 +22,11 @@ for %%A in (%*) do (
     if /I "%%~A"=="--dry-run" set "NEEDS_API_KEY=0"
 )
 
-if "%NEEDS_API_KEY%"=="1" if "%IMAGE_GENERATION_KEY_B_OPENAI_API_KEY%"=="" (
-    echo IMAGE_GENERATION_KEY_B_OPENAI_API_KEY is not set.
+if "%NEEDS_API_KEY%"=="1" if "%VAULTFORGE_ENGINE_OPENAI_API_KEY%"=="" if "%IMAGE_GENERATION_KEY_B_OPENAI_API_KEY%"=="" if "%OPENAI_API_KEY%"=="" (
+    echo No OpenAI API key is set.
     echo Paste your key into "%ENV_FILE%" like this:
-    echo   IMAGE_GENERATION_KEY_B_OPENAI_API_KEY=sk-your-key
-    echo You can also set it for your Windows user profile with setx if preferred.
+    echo   VAULTFORGE_ENGINE_OPENAI_API_KEY=sk-your-key
+    echo Lanes can also pass --api-key or --api-key-env to src\generate.py.
     exit /b 1
 )
 

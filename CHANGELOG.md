@@ -2,6 +2,7 @@
 
 ## 2026-05-09
 
+- Added engine-local `.env` API-key loading and lane override flags in `vaultforge-engine`, with the default model pinned to `gpt-image-2-2026-04-21`.
 - Added engine-native image input/reference support in `vaultforge-engine`: direct `--input-image` / `--reference-image` files and embedded images inside Markdown prompt notes can now be sent with the prompt for reference-driven generation and edits.
 
 ## 2026-05-03

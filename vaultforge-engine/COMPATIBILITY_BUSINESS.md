@@ -222,3 +222,4 @@ Engine behavior:
 - Decide whether business wrappers should eventually pass native engine `--client`, `--job`, `--tag`, and `--variants` directly, or keep their current wrapper-owned metadata files.
 - Decide whether business config files should become real runtime entrypoints or remain documentation-only.
 - Business wrappers can now choose when to pass native engine `--input-image` and `--reference-image`; wrapper-level tweak wording still belongs in business prompt composition.
+- Business wrappers can pass a lane-owned key with `--api-key` or `--api-key-env`; if they do not, the engine falls back to `vaultforge-engine\.env` and compatible legacy env var names.

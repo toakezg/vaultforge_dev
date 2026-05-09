@@ -32,9 +32,10 @@ PROJECT_ROOT = get_project_root()
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "assets" / "generated"
 DEFAULT_BATCH_INPUT_DIR = PROJECT_ROOT / "assets" / "batch-input"
 DEFAULT_SMOKE_BATCH_INPUT_DIR = PROJECT_ROOT / "assets" / "batch-input-smoke"
+DEFAULT_ENV_FILE = PROJECT_ROOT / ".env"
 BATCH_STATE_FILENAME = ".batch-state.json"
-DEFAULT_MODEL = "gpt-5"
-DEFAULT_FALLBACK_MODELS = ("gpt-4.1",)
+DEFAULT_MODEL = "gpt-image-2-2026-04-21"
+DEFAULT_FALLBACK_MODELS = ("gpt-image-2", "gpt-5.5", "gpt-5.2")
 SUPPORTED_FORMATS = {"png", "jpeg", "webp"}
 SUPPORTED_INPUT_IMAGE_EXTENSIONS = {".gif", ".ico", ".jpeg", ".jpg", ".png", ".svg", ".webp"}
 INPUT_IMAGE_MIME_TYPES = {
@@ -48,7 +49,13 @@ INPUT_IMAGE_MIME_TYPES = {
 PROMPT_FILE_EXTENSIONS = {"", ".md", ".markdown", ".txt"}
 MARKDOWN_PROMPT_EXTENSIONS = {".md", ".markdown"}
 BATCH_HELPER_EXTENSIONS = {".bat", ".cfg", ".cmd", ".conf", ".ini", ".json", ".ps1"}
-API_KEY_ENV_VAR = "IMAGE_GENERATION_KEY_B_OPENAI_API_KEY"
+API_KEY_ENV_VAR = "VAULTFORGE_ENGINE_OPENAI_API_KEY"
+API_KEY_ENV_VARS = (
+    API_KEY_ENV_VAR,
+    "IMAGE_GENERATION_KEY_B_OPENAI_API_KEY",
+    "OPENAI_API_KEY",
+)
+GPT_IMAGE_MODEL_PREFIXES = ("gpt-image-", "chatgpt-image")
 STYLE_PROMPTS = {
     "fine-line": "fine-line illustration, delicate contours, sparse shading, precise ornamental detail",
     "geometric": "geometric construction, crisp vector-like edges, balanced shapes, strong symbolic clarity",
@@ -288,6 +295,23 @@ def parse_args() -> argparse.Namespace:
         help="Disable automatic fallback model handling.",
     )
     parser.add_argument(
+        "--api-key",
+        help=(
+            "Explicit OpenAI API key for this run. "
+            "Intended for lane wrappers that provide their own key."
+        ),
+    )
+    parser.add_argument(
+        "--api-key-env",
+        action="append",
+        default=[],
+        metavar="ENV_VAR",
+        help=(
+            "Environment variable name to read the OpenAI API key from before "
+            "engine defaults. Repeat to allow multiple lane-specific names."
+        ),
+    )
+    parser.add_argument(
         "--style",
         action="append",
         choices=sorted(STYLE_PROMPTS),
@@ -456,25 +480,77 @@ def resolve_batch_folder(
     return None
 
 
-def get_api_key() -> tuple[str, str]:
-    value = os.environ.get(API_KEY_ENV_VAR)
-    if value:
-        return API_KEY_ENV_VAR, value
+def load_env_file(env_file: Path | None = None) -> dict[str, str]:
+    env_file = env_file or DEFAULT_ENV_FILE
+    if not env_file.exists():
+        return {}
+
+    values: dict[str, str] = {}
+    for raw_line in env_file.read_text(encoding="utf-8-sig").splitlines():
+        stripped = raw_line.strip()
+        if not stripped or stripped.startswith("#") or stripped.startswith(";"):
+            continue
+        key, separator, value = stripped.partition("=")
+        if not separator:
+            continue
+        key = key.strip()
+        if not key:
+            continue
+        values[key] = strip_optional_quotes(value.strip())
+    return values
+
+
+def find_api_key_in_sources(
+    names: Iterable[str],
+    *,
+    env_values: dict[str, str],
+) -> tuple[str, str] | None:
+    for name in names:
+        cleaned = name.strip()
+        if not cleaned:
+            continue
+        value = os.environ.get(cleaned)
+        if value:
+            return cleaned, value
+        value = env_values.get(cleaned)
+        if value:
+            return f"{DEFAULT_ENV_FILE.name}:{cleaned}", value
+    return None
+
+
+def get_api_key(args: argparse.Namespace) -> tuple[str, str]:
+    if args.api_key:
+        return "--api-key", args.api_key
+
+    env_values = load_env_file()
+    candidate_names = [*args.api_key_env, *API_KEY_ENV_VARS]
+    found = find_api_key_in_sources(candidate_names, env_values=env_values)
+    if found:
+        return found
 
     raise RuntimeError(
-        "OpenAI API key not found. Set this environment variable before running: "
-        f"{API_KEY_ENV_VAR}."
+        "OpenAI API key not found. Add one to "
+        f"{DEFAULT_ENV_FILE} as {API_KEY_ENV_VAR}=sk-... or pass --api-key / --api-key-env."
     )
 
 
-def get_api_key_for_run(dry_run: bool) -> tuple[str, str | None]:
-    if dry_run:
-        value = os.environ.get(API_KEY_ENV_VAR)
-        if value:
-            return f"{API_KEY_ENV_VAR} (dry run)", value
+def get_api_key_for_run(args: argparse.Namespace) -> tuple[str, str | None]:
+    if args.api_key:
+        return "--api-key" + (" (dry run)" if args.dry_run else ""), args.api_key
+
+    env_values = load_env_file()
+    candidate_names = [*args.api_key_env, *API_KEY_ENV_VARS]
+    found = find_api_key_in_sources(candidate_names, env_values=env_values)
+    if found:
+        source, value = found
+        if args.dry_run:
+            return f"{source} (dry run)", value
+        return source, value
+
+    if args.dry_run:
         return "dry run (API key not required)", None
 
-    api_env_var, api_key = get_api_key()
+    api_env_var, api_key = get_api_key(args)
     return api_env_var, api_key
 
 
@@ -508,15 +584,48 @@ def compose_prompt(
 
 def extract_image_bytes(response) -> bytes:
     for output in response.output:
-        if getattr(output, "type", None) != "image_generation_call":
-            continue
-        result = getattr(output, "result", None)
+        result = extract_base64_image_value(output)
         if result:
             return base64.b64decode(result)
 
     raise RuntimeError(
-        "The API response completed, but it did not include image bytes from the image_generation tool."
+        "The API response completed, but it did not include base64 image bytes."
     )
+
+
+def extract_base64_image_value(value) -> str | None:
+    if isinstance(value, dict):
+        for key in ("result", "b64_json", "image_base64", "base64"):
+            found = value.get(key)
+            if isinstance(found, str) and found:
+                return found
+        for nested in value.values():
+            found = extract_base64_image_value(nested)
+            if found:
+                return found
+        return None
+
+    for key in ("result", "b64_json", "image_base64", "base64"):
+        found = getattr(value, key, None)
+        if isinstance(found, str) and found:
+            return found
+
+    nested_values = []
+    content = getattr(value, "content", None)
+    if content is not None:
+        nested_values.append(content)
+    data = getattr(value, "data", None)
+    if data is not None:
+        nested_values.append(data)
+
+    if isinstance(value, (list, tuple)):
+        nested_values.extend(value)
+
+    for nested in nested_values:
+        found = extract_base64_image_value(nested)
+        if found:
+            return found
+    return None
 
 
 def build_output_path(
@@ -935,6 +1044,10 @@ def build_responses_input(prompt: str, image_references: list[ImageReference]):
     return [{"role": "user", "content": content}]
 
 
+def is_direct_image_model(model: str) -> bool:
+    return model.startswith(GPT_IMAGE_MODEL_PREFIXES)
+
+
 def should_try_fallback(error: APIError) -> bool:
     message = str(error).lower()
     fallback_signals = (
@@ -958,6 +1071,12 @@ def request_image(
     image_references: list[ImageReference],
     args: argparse.Namespace,
 ):
+    if is_direct_image_model(model):
+        return client.responses.create(
+            model=model,
+            input=build_responses_input(prompt, image_references),
+        )
+
     return client.responses.create(
         model=model,
         input=build_responses_input(prompt, image_references),
@@ -1201,7 +1320,7 @@ def main() -> int:
     args.output_dir_path.mkdir(parents=True, exist_ok=True)
 
     try:
-        api_env_var, api_key = get_api_key_for_run(args.dry_run)
+        api_env_var, api_key = get_api_key_for_run(args)
         fallback_models = (
             []
             if args.no_model_fallback

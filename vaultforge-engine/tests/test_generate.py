@@ -1,7 +1,9 @@
 import io
+import os
 import sys
 import tempfile
 import unittest
+from types import SimpleNamespace
 from pathlib import Path
 from unittest.mock import patch
 
@@ -186,6 +188,19 @@ class PromptBuildingBlocksTests(unittest.TestCase):
         self.assertEqual(args.tag, "local, premium")
         self.assertEqual(args.variants, 3)
 
+    def test_parse_args_accepts_lane_api_key_env(self):
+        argv = [
+            "generate.py",
+            "Premium logo direction",
+            "--api-key-env",
+            "VAULTFORGE_ICON_OPENAI_API_KEY",
+        ]
+
+        with patch.object(sys, "argv", argv):
+            args = generate.parse_args()
+
+        self.assertEqual(args.api_key_env, ["VAULTFORGE_ICON_OPENAI_API_KEY"])
+
     def test_parse_args_rejects_zero_variants(self):
         argv = [
             "generate.py",
@@ -265,6 +280,86 @@ class PromptBuildingBlocksTests(unittest.TestCase):
             self.assertEqual(content[0], {"type": "input_text", "text": "Match this style"})
             self.assertEqual(content[1]["type"], "input_image")
             self.assertTrue(content[1]["image_url"].startswith("data:image/svg+xml;base64,"))
+
+    def test_direct_image_model_request_omits_image_generation_tool(self):
+        calls = []
+
+        class FakeResponses:
+            def create(self, **kwargs):
+                calls.append(kwargs)
+                return SimpleNamespace(output=[])
+
+        client = SimpleNamespace(responses=FakeResponses())
+        args = generate.argparse.Namespace(
+            size="1024x1024",
+            quality="medium",
+            format="png",
+            background="auto",
+        )
+
+        generate.request_image(
+            client,
+            model=generate.DEFAULT_MODEL,
+            prompt="Draw a forge",
+            image_references=[],
+            args=args,
+        )
+
+        self.assertEqual(calls[0]["model"], "gpt-image-2-2026-04-21")
+        self.assertNotIn("tools", calls[0])
+
+
+class ApiKeyLoadingTests(unittest.TestCase):
+    def test_get_api_key_prefers_explicit_key(self):
+        args = generate.argparse.Namespace(
+            api_key="sk-explicit",
+            api_key_env=[],
+            dry_run=False,
+        )
+
+        source, value = generate.get_api_key_for_run(args)
+
+        self.assertEqual(source, "--api-key")
+        self.assertEqual(value, "sk-explicit")
+
+    def test_get_api_key_reads_engine_env_file(self):
+        args = generate.argparse.Namespace(
+            api_key=None,
+            api_key_env=[],
+            dry_run=False,
+        )
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            env_file = Path(temp_dir) / ".env"
+            env_file.write_text(
+                "VAULTFORGE_ENGINE_OPENAI_API_KEY=sk-env-file\n",
+                encoding="utf-8",
+            )
+            with patch.object(generate, "DEFAULT_ENV_FILE", env_file), patch.dict(os.environ, {}, clear=True):
+                source, value = generate.get_api_key_for_run(args)
+
+        self.assertEqual(source, ".env:VAULTFORGE_ENGINE_OPENAI_API_KEY")
+        self.assertEqual(value, "sk-env-file")
+
+    def test_get_api_key_reads_lane_env_before_engine_default(self):
+        args = generate.argparse.Namespace(
+            api_key=None,
+            api_key_env=["VAULTFORGE_ICON_OPENAI_API_KEY"],
+            dry_run=False,
+        )
+
+        with patch.dict(
+            os.environ,
+            {
+                "VAULTFORGE_ICON_OPENAI_API_KEY": "sk-icon",
+                "VAULTFORGE_ENGINE_OPENAI_API_KEY": "sk-engine",
+            },
+            clear=True,
+        ):
+            source, value = generate.get_api_key_for_run(args)
+
+        self.assertEqual(source, "VAULTFORGE_ICON_OPENAI_API_KEY")
+        self.assertEqual(value, "sk-icon")
 
 
 class EngineProjectRootTests(unittest.TestCase):
