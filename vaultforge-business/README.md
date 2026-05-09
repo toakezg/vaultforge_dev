@@ -42,6 +42,15 @@ Run the starter pack:
 run-client-pack.bat "Empower You Plan Management" "empower-you" "logo-pack-01" "round1" ".\logo-pack.txt"
 ```
 
+Preview a pack without running commands or touching `logs\run-log.csv`:
+
+```powershell
+.\run-client-pack.ps1 -InputValue "Empower You Plan Management" -Client "empower-you" -Project "logo-pack-01" -Tag "round1" -PromptFile ".\logo-pack.txt" -WhatIf
+```
+
+Add `-LogWhatIf` when you intentionally want preview rows appended to
+`logs\run-log.csv`.
+
 Build a generated-output review summary from existing `gallery-entry.json` files:
 
 ```bat

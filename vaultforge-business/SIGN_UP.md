@@ -89,3 +89,25 @@ Use this shape:
 - Verification: parser checks for `run_business.ps1` and `run_business_md_bank.ps1`; engine `--help`; direct wrapper `-DryRun`; image-reference direct wrapper `-WhatIf`; smoke batch dry-run; targeted markdown-bank `-WhatIf`; checked sample dry-run/WhatIf output folders stayed absent; `git diff --check` reported only LF-to-CRLF warnings
 - Blocker or decision: no hard gate hit; no live generation was run
 - Resume prompt: `Continue Workflow B for vaultforge-business as reviewer. Review the manifest ownership decision and input/reference passthrough, then run parser checks plus dry-run/WhatIf verification without live generation.`
+
+## 2026-05-09 - workflow-b business pack WhatIf logging builder
+
+- Role: builder for Workflow B cycle 1 business-lane approved local slices
+- Scope: `vaultforge-business` section files only
+- Read: live `git status --short`, root `THREAD_MAP.md`, business `SYSTEM.md`, `PLAN.md`, `TASKS.md`, `CHANGELOG.md`, `SIGN_UP.md`, `README.md`, `run-client-pack.ps1`, `run_business.ps1`, and Workflow B run packet checkpoint/status outputs
+- Changed: `run-client-pack.ps1 -WhatIf` no longer creates or appends `logs\run-log.csv` by default; added `-LogWhatIf` for intentional preview audit rows; updated README, changelog, and task state
+- Handoff: the safe business-local pack logging slice is ready for reviewer verification; broader preset/style/mod fragment migration remains a cross engine/business coordination task and should not be started as a blind business-only edit
+- Verification: parser checks for `run-client-pack.ps1` and `run_business.ps1`; temp-workspace pack `-WhatIf` without `-LogWhatIf` left no log folder; temp-workspace pack `-WhatIf -LogWhatIf` wrote one `whatif` row
+- Workflow B observation: run packet checkpointing and budget fields were readable; launch reached business builder with estimated usage `$0.3200` of `$1.0000`, 4 of 48 agent slots started, and no hard gate recorded before this slice. The coordinator already noted a non-blocking root issue where `workflow-b-plan.md` omits `--execute` in its resume command despite the active run being executable.
+- Blocker or decision: no hard gate hit; no live generation was run
+- Resume prompt: `Continue Workflow B for vaultforge-business as reviewer. Review the pack-runner WhatIf logging change, verify default WhatIf remains no-write for logs, verify -LogWhatIf writes intentional preview rows, and do not run live generation.`
+
+## 2026-05-09 - workflow-b business pack WhatIf logging reviewer
+
+- Role: reviewer for Workflow B cycle 1 business-lane approved local slices
+- Scope: `vaultforge-business` verification and review findings
+- Read: live `git status --short`, run packet status/checkpoint outputs, builder handoff, wrapper diff, `run-client-pack.ps1`, `run_business.ps1`, `README.md`, `TASKS.md`, `CHANGELOG.md`, and `SIGN_UP.md`
+- Findings: no blocking findings in the pack-runner WhatIf logging fix
+- Verification: parser checks passed for `run-client-pack.ps1` and `run_business.ps1`; temp-workspace default `-WhatIf` left no `logs\run-log.csv`; temp-workspace `-WhatIf -LogWhatIf` wrote one `whatif` row; temp-workspace normal harmless run wrote one `success` row; `git diff --check` reported only LF-to-CRLF warnings
+- Blocker or decision: no hard gate hit; no live generation was run
+- Resume prompt: `Continue Workflow B for vaultforge-business as recorder. Record the reviewed pack-runner WhatIf logging fix, keep preset/style/mod fragment migration as a later engine/business coordination task, and do not run live generation unless Nath approves it.`

@@ -8,7 +8,8 @@ param(
     [switch]$StopOnError,
     [switch]$PauseBetween,
     [int]$DelaySeconds = 0,
-    [switch]$WhatIf
+    [switch]$WhatIf,
+    [switch]$LogWhatIf
 )
 
 function Get-CommandElementText {
@@ -310,20 +311,32 @@ function Add-RunLogRow {
     } | ConvertTo-Csv -NoTypeInformation | Select-Object -Skip 1 | Add-Content -Path $Path -Encoding utf8
 }
 
+function Initialize-RunLog {
+    param([string]$Path)
+
+    $directory = Split-Path -Parent $Path
+    if (-not (Test-Path $directory)) {
+        New-Item -ItemType Directory -Path $directory | Out-Null
+    }
+
+    if (-not (Test-Path $Path)) {
+        'timestamp,client,project,tag,input,prompt_file,command,status,exit_code' | Out-File -FilePath $Path -Encoding utf8
+    }
+}
+
 if (-not (Test-Path $PromptFile)) {
     Write-Host "Prompt file not found: $PromptFile" -ForegroundColor Red
     exit 1
 }
 
 $packEntries = @(Get-PackEntries $PromptFile)
-$logDir = ".\logs"
-if (-not (Test-Path $logDir)) {
-    New-Item -ItemType Directory -Path $logDir | Out-Null
+$logFile = Join-Path ".\logs" "run-log.csv"
+$shouldWriteRunLog = (-not $WhatIf) -or $LogWhatIf
+if ($shouldWriteRunLog) {
+    Initialize-RunLog $logFile
 }
-
-$logFile = Join-Path $logDir "run-log.csv"
-if (-not (Test-Path $logFile)) {
-    'timestamp,client,project,tag,input,prompt_file,command,status,exit_code' | Out-File -FilePath $logFile -Encoding utf8
+elseif ($WhatIf) {
+    Write-Host "WhatIf preview only: run log will not be updated. Add -LogWhatIf to record preview rows." -ForegroundColor Yellow
 }
 
 foreach ($entry in $packEntries) {
@@ -334,7 +347,9 @@ foreach ($entry in $packEntries) {
     Write-Host "Running: $cmd" -ForegroundColor Cyan
 
     if ($WhatIf) {
-        Add-RunLogRow $logFile $timestamp $Client $Project $Tag $InputValue $PromptFile $cmd "whatif" 0
+        if ($LogWhatIf) {
+            Add-RunLogRow $logFile $timestamp $Client $Project $Tag $InputValue $PromptFile $cmd "whatif" 0
+        }
         continue
     }
 
