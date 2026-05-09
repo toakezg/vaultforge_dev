@@ -151,3 +151,32 @@ Use this shape:
 - Verification: docs diff review; business/engine status scope check; `git diff --check` for touched business files reported only LF-to-CRLF warnings.
 - Blocker or decision: no new hard gate for this docs slice; the pre-existing fragment migration gate remains recorded.
 - Resume prompt: `Continue Workflow B for vaultforge-business as recorder. Record the reviewed client-ready criteria docs, keep fragment migration blocked until root/engine/Nath approval, and choose client intake template or delivery package skeleton as the next safe business-local slice.`
+
+## 2026-05-09 - workflow-b business client-ready recorder closure
+
+- Role: root recorder closing the Workflow B cycle 1 business client-ready slice
+- Scope: affected section handoff note only
+- Read: active run packet output notes for root coordinator, engine builder, engine reviewer, business builder, and business reviewer; current business `SIGN_UP.md`; current git status and recent commit log
+- Changed: recorded that the reviewed client-ready criteria docs slice is closed and committed as `e89fe60`
+- Handoff: no new hard gate remains for `BUSINESS_CLIENT_READY_CRITERIA.md`. The actual fragment-library move remains blocked on root/engine/Nath approval, and paid launch, pricing/licensing, publication, and live generation remain gated. The next safe business-local slice is `business-client-intake-template` or `business-client-package-skeleton`.
+
+## 2026-05-09 - workflow-b business client intake template builder
+
+- Role: builder for Workflow B cycle 2 business-lane safe local slice
+- Scope: `vaultforge-business` section files only
+- Read: live `git status --short`, root `CODEX_START.md`, root `THREAD_MAP.md`, root `MULTI_AGENT_WORKFLOW.md`, root `WORKFLOW_REVIEW.md`, business `TASKS.md`, `README.md`, `CHANGELOG.md`, `SIGN_UP.md`, `BUSINESS_CLIENT_READY_CRITERIA.md`, prompt-bank templates, markdown-bank runner prompt detection, and active Workflow B run packet live status
+- Changed: added `my-prompts-bank\_intake\client-intake-template.md` as a non-runnable client brief template; documented the intake template in business README files; marked `business-client-intake-template` complete in `TASKS.md`; updated `CHANGELOG.md`
+- Verification: `run_business_md_bank.ps1 -Path ".\my-prompts-bank\_intake\client-intake-template.md" -WhatIf` skipped the intake note as non-prompt markdown with 0 ran, 1 skipped, 0 failed; `git diff --check` on touched business files reported only existing LF-to-CRLF warnings
+- Workflow B observation: cycle 2 live status showed the business builder slot running with execute true, commit mode review, hard-gate mode `switch-safe`, estimated usage `$0.8000` of `$1.0000`, and about 4.2 minutes remaining in the 20 minute timebox when inspected
+- Blocker or decision: no new hard gate hit; no live generation was run; pricing, licensing, publication, and live generation remain Nath gates; the fragment-library move remains blocked on root/engine/Nath ownership approval
+- Resume prompt: `Continue Workflow B for vaultforge-business as reviewer. Review the non-runnable client intake template slice, verify the markdown-bank runner skips it as non-prompt markdown, and keep the next safe business-local slice to delivery package skeleton, service catalog, or output review checklist work only.`
+
+## 2026-05-09 - workflow-b business client intake template reviewer
+
+- Role: reviewer for Workflow B cycle 2 business-lane safe local slice
+- Scope: `vaultforge-business` verification and review findings
+- Read: live dirty baseline, builder run-packet output, business diffs, `run_business_md_bank.ps1` prompt detection, new intake template, business README/task/changelog/sign-up updates, and Workflow B live status
+- Findings: no blocking findings in the client intake template slice; the new file is intentionally non-runnable and does not carry prompt-bank frontmatter
+- Verification: `run_business_md_bank.ps1 -Path ".\my-prompts-bank\_intake\client-intake-template.md" -WhatIf` skipped the note as non-prompt markdown with 0 ran, 1 skipped, 0 failed; `git diff --check` on touched business files reported only LF-to-CRLF warnings
+- Blocker or decision: no new hard gate hit; no live generation was run; paid launch, pricing/licensing, publication, and fragment-library movement remain gated separately
+- Resume prompt: `Continue Workflow B for vaultforge-business as recorder. Record the reviewed client intake template slice and keep the next safe business-local slice to delivery package skeleton, service catalog, or output review checklist work only.`

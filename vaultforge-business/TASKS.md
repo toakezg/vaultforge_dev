@@ -49,7 +49,7 @@ ____
 - [ ] 🔼 Decide engine/business ownership and registry shape before moving stable business preset/style/mod fragments into engine libraries #business #engine #libraries #nath 🆔 business-fragment-library-ownership-gate ⛔ business-fragment-library-candidates
 - [ ] 🔼 Move stable business preset/style/mod fragments into engine libraries after the registry shape is approved #business #engine #libraries 🆔 business-fragment-library-move ⛔ business-fragment-library-ownership-gate
 - [x] 🔼 Define what makes VaultForge Business finished and primed for real client use before building paid-service packaging #business #planning 🆔 business-client-ready-definition ✅ 2026-05-09
-- [ ] 🔼 Add a repeatable client intake markdown template for paid-service style requests #business #clients #prompts 🆔 business-client-intake-template ⛔ business-client-ready-definition
+- [x] 🔼 Add a repeatable client intake markdown template for paid-service style requests #business #clients #prompts 🆔 business-client-intake-template ⛔ business-client-ready-definition ✅ 2026-05-09
 - [ ] 🔼 Add a delivery package skeleton with export folders and a client-facing README template #business #packaging 🆔 business-client-package-skeleton ⛔ business-client-ready-definition
 - [ ] 🔼 Create a preset/style/mod service catalog from current business wrapper names and prompt-bank usage #business #docs #clients 🆔 business-service-catalog ⛔ business-client-ready-definition
 - [ ] 🔼 Add a client-ready output review checklist for gallery/contact-sheet selection #business #review #packaging 🆔 business-client-output-review-checklist ⛔ business-client-ready-definition

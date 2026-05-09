@@ -31,6 +31,11 @@ are in `_template`:
 - `brand-board-template.md`
 - `client-pack-template.md`
 
+Non-runnable intake templates are in `_intake`:
+
+- `client-intake-template.md` - client brief template used before creating
+  prompt notes.
+
 The first runnable markdown example pack lives in `example-client`:
 
 - `logo-01.md`
@@ -52,6 +57,10 @@ Use these as the canonical shape for prompt-bank entries. The markdown runner is
 by default, ignores non-prompt markdown such as READMEs and dashboards, strips
 the opening H1 from the prompt body, and passes the remaining body to
 `run_business.ps1`.
+
+Client intake notes are upstream briefs, not generation prompts. Keep intake
+templates free of runnable prompt frontmatter, then convert the useful details
+into one or more runnable asset notes when the request is ready.
 
 Useful checks:
 

@@ -2,6 +2,9 @@
 
 ## 2026-05-09
 
+- Added `my-prompts-bank\_intake\client-intake-template.md` as a non-runnable
+  client brief template for converting service-style requests into later
+  runnable business prompt notes.
 - Added `BUSINESS_CLIENT_READY_CRITERIA.md` to define the business lane's paid-client readiness target and split the next safe packaging/intake/catalog slices from Nath-gated launch decisions.
 - Added `BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md` to review business preset/style/mod migration candidates and record the hard gate before moving lane-owned fragments into shared engine libraries.
 - Fixed `run-client-pack.ps1 -WhatIf` so pack previews no longer create or append `logs/run-log.csv` by default; added `-LogWhatIf` for intentional preview audit rows.

@@ -12,6 +12,8 @@ publication, live generation, and cross-lane approval gates.
 
 - Root `*-pack.txt` files are the current runnable text packs for `run-client-pack.ps1`.
 - `my-prompts-bank\_template` holds markdown frontmatter templates.
+- `my-prompts-bank\_intake\client-intake-template.md` is a non-runnable client
+  brief template for turning service-style requests into later prompt notes.
 - `my-prompts-bank\example-client` is the first runnable markdown prompt pack.
 - `my-prompts-bank\vaultforge` is the starter VaultForge system-brand prompt pack.
 - `my-prompts-bank\_archive\legacy-one-offs` keeps old manual scratch prompts.
