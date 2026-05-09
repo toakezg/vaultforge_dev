@@ -221,4 +221,4 @@ Engine behavior:
 
 - Decide whether business wrappers should eventually pass native engine `--client`, `--job`, `--tag`, and `--variants` directly, or keep their current wrapper-owned metadata files.
 - Decide whether business config files should become real runtime entrypoints or remain documentation-only.
-- Add edit/reference API support later; `--input-image`, `--reference-image`, and tweak fields were intentionally not part of this low-risk engine pass.
+- Business wrappers can now choose when to pass native engine `--input-image` and `--reference-image`; wrapper-level tweak wording still belongs in business prompt composition.

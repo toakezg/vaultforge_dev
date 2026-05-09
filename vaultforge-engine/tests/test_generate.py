@@ -26,6 +26,7 @@ class LoadBatchPromptsTests(unittest.TestCase):
                     batch_dir / "forge.txt",
                     "A glowing forge hidden inside an ancient mountain vault",
                     "forge",
+                    [],
                 ),
             )
 
@@ -54,6 +55,7 @@ Ancient brass tools resting in ember light.
             )
             self.assertEqual(entries[0][1], expected_prompt)
             self.assertEqual(entries[0][2], 'random-title')
+            self.assertEqual(entries[0][3], [])
 
     def test_markdown_heading_only_becomes_the_prompt(self):
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -68,6 +70,45 @@ Ancient brass tools resting in ember light.
             self.assertEqual(len(entries), 1)
             self.assertEqual(entries[0][1], "Sacred scene prompt")
             self.assertEqual(entries[0][2], "untitled")
+            self.assertEqual(entries[0][3], [])
+
+    def test_markdown_prompt_extracts_embedded_image_references(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            batch_dir = Path(temp_dir)
+            image_path = batch_dir / "style ref.png"
+            image_path.write_bytes(b"fake-png")
+            (batch_dir / "with-ref.md").write_text(
+                "# Forest character\n\nUse this as a style reference:\n\n![style](style%20ref.png)\n\nMake a calm portrait.",
+                encoding="utf-8",
+            )
+
+            entries = generate.load_batch_prompts(batch_dir)
+
+            self.assertEqual(len(entries), 1)
+            self.assertEqual(
+                entries[0][1],
+                "Use this as a style reference:\nMake a calm portrait.",
+            )
+            self.assertEqual(entries[0][3], [
+                generate.ImageReference(path=image_path.resolve(), source="embed:with-ref.md")
+            ])
+
+    def test_markdown_prompt_extracts_raw_space_image_paths(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            batch_dir = Path(temp_dir)
+            image_path = batch_dir / "style ref.png"
+            image_path.write_bytes(b"fake-png")
+            (batch_dir / "with-spaces.md").write_text(
+                "# Forest character\n\n![style](style ref.png)\n\nMake a calm portrait.",
+                encoding="utf-8",
+            )
+
+            entries = generate.load_batch_prompts(batch_dir)
+
+            self.assertEqual(entries[0][1], "Make a calm portrait.")
+            self.assertEqual(entries[0][3], [
+                generate.ImageReference(path=image_path.resolve(), source="embed:with-spaces.md")
+            ])
 
 
 class PromptBuildingBlocksTests(unittest.TestCase):
@@ -103,6 +144,25 @@ class PromptBuildingBlocksTests(unittest.TestCase):
 
         self.assertEqual(args.preset, "icon")
         self.assertEqual(args.style, ["geometric", "fine-line", "mystica"])
+
+    def test_parse_args_accepts_reference_image(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            image_path = Path(temp_dir) / "reference.jpeg"
+            image_path.write_bytes(b"fake-jpeg")
+            argv = [
+                "generate.py",
+                "Minor style tweak",
+                "--reference-image",
+                str(image_path),
+            ]
+
+            with patch.object(sys, "argv", argv):
+                args = generate.parse_args()
+
+            self.assertEqual(args.reference_image, [str(image_path)])
+            self.assertEqual(args.cli_image_references, [
+                generate.ImageReference(path=image_path.resolve(), source="--reference-image")
+            ])
 
     def test_parse_args_accepts_business_context_flags(self):
         argv = [
@@ -168,6 +228,7 @@ class PromptBuildingBlocksTests(unittest.TestCase):
             quality="medium",
             format="png",
             background="auto",
+            cli_image_references=[],
         )
 
         metadata = generate.build_run_metadata(
@@ -188,6 +249,22 @@ class PromptBuildingBlocksTests(unittest.TestCase):
         self.assertEqual(metadata["tag_slug"], "local-premium")
         self.assertEqual(metadata["variants"], 2)
         self.assertEqual(metadata["variant"], 1)
+
+    def test_build_responses_input_adds_image_data_urls(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            image_path = Path(temp_dir) / "reference.svg"
+            image_path.write_text("<svg></svg>", encoding="utf-8")
+            references = [
+                generate.ImageReference(path=image_path, source="--reference-image")
+            ]
+
+            responses_input = generate.build_responses_input("Match this style", references)
+
+            self.assertIsInstance(responses_input, list)
+            content = responses_input[0]["content"]
+            self.assertEqual(content[0], {"type": "input_text", "text": "Match this style"})
+            self.assertEqual(content[1]["type"], "input_image")
+            self.assertTrue(content[1]["image_url"].startswith("data:image/svg+xml;base64,"))
 
 
 class EngineProjectRootTests(unittest.TestCase):

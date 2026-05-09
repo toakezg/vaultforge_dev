@@ -32,15 +32,15 @@ tag includes engine
 - [x] Compare direct engine dry-run output against the current business dry-run before retargeting business #engine #validation
 - [ ] ⏫ Decide whether `@file.conf` smoke configs should include `--dry-run` variants for safer testing #engine #validation 🆔 engine-conf-dry-run-variants
 - [ ] 🔼 Review whether engine sidecar JSON should stay additive or become a shared manifest contract before gallery hooks land #engine #metadata 🆔 engine-manifest-contract-review ⛔ engine-business-metadata-flags
-- [ ] ⏫ Define the shared tweak/edit/reference contract before landing native input-image or reference-image flags #engine #api 🆔 engine-edit-reference-contract
+- [x] ⏫ Define the shared tweak/edit/reference contract before landing native input-image or reference-image flags #engine #api 🆔 engine-edit-reference-contract 2026-05-09
 
 ## Later
 
 - [ ] 🔽 Split registries into dedicated preset/style/mod files if the single-file module becomes hard to maintain #engine #architecture 🆔 engine-split-registries
 - [x] ⏫ Add business-native metadata flags #engine #metadata 🆔 engine-business-metadata-flags
 - [ ] 🔽 Consider a future no-write preview mode for business dry-runs once config-safe testing is settled #engine #dry-run 🆔 engine-no-write-preview ⛔ engine-conf-dry-run-variants
-- [ ] 🔼 Add image edit plumbing for `--input-image` #engine #api 🆔 engine-input-image-plumbing ⛔ engine-edit-reference-contract
-- [ ] 🔼 Add reference image plumbing #engine #api 🆔 engine-reference-image-plumbing ⛔ engine-edit-reference-contract
+- [x] 🔼 Add image edit plumbing for `--input-image` #engine #api 🆔 engine-input-image-plumbing ⛔ engine-edit-reference-contract 2026-05-09
+- [x] 🔼 Add reference image plumbing #engine #api 🆔 engine-reference-image-plumbing ⛔ engine-edit-reference-contract 2026-05-09
 - [ ] 🔽 Add gallery/contact-sheet generation hooks #engine #gallery 🆔 engine-gallery-hooks ⛔ engine-manifest-contract-review
 
 ## Working Rules

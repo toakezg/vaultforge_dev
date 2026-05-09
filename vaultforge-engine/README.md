@@ -24,7 +24,7 @@ That sibling project is dirty, so this prototype was copied without modifying th
 - metadata writing
 - API request building
 - native client/job/tag context metadata and variant loops
-- future image edit and reference-image support
+- native image input/reference plumbing for local files and Markdown embeds
 
 ## Consumers
 
@@ -60,11 +60,22 @@ The engine now accepts native low-risk business handoff flags:
 --job
 --tag
 --variants
+--input-image
+--reference-image
 ```
 
-These fields affect output naming, variant count, dry-run previews, and optional
-sidecar run metadata. They do not inject lane context into prompt text; business
-and art wrappers still own their lane-specific prompt composition.
+The context and variant fields affect output naming, variant count, dry-run
+previews, and optional sidecar run metadata. They do not inject lane context
+into prompt text; business and art wrappers still own their lane-specific prompt
+composition.
+
+`--input-image` and `--reference-image` attach local `.png`, `.jpg`, `.jpeg`,
+`.webp`, `.gif`, `.svg`, or `.ico` files to the Responses API request as image
+inputs. Markdown batch prompt notes can also embed images with standard
+`![alt](path.png)`, Obsidian wiki embeds like `![[path.png]]`, or simple
+`<img src="path.png">` tags; the engine removes the embed syntax from the text
+prompt and sends the image file beside the composed prompt. Relative Markdown
+image paths resolve from the prompt note's folder first.
 
 ## Execution For Now
 

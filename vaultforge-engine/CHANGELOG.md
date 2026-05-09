@@ -1,5 +1,11 @@
 # Engine Changelog
 
+## 2026-05-09
+
+- Added native local image references with `--input-image` and `--reference-image`, including dry-run visibility and sidecar metadata.
+- Added Markdown batch prompt image extraction for standard Markdown embeds, Obsidian wiki embeds, and simple HTML image tags.
+- Updated batch hashing so changed reference images trigger reruns instead of being treated as unchanged prompt text.
+
 ## 2026-04-16
 
 - Added the engine task-property rule: active and next tasks now carry stable `🆔` ids, recurring loops should use `🔁`, and dependencies should use `⛔`.

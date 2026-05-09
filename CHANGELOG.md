@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2026-05-09
+
+- Added engine-native image input/reference support in `vaultforge-engine`: direct `--input-image` / `--reference-image` files and embedded images inside Markdown prompt notes can now be sent with the prompt for reference-driven generation and edits.
+
 ## 2026-05-03
 
 - Promoted `vaultforge-icon` into a lightweight active icon lane with its own

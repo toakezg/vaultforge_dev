@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import argparse
 import base64
+from dataclasses import dataclass
 import hashlib
 import json
+import mimetypes
 import os
 import re
 import sys
@@ -34,6 +36,15 @@ BATCH_STATE_FILENAME = ".batch-state.json"
 DEFAULT_MODEL = "gpt-5"
 DEFAULT_FALLBACK_MODELS = ("gpt-4.1",)
 SUPPORTED_FORMATS = {"png", "jpeg", "webp"}
+SUPPORTED_INPUT_IMAGE_EXTENSIONS = {".gif", ".ico", ".jpeg", ".jpg", ".png", ".svg", ".webp"}
+INPUT_IMAGE_MIME_TYPES = {
+    ".ico": "image/x-icon",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".png": "image/png",
+    ".svg": "image/svg+xml",
+    ".webp": "image/webp",
+}
 PROMPT_FILE_EXTENSIONS = {"", ".md", ".markdown", ".txt"}
 MARKDOWN_PROMPT_EXTENSIONS = {".md", ".markdown"}
 BATCH_HELPER_EXTENSIONS = {".bat", ".cfg", ".cmd", ".conf", ".ini", ".json", ".ps1"}
@@ -64,6 +75,15 @@ MOOD_PROMPTS = {
 }
 
 MARKDOWN_HEADING_PATTERN = re.compile(r"^#{1,6}\s+(.*\S)\s*$")
+MARKDOWN_IMAGE_PATTERN = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
+WIKI_IMAGE_PATTERN = re.compile(r"!\[\[([^|\]#]+)(?:[#|][^\]]*)?\]\]")
+HTML_IMAGE_PATTERN = re.compile(r"<img\b[^>]*\bsrc=[\"']([^\"']+)[\"'][^>]*>", re.IGNORECASE)
+
+
+@dataclass(frozen=True)
+class ImageReference:
+    path: Path
+    source: str
 
 class ConfigFileArgumentParser(argparse.ArgumentParser):
     def convert_arg_line_to_args(self, arg_line: str) -> list[str]:
@@ -128,7 +148,7 @@ def has_context_metadata(args: argparse.Namespace) -> bool:
 
 
 def should_write_run_metadata(args: argparse.Namespace) -> bool:
-    return has_context_metadata(args) or args.variants > 1
+    return has_context_metadata(args) or args.variants > 1 or bool(args.cli_image_references)
 
 
 def resolve_project_path(value: str) -> Path:
@@ -136,6 +156,86 @@ def resolve_project_path(value: str) -> Path:
     if not path.is_absolute():
         path = PROJECT_ROOT / path
     return path
+
+
+def resolve_input_image_path(value: str, *, base_dir: Path | None = None) -> Path:
+    path = Path(strip_markdown_target(value)).expanduser()
+    if not path.is_absolute():
+        candidates: list[Path] = []
+        if base_dir is not None:
+            candidates.append(base_dir / path)
+        candidates.append(Path.cwd() / path)
+        candidates.append(PROJECT_ROOT / path)
+        for candidate in candidates:
+            if candidate.exists():
+                path = candidate
+                break
+        else:
+            path = candidates[0]
+    return path.resolve()
+
+
+def strip_markdown_target(value: str) -> str:
+    cleaned = value.strip()
+    if cleaned.startswith('"') and '"' in cleaned[1:]:
+        cleaned = cleaned[1:].split('"', 1)[0].strip()
+    elif cleaned.startswith("'") and "'" in cleaned[1:]:
+        cleaned = cleaned[1:].split("'", 1)[0].strip()
+    elif " " in cleaned and '"' in cleaned:
+        cleaned = cleaned.split('"', 1)[0].strip()
+    cleaned = cleaned.strip("'\"").strip("<>")
+    if "#" in cleaned:
+        cleaned = cleaned.split("#", 1)[0]
+    if "?" in cleaned:
+        cleaned = cleaned.split("?", 1)[0]
+    return cleaned.replace("%20", " ")
+
+
+def is_supported_input_image(path: Path) -> bool:
+    return path.suffix.lower() in SUPPORTED_INPUT_IMAGE_EXTENSIONS
+
+
+def build_cli_image_references(args: argparse.Namespace) -> list[ImageReference]:
+    references: list[ImageReference] = []
+    for label, values in (
+        ("input-image", args.input_image),
+        ("reference-image", args.reference_image),
+    ):
+        for value in values:
+            path = resolve_input_image_path(value)
+            references.append(ImageReference(path=path, source=f"--{label}"))
+    return references
+
+
+def validate_image_references(
+    parser: argparse.ArgumentParser,
+    references: Iterable[ImageReference],
+) -> None:
+    for reference in references:
+        if not reference.path.exists():
+            parser.error(f"{reference.source} image does not exist: {reference.path}")
+        if not reference.path.is_file():
+            parser.error(f"{reference.source} image is not a file: {reference.path}")
+        if not is_supported_input_image(reference.path):
+            supported = ", ".join(sorted(SUPPORTED_INPUT_IMAGE_EXTENSIONS))
+            parser.error(
+                f"{reference.source} has unsupported image type: {reference.path}. "
+                f"Supported: {supported}"
+            )
+
+
+def ensure_image_references_exist(references: Iterable[ImageReference]) -> None:
+    for reference in references:
+        if not reference.path.exists():
+            raise RuntimeError(f"{reference.source} image does not exist: {reference.path}")
+        if not reference.path.is_file():
+            raise RuntimeError(f"{reference.source} image is not a file: {reference.path}")
+        if not is_supported_input_image(reference.path):
+            supported = ", ".join(sorted(SUPPORTED_INPUT_IMAGE_EXTENSIONS))
+            raise RuntimeError(
+                f"{reference.source} has unsupported image type: {reference.path}. "
+                f"Supported: {supported}"
+            )
 
 
 def parse_args() -> argparse.Namespace:
@@ -239,6 +339,26 @@ def parse_args() -> argparse.Namespace:
         help="Optional output filename without extension. Defaults to a prompt-based slug.",
     )
     parser.add_argument(
+        "--input-image",
+        action="append",
+        default=[],
+        metavar="PATH",
+        help=(
+            "Local image to include as an editable input/reference. "
+            "Repeat for multiple images."
+        ),
+    )
+    parser.add_argument(
+        "--reference-image",
+        action="append",
+        default=[],
+        metavar="PATH",
+        help=(
+            "Local reference image to include with the prompt. "
+            "Repeat for multiple references."
+        ),
+    )
+    parser.add_argument(
         "--client",
         default="",
         help="Optional operator-facing client metadata for output naming and run manifests.",
@@ -282,6 +402,8 @@ def parse_args() -> argparse.Namespace:
 def validate_args(parser: argparse.ArgumentParser, args: argparse.Namespace) -> None:
     args.output_dir_path = resolve_project_path(args.output_dir)
     args.batch_folder = resolve_batch_folder(parser, args)
+    args.cli_image_references = build_cli_image_references(args)
+    validate_image_references(parser, args.cli_image_references)
 
     if args.variants < 1:
         parser.error("--variants must be 1 or greater.")
@@ -454,6 +576,7 @@ def build_run_metadata(
     models_to_try: list[str],
     selected_model: str | None,
     variant_index: int,
+    image_references: list[ImageReference] | None = None,
     prompt_file: Path | None = None,
 ) -> dict[str, object]:
     context_slugs = build_context_slugs(args)
@@ -481,6 +604,15 @@ def build_run_metadata(
         "background": args.background,
         "output_path": str(output_path),
     }
+    if image_references:
+        payload["image_references"] = [
+            {
+                "path": str(reference.path),
+                "source": reference.source,
+                "sha256": hash_file(reference.path),
+            }
+            for reference in image_references
+        ]
     if prompt_file is not None:
         payload["prompt_file"] = str(prompt_file)
     return payload
@@ -552,6 +684,7 @@ def save_batch_state(batch_input: Path, entries: dict[str, dict[str, str]]) -> N
 def build_batch_request_hash(
     prompt_text: str,
     *,
+    image_references: list[ImageReference],
     models_to_try: list[str],
     args: argparse.Namespace,
 ) -> str:
@@ -559,6 +692,14 @@ def build_batch_request_hash(
         "background": args.background,
         "client": args.client,
         "format": args.format,
+        "image_references": [
+            {
+                "path": str(reference.path),
+                "sha256": hash_file(reference.path),
+                "source": reference.source,
+            }
+            for reference in image_references
+        ],
         "job": args.job,
         "mods": list(args.mod),
         "models_to_try": models_to_try,
@@ -573,6 +714,14 @@ def build_batch_request_hash(
     }
     serialized = json.dumps(payload, sort_keys=True)
     return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
+
+
+def hash_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as file_handle:
+        for chunk in iter(lambda: file_handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def is_batch_prompt_file(path: Path) -> bool:
@@ -614,7 +763,51 @@ def extract_markdown_prompt_text(prompt_text: str) -> str:
     return "\n".join(lines).strip()
 
 
-def read_batch_prompt_file(prompt_file: Path) -> tuple[Path, str, str] | None:
+def extract_markdown_image_targets(prompt_text: str) -> list[str]:
+    targets: list[str] = []
+    for pattern in (MARKDOWN_IMAGE_PATTERN, WIKI_IMAGE_PATTERN, HTML_IMAGE_PATTERN):
+        targets.extend(match.group(1).strip() for match in pattern.finditer(prompt_text))
+    return targets
+
+
+def strip_markdown_image_embeds(prompt_text: str) -> str:
+    text = MARKDOWN_IMAGE_PATTERN.sub("", prompt_text)
+    text = WIKI_IMAGE_PATTERN.sub("", text)
+    text = HTML_IMAGE_PATTERN.sub("", text)
+    lines = [line.rstrip() for line in text.splitlines()]
+    return "\n".join(line for line in lines if line.strip()).strip()
+
+
+def extract_markdown_image_references(
+    prompt_text: str,
+    *,
+    prompt_file: Path,
+) -> list[ImageReference]:
+    references: list[ImageReference] = []
+    for target in extract_markdown_image_targets(prompt_text):
+        stripped = strip_markdown_target(target)
+        if not stripped:
+            continue
+        path = resolve_input_image_path(stripped, base_dir=prompt_file.parent)
+        if not is_supported_input_image(path):
+            continue
+        references.append(ImageReference(path=path, source=f"embed:{prompt_file.name}"))
+    return references
+
+
+def dedupe_image_references(references: Iterable[ImageReference]) -> list[ImageReference]:
+    deduped: list[ImageReference] = []
+    seen: set[Path] = set()
+    for reference in references:
+        key = reference.path.resolve()
+        if key in seen:
+            continue
+        deduped.append(reference)
+        seen.add(key)
+    return deduped
+
+
+def read_batch_prompt_file(prompt_file: Path) -> tuple[Path, str, str, list[ImageReference]] | None:
     try:
         raw_text = prompt_file.read_text(encoding="utf-8-sig")
     except UnicodeDecodeError as error:
@@ -623,8 +816,10 @@ def read_batch_prompt_file(prompt_file: Path) -> tuple[Path, str, str] | None:
         ) from error
 
     suffix = prompt_file.suffix.lower()
+    image_references: list[ImageReference] = []
     if suffix in MARKDOWN_PROMPT_EXTENSIONS:
-        prompt_text = extract_markdown_prompt_text(raw_text)
+        image_references = extract_markdown_image_references(raw_text, prompt_file=prompt_file)
+        prompt_text = strip_markdown_image_embeds(extract_markdown_prompt_text(raw_text))
     else:
         prompt_text = raw_text.strip()
 
@@ -634,9 +829,9 @@ def read_batch_prompt_file(prompt_file: Path) -> tuple[Path, str, str] | None:
         print(f"Skipping empty prompt file: {prompt_file.name}", file=sys.stderr)
         return None
 
-    return (prompt_file, prompt_text, output_stem)
+    return (prompt_file, prompt_text, output_stem, image_references)
 
-def load_batch_prompts(batch_input: Path) -> list[tuple[Path, str, str]]:
+def load_batch_prompts(batch_input: Path) -> list[tuple[Path, str, str, list[ImageReference]]]:
     is_default_batch_dir = batch_input.resolve() == DEFAULT_BATCH_INPUT_DIR.resolve()
 
     if not batch_input.exists():
@@ -659,7 +854,7 @@ def load_batch_prompts(batch_input: Path) -> list[tuple[Path, str, str]]:
             f"{batch_input}. Add one .txt, .md, .markdown, or extensionless prompt file and rerun the batch."
         )
 
-    prompts: list[tuple[Path, str, str]] = []
+    prompts: list[tuple[Path, str, str, list[ImageReference]]] = []
     for prompt_file in prompt_files:
         prompt_entry = read_batch_prompt_file(prompt_file)
         if prompt_entry is None:
@@ -686,13 +881,13 @@ def matches_rerun_target(prompt_file: Path, rerun_targets: set[str]) -> bool:
 
 def validate_rerun_targets(
     rerun_targets: set[str],
-    prompt_entries: list[tuple[Path, str, str]],
+    prompt_entries: list[tuple[Path, str, str, list[ImageReference]]],
 ) -> None:
     if not rerun_targets:
         return
 
     matched_targets: set[str] = set()
-    for prompt_file, _, _ in prompt_entries:
+    for prompt_file, _, _, _ in prompt_entries:
         aliases = {prompt_file.name.lower(), prompt_file.stem.lower()}
         matched_targets.update(rerun_targets & aliases)
 
@@ -711,6 +906,35 @@ def to_project_relative_path(path: Path) -> str:
         return str(path)
 
 
+def describe_image_references(references: Iterable[ImageReference]) -> list[str]:
+    return [
+        f"{reference.source}: {to_project_relative_path(reference.path)}"
+        for reference in references
+    ]
+
+
+def image_to_data_url(path: Path) -> str:
+    mime_type = INPUT_IMAGE_MIME_TYPES.get(path.suffix.lower())
+    if mime_type is None:
+        mime_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
+    encoded = base64.b64encode(path.read_bytes()).decode("ascii")
+    return f"data:{mime_type};base64,{encoded}"
+
+
+def build_responses_input(prompt: str, image_references: list[ImageReference]):
+    if not image_references:
+        return prompt
+    content: list[dict[str, str]] = [{"type": "input_text", "text": prompt}]
+    for reference in image_references:
+        content.append(
+            {
+                "type": "input_image",
+                "image_url": image_to_data_url(reference.path),
+            }
+        )
+    return [{"role": "user", "content": content}]
+
+
 def should_try_fallback(error: APIError) -> bool:
     message = str(error).lower()
     fallback_signals = (
@@ -726,10 +950,17 @@ def should_try_fallback(error: APIError) -> bool:
     return any(signal in message for signal in fallback_signals)
 
 
-def request_image(client: OpenAI, *, model: str, prompt: str, args: argparse.Namespace):
+def request_image(
+    client: OpenAI,
+    *,
+    model: str,
+    prompt: str,
+    image_references: list[ImageReference],
+    args: argparse.Namespace,
+):
     return client.responses.create(
         model=model,
-        input=prompt,
+        input=build_responses_input(prompt, image_references),
         tools=[
             {
                 "type": "image_generation",
@@ -747,13 +978,20 @@ def generate_with_fallback(
     client: OpenAI,
     models: list[str],
     prompt: str,
+    image_references: list[ImageReference],
     args: argparse.Namespace,
 ):
     errors: list[tuple[str, str]] = []
 
     for index, model in enumerate(models):
         try:
-            response = request_image(client, model=model, prompt=prompt, args=args)
+            response = request_image(
+                client,
+                model=model,
+                prompt=prompt,
+                image_references=image_references,
+                args=args,
+            )
             return model, response, errors
         except APIError as error:
             errors.append((model, str(error)))
@@ -812,9 +1050,14 @@ def run_batch(
     skipped = 0
     failures: list[tuple[Path, str]] = []
 
-    for index, (prompt_file, prompt_text, output_stem) in enumerate(prompt_entries, start=1):
+    for index, (prompt_file, prompt_text, output_stem, embedded_references) in enumerate(prompt_entries, start=1):
+        image_references = dedupe_image_references(
+            [*args.cli_image_references, *embedded_references]
+        )
+        ensure_image_references_exist(image_references)
         request_hash = build_batch_request_hash(
             prompt_text,
+            image_references=image_references,
             models_to_try=models_to_try,
             args=args,
         )
@@ -838,17 +1081,22 @@ def run_batch(
             variant_count=args.variants,
         )
         composed_prompt = compose_prompt(prompt_text, args.preset, args.style, args.mod)
+        write_metadata_for_entry = write_metadata or bool(image_references)
 
         if args.dry_run:
             status_suffix = " (forced rerun)" if force_rerun else ""
             print(f"[{index}/{total}] Source: {prompt_file}{status_suffix}")
             print(f"[{index}/{total}] Prompt: {composed_prompt}")
+            if image_references:
+                print(f"[{index}/{total}] Image references: {len(image_references)}")
+                for description in describe_image_references(image_references):
+                    print(f"[{index}/{total}] - {description}")
             for variant_index, output_path in output_paths:
                 label = "Output path"
                 if args.variants > 1:
                     label = f"Output path v{variant_index:02d}"
                 print(f"[{index}/{total}] {label}: {output_path}")
-                if write_metadata:
+                if write_metadata_for_entry:
                     print(f"[{index}/{total}] Metadata path: {output_path.with_suffix('.json')}")
             continue
 
@@ -861,6 +1109,7 @@ def run_batch(
                     client,
                     models=models_to_try,
                     prompt=composed_prompt,
+                    image_references=image_references,
                     args=args,
                 )
                 image_bytes = extract_image_bytes(response)
@@ -868,7 +1117,7 @@ def run_batch(
                 successes += 1
                 saved_outputs.append(to_project_relative_path(output_path))
 
-                if write_metadata:
+                if write_metadata_for_entry:
                     metadata_path = write_run_metadata(
                         output_path,
                         build_run_metadata(
@@ -879,6 +1128,7 @@ def run_batch(
                             models_to_try=models_to_try,
                             selected_model=selected_model,
                             variant_index=variant_index,
+                            image_references=image_references,
                             prompt_file=prompt_file,
                         ),
                     )
@@ -970,6 +1220,7 @@ def main() -> int:
 
         assert args.prompt is not None
         composed_prompt = compose_prompt(args.prompt, args.preset, args.style, args.mod)
+        image_references = dedupe_image_references(args.cli_image_references)
         context_prefix = build_context_filename_prefix(args)
         write_metadata = should_write_run_metadata(args)
         output_paths = build_output_paths(
@@ -997,6 +1248,10 @@ def main() -> int:
             if args.variants > 1:
                 print(f"Variants: {args.variants}")
             print(f"Prompt: {composed_prompt}")
+            if image_references:
+                print(f"Image references: {len(image_references)}")
+                for description in describe_image_references(image_references):
+                    print(f"- {description}")
             for variant_index, output_path in output_paths:
                 label = "Output path"
                 if args.variants > 1:
@@ -1013,6 +1268,7 @@ def main() -> int:
                 client,
                 models=models_to_try,
                 prompt=composed_prompt,
+                image_references=image_references,
                 args=args,
             )
             image_bytes = extract_image_bytes(response)
@@ -1029,6 +1285,7 @@ def main() -> int:
                         models_to_try=models_to_try,
                         selected_model=selected_model,
                         variant_index=variant_index,
+                        image_references=image_references,
                     ),
                 )
 
