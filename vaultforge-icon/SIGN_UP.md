@@ -17,33 +17,45 @@ Use this shape:
 
 ## Multi-Agent Handoff
 
-- Task: Workflow B cycle 1 icon builder gate and switch-safe fallback for run
-  `20260509T235058-run-approved-section-local-build-slices-while-an`
+- Task: Workflow B cycle 1 icon builder inactive/no-generation decision for
+  run `20260510T005106-run-approved-section-local-build-slices-while-an`
 - Current role: Builder
 - Last verified state:
-  `icon-media-style-set-proposal` is still blocked because
-  `generated/proposals/inbox/media-style-guide-note.md` says the style should
-  not be applied in runs until its status is active. The switch-safe fallback
-  `icon-review-handoff-root-coop-spec` was completed as docs-only work.
+  `icon-media-style-set-proposal` was resolved by keeping
+  `generated/proposals/inbox/media-style-guide-note.md` inactive/reference-only
+  for proposal generation. The source note was not changed to active.
 - Files touched:
-  `documents/decisions/MEDIA_STYLE_PROPOSAL_STATUS_GATE.md`,
-  `documents/contracts/REVIEW_HANDOFF_WRITER_ROOT_COOP_SPEC.md`,
-  `documents/README.md`, `TASKS.md`, `CHANGELOG.md`, and `SIGN_UP.md`.
+  `documents/decisions/MEDIA_STYLE_PROPOSAL_STATUS_GATE.md`, `TASKS.md`,
+  `CHANGELOG.md`, and `SIGN_UP.md`.
 - Verification run:
   `git status --short` recorded the dirty baseline before edits. The media
-  inbox note was read directly. Post-edit verification inspected the scoped
-  icon-lane diff, confirmed the two task ids now have the expected open/landed
-  status, and reread the new handoff-writer spec.
+  inbox note was read directly and remained reference-only/inactive. Post-edit
+  verification should confirm no generated media proposal folder was created
+  and no generation command ran.
 - Blocker or decision:
-  hard gate remains on the media-style proposal until Nath or a later approved
-  task changes the source note status to active. No API/paid generation,
-  selected/applied outputs, asset moves/deletes, folder-icon application, root
-  rewrite, real skill file, staging, or commit happened.
+  the prior hard gate is resolved as no-generation: media styler stays inactive
+  for proposal generation. No API/paid generation, generated proposal output
+  folder, selected/applied output, asset move/delete, folder-icon application,
+  root rewrite, staging, or commit happened.
 - Resume prompt:
-  Review and commit the scoped icon-lane docs if accepted. Then ask Nath whether
-  `generated/proposals/inbox/media-style-guide-note.md` should become active
-  before running `icon-media-style-set-proposal`, or continue with a different
-  approved docs-only icon slice.
+  Review the scoped icon-lane docs and verify that
+  `generated/proposals/inbox/media-style-guide-note.md` remains inactive, that
+  no media proposal outputs were created, and that no paid/API generation ran.
+
+## 2026-05-10 - Workflow B media style inactive decision
+
+- Role: Builder
+- Scope: record the decision that the media style guide stays inactive for
+  proposal generation, without changing it to active or running generation
+- Read: root coordinator routing, icon task/plan/changelog/handoff docs,
+  `generated/proposals/inbox/media-style-guide-note.md`, the prior media-style
+  status-gate decision, and the icon-set generation workflow contract
+- Changed: updated the media-style status-gate decision note, marked
+  `icon-media-style-set-proposal` landed as no-generation, and updated
+  changelog/handoff records
+- Handoff: reviewer should verify the source note is still reference-only, no
+  `run_icon_proposal.ps1` command ran, no generated media proposal folder
+  exists from this cycle, and all edits stayed inside the icon lane.
 
 ## 2026-05-09 - Workflow B icon builder gate fallback
 

@@ -1,5 +1,13 @@
 # Icon Changelog
 
+## 2026-05-10
+
+- Resolved `icon-media-style-set-proposal` as inactive/no-generation for
+  Workflow B run `20260510T005106-run-approved-section-local-build-slices-while-an`:
+  the media style guide note remains reference-only, no paid/API proposal
+  generation was run, and no generated media proposal outputs, selected/applied
+  outputs, asset operations, or folder-icon application were created.
+
 ## 2026-05-09
 
 - Recorded `documents/decisions/MEDIA_STYLE_PROPOSAL_STATUS_GATE.md` for the

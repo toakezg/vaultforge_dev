@@ -13,11 +13,11 @@ No active icon task is selected. Use the next approved task unless Nath picks a
 different slice.
 
 ## Next
-- [ ] 🔼 Resolve the inactive status gate before running a small media-folder icon-set proposal batch from `generated/proposals/inbox/media-style-guide-note.md`; the source note remains reference-only until active, so no paid/API generation should run yet #icon #proposals #approved #nath 🆔 icon-media-style-set-proposal 2026-05-04
 - [ ] 🔽 Review the Gallable generated proposal image for taste and decide whether to reroll, resize-check further, or create a separate target-project build/apply task #icon #proposals #nath 🆔 icon-gallable-proposal-selection 2026-05-04
 
 ## Landed Work
 
+- [x] Keep `generated/proposals/inbox/media-style-guide-note.md` inactive/reference-only for proposal generation, resolving the media-style proposal gate as no-generation with no paid/API call, generated output folder, selected/applied output, asset operation, or folder-icon application #icon #proposals #approved 🆔 icon-media-style-set-proposal 2026-05-04 ✅ 2026-05-10
 - [x] Draft `documents/contracts/REVIEW_HANDOFF_WRITER_ROOT_COOP_SPEC.md` as the root-cooperative `$review-handoff-writer` spec/checklist for icon-to-root recording, without creating a real skill, script, API call, generated artifact, selected/applied output, asset operation, folder-icon application, root rewrite, or commit #icon #skills #approved 🆔 icon-review-handoff-root-coop-spec 2026-05-04 ✅ 2026-05-09
 - [x] Draft `documents/contracts/DIRECTORY_SCOUT_PROPOSAL_INTAKE_CHECKLIST.md` so future scoped folder/project scouts can summarize targets, use the compatible-filetypes reference, and write proposal-ready descriptions into `generated/proposals/inbox/` without applying icons #icon #proposals #approved 🆔 icon-directory-scout-intake-checklist 2026-05-04 ✅ 2026-05-04
 - [x] Run the Gallable inbox proposal through `run_icon_proposal.ps1` into `generated/proposals/gallable-launcher-geometric-gallery/`, producing one PNG proposal image, one JSON metadata file, run docs, target notes, and prompt material without writing into `F:\projects\gallable-html`, selecting winners, or applying icons #icon #proposals #approved 🆔 icon-gallable-launcher-proposal-run 2026-05-04 ✅ 2026-05-04

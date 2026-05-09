@@ -13,9 +13,9 @@ Current root-cooperative handoff references:
 
 - `contracts/REVIEW_HANDOFF_WRITER_ROOT_COOP_SPEC.md`: checklist/spec only for
   future `$review-handoff-writer` behavior; no real skill or automation exists.
-- `decisions/MEDIA_STYLE_PROPOSAL_STATUS_GATE.md`: records why the approved
-  media-style proposal task is blocked until the inbox note status becomes
-  active.
+- `decisions/MEDIA_STYLE_PROPOSAL_STATUS_GATE.md`: records the media-style
+  proposal task resolution as inactive/no-generation while the inbox note
+  remains reference-only.
 
 Keep operational files such as `SYSTEM.md`, `PLAN.md`, `TASKS.md`,
 `CHANGELOG.md`, and `SIGN_UP.md` at the icon-lane root.
