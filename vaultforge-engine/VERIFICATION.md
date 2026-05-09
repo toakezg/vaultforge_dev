@@ -1322,3 +1322,194 @@ Decision:
 - Do not implement contact-sheet rendering against an empty gallery source.
 - No safe engine implementation slice remains until real sidecar examples or a root-approved contact-sheet fixture strategy exists.
 - Continue Workflow B through reviewer and recorder, then switch to another approved safe slice outside engine unless new approved engine inputs appear.
+
+## Workflow B 055419 Cycle 2 Engine Builder Check
+
+Date: 2026-05-10
+
+Run id:
+
+```text
+20260510T055419-run-approved-build-slices-while-analyzing-workfl
+```
+
+Dirty baseline:
+
+- Pre-existing dirty files included root workflow docs, business handoff notes, XP4L state, `.workflow-b.lock`, engine `SIGN_UP.md`, root workflow controller/docs files, and untracked root notes.
+- `git status --short` also reported permission warnings under `.tmp_tests/` and `ICON/XP4Life/part-a/prompts/.icon-wrapper-temp/`.
+- This builder pass only updated engine evidence files.
+
+Coordinator route:
+
+- Cycle 2 root coordinator routed the generated engine slot as evidence-only verification and Workflow B handoff hygiene.
+- `engine-contact-sheet-renderer` remains parked as `#live-required`.
+- Live generation, paid/API work, generated art, renderer implementation, fixture-policy decisions, sidecar contract expansion, destructive file operations, cross-lane ownership changes, and root Workflow B controller edits were not approved for this engine slot.
+
+Unit tests:
+
+```powershell
+$env:PYTHONPATH=(Resolve-Path 'src').Path; py -B -m unittest discover -s tests
+```
+
+Result:
+
+```text
+Ran 24 tests
+OK
+Exit code: 0
+```
+
+Committed smoke config dry-run:
+
+```powershell
+py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'
+```
+
+Observed result:
+
+```text
+Batch dry run complete: 1 prompt file(s) would run, 2 image request(s) would be made, 0 would skip.
+Exit code: 0
+Generated before: 0
+Generated after: 0
+Batch state before: False
+Batch state after: False
+```
+
+Empty gallery-index smoke:
+
+```powershell
+$out = Join-Path $env:TEMP 'vaultforge-engine-gallery-index-055419-cycle2-builder.json'
+if (Test-Path -LiteralPath $out) { Remove-Item -LiteralPath $out -Force }
+py .\src\generate.py --gallery-index --gallery-source assets\generated --gallery-output $out
+Test-Path -LiteralPath $out
+```
+
+Observed result:
+
+```text
+Gallery index written: C:\Users\natha\AppData\Local\Temp\vaultforge-engine-gallery-index-055419-cycle2-builder.json
+Exit code: 0
+Output exists: True
+entry_count: 0
+ignored_count: 0
+```
+
+Dry-run conflict guard:
+
+```powershell
+$reject = Join-Path $env:TEMP 'vaultforge-engine-gallery-index-055419-cycle2-dry-run-reject.json'
+if (Test-Path -LiteralPath $reject) { Remove-Item -LiteralPath $reject -Force }
+py .\src\generate.py --gallery-index --dry-run --gallery-source assets\generated --gallery-output $reject
+Test-Path -LiteralPath $reject
+```
+
+Observed result:
+
+```text
+generate.py: error: --gallery-index cannot be combined with --dry-run because it writes an index file.
+Exit code: 2
+Output exists: False
+```
+
+Decision:
+
+- Treat `engine-contact-sheet-renderer` as correctly blocked by `#live-required`.
+- Do not implement contact-sheet rendering against an empty gallery source.
+- No safe engine implementation slice remains until real sidecar examples or a root-approved contact-sheet fixture strategy exists.
+- Continue Workflow B through reviewer and recorder, then switch to another approved safe slice outside engine unless new approved engine inputs appear.
+
+## Workflow B 055419 Cycle 2 Engine Reviewer Check
+
+Date: 2026-05-10
+
+Run id:
+
+```text
+20260510T055419-run-approved-build-slices-while-analyzing-workfl
+```
+
+Findings:
+
+- No blocking findings.
+- The builder stayed inside the coordinator's evidence-only engine route.
+- The remaining contact-sheet renderer task is still correctly parked as `#live-required`.
+- No live generation, paid/API work, generated art, renderer implementation, fixture-policy decision, sidecar contract expansion, root Workflow B controller edit, or cross-lane ownership change was approved or performed.
+
+Reviewer verification:
+
+```powershell
+$env:PYTHONPATH=(Resolve-Path 'src').Path; py -B -m unittest discover -s tests
+```
+
+Result:
+
+```text
+Ran 24 tests
+OK
+Exit code: 0
+```
+
+Committed smoke config dry-run:
+
+```powershell
+py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'
+```
+
+Observed result:
+
+```text
+Batch dry run complete: 1 prompt file(s) would run, 2 image request(s) would be made, 0 would skip.
+Exit code: 0
+Generated before: 0
+Generated after: 0
+Batch state before: False
+Batch state after: False
+```
+
+Empty gallery-index smoke:
+
+```powershell
+py .\src\generate.py --gallery-index --gallery-source assets\generated --gallery-output $env:TEMP\vaultforge-engine-gallery-index-055419-cycle2-reviewer.json
+```
+
+Observed result:
+
+```text
+Exit code: 0
+Output exists: True
+entry_count: 0
+ignored_count: 0
+```
+
+Dry-run conflict guard:
+
+```powershell
+py .\src\generate.py --gallery-index --dry-run --gallery-source assets\generated --gallery-output $env:TEMP\vaultforge-engine-gallery-index-055419-cycle2-reviewer-dry-run-reject.json
+```
+
+Observed result:
+
+```text
+generate.py: error: --gallery-index cannot be combined with --dry-run because it writes an index file.
+Exit code: 2
+Output exists: False
+```
+
+Whitespace check:
+
+```powershell
+git diff --check -- vaultforge-engine/SIGN_UP.md vaultforge-engine/VERIFICATION.md
+```
+
+Observed result:
+
+```text
+No whitespace errors; only LF-to-CRLF working-copy warnings.
+```
+
+Decision:
+
+- Treat the evidence-only engine builder pass as reviewed and non-blocking.
+- Keep `engine-contact-sheet-renderer` parked until real sidecar examples or a root-approved contact-sheet fixture strategy exists.
+- Continue Workflow B through root recorder or another approved safe slice outside engine.

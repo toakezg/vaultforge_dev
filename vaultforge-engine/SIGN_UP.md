@@ -14,6 +14,30 @@ Use this shape:
 - Handoff:
 ```
 
+## 2026-05-10 - workflow b 055419 cycle 2 engine reviewer
+
+- Role: Reviewer for Workflow B cycle 2, engine lane
+- Scope: review the evidence-only engine builder pass for run `20260510T055419-run-approved-build-slices-while-analyzing-workfl`
+- Read: cycle 2 coordinator routing note, workflow update note, builder last message, current Workflow A/B guidance, dirty baseline, engine `TASKS.md`, `SIGN_UP.md`, `VERIFICATION.md`, `README.md`, and current `assets\generated`
+- Changed: recorded this reviewer handoff and run-packet review note only
+- Handoff: no blocking findings. Reviewer reran 24 unit tests, the committed smoke config dry-run, normal empty gallery-index smoke to a temp file, `--gallery-index --dry-run` rejection, and `git diff --check` for the scoped engine files. The contact-sheet renderer remains correctly parked as `#live-required`; no live generation, generated art, fixture-policy decision, cross-lane ownership change, root Workflow B controller edit, or renderer implementation was approved. Commit staging must avoid unrelated root/business/XP4L dirty state and account for the pre-existing cycle 1 root-recorder entry already present in engine `SIGN_UP.md`.
+
+## 2026-05-10 - workflow b 055419 cycle 2 engine builder
+
+- Role: Builder for Workflow B cycle 2, engine lane
+- Scope: section-local verification and handoff evidence for run `20260510T055419-run-approved-build-slices-while-analyzing-workfl`
+- Read: cycle 2 root coordinator routing note, workflow update note, active run packet status/live status, dirty baseline, refreshed Workflow A/B guidance, engine `README.md`, `TASKS.md`, `SIGN_UP.md`, `VERIFICATION.md`, `RUN_MANIFEST.md`, and current empty `assets\generated`
+- Changed: recorded verification evidence only; no renderer implementation because the coordinator routed this slot as evidence-only and `engine-contact-sheet-renderer` remains `#live-required`
+- Handoff: no hard gate was triggered in engine. Unit tests passed, the committed smoke config dry-run stayed no-live/no-write, normal gallery-index over empty `assets\generated` wrote a temp zero-entry index, and `--gallery-index --dry-run` rejected without creating output. No safe engine implementation slice remains until real sidecar examples or a root-approved contact-sheet fixture strategy exists; reviewer should check this evidence and then Workflow B should continue through reviewer/recorder or another approved safe slice outside engine.
+
+## 2026-05-10 - workflow b root recorder 055419 engine closure
+
+- Role: Root recorder closing the Workflow B cycle 1 engine evidence slice
+- Scope: affected section handoff note only
+- Read: active run packet status/checkpoints/live status, workflow update note, coordinator output, engine builder output, engine reviewer output, current engine `SIGN_UP.md`, root `CHANGELOG.md`, active lock file, and reviewed engine commit metadata
+- Changed: recorded that the reviewed evidence-only engine pass is closed for this cycle and committed as `a667192`
+- Handoff: no new engine hard gate was created. `engine-contact-sheet-renderer` remains `#live-required` until real sidecar examples or a root-approved contact-sheet fixture strategy exists. Verification passed with 24 unit tests OK, smoke config dry-run no-live/no-write behavior, normal empty gallery-index output to a temp zero-entry JSON, `--gallery-index --dry-run` rejection without output, and `git diff --check` with only LF-to-CRLF working-copy warnings. Next productive Workflow B work should route to the root resume-command fix or another approved safe slice unless new approved engine inputs appear.
+
 ## 2026-05-10 - workflow b 055419 engine reviewer
 
 - Role: Reviewer for Workflow B cycle 1, engine lane
