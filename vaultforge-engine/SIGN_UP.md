@@ -14,6 +14,22 @@ Use this shape:
 - Handoff:
 ```
 
+## 2026-05-10 - workflow b 004631 engine live-required evidence
+
+- Role: Builder for Workflow B cycle 1, engine lane
+- Scope: section-local verification and handoff evidence for run `20260510T004631-run-approved-section-local-build-slices-while-an`
+- Read: active run packet plan/status, root coordinator routing note, dirty baseline, engine `TASKS.md`, `SIGN_UP.md`, `VERIFICATION.md`, `RUN_MANIFEST.md`, and current `assets\generated`
+- Changed: recorded verification evidence only; no renderer implementation because `engine-contact-sheet-renderer` remains `#live-required` and `assets\generated` has no real sidecar examples to consume
+- Handoff: no hard gate was triggered in engine. Unit tests passed, the committed smoke config dry-run stayed no-live/no-write, normal gallery-index over empty `assets\generated` wrote a temp zero-entry index, and `--gallery-index --dry-run` rejected without creating output. No safe engine implementation slice remains until real sidecar examples or a root-approved contact-sheet fixture strategy exists.
+
+## 2026-05-10 - workflow b 004631 engine reviewer
+
+- Role: Reviewer for Workflow B cycle 1, engine lane
+- Scope: review builder evidence for the contact-sheet live-required gate in run `20260510T004631-run-approved-section-local-build-slices-while-an`
+- Read: active run packet routing and builder output, dirty baseline, builder diff, `TASKS.md`, `SIGN_UP.md`, `VERIFICATION.md`, `RUN_MANIFEST.md`, `src\generate.py`, `tests\test_generate.py`, and current `assets\generated`
+- Changed: recorded this reviewer handoff only
+- Handoff: no blocking findings. Reviewer reran the unit suite, smoke config dry-run, normal empty gallery-index smoke, and `--gallery-index --dry-run` rejection. The contact-sheet renderer remains correctly parked as `#live-required`; no live generation, generated art, fixture-policy decision, or renderer implementation was approved.
+
 ## 2026-05-09 - workflow b 235211 engine live-required gate
 
 - Role: Builder for Workflow B cycle 1, engine lane
