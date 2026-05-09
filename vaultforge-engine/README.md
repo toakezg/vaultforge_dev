@@ -151,3 +151,7 @@ This reads engine-written sidecars, skips unrelated JSON, and writes a compact
 index with one entry per valid sidecar. It is a shared hook for later gallery or
 contact-sheet tooling; lane-specific gallery pages, review surfaces, and
 delivery folders still belong to their lanes.
+
+`--gallery-index` cannot be combined with `--dry-run` because building the index
+is itself a write operation. Use the normal gallery-index command only when that
+JSON output is intended.

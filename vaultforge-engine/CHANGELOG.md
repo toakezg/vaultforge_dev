@@ -2,6 +2,7 @@
 
 ## 2026-05-09
 
+- Rejected `--gallery-index --dry-run` at argument validation so the engine dry-run contract remains no-write while normal gallery-index output still writes explicitly requested JSON.
 - Added the first shared gallery hook: `--gallery-index` scans existing engine sidecar JSON and writes a compact gallery index without API calls or lane-specific gallery output.
 - Verified the committed smoke config as the engine's current no-write preview path: `--dry-run` prints output and metadata paths without creating generated images, sidecar JSON, or batch state, so no separate preview flag is needed yet.
 - Added a committed dry-run `@file.conf` smoke path that exercises batch prompt routing, explicit output routing, native metadata previews, two variants, and a local reference image without live API writes.

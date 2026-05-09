@@ -279,3 +279,60 @@ Blocking finding:
 Next safe fix:
 
 - Reject `--gallery-index --dry-run`, or make that combination preview-only, and add a regression test before marking `engine-gallery-hooks` complete.
+
+## Workflow B Gallery Index Dry-Run Guard
+
+Date: 2026-05-09
+
+Unit tests:
+
+```powershell
+$env:PYTHONPATH=(Resolve-Path 'src').Path; py -B -m unittest discover -s tests
+```
+
+Result:
+
+```text
+Ran 24 tests
+OK
+```
+
+Rejected dry-run conflict:
+
+```powershell
+$out = Join-Path $env:TEMP 'vaultforge-engine-gallery-index-dry-run-guard.json'
+if (Test-Path $out) { Remove-Item -LiteralPath $out -Force }
+py .\src\generate.py --gallery-index --dry-run --gallery-source assets\generated --gallery-output $out
+Test-Path $out
+```
+
+Observed result:
+
+```text
+generate.py: error: --gallery-index cannot be combined with --dry-run because it writes an index file.
+Exit code: 2
+Output exists: false
+```
+
+Normal gallery-index smoke:
+
+```powershell
+$out = Join-Path $env:TEMP 'vaultforge-engine-gallery-index-guard-normal.json'
+if (Test-Path $out) { Remove-Item -LiteralPath $out -Force }
+py .\src\generate.py --gallery-index --gallery-source assets\generated --gallery-output $out
+Test-Path $out
+```
+
+Observed result:
+
+```text
+Gallery index written: C:\Users\natha\AppData\Local\Temp\vaultforge-engine-gallery-index-guard-normal.json
+Exit code: 0
+Output exists: true
+```
+
+Decision:
+
+- Reject `--gallery-index --dry-run` instead of adding a second preview behavior.
+- Keep `--dry-run` as the engine no-write preview contract.
+- Keep normal `--gallery-index` as an explicit index-writing operation.

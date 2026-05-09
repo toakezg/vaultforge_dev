@@ -76,3 +76,6 @@ The index is intentionally small and mechanical:
 Each entry copies the stable sidecar fields needed for grouping and review, plus
 `sidecar_path`. Contact-sheet renderers can consume this index later without
 depending on incidental sidecar fields.
+
+`--gallery-index` rejects `--dry-run` so the dry-run contract stays no-write.
+Run the normal gallery-index command only when the JSON index write is intended.

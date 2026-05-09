@@ -43,8 +43,8 @@ tag includes engine
 - [x] 🔽 Consider a future no-write preview mode for business dry-runs once config-safe testing is settled #engine #dry-run 🆔 engine-no-write-preview ⛔ engine-conf-dry-run-variants ✅ 2026-05-09
 - [x] 🔼 Add image edit plumbing for `--input-image` #engine #api 🆔 engine-input-image-plumbing ⛔ engine-edit-reference-contract 2026-05-09
 - [x] 🔼 Add reference image plumbing #engine #api 🆔 engine-reference-image-plumbing ⛔ engine-edit-reference-contract 2026-05-09
-- [ ] 🔽 Add gallery/contact-sheet generation hooks #engine #gallery 🆔 engine-gallery-hooks ⛔ engine-run-manifest-field-list
-- [ ] 🔼 Fix or reject `--gallery-index --dry-run` so the engine dry-run contract remains no-write #engine #dry-run #gallery 🆔 engine-gallery-index-dry-run-guard ⛔ engine-gallery-hooks
+- [x] 🔽 Add gallery/contact-sheet generation hooks #engine #gallery 🆔 engine-gallery-hooks ⛔ engine-run-manifest-field-list ✅ 2026-05-09
+- [x] 🔼 Fix or reject `--gallery-index --dry-run` so the engine dry-run contract remains no-write #engine #dry-run #gallery 🆔 engine-gallery-index-dry-run-guard ⛔ engine-gallery-hooks ✅ 2026-05-09
 - [ ] 🔽 Add optional contact-sheet rendering after the gallery index has real sidecar examples to consume #engine #gallery 🆔 engine-contact-sheet-renderer ⛔ engine-gallery-index-dry-run-guard
 
 ## Working Rules

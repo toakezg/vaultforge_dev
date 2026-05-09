@@ -328,6 +328,23 @@ class GalleryIndexTests(unittest.TestCase):
         self.assertEqual(args.gallery_source_path, generate.PROJECT_ROOT / "assets" / "generated")
         self.assertEqual(args.gallery_output_path, generate.PROJECT_ROOT / "assets" / "gallery-index.json")
 
+    def test_parse_args_rejects_gallery_index_dry_run(self):
+        argv = [
+            "generate.py",
+            "--gallery-index",
+            "--dry-run",
+            "--gallery-source",
+            "assets/generated",
+            "--gallery-output",
+            "assets/gallery-index.json",
+        ]
+
+        with patch.object(sys, "argv", argv), patch.object(sys, "stderr", io.StringIO()):
+            with self.assertRaises(SystemExit) as raised:
+                generate.parse_args()
+
+        self.assertEqual(raised.exception.code, 2)
+
     def test_build_gallery_index_collects_valid_sidecars(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             source_dir = Path(temp_dir) / "generated"

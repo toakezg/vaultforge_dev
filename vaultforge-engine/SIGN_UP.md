@@ -88,6 +88,22 @@ Use this shape:
 - Changed: recorded that the gallery-index hook is not closed because reviewer found `--gallery-index --dry-run` writes JSON despite the no-write dry-run contract
 - Handoff: no hard gate is needed for this engine issue. The next safe engine slice is `engine-gallery-index-dry-run-guard`: reject the flag combination or make it preview-only, add a regression test, rerun unit tests and gallery-index smoke checks, then reviewer can commit scoped engine changes.
 
+## 2026-05-09 - workflow b engine gallery dry-run guard
+
+- Role: Builder for Workflow B cycle 1, engine lane
+- Scope: section-local fix for `engine-gallery-index-dry-run-guard`
+- Read: active run packet prompt, dirty baseline, `TASKS.md`, `SIGN_UP.md`, `VERIFICATION.md`, `RUN_MANIFEST.md`, `README.md`, `src\generate.py`, and `tests\test_generate.py`
+- Changed: rejected `--gallery-index --dry-run` during argument validation, added a regression test, documented the no-write guard, and marked the gallery hook plus guard tasks complete after verification
+- Handoff: reviewer should re-check the scoped diff, the unit suite, the rejected dry-run conflict, and the normal gallery-index smoke. No hard gate was found; contact-sheet rendering remains the next later engine gallery task.
+
+## 2026-05-09 - workflow b engine gallery dry-run guard reviewer
+
+- Role: Reviewer for Workflow B cycle 1, engine lane
+- Scope: review the `engine-gallery-index-dry-run-guard` fix, regression test, docs, and verification evidence
+- Read: builder output, scoped engine diff, `src\generate.py`, `tests\test_generate.py`, `README.md`, `RUN_MANIFEST.md`, `TASKS.md`, `CHANGELOG.md`, `VERIFICATION.md`, and active run packet status
+- Changed: updated this reviewer handoff only
+- Handoff: no blocking findings. Unit tests pass, `--gallery-index --dry-run` rejects without creating the requested JSON file, normal `--gallery-index` still writes an explicit index, and the committed batch smoke dry-run remains no-live/no-write. Recorder can capture the commit and continue only with another approved safe slice.
+
 ## 2026-04-16 - engine task review
 
 - Role: Task Master review for the engine section

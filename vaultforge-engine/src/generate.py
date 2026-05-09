@@ -456,6 +456,8 @@ def validate_args(parser: argparse.ArgumentParser, args: argparse.Namespace) -> 
             parser.error("The prompt argument cannot be used with --gallery-index.")
         if args.batch is not None or args.batch_smoke or args.batch_input_legacy:
             parser.error("--gallery-index cannot be combined with batch generation options.")
+        if args.dry_run:
+            parser.error("--gallery-index cannot be combined with --dry-run because it writes an index file.")
         if args.rerun:
             parser.error("--rerun can only be used together with --batch or --batch-smoke.")
         return
