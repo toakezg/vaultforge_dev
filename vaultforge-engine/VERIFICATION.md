@@ -498,6 +498,94 @@ Decision:
 - Do not implement contact-sheet rendering against an empty gallery source.
 - Continue only through another approved safe slice outside engine, or return to engine after real sidecar examples or a root-approved contact-sheet fixture strategy exists.
 
+## Workflow B 005900 Engine Builder Check
+
+Date: 2026-05-10
+
+Run id:
+
+```text
+20260510T005900-run-approved-section-local-build-slices-while-an
+```
+
+Dirty baseline:
+
+- Pre-existing dirty files included root docs, business handoff notes, XP4L state, engine `SIGN_UP.md`, engine `VERIFICATION.md`, `.workflow-b.lock`, and the untracked `runs/workflow-b/` tree.
+- `git status --short` also reported permission warnings under `.tmp_tests/` and `ICON/XP4Life/part-a/prompts/.icon-wrapper-temp/`.
+- This builder pass only updated engine evidence files.
+
+Unit tests:
+
+```powershell
+$env:PYTHONPATH=(Resolve-Path 'src').Path
+py -B -m unittest discover -s tests
+```
+
+Result:
+
+```text
+Ran 24 tests
+OK
+```
+
+Committed smoke config dry-run:
+
+```powershell
+py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'
+```
+
+Observed result:
+
+```text
+Batch dry run complete: 1 prompt file(s) would run, 2 image request(s) would be made, 0 would skip.
+```
+
+No-write evidence:
+
+- `assets\generated` was empty before and after the smoke dry-run.
+- `assets\batch-input-smoke\.batch-state.json` did not exist before or after the smoke dry-run.
+
+Empty gallery-index smoke:
+
+```powershell
+$out = Join-Path $env:TEMP 'vaultforge-engine-gallery-index-005900-builder.json'
+if (Test-Path -LiteralPath $out) { Remove-Item -LiteralPath $out -Force }
+py .\src\generate.py --gallery-index --gallery-source assets\generated --gallery-output $out
+Test-Path -LiteralPath $out
+```
+
+Observed result:
+
+```text
+Gallery index written: C:\Users\natha\AppData\Local\Temp\vaultforge-engine-gallery-index-005900-builder.json
+Output exists: True
+entry_count: 0
+```
+
+Dry-run conflict guard:
+
+```powershell
+$reject = Join-Path $env:TEMP 'vaultforge-engine-gallery-index-005900-dry-run-reject.json'
+if (Test-Path -LiteralPath $reject) { Remove-Item -LiteralPath $reject -Force }
+py .\src\generate.py --gallery-index --dry-run --gallery-source assets\generated --gallery-output $reject
+Test-Path -LiteralPath $reject
+```
+
+Observed result:
+
+```text
+generate.py: error: --gallery-index cannot be combined with --dry-run because it writes an index file.
+Exit code: 2
+Output exists: False
+```
+
+Decision:
+
+- Treat `engine-contact-sheet-renderer` as correctly blocked by `#live-required`.
+- Do not implement contact-sheet rendering against an empty gallery source.
+- No safe engine implementation slice remains until real sidecar examples or a root-approved contact-sheet fixture strategy exists.
+- Continue Workflow B through another approved safe slice outside engine, or fix the root resume `--execute` flag task.
+
 ## Workflow B 004631 Engine Live-Required Gate Check
 
 Date: 2026-05-10
