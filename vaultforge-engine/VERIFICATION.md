@@ -417,3 +417,83 @@ Decision:
 - Treat `engine-contact-sheet-renderer` as correctly blocked by `#live-required`.
 - Do not implement contact-sheet rendering against an empty gallery source.
 - Continue only through another approved safe slice outside engine, or return to engine after real sidecar examples or a root-approved fixture strategy exists.
+
+## Workflow B 235211 Engine Live-Required Gate Check
+
+Date: 2026-05-09
+
+Run id:
+
+```text
+20260509T235211-run-approved-section-local-build-slices-while-an
+```
+
+Unit tests:
+
+```powershell
+$env:PYTHONPATH=(Resolve-Path 'src').Path; py -B -m unittest discover -s tests
+```
+
+Result:
+
+```text
+Ran 24 tests
+OK
+```
+
+Committed smoke config dry-run:
+
+```powershell
+py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'
+```
+
+Observed result:
+
+```text
+Batch dry run complete: 1 prompt file(s) would run, 2 image request(s) would be made, 0 would skip.
+```
+
+No-write evidence:
+
+- `assets\generated` was empty after the smoke dry-run.
+- `assets\batch-input-smoke\.batch-state.json` did not exist after the smoke dry-run.
+
+Empty gallery-index smoke:
+
+```powershell
+$out = Join-Path $env:TEMP 'vaultforge-engine-gallery-index-235211-builder.json'
+if (Test-Path -LiteralPath $out) { Remove-Item -LiteralPath $out -Force }
+py .\src\generate.py --gallery-index --gallery-source assets\generated --gallery-output $out
+Test-Path -LiteralPath $out
+```
+
+Observed result:
+
+```text
+Gallery index written: C:\Users\natha\AppData\Local\Temp\vaultforge-engine-gallery-index-235211-builder.json
+Output exists: True
+entry_count: 0
+```
+
+Dry-run conflict guard:
+
+```powershell
+$out = Join-Path $env:TEMP 'vaultforge-engine-gallery-index-235211-dry-run-reject.json'
+if (Test-Path -LiteralPath $out) { Remove-Item -LiteralPath $out -Force }
+py .\src\generate.py --gallery-index --dry-run --gallery-source assets\generated --gallery-output $out
+Test-Path -LiteralPath $out
+```
+
+Observed result:
+
+```text
+generate.py: error: --gallery-index cannot be combined with --dry-run because it writes an index file.
+Exit code: 2
+Output exists: False
+```
+
+Decision:
+
+- Treat `engine-contact-sheet-renderer` as correctly blocked by `#live-required`.
+- Do not implement contact-sheet rendering against an empty gallery source.
+- Continue only through another approved safe slice outside engine, or return to engine after real sidecar examples or a root-approved contact-sheet fixture strategy exists.

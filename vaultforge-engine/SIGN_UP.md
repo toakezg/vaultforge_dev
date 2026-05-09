@@ -14,6 +14,22 @@ Use this shape:
 - Handoff:
 ```
 
+## 2026-05-09 - workflow b 235211 engine live-required gate
+
+- Role: Builder for Workflow B cycle 1, engine lane
+- Scope: section-local verification and handoff evidence for the contact-sheet renderer gate in run `20260509T235211-run-approved-section-local-build-slices-while-an`
+- Read: active run packet plan/status, root coordinator output, dirty baseline, engine `TASKS.md`, `SIGN_UP.md`, `VERIFICATION.md`, and current `assets\generated`
+- Changed: recorded verification evidence only; no code change because `engine-contact-sheet-renderer` remains `#live-required` and `assets\generated` has no real sidecar examples to consume
+- Handoff: no new engine hard gate. Reviewer should confirm the evidence: unit tests pass, the committed smoke config dry-run remains no-live/no-write, normal gallery-index over empty `assets\generated` writes a temp zero-entry index, and `--gallery-index --dry-run` rejects without creating output. Safe engine implementation work does not remain until real sidecar examples or a root-approved contact-sheet fixture strategy exists.
+
+## 2026-05-09 - workflow b 235211 engine reviewer
+
+- Role: Reviewer for Workflow B cycle 1, engine lane
+- Scope: review the builder's live-required contact-sheet gate evidence and dry-run/gallery guard checks for run `20260509T235211-run-approved-section-local-build-slices-while-an`
+- Read: active run packet outputs, builder diff, `TASKS.md`, `SIGN_UP.md`, `VERIFICATION.md`, `src\generate.py`, `tests\test_generate.py`, and current `assets\generated`
+- Changed: recorded this reviewer handoff only
+- Handoff: no blocking findings. The contact-sheet renderer remains correctly parked as `#live-required`; unit tests pass, smoke config dry-run remains no-live/no-write with empty generated output and no batch state, normal gallery-index writes a temp zero-entry index, and `--gallery-index --dry-run` rejects without creating output. Safe engine implementation work does not remain until real sidecar examples or a root-approved contact-sheet fixture strategy exists.
+
 ## 2026-05-09 - workflow b 233547 engine live-required gate
 
 - Role: Builder for Workflow B cycle 1, engine lane
