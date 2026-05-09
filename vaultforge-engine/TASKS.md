@@ -45,7 +45,7 @@ tag includes engine
 - [x] 🔼 Add reference image plumbing #engine #api 🆔 engine-reference-image-plumbing ⛔ engine-edit-reference-contract 2026-05-09
 - [x] 🔽 Add gallery/contact-sheet generation hooks #engine #gallery 🆔 engine-gallery-hooks ⛔ engine-run-manifest-field-list ✅ 2026-05-09
 - [x] 🔼 Fix or reject `--gallery-index --dry-run` so the engine dry-run contract remains no-write #engine #dry-run #gallery 🆔 engine-gallery-index-dry-run-guard ⛔ engine-gallery-hooks ✅ 2026-05-09
-- [ ] 🔽 Add optional contact-sheet rendering after the gallery index has real sidecar examples to consume #engine #gallery 🆔 engine-contact-sheet-renderer ⛔ engine-gallery-index-dry-run-guard
+- [ ] 🔽 Add optional contact-sheet rendering after the gallery index has real sidecar examples to consume #engine #gallery #live-required 🆔 engine-contact-sheet-renderer ⛔ engine-gallery-index-dry-run-guard
 
 ## Working Rules
 

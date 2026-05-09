@@ -104,6 +104,30 @@ Use this shape:
 - Changed: updated this reviewer handoff only
 - Handoff: no blocking findings. Unit tests pass, `--gallery-index --dry-run` rejects without creating the requested JSON file, normal `--gallery-index` still writes an explicit index, and the committed batch smoke dry-run remains no-live/no-write. Recorder can capture the commit and continue only with another approved safe slice.
 
+## 2026-05-09 - workflow b root recorder cycle 1 gallery guard closure
+
+- Role: Root recorder for Workflow B cycle 1
+- Scope: affected section handoff note only
+- Read: active run packet output notes for root coordinator, engine builder, engine reviewer, business builder, and business reviewer; current engine `SIGN_UP.md`; current git status and recent commit log
+- Changed: recorded that the engine gallery dry-run guard has passed reviewer checks and is already committed as `cd9a86d`
+- Handoff: no engine hard gate remains for `engine-gallery-index-dry-run-guard`. The engine dry-run contract is now protected by rejecting `--gallery-index --dry-run`; normal explicit gallery-index output remains allowed. No live generation was run or approved in this recorder pass.
+
+## 2026-05-09 - workflow b engine cycle 2 builder routing
+
+- Role: Builder for Workflow B cycle 2, engine lane
+- Scope: section-local docs/evidence only; no code change because the remaining contact-sheet renderer task requires real sidecar examples and `assets\generated` is currently empty
+- Read: refreshed root workflow review guidance, cycle 2 root coordinator routing note, engine task board, `RUN_MANIFEST.md`, `VERIFICATION.md`, current dirty baseline, and current generator/gallery tests
+- Changed: tagged `engine-contact-sheet-renderer` as `#live-required` to make the missing real sidecar examples explicit, and left the implementation slice for a later approved pass
+- Handoff: no engine hard gate was triggered, but there is no approved engine implementation slice ready in this cycle. Reviewer can check the docs-only task tag plus verification: unit tests passed, smoke config dry-run stayed no-live/no-write, empty gallery-index smoke produced a zero-entry temp index, and `--gallery-index --dry-run` still rejects without creating output.
+
+## 2026-05-09 - workflow b engine cycle 2 reviewer
+
+- Role: Reviewer for Workflow B cycle 2, engine lane
+- Scope: review the builder's docs-only routing decision for `engine-contact-sheet-renderer`
+- Read: cycle 2 coordinator routing note, engine builder output, current engine diff, `TASKS.md`, `SIGN_UP.md`, `src\generate.py`, `VERIFICATION.md`, and current `assets\generated`
+- Changed: recorded this reviewer handoff only
+- Handoff: no blocking findings. The `#live-required` tag is appropriate because `assets\generated` has no real sidecar examples, the remaining contact-sheet renderer would otherwise depend on missing live/generated evidence, and the existing gallery dry-run guard still verifies. Unit tests passed, smoke config dry-run stayed no-write, normal empty gallery-index wrote only a temp zero-entry index, and `--gallery-index --dry-run` rejected without creating output.
+
 ## 2026-04-16 - engine task review
 
 - Role: Task Master review for the engine section
