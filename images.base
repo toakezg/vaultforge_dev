@@ -1,5 +1,0 @@
-views:
-  - type: table
-    name: Table
-  - type: mc-waterfall
-    name: View

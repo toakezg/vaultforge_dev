@@ -111,3 +111,25 @@ shared engine contract before the package shape settles.
 
 `run_engine.bat` will use `.venv\Scripts\python.exe` if that local environment
 already exists, but the engine does not require an editable install yet.
+
+## Smoke Config
+
+The committed smoke config is:
+
+```text
+assets\batch-input-smoke\smoke.conf
+```
+
+Run it from the engine folder with:
+
+```powershell
+py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'
+```
+
+It includes `--dry-run`, batch prompt loading, explicit output routing, native
+client/job/tag metadata, two variants, and a local `--reference-image`. It is
+safe to run without an API key and should not write generated images or sidecar
+JSON.
+
+The first shared sidecar field list for future gallery/contact-sheet consumers
+lives in `RUN_MANIFEST.md`.

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-05-09
+
+- Passed native engine `--client`, `--job`, `--tag`, and `--variants` through `run_business.ps1` while preserving business output routing, prompt composition, and wrapper-owned `run.json` / `gallery-entry.json` manifests.
+- Switched the business wrappers' default engine root from the stale fixed `E:\tools\vaultforge\vaultforge-engine` path to the sibling `..\vaultforge-engine` path, while keeping `-EngineRoot` and `-ArtRoot` overrides available.
+- Verified the business wrapper path with PowerShell parser checks, direct `-WhatIf`, direct `-DryRun`, smoke batch dry-run, markdown-bank `-WhatIf`, and pack-runner `-WhatIf`.
+
 ## 2026-04-16
 
 - Reviewed the business open-task queue against root and engine docs so the remaining business integration work matches the actual shared-engine state.

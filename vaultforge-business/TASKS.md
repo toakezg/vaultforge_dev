@@ -39,9 +39,10 @@ ____
 
 - [x] Retarget `run_business.ps1` to call `vaultforge-engine\src\generate.py` directly after a tiny retarget pass #business #engine
 - [x] 🔼 Add additional real client prompt notes under `my-prompts-bank` once reusable client packs are ready #business #prompts 2026-04-15 ✅ 2026-04-15
-- [ ] ⏫ Pass native engine `--client`, `--job`, `--tag`, and `--variants` through `run_business.ps1` while keeping business routing and prompt composition stable #business #engine #integration 🆔 business-engine-native-metadata-adoption
-- [ ] ⏫ Validate backward compatibility for the current business wrappers during the native metadata integration pass #business #validation 🆔 business-wrapper-backcompat ⛔ business-engine-native-metadata-adoption
+- [x] ⏫ Pass native engine `--client`, `--job`, `--tag`, and `--variants` through `run_business.ps1` while keeping business routing and prompt composition stable #business #engine #integration 🆔 business-engine-native-metadata-adoption ✅ 2026-05-09
+- [x] ⏫ Validate backward compatibility for the current business wrappers during the native metadata integration pass #business #validation 🆔 business-wrapper-backcompat ⛔ business-engine-native-metadata-adoption ✅ 2026-05-09
 - [ ] 🔼 Review whether business should keep authoritative `run.json` and `gallery-entry.json` files or merge engine sidecar metadata during the native metadata pass #business #planning 🆔 business-manifest-contract-review ⛔ business-engine-native-metadata-adoption
+- [ ] 🔽 Fix or decide the `run-client-pack.ps1 -WhatIf` logging side effect so preview commands do not append `logs/run-log.csv` rows unless that is explicitly wanted #business #cli #dry-run 🆔 business-pack-whatif-log-side-effect
 - [ ] 🔼 Pass `-InputImage` through to the engine once shared edit plumbing exists #business #engine #api 🆔 business-input-image-support ⛔ engine-input-image-plumbing
 - [ ] 🔼 Pass `-ReferenceImage` through to the engine once the shared reference-image contract exists #business #engine #api 🆔 business-reference-image-support ⛔ engine-reference-image-plumbing
 - [ ] 🔼 Move stable business preset/style/mod fragments into engine libraries once the native metadata pass is stable #business #engine #libraries 🆔 business-fragment-library-move ⛔ business-wrapper-backcompat

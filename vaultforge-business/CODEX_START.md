@@ -19,6 +19,6 @@ The current high-value slice is to keep improving the business lane while keepin
 
 Important engine fact:
 
-`E:\tools\vaultforge\vaultforge-engine\src\generate.py --help` currently shows only the original shared presets/styles/mods. Business presets and styles are bridged in `run_business.ps1` until the engine grows native support.
+`..\vaultforge-engine\src\generate.py --help` currently shows the shared engine CLI. Business presets and styles are bridged in `run_business.ps1`; native engine metadata fields are passed through where the engine supports them.
 
 - At the end of a business run, update `CHANGELOG.md`. If the change affects root coordination or engine contracts, also update the root handoff/changelog docs.

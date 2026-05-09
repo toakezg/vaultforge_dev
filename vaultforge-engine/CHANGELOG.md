@@ -2,6 +2,9 @@
 
 ## 2026-05-09
 
+- Added a committed dry-run `@file.conf` smoke path that exercises batch prompt routing, explicit output routing, native metadata previews, two variants, and a local reference image without live API writes.
+- Added `RUN_MANIFEST.md` as the first shared sidecar field list for future gallery/contact-sheet consumers.
+- Settled two engine-local build-slice decisions: future `@file.conf` smoke configs should include explicit dry-run variants, and gallery/contact-sheet work should wait for a minimal shared run-manifest field list instead of binding directly to incidental sidecar JSON.
 - Added engine-local `.env` API-key loading, direct `--api-key` overrides, and lane-oriented `--api-key-env` overrides.
 - Switched the default image generation model to the GPT Image 2 snapshot `gpt-image-2-2026-04-21`, with fallbacks for the alias and current Responses-capable mainline models.
 - Added native local image references with `--input-image` and `--reference-image`, including dry-run visibility and sidecar metadata.

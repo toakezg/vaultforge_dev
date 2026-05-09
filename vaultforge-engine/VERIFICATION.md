@@ -113,3 +113,42 @@ Result:
 ```text
 Batch dry run complete: 1 prompt file(s) would run, 2 image request(s) would be made, 0 would skip.
 ```
+
+## Workflow B Engine Build Slice
+
+Date: 2026-05-09
+
+Unit tests:
+
+```powershell
+$env:PYTHONPATH=(Resolve-Path 'src').Path; py -B -m unittest discover -s tests
+```
+
+Result:
+
+```text
+Ran 20 tests
+OK
+```
+
+Committed config dry-run:
+
+```powershell
+py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'
+```
+
+Expected coverage:
+
+- `@file.conf` parsing
+- `--batch-smoke` prompt routing
+- explicit `--output-dir`
+- native client/job/tag metadata preview
+- two output variants
+- local `--reference-image`
+- metadata path preview without live API writes
+
+Observed result:
+
+```text
+Batch dry run complete: 1 prompt file(s) would run, 2 image request(s) would be made, 0 would skip.
+```

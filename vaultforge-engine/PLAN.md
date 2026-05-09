@@ -41,3 +41,11 @@
 - [x] Add native support for variants and client/job/tag metadata.
 - [ ] Add native support for tweaks, input images, and references after the edit/reference API contract is ready.
 - [ ] Add shared gallery/contact-sheet primitives only after metadata shape settles.
+
+## 2026-05-09 Build Slice Decisions
+
+- `@file.conf` smoke configs should include explicit `--dry-run` variants. The engine's safest repeatable smoke path should prove config parsing, prompt routing, output path resolution, metadata preview, and reference-image argument handling without spending API calls or writing generated images.
+- Sidecar JSON should stay additive for current generation work, but gallery/contact-sheet hooks need a small shared run-manifest field list first. The next metadata slice should document the minimum fields gallery tooling can depend on before treating the sidecar format as a cross-lane contract.
+- The first committed config smoke path now lives at `assets\batch-input-smoke\smoke.conf`; it is dry-run only and includes output routing, metadata preview, variants, and a local reference image.
+- The first shared sidecar field list now lives in `RUN_MANIFEST.md`.
+- Gallery/contact-sheet work can use `RUN_MANIFEST.md` as its minimum read contract, but lane-owned gallery files should stay separate from engine sidecars until a later root-approved contract expands the shape.

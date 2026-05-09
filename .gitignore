@@ -43,8 +43,12 @@ vaultforge-icon/svg-forge/XP4Life/part-a/assets/
 vaultforge-icon/pack/
 vaultforge-keybearer/
 pack/
-
+**/.obsidian/
+*/.obsidan/
+/.obsidian/
 # Testing
 svg-forge/samples/
+**/_template/
+
 
 

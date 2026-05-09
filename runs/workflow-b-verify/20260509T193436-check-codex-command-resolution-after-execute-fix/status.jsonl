@@ -1,0 +1,4 @@
+{"event": "plan_created", "run_id": "20260509T193436-check-codex-command-resolution-after-execute-fix"}
+{"cycle": 1, "event": "cycle_started"}
+{"cycle": 1, "event": "cycle_finished"}
+{"event": "run_finished", "run_id": "20260509T193436-check-codex-command-resolution-after-execute-fix"}

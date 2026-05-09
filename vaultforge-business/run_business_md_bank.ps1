@@ -1,7 +1,7 @@
 param(
     [string]$Path = ".\my-prompts-bank",
     [string]$OutputRoot = ".\generated",
-    [string]$EngineRoot = "E:\tools\vaultforge\vaultforge-engine",
+    [string]$EngineRoot = "",
     [string]$Status = "draft",
     [int]$Limit = 0,
     [switch]$All,
@@ -13,6 +13,16 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+
+if ([string]::IsNullOrWhiteSpace($EngineRoot)) {
+    $EngineRoot = Join-Path $PSScriptRoot "..\vaultforge-engine"
+}
+try {
+    $EngineRoot = (Resolve-Path -LiteralPath $EngineRoot -ErrorAction Stop).Path
+}
+catch {
+    $EngineRoot = [System.IO.Path]::GetFullPath($EngineRoot)
+}
 
 function ConvertFrom-FrontMatterScalar {
     param([AllowNull()][string]$Value)

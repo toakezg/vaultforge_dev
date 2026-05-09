@@ -18,7 +18,7 @@ param(
     [string]$ReferenceImage = "",
     [string]$SourcePromptFile = "",
     [string]$OutputRoot = ".\generated",
-    [Alias("ArtRoot")][string]$EngineRoot = "E:\tools\vaultforge\vaultforge-engine",
+    [Alias("ArtRoot")][string]$EngineRoot = "",
     [switch]$DryRun,
     [switch]$WriteMetadata,
     [switch]$WhatIf
@@ -129,6 +129,11 @@ if ($Variants -lt 1) {
     exit 1
 }
 
+if ([string]::IsNullOrWhiteSpace($EngineRoot)) {
+    $EngineRoot = Join-Path $PSScriptRoot "..\vaultforge-engine"
+}
+$EngineRoot = Get-FullPath $EngineRoot
+
 if (-not (Test-Path $EngineRoot)) {
     Write-Host "VaultForge Engine root not found: $EngineRoot" -ForegroundColor Red
     exit 1
@@ -237,41 +242,47 @@ elseif ($DryRun -and -not $WhatIf) {
     Write-Host "Dry run: business metadata is not written. Add -WriteMetadata to keep prompt/run/gallery files." -ForegroundColor Yellow
 }
 
-for ($i = 1; $i -le $Variants; $i++) {
-    $variant = "{0:D2}" -f $i
-    $filenameBits = @($clientSlug, $assetSlug, $presetSlug, $styleSlug)
-    if ($tagSlug -ne "tag") { $filenameBits += $tagSlug }
-    $filenameBits += "v$variant"
-    $filename = ($filenameBits -join "__")
+$filenameBits = @($clientSlug, $assetSlug, $presetSlug, $styleSlug)
+if ($tagSlug -ne "tag") { $filenameBits += $tagSlug }
+$filename = ($filenameBits -join "__")
 
-    $args = @(
-        ".\src\generate.py",
-        $composedPrompt,
-        "--preset", $enginePreset,
-        "--style", $engineStyle,
-        "--size", $Size,
-        "--quality", $Quality,
-        "--format", $Format,
-        "--background", $effectiveBackground,
-        "--output-dir", $engineOutputDir,
-        "--filename", $filename
-    )
+$args = @(
+    ".\src\generate.py",
+    $composedPrompt,
+    "--preset", $enginePreset,
+    "--style", $engineStyle,
+    "--size", $Size,
+    "--quality", $Quality,
+    "--format", $Format,
+    "--background", $effectiveBackground,
+    "--output-dir", $engineOutputDir,
+    "--filename", $filename,
+    "--client", $Client,
+    "--job", $Job,
+    "--variants", ([string]$Variants)
+)
 
-    if ($DryRun) { $args += "--dry-run" }
+if (-not [string]::IsNullOrWhiteSpace($Tag)) {
+    $args += @("--tag", $Tag)
+}
 
-    Write-Host ""
-    Write-Host "VaultForge Business -> Shared engine variant $variant" -ForegroundColor Cyan
-    Write-Host "Business output: $runDirFull"
+if ($DryRun) { $args += "--dry-run" }
 
-    if ($DryRun -and -not $WriteMetadata) {
-        Write-Host "Engine dry-run scratch output: $engineOutputDir"
-    }
+Write-Host ""
+Write-Host "VaultForge Business -> Shared engine" -ForegroundColor Cyan
+if ($Variants -gt 1) {
+    Write-Host "Business variants: $Variants"
+}
+Write-Host "Business output: $runDirFull"
 
-    if ($WhatIf) {
-        Write-Host ("py " + (ConvertTo-DisplayCommand $args))
-        continue
-    }
+if ($DryRun -and -not $WriteMetadata) {
+    Write-Host "Engine dry-run scratch output: $engineOutputDir"
+}
 
+if ($WhatIf) {
+    Write-Host ("py " + (ConvertTo-DisplayCommand $args))
+}
+else {
     Push-Location $EngineRoot
     try {
         & py @args

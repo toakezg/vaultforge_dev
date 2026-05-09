@@ -30,8 +30,10 @@ tag includes engine
 - [x] Rename the engine entrypoint and update wrappers/tests/docs to the neutral `generate.py` path #engine #docs
 - [x] 🔽 Decide whether to install the engine editable into its own `.venv` or keep launcher-based execution for now #engine #planning
 - [x] Compare direct engine dry-run output against the current business dry-run before retargeting business #engine #validation
-- [ ] ⏫ Decide whether `@file.conf` smoke configs should include `--dry-run` variants for safer testing #engine #validation 🆔 engine-conf-dry-run-variants
-- [ ] 🔼 Review whether engine sidecar JSON should stay additive or become a shared manifest contract before gallery hooks land #engine #metadata 🆔 engine-manifest-contract-review ⛔ engine-business-metadata-flags
+- [x] ⏫ Decide whether `@file.conf` smoke configs should include `--dry-run` variants for safer testing #engine #validation 🆔 engine-conf-dry-run-variants ✅ 2026-05-09
+- [x] 🔼 Review whether engine sidecar JSON should stay additive or become a shared manifest contract before gallery hooks land #engine #metadata 🆔 engine-manifest-contract-review ⛔ engine-business-metadata-flags ✅ 2026-05-09
+- [x] 🔼 Add a committed dry-run smoke config that exercises prompt, output, metadata, and reference-image paths without live API writes #engine #validation 🆔 engine-dry-run-smoke-config ⛔ engine-conf-dry-run-variants 2026-05-09 ✅ 2026-05-09
+- [x] 🔼 Draft the first shared run-manifest field list before gallery/contact-sheet hooks consume sidecar JSON #engine #metadata 🆔 engine-run-manifest-field-list ⛔ engine-manifest-contract-review 2026-05-09 ✅ 2026-05-09
 - [x] ⏫ Define the shared tweak/edit/reference contract before landing native input-image or reference-image flags #engine #api 🆔 engine-edit-reference-contract 2026-05-09
 
 ## Later
@@ -41,7 +43,7 @@ tag includes engine
 - [ ] 🔽 Consider a future no-write preview mode for business dry-runs once config-safe testing is settled #engine #dry-run 🆔 engine-no-write-preview ⛔ engine-conf-dry-run-variants
 - [x] 🔼 Add image edit plumbing for `--input-image` #engine #api 🆔 engine-input-image-plumbing ⛔ engine-edit-reference-contract 2026-05-09
 - [x] 🔼 Add reference image plumbing #engine #api 🆔 engine-reference-image-plumbing ⛔ engine-edit-reference-contract 2026-05-09
-- [ ] 🔽 Add gallery/contact-sheet generation hooks #engine #gallery 🆔 engine-gallery-hooks ⛔ engine-manifest-contract-review
+- [ ] 🔽 Add gallery/contact-sheet generation hooks #engine #gallery 🆔 engine-gallery-hooks ⛔ engine-run-manifest-field-list
 
 ## Working Rules
 

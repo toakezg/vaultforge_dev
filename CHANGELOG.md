@@ -2,8 +2,13 @@
 
 ## 2026-05-09
 
+- Recorded Workflow B cycle 1 for run `20260509T204905-run-approved-section-local-build-slices`: engine dry-run smoke/manifest work and business native metadata bridge both passed reviewer checks with no hard gates and no live generation.
+- Recorded a Workflow B cycle 1 root-recorder blocker for run `20260509T201250-run-approved-section-local-build-slices`: local shell inspection failed before PowerShell started with `windows sandbox: CryptUnprotectData failed: 2148073483`, so the recorder handoff explicitly avoids inferring builder or reviewer results.
 - Added engine-local `.env` API-key loading and lane override flags in `vaultforge-engine`, with the default model pinned to `gpt-image-2-2026-04-21`.
 - Added engine-native image input/reference support in `vaultforge-engine`: direct `--input-image` / `--reference-image` files and embedded images inside Markdown prompt notes can now be sent with the prompt for reference-driven generation and edits.
+- Added Workflow B as a root long-run controller design with `MULTI_AGENT_WORKFLOW_B.md`, `workflow_b_controller.py`, and `run_workflow_b.bat`; it creates locked cycle packets and can optionally launch section-scoped `codex exec` agents.
+- Added Workflow B commit policy flags so spawned agents can commit scoped work after review, per cycle, per agent, or never, while avoiding pre-existing dirty files.
+- Added `WORKFLOW_REVIEW.md` and Workflow B workflow-change watching so long runs can refresh root workflow docs between cycles, detect changed workflow guidance, and surface updates in later prompts.
 
 ## 2026-05-03
 

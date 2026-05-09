@@ -2,7 +2,7 @@
 
 VaultForge Business is the client-facing generation lane for logos, icons, covers, brand marks, social tiles, and reusable business asset packs.
 
-Business now targets the shared generator at `E:\tools\vaultforge\vaultforge-engine`. This folder provides business wrappers, prompt banks, metadata, and output routing so client work does not mix with playground output.
+Business now targets the sibling shared generator at `..\vaultforge-engine` by default. This folder provides business wrappers, prompt banks, metadata, and output routing so client work does not mix with playground output.
 
 ## Prompt Bank Map
 
@@ -143,6 +143,6 @@ that list into the wrapper's singular `-Tag` string.
 
 ## Current Bridge Behavior
 
-The shared generator supports the original VaultForge presets and styles only. The business wrapper accepts business-friendly fields, injects them into the prompt, maps to the closest supported generator preset/style, and keeps the original business fields in metadata.
+The shared generator supports the original VaultForge presets and styles only. The business wrapper accepts business-friendly fields, injects them into the prompt, maps to the closest supported generator preset/style, passes native engine `--client`, `--job`, `--tag`, and `--variants` fields through, and keeps the original business fields in business metadata.
 
 Edit-oriented fields like `-Tweak`, `-InputImage`, and `-ReferenceImage` are recorded and injected as prompt context for now. They are ready for direct edit API wiring later.
