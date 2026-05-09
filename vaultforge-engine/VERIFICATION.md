@@ -1126,3 +1126,199 @@ Decision:
 - Do not implement contact-sheet rendering against an empty gallery source.
 - No safe engine implementation slice remains until real sidecar examples or a root-approved contact-sheet fixture strategy exists.
 - Continue Workflow B through reviewer and recorder, then switch to another approved safe slice outside engine unless new approved engine inputs appear.
+
+## Workflow B 055419 Engine Reviewer Check
+
+Date: 2026-05-10
+
+Run id:
+
+```text
+20260510T055419-run-approved-build-slices-while-analyzing-workfl
+```
+
+Findings:
+
+- No blocking findings.
+- Builder evidence stayed inside the routed evidence-only engine scope.
+- `engine-contact-sheet-renderer` remains correctly parked as `#live-required` until real sidecar examples or a root-approved contact-sheet fixture strategy exists.
+
+Reviewer verification:
+
+```powershell
+$env:PYTHONPATH=(Resolve-Path 'src').Path
+py -B -m unittest discover -s tests
+```
+
+Result:
+
+```text
+Ran 24 tests
+OK
+Exit code: 0
+```
+
+Committed smoke config dry-run:
+
+```powershell
+py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'
+```
+
+Observed result:
+
+```text
+Batch dry run complete: 1 prompt file(s) would run, 2 image request(s) would be made, 0 would skip.
+Exit code: 0
+Generated before: 0
+Generated after: 0
+Batch state before: False
+Batch state after: False
+```
+
+Empty gallery-index smoke:
+
+```powershell
+$out = Join-Path $env:TEMP 'vaultforge-engine-gallery-index-055419-reviewer.json'
+if (Test-Path -LiteralPath $out) { Remove-Item -LiteralPath $out -Force }
+py .\src\generate.py --gallery-index --gallery-source assets\generated --gallery-output $out
+```
+
+Observed result:
+
+```text
+Gallery index written: C:\Users\natha\AppData\Local\Temp\vaultforge-engine-gallery-index-055419-reviewer.json
+Exit code: 0
+Output exists: True
+entry_count: 0
+ignored_count: 0
+```
+
+Dry-run conflict guard:
+
+```powershell
+$reject = Join-Path $env:TEMP 'vaultforge-engine-gallery-index-055419-reviewer-dry-run-reject.json'
+if (Test-Path -LiteralPath $reject) { Remove-Item -LiteralPath $reject -Force }
+py .\src\generate.py --gallery-index --dry-run --gallery-source assets\generated --gallery-output $reject
+```
+
+Observed result:
+
+```text
+generate.py: error: --gallery-index cannot be combined with --dry-run because it writes an index file.
+Exit code: 2
+Output exists: False
+```
+
+Diff check:
+
+```powershell
+git diff --check -- SIGN_UP.md VERIFICATION.md src/generate.py tests/test_generate.py
+```
+
+Observed result:
+
+```text
+No whitespace errors.
+Git reported only LF-to-CRLF working-copy warnings for SIGN_UP.md and VERIFICATION.md.
+```
+
+Decision:
+
+- No live generation, generated art, paid/API work, fixture-policy decision, sidecar contract expansion, root Workflow B controller edit, cross-lane ownership change, or renderer implementation was approved or performed.
+- The scoped engine evidence changes are safe to commit in review mode if staging is limited to `vaultforge-engine/SIGN_UP.md` and `vaultforge-engine/VERIFICATION.md`.
+
+## Workflow B 055419 Engine Builder Check
+
+Date: 2026-05-10
+
+Run id:
+
+```text
+20260510T055419-run-approved-build-slices-while-analyzing-workfl
+```
+
+Dirty baseline:
+
+- Pre-existing dirty files included root workflow docs, business handoff notes, XP4L state, `.workflow-b.lock`, and untracked root notes.
+- `git status --short` also reported permission warnings under `.tmp_tests/` and `ICON/XP4Life/part-a/prompts/.icon-wrapper-temp/`.
+- This builder pass only updated engine evidence files.
+
+Coordinator route:
+
+- Cycle 1 root coordinator routed the engine slot as evidence-only verification and Workflow B handoff hygiene.
+- `engine-contact-sheet-renderer` remains parked as `#live-required`.
+- Live generation, paid/API work, generated art, renderer implementation, fixture-policy decisions, sidecar contract expansion, destructive file operations, cross-lane ownership changes, and root Workflow B controller edits were not approved for this engine slot.
+
+Unit tests:
+
+```powershell
+$env:PYTHONPATH=(Resolve-Path 'src').Path; py -B -m unittest discover -s tests
+```
+
+Result:
+
+```text
+Ran 24 tests
+OK
+Exit code: 0
+```
+
+Committed smoke config dry-run:
+
+```powershell
+py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'
+```
+
+Observed result:
+
+```text
+Batch dry run complete: 1 prompt file(s) would run, 2 image request(s) would be made, 0 would skip.
+Exit code: 0
+Generated before: 0
+Generated after: 0
+Batch state before: False
+Batch state after: False
+```
+
+Empty gallery-index smoke:
+
+```powershell
+$out = Join-Path $env:TEMP 'vaultforge-engine-gallery-index-055419-builder.json'
+if (Test-Path -LiteralPath $out) { Remove-Item -LiteralPath $out -Force }
+py .\src\generate.py --gallery-index --gallery-source assets\generated --gallery-output $out
+Test-Path -LiteralPath $out
+```
+
+Observed result:
+
+```text
+Gallery index written: C:\Users\natha\AppData\Local\Temp\vaultforge-engine-gallery-index-055419-builder.json
+Exit code: 0
+Output exists: True
+entry_count: 0
+ignored_count: 0
+```
+
+Dry-run conflict guard:
+
+```powershell
+$reject = Join-Path $env:TEMP 'vaultforge-engine-gallery-index-055419-dry-run-reject.json'
+if (Test-Path -LiteralPath $reject) { Remove-Item -LiteralPath $reject -Force }
+py .\src\generate.py --gallery-index --dry-run --gallery-source assets\generated --gallery-output $reject
+Test-Path -LiteralPath $reject
+```
+
+Observed result:
+
+```text
+generate.py: error: --gallery-index cannot be combined with --dry-run because it writes an index file.
+Exit code: 2
+Output exists: False
+```
+
+Decision:
+
+- Treat `engine-contact-sheet-renderer` as correctly blocked by `#live-required`.
+- Do not implement contact-sheet rendering against an empty gallery source.
+- No safe engine implementation slice remains until real sidecar examples or a root-approved contact-sheet fixture strategy exists.
+- Continue Workflow B through reviewer and recorder, then switch to another approved safe slice outside engine unless new approved engine inputs appear.
