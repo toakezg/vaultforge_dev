@@ -17,6 +17,7 @@ import sys
 from dataclasses import asdict, dataclass
 from datetime import datetime
 from pathlib import Path
+from time import monotonic
 from typing import Iterable, Sequence
 
 
@@ -55,6 +56,11 @@ DEFAULT_LANES = {
 
 ROLE_ORDER = ("coordinator", "builder", "reviewer", "recorder")
 DEFAULT_EXTERNAL_WORKFLOW_FILE = Path(r"F:\toakezg\workflows\workflow-types.md")
+TERMINAL_DETAIL = "compact"
+
+
+class WorkflowBCancelled(Exception):
+    """Raised when the operator requests a graceful Workflow B cancellation."""
 
 
 @dataclass(frozen=True)
@@ -85,7 +91,24 @@ class RunPlan:
     workflow_review_every: int
     watch_workflows: bool
     watch_workflow_files: tuple[str, ...]
+    timebox_minutes: float
+    usage_budget_usd: float
+    estimated_agent_usd: float
+    hard_gate_mode: str
     agents: tuple[AgentSpec, ...]
+
+
+@dataclass(slots=True)
+class BudgetState:
+    """Mutable controller-side budget tracking."""
+
+    started_monotonic: float
+    timebox_minutes: float = 0.0
+    usage_budget_usd: float = 0.0
+    estimated_agent_usd: float = 0.0
+    agent_runs_started: int = 0
+    estimated_usage_usd: float = 0.0
+    reported_usage_usd: float = 0.0
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
@@ -163,6 +186,48 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         action="append",
         default=[],
         help="Extra workflow file to fingerprint and surface when it changes.",
+    )
+    parser.add_argument(
+        "--timebox-minutes",
+        type=float,
+        default=0.0,
+        help="Stop before starting more work after this many minutes. 0 disables.",
+    )
+    parser.add_argument(
+        "--usage-budget-usd",
+        type=float,
+        default=0.0,
+        help=(
+            "Estimated usage budget in USD. 0 disables controller-side budget "
+            "stops. Codex CLI does not expose reliable live cost here."
+        ),
+    )
+    parser.add_argument(
+        "--estimated-agent-usd",
+        type=float,
+        default=0.0,
+        help=(
+            "Estimated USD to reserve before starting each codex exec agent. "
+            "Use with --usage-budget-usd for a conservative budget guard."
+        ),
+    )
+    parser.add_argument(
+        "--hard-gate-mode",
+        default="switch-safe",
+        choices=("stop", "switch-safe", "record-continue"),
+        help=(
+            "How Workflow B should respond when an agent reports a hard gate: "
+            "stop, switch-safe, or record-continue."
+        ),
+    )
+    parser.add_argument(
+        "--terminal-detail",
+        default="compact",
+        choices=("compact", "verbose"),
+        help=(
+            "How much checkpoint detail to print to the terminal. "
+            "Use verbose for a watch window."
+        ),
     )
     parser.add_argument(
         "--model",
@@ -269,6 +334,7 @@ def workflow_watch_files(root: Path, extras: Sequence[str]) -> tuple[Path, ...]:
         root / "WORKFLOW_REVIEW.md",
         root / "THREAD_MAP.md",
         root / "TASKS.md",
+        root / "business-if-done.txt",
     ]
     if DEFAULT_EXTERNAL_WORKFLOW_FILE.exists():
         watched.append(DEFAULT_EXTERNAL_WORKFLOW_FILE)
@@ -309,6 +375,255 @@ def workflow_change_note(changed_files: Sequence[str]) -> str:
     ]
     lines.extend(f"- {path}" for path in changed_files)
     return "\n".join(lines)
+
+
+def budget_snapshot(state: BudgetState) -> dict[str, object]:
+    """Return the current controller-side budget snapshot."""
+
+    elapsed_seconds = monotonic() - state.started_monotonic
+    elapsed_minutes = elapsed_seconds / 60.0
+    remaining_minutes = (
+        max(state.timebox_minutes - elapsed_minutes, 0.0)
+        if state.timebox_minutes
+        else None
+    )
+    remaining_usage = (
+        max(state.usage_budget_usd - state.estimated_usage_usd, 0.0)
+        if state.usage_budget_usd
+        else None
+    )
+    return {
+        "elapsed_seconds": round(elapsed_seconds, 1),
+        "elapsed_minutes": round(elapsed_minutes, 3),
+        "timebox_minutes": state.timebox_minutes,
+        "remaining_minutes": None
+        if remaining_minutes is None
+        else round(remaining_minutes, 3),
+        "timebox_used_percent": None
+        if not state.timebox_minutes
+        else round(min(elapsed_minutes / state.timebox_minutes * 100.0, 999.0), 2),
+        "usage_budget_usd": state.usage_budget_usd,
+        "estimated_agent_usd": state.estimated_agent_usd,
+        "agent_runs_started": state.agent_runs_started,
+        "estimated_usage_usd": round(state.estimated_usage_usd, 6),
+        "reported_usage_usd": round(state.reported_usage_usd, 6),
+        "remaining_estimated_usage_usd": None
+        if remaining_usage is None
+        else round(remaining_usage, 6),
+        "estimated_usage_used_percent": None
+        if not state.usage_budget_usd
+        else round(min(state.estimated_usage_usd / state.usage_budget_usd * 100.0, 999.0), 2),
+    }
+
+
+def budget_stop_reason(state: BudgetState, *, before_agent: bool = False) -> str | None:
+    """Return a budget stop reason, if the next work unit should not start."""
+
+    elapsed_minutes = (monotonic() - state.started_monotonic) / 60.0
+    if state.timebox_minutes and elapsed_minutes >= state.timebox_minutes:
+        return (
+            f"timebox reached: {elapsed_minutes:.2f} minutes elapsed "
+            f"of {state.timebox_minutes:.2f}"
+        )
+    if (
+        before_agent
+        and state.usage_budget_usd
+        and state.estimated_agent_usd
+        and state.estimated_usage_usd + state.estimated_agent_usd
+        > state.usage_budget_usd
+    ):
+        return (
+            "estimated usage budget would be exceeded: "
+            f"{state.estimated_usage_usd:.4f} used + "
+            f"{state.estimated_agent_usd:.4f} reserved > "
+            f"{state.usage_budget_usd:.4f}"
+        )
+    return None
+
+
+def write_stop_handoff(
+    *,
+    run_dir: Path,
+    reason: str,
+    cycle: int | None,
+    state: BudgetState,
+    next_action: str,
+) -> Path:
+    """Write a small stop handoff for budget or gate stops."""
+
+    path = run_dir / "workflow-b-stop-handoff.md"
+    cycle_text = "before cycle start" if cycle is None else str(cycle)
+    text = f"""# Workflow B Stop Handoff
+
+- Stopped: `{datetime.now().astimezone().isoformat(timespec="seconds")}`
+- Cycle: `{cycle_text}`
+- Reason: {reason}
+- Next action: {next_action}
+
+## Budget Snapshot
+
+```json
+{json.dumps(budget_snapshot(state), indent=2)}
+```
+"""
+    path.write_text(text, encoding="utf-8")
+    return path
+
+
+def write_cancel_handoff(
+    *,
+    run_dir: Path,
+    plan: RunPlan,
+    cycle: int | None,
+    agent: AgentSpec | None,
+    state: BudgetState,
+) -> Path:
+    """Write a cancellation handoff when the operator stops the run."""
+
+    path = run_dir / "workflow-b-cancel-handoff.md"
+    cycle_text = "before cycle start" if cycle is None else str(cycle)
+    agent_text = "none active"
+    if agent is not None:
+        agent_text = (
+            f"{agent.name} (lane `{agent.lane}`, role `{agent.role}`, "
+            f"workdir `{agent.workdir}`)"
+        )
+    resume_lanes = " ".join(
+        f"--lane {agent.lane}"
+        for agent in plan.agents
+        if agent.role == "builder" and agent.lane != "root"
+    )
+    if not resume_lanes:
+        resume_lanes = "--lane root"
+    escaped_task = plan.task.replace('"', '\\"')
+    text = f"""# Workflow B Cancel Handoff
+
+- Cancelled: `{datetime.now().astimezone().isoformat(timespec="seconds")}`
+- Run id: `{plan.run_id}`
+- Cycle: `{cycle_text}` of `{plan.cycles}`
+- Active agent: {agent_text}
+- Reason: operator requested cancellation with Ctrl+C or batch termination.
+
+## What To Review
+
+- `workflow-b-live-status.md`
+- `checkpoints.jsonl`
+- `status.jsonl`
+- latest `cycle-XX/outputs/*.last-message.md` files
+- any changed files from the active lane before resuming
+
+## Budget Snapshot
+
+```json
+{json.dumps(budget_snapshot(state), indent=2)}
+```
+
+## Resume Shape
+
+Start a fresh run after reviewing the partial outputs:
+
+```bat
+run_workflow_b_watch.bat --cycles {plan.cycles} {resume_lanes} --timebox-minutes {plan.timebox_minutes} --usage-budget-usd {plan.usage_budget_usd} --estimated-agent-usd {plan.estimated_agent_usd} --hard-gate-mode {plan.hard_gate_mode} --commit-mode {plan.commit_mode} --task "{escaped_task}"
+```
+
+Do not use `--force-unlock` unless `.workflow-b.lock` remains and no Workflow B
+Python process is active.
+"""
+    path.write_text(text, encoding="utf-8")
+    return path
+
+
+def parse_agent_signal(output_path: Path) -> dict[str, str]:
+    """Parse a small Workflow B signal block from an agent final message."""
+
+    signal: dict[str, str] = {}
+    if not output_path.exists():
+        return signal
+    for raw_line in output_path.read_text(encoding="utf-8", errors="replace").splitlines():
+        line = raw_line.strip()
+        if not line.upper().startswith("WORKFLOW_B_") or ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        signal[key.strip().upper()] = value.strip()
+    return signal
+
+
+def signal_is_yes(signal: dict[str, str], key: str) -> bool:
+    return signal.get(key, "").strip().lower() in {"yes", "true", "1"}
+
+
+def signal_usage_usd(signal: dict[str, str]) -> float:
+    value = signal.get("WORKFLOW_B_USAGE_USD", "").strip().lstrip("$")
+    if not value:
+        return 0.0
+    try:
+        return max(float(value), 0.0)
+    except ValueError:
+        return 0.0
+
+
+def handle_hard_gate_signal(
+    *,
+    signal: dict[str, str],
+    mode: str,
+    status_path: Path,
+    run_dir: Path,
+    cycle: int,
+    agent: AgentSpec,
+    state: BudgetState,
+) -> bool:
+    """Return True when the controller should stop for a hard gate."""
+
+    if not signal_is_yes(signal, "WORKFLOW_B_HARD_GATE"):
+        return False
+
+    safe_work_remains = signal_is_yes(signal, "WORKFLOW_B_SAFE_WORK_REMAINS")
+    next_action = signal.get("WORKFLOW_B_NEXT_ACTION", "review hard gate")
+    append_status(
+        status_path,
+        {
+            "event": "hard_gate_reported",
+            "cycle": cycle,
+            "agent": agent.name,
+            "mode": mode,
+            "safe_work_remains": safe_work_remains,
+            "next_action": next_action,
+            "budget": budget_snapshot(state),
+        },
+    )
+
+    if mode == "record-continue":
+        return False
+    if mode == "switch-safe" and safe_work_remains:
+        append_status(
+            status_path,
+            {
+                "event": "hard_gate_switch_safe",
+                "cycle": cycle,
+                "agent": agent.name,
+                "next_action": next_action,
+            },
+        )
+        return False
+
+    write_stop_handoff(
+        run_dir=run_dir,
+        reason=f"hard gate reported by {agent.name}",
+        cycle=cycle,
+        state=state,
+        next_action=next_action,
+    )
+    print(f"Workflow B stopped for hard gate. Run packet: {run_dir}")
+    append_status(
+        status_path,
+        {
+            "event": "hard_gate_stop",
+            "cycle": cycle,
+            "agent": agent.name,
+            "next_action": next_action,
+        },
+    )
+    return True
 
 
 def normalize_run_id(task: str, timestamp: datetime) -> str:
@@ -418,6 +733,10 @@ Lane: {agent.lane}
 Working directory: {agent.workdir}
 Write scope: {agent.write_scope}
 Commit mode: {plan.commit_mode}
+Hard gate mode: {plan.hard_gate_mode}
+Timebox minutes: {plan.timebox_minutes}
+Usage budget USD: {plan.usage_budget_usd}
+Estimated agent USD: {plan.estimated_agent_usd}
 Run packet: {run_dir}
 
 ## Main Run Brief
@@ -440,6 +759,22 @@ Run packet: {run_dir}
 - Keep evidence: files touched, verification run, blockers, and next prompt.
 - If this role is reviewer, lead with findings and file/line references where possible.
 - If this role is recorder, update only the relevant handoff/changelog/task notes.
+- Respect the hard-gate mode:
+  - `stop`: stop at a hard gate and leave a decision note.
+  - `switch-safe`: stop the blocked slice, record the gate, then continue only with another approved safe slice if one exists.
+  - `record-continue`: record the gate and continue only when the gate does not block the current safe work.
+- Respect time and usage budgets. Prefer smaller safe slices as budget gets low.
+
+## Required Final Signal
+
+End your final answer with these exact lines so the controller can keep strict records:
+
+```text
+WORKFLOW_B_HARD_GATE: yes|no
+WORKFLOW_B_SAFE_WORK_REMAINS: yes|no
+WORKFLOW_B_USAGE_USD: 0.00
+WORKFLOW_B_NEXT_ACTION: short next action
+```
 
 ## Workflow Update Check
 
@@ -548,6 +883,18 @@ def write_plan_files(plan: RunPlan, run_dir: Path) -> None:
     )
     if not lane_args:
         lane_args = "--lane root"
+    budget_args = []
+    if plan.timebox_minutes:
+        budget_args.append(f"--timebox-minutes {plan.timebox_minutes}")
+    if plan.usage_budget_usd:
+        budget_args.append(f"--usage-budget-usd {plan.usage_budget_usd}")
+    if plan.estimated_agent_usd:
+        budget_args.append(f"--estimated-agent-usd {plan.estimated_agent_usd}")
+    if plan.hard_gate_mode != "switch-safe":
+        budget_args.append(f"--hard-gate-mode {plan.hard_gate_mode}")
+    budget_arg_text = " ".join(budget_args)
+    if budget_arg_text:
+        budget_arg_text += " "
     escaped_task = plan.task.replace('"', '\\"')
     summary = f"""# Workflow B Plan
 
@@ -560,6 +907,10 @@ def write_plan_files(plan: RunPlan, run_dir: Path) -> None:
 - Commit mode: `{plan.commit_mode}`
 - Workflow review every: `{plan.workflow_review_every}`
 - Watch workflows: `{plan.watch_workflows}`
+- Timebox minutes: `{plan.timebox_minutes}`
+- Usage budget USD: `{plan.usage_budget_usd}`
+- Estimated agent USD: `{plan.estimated_agent_usd}`
+- Hard gate mode: `{plan.hard_gate_mode}`
 - Task: {plan.task}
 
 ## Agents
@@ -569,7 +920,7 @@ def write_plan_files(plan: RunPlan, run_dir: Path) -> None:
 ## Resume
 
 ```bat
-run_workflow_b.bat --cycles {plan.cycles} {lane_args} --task "{escaped_task}"
+run_workflow_b.bat --cycles {plan.cycles} {lane_args} {budget_arg_text}--task "{escaped_task}"
 ```
 """
     (run_dir / "workflow-b-plan.md").write_text(summary, encoding="utf-8")
@@ -616,6 +967,9 @@ It should stay short enough for long-running agents to reread quickly.
 - Cycle: `{cycle}` of `{plan.cycles}`
 - Run packet: `{run_dir}`
 - Commit mode: `{plan.commit_mode}`
+- Timebox minutes: `{plan.timebox_minutes}`
+- Usage budget USD: `{plan.usage_budget_usd}`
+- Hard gate mode: `{plan.hard_gate_mode}`
 - Watched workflow changes this cycle:
 {changed_text}
 
@@ -641,9 +995,387 @@ It should stay short enough for long-running agents to reread quickly.
 
 
 def append_status(path: Path, payload: dict[str, object]) -> None:
+    payload = {
+        "recorded_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+        **payload,
+    }
     with path.open("a", encoding="utf-8", newline="\n") as handle:
         handle.write(json.dumps(payload, sort_keys=True))
         handle.write("\n")
+
+
+def format_minutes(value: object) -> str:
+    if value is None:
+        return "none"
+    try:
+        minutes = float(value)
+    except (TypeError, ValueError):
+        return str(value)
+    total_tenths = int(round(max(minutes, 0.0) * 10))
+    hours, rem_tenths = divmod(total_tenths, 600)
+    rem_minutes = rem_tenths / 10.0
+    if hours >= 1:
+        return f"{hours}h {rem_minutes:.1f}m"
+    return f"{rem_minutes:.1f}m"
+
+
+def money_or_none(value: object) -> str:
+    if value is None:
+        return "none"
+    try:
+        return f"${float(value):.4f}"
+    except (TypeError, ValueError):
+        return str(value)
+
+
+def checkpoint_payload(
+    *,
+    plan: RunPlan,
+    state: BudgetState,
+    phase: str,
+    cycle: int | None = None,
+    agent: AgentSpec | None = None,
+    extra: dict[str, object] | None = None,
+) -> dict[str, object]:
+    """Build a consistent checkpoint payload for long-run visibility."""
+
+    budget = budget_snapshot(state)
+    total_agent_slots = plan.cycles * len(plan.agents)
+    remaining_cycles = None if cycle is None else max(plan.cycles - cycle, 0)
+    cycle_percent = None
+    if cycle is not None and plan.cycles:
+        cycle_percent = round(min(cycle / plan.cycles * 100.0, 100.0), 2)
+
+    payload: dict[str, object] = {
+        "event": "checkpoint",
+        "phase": phase,
+        "run_id": plan.run_id,
+        "execute": plan.execute,
+        "parallel": plan.parallel,
+        "commit_mode": plan.commit_mode,
+        "hard_gate_mode": plan.hard_gate_mode,
+        "cycle": {
+            "current": cycle,
+            "max": plan.cycles,
+            "remaining_after_current": remaining_cycles,
+            "percent_of_max": cycle_percent,
+        },
+        "agents": {
+            "count_this_cycle": len(plan.agents),
+            "started": state.agent_runs_started,
+            "total_slots": total_agent_slots,
+            "remaining_slots": max(total_agent_slots - state.agent_runs_started, 0),
+        },
+        "runtime": {
+            "elapsed_seconds": budget["elapsed_seconds"],
+            "elapsed_minutes": budget["elapsed_minutes"],
+            "elapsed_human": format_minutes(budget["elapsed_minutes"]),
+            "timebox_minutes": budget["timebox_minutes"],
+            "timebox_human": format_minutes(budget["timebox_minutes"]),
+            "remaining_minutes": budget["remaining_minutes"],
+            "remaining_human": format_minutes(budget["remaining_minutes"]),
+            "timebox_used_percent": budget["timebox_used_percent"],
+        },
+        "usage": {
+            "budget_usd": budget["usage_budget_usd"],
+            "estimated_agent_usd": budget["estimated_agent_usd"],
+            "estimated_used_usd": budget["estimated_usage_usd"],
+            "reported_used_usd": budget["reported_usage_usd"],
+            "remaining_estimated_usd": budget["remaining_estimated_usage_usd"],
+            "estimated_used_percent": budget["estimated_usage_used_percent"],
+        },
+    }
+    if agent is not None:
+        payload["agent"] = {
+            "name": agent.name,
+            "lane": agent.lane,
+            "role": agent.role,
+            "workdir": agent.workdir,
+        }
+    if extra:
+        payload["extra"] = extra
+    return payload
+
+
+def print_checkpoint(payload: dict[str, object]) -> None:
+    cycle = payload["cycle"]
+    runtime = payload["runtime"]
+    usage = payload["usage"]
+    agent = payload.get("agent")
+    cycle_text = f"{cycle['current']}/{cycle['max']}" if cycle["current"] else f"0/{cycle['max']}"
+    time_text = (
+        f"{runtime['elapsed_human']}/{runtime['timebox_human']}"
+        if runtime["timebox_minutes"]
+        else f"{runtime['elapsed_human']}/no timebox"
+    )
+    usage_text = (
+        f"{money_or_none(usage['estimated_used_usd'])}/{money_or_none(usage['budget_usd'])}"
+        if usage["budget_usd"]
+        else f"{money_or_none(usage['estimated_used_usd'])}/no usage budget"
+    )
+    agent_text = f" | agent {agent['name']}" if isinstance(agent, dict) else ""
+    print(
+        "[workflow-b] "
+        f"{payload['phase']} | cycle {cycle_text} | elapsed {time_text} | "
+        f"est usage {usage_text} | agents {payload['agents']['started']}/"
+        f"{payload['agents']['total_slots']}{agent_text}"
+    )
+    if TERMINAL_DETAIL != "verbose":
+        return
+
+    print(
+        "  runtime: "
+        f"remaining {runtime['remaining_human']} | "
+        f"timebox used {runtime['timebox_used_percent']}%"
+    )
+    print(
+        "  usage: "
+        f"reported {money_or_none(usage['reported_used_usd'])} | "
+        f"remaining est {money_or_none(usage['remaining_estimated_usd'])} | "
+        f"used {usage['estimated_used_percent']}%"
+    )
+    print(
+        "  cycles: "
+        f"remaining after current {cycle['remaining_after_current']} | "
+        f"progress {cycle['percent_of_max']}%"
+    )
+    if isinstance(agent, dict):
+        print(
+            "  agent: "
+            f"lane {agent['lane']} | role {agent['role']} | workdir {agent['workdir']}"
+        )
+    extra = payload.get("extra")
+    if isinstance(extra, dict) and extra:
+        for key in ("output", "handoff", "reason", "path"):
+            if key in extra:
+                print(f"  {key}: {extra[key]}")
+
+
+def write_live_status(run_dir: Path, payload: dict[str, object]) -> None:
+    runtime = payload["runtime"]
+    usage = payload["usage"]
+    cycle = payload["cycle"]
+    agent = payload.get("agent")
+    agent_lines = ""
+    if isinstance(agent, dict):
+        agent_lines = f"""
+## Current Agent
+
+- Name: `{agent['name']}`
+- Lane: `{agent['lane']}`
+- Role: `{agent['role']}`
+- Workdir: `{agent['workdir']}`
+"""
+    text = f"""# Workflow B Live Status
+
+- Last checkpoint: `{payload.get('recorded_at', datetime.now().astimezone().isoformat(timespec="seconds"))}`
+- Run id: `{payload['run_id']}`
+- Phase: `{payload['phase']}`
+- Cycle: `{cycle['current']}` of `{cycle['max']}`
+- Remaining cycles after current: `{cycle['remaining_after_current']}`
+- Execute: `{payload['execute']}`
+- Parallel: `{payload['parallel']}`
+- Commit mode: `{payload['commit_mode']}`
+- Hard gate mode: `{payload['hard_gate_mode']}`
+
+## Runtime
+
+- Elapsed: `{runtime['elapsed_human']}` (`{runtime['elapsed_minutes']}` minutes)
+- Timebox: `{runtime['timebox_human']}`
+- Remaining timebox: `{runtime['remaining_human']}`
+- Timebox used percent: `{runtime['timebox_used_percent']}`
+
+## Usage
+
+- Estimated used: `{money_or_none(usage['estimated_used_usd'])}`
+- Reported used: `{money_or_none(usage['reported_used_usd'])}`
+- Usage budget: `{money_or_none(usage['budget_usd'])}`
+- Remaining estimated usage: `{money_or_none(usage['remaining_estimated_usd'])}`
+- Estimated used percent: `{usage['estimated_used_percent']}`
+- Estimated per-agent reserve: `{money_or_none(usage['estimated_agent_usd'])}`
+
+## Agent Slots
+
+- Agents started: `{payload['agents']['started']}`
+- Total possible slots: `{payload['agents']['total_slots']}`
+- Remaining slots: `{payload['agents']['remaining_slots']}`
+{agent_lines}
+## Latest Extra
+
+```json
+{json.dumps(payload.get('extra', {}), indent=2)}
+```
+"""
+    (run_dir / "workflow-b-live-status.md").write_text(text, encoding="utf-8")
+
+
+def record_checkpoint(
+    *,
+    run_dir: Path,
+    status_path: Path,
+    plan: RunPlan,
+    state: BudgetState,
+    phase: str,
+    cycle: int | None = None,
+    agent: AgentSpec | None = None,
+    extra: dict[str, object] | None = None,
+    print_line: bool = True,
+) -> dict[str, object]:
+    payload = {
+        "recorded_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+        **checkpoint_payload(
+            plan=plan,
+            state=state,
+            phase=phase,
+            cycle=cycle,
+            agent=agent,
+            extra=extra,
+        ),
+    }
+    append_status(status_path, payload)
+    checkpoint_path = run_dir / "checkpoints.jsonl"
+    with checkpoint_path.open("a", encoding="utf-8", newline="\n") as handle:
+        handle.write(json.dumps(payload, sort_keys=True))
+        handle.write("\n")
+    write_live_status(run_dir, payload)
+    if print_line:
+        print_checkpoint(payload)
+    return payload
+
+
+def explain_codex_failure(
+    *,
+    returncode: int | None,
+    output_path: Path | None = None,
+    exception: BaseException | None = None,
+) -> dict[str, object]:
+    """Return a practical operator-facing explanation for a Codex CLI failure."""
+
+    snippets: list[str] = []
+    if output_path and output_path.exists():
+        snippets.append(output_path.read_text(encoding="utf-8", errors="replace")[-4000:])
+    if exception is not None:
+        snippets.append(str(exception))
+    combined = "\n".join(snippets).lower()
+
+    issue = "codex_cli_failure"
+    meaning = "Codex CLI returned a non-zero exit code before Workflow B could continue."
+    next_steps = [
+        "Open the agent output file if one exists.",
+        "Check the terminal lines immediately above the failure.",
+        "Rerun with --terminal-detail verbose for more controller checkpoints.",
+    ]
+
+    if isinstance(exception, FileNotFoundError) or "could not find codex cli" in combined:
+        issue = "codex_cli_not_found"
+        meaning = "Workflow B could not find codex.cmd, codex.exe, or the provided --codex-bin path."
+        next_steps = [
+            "Confirm Codex CLI is installed and available on PATH.",
+            r"Or pass --codex-bin C:\Users\natha\AppData\Roaming\npm\codex.cmd.",
+        ]
+    elif "cryptunprotectdata" in combined or returncode in {-1, 4294967295}:
+        issue = "windows_sandbox_or_tool_failure"
+        meaning = (
+            "Codex reported a Windows sandbox/tool execution failure. "
+            "The common local symptom is CryptUnprotectData failed."
+        )
+        next_steps = [
+            "For trusted local VaultForge runs, add --bypass-sandbox.",
+            "If --bypass-sandbox was already used, inspect the agent output and Codex terminal lines for the failing tool.",
+        ]
+    elif "unexpected argument" in combined:
+        issue = "codex_cli_argument_mismatch"
+        meaning = "The installed Codex CLI rejected one of the flags Workflow B passed through."
+        next_steps = [
+            "Run codex exec --help and compare supported flags.",
+            "Keep Workflow B controller compatibility flags out of the Codex command path.",
+        ]
+    elif "plugin" in combined or "plugins" in combined:
+        issue = "codex_plugin_warning_or_failure"
+        meaning = (
+            "Codex mentioned plugins while running. If the agent exited 0, this is usually a warning; "
+            "if it exited non-zero, a plugin/tool load or permission issue may have blocked the agent."
+        )
+        next_steps = [
+            "Check whether the run continued after the warning.",
+            "If the return code is non-zero, inspect Codex plugin/tool configuration and rerun the same single agent prompt if needed.",
+        ]
+
+    return {
+        "issue": issue,
+        "returncode": returncode,
+        "meaning": meaning,
+        "next_steps": next_steps,
+        "output_path": None if output_path is None else str(output_path),
+        "exception": None if exception is None else repr(exception),
+    }
+
+
+def print_failure_explanation(explanation: dict[str, object]) -> None:
+    print("[workflow-b] Codex failure explanation")
+    print(f"  issue: {explanation['issue']}")
+    print(f"  returncode: {explanation['returncode']}")
+    print(f"  meaning: {explanation['meaning']}")
+    for step in explanation["next_steps"]:
+        print(f"  next: {step}")
+    if explanation.get("output_path"):
+        print(f"  output: {explanation['output_path']}")
+
+
+def stop_child_process(process: subprocess.Popen[str], *, label: str) -> None:
+    """Best-effort cleanup for a Codex child when Workflow B is cancelled."""
+
+    if process.poll() is not None:
+        return
+    print(f"[workflow-b] stopping active Codex process for {label}...")
+    try:
+        process.terminate()
+        process.wait(timeout=8)
+    except subprocess.TimeoutExpired:
+        print(f"[workflow-b] Codex process for {label} did not stop; killing it.")
+        process.kill()
+        process.wait(timeout=8)
+    except OSError as exc:
+        print(f"[workflow-b] could not stop Codex process for {label}: {exc}")
+
+
+def write_error_guide(
+    *,
+    run_dir: Path,
+    cycle: int,
+    agent: AgentSpec,
+    explanation: dict[str, object],
+) -> Path:
+    path = run_dir / "workflow-b-error-guide.md"
+    steps = "\n".join(f"- {step}" for step in explanation["next_steps"])
+    text = f"""# Workflow B Error Guide
+
+- Recorded: `{datetime.now().astimezone().isoformat(timespec="seconds")}`
+- Cycle: `{cycle}`
+- Agent: `{agent.name}`
+- Lane: `{agent.lane}`
+- Role: `{agent.role}`
+- Workdir: `{agent.workdir}`
+- Issue: `{explanation['issue']}`
+- Return code: `{explanation['returncode']}`
+- Output path: `{explanation['output_path']}`
+
+## Meaning
+
+{explanation['meaning']}
+
+## Next Steps
+
+{steps}
+
+## Raw Explanation
+
+```json
+{json.dumps(explanation, indent=2)}
+```
+"""
+    path.write_text(text, encoding="utf-8")
+    return path
 
 
 def build_codex_command(
@@ -674,43 +1406,145 @@ def build_codex_command(
 def run_agent(
     *,
     args: argparse.Namespace,
+    plan: RunPlan,
     agent: AgentSpec,
     prompt_path: Path,
     output_path: Path,
+    run_dir: Path,
     status_path: Path,
-) -> int:
+    state: BudgetState,
+    cycle: int,
+) -> tuple[int, dict[str, str]]:
     command = build_codex_command(
         args=args,
         agent=agent,
         prompt_path=prompt_path,
         output_path=output_path,
     )
+    state.agent_runs_started += 1
+    if state.estimated_agent_usd:
+        state.estimated_usage_usd += state.estimated_agent_usd
     append_status(
         status_path,
         {
             "event": "agent_started",
+            "cycle": cycle,
             "agent": agent.name,
             "workdir": agent.workdir,
             "output": str(output_path),
+            "budget": budget_snapshot(state),
         },
     )
-    prompt_text = prompt_path.read_text(encoding="utf-8")
-    completed = subprocess.run(
-        command,
-        input=prompt_text,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
+    record_checkpoint(
+        run_dir=run_dir,
+        status_path=status_path,
+        plan=plan,
+        state=state,
+        phase="agent_started",
+        cycle=cycle,
+        agent=agent,
+        extra={"output": str(output_path), "workdir": agent.workdir},
     )
+    prompt_text = prompt_path.read_text(encoding="utf-8")
+    try:
+        completed = subprocess.run(
+            command,
+            input=prompt_text,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+    except OSError as exc:
+        explanation = explain_codex_failure(
+            returncode=None,
+            output_path=output_path,
+            exception=exc,
+        )
+        print_failure_explanation(explanation)
+        append_status(
+            status_path,
+            {
+                "event": "agent_launch_failed",
+                "cycle": cycle,
+                "agent": agent.name,
+                "explanation": explanation,
+                "budget": budget_snapshot(state),
+            },
+        )
+        record_checkpoint(
+            run_dir=run_dir,
+            status_path=status_path,
+            plan=plan,
+            state=state,
+            phase="agent_launch_failed",
+            cycle=cycle,
+            agent=agent,
+            extra=explanation,
+        )
+        return 127, {}
+    signal = parse_agent_signal(output_path)
+    reported_usage = signal_usage_usd(signal)
+    if reported_usage:
+        state.reported_usage_usd += reported_usage
     append_status(
         status_path,
         {
             "event": "agent_finished",
+            "cycle": cycle,
             "agent": agent.name,
             "returncode": completed.returncode,
+            "signal": signal,
+            "budget": budget_snapshot(state),
         },
     )
-    return completed.returncode
+    record_checkpoint(
+        run_dir=run_dir,
+        status_path=status_path,
+        plan=plan,
+        state=state,
+        phase="agent_finished",
+        cycle=cycle,
+        agent=agent,
+        extra={
+            "returncode": completed.returncode,
+            "signal": signal,
+            "output": str(output_path),
+        },
+    )
+    if completed.returncode != 0:
+        explanation = explain_codex_failure(
+            returncode=completed.returncode,
+            output_path=output_path,
+        )
+        guide = write_error_guide(
+            run_dir=run_dir,
+            cycle=cycle,
+            agent=agent,
+            explanation=explanation,
+        )
+        print_failure_explanation(explanation)
+        append_status(
+            status_path,
+            {
+                "event": "agent_failed_explained",
+                "cycle": cycle,
+                "agent": agent.name,
+                "guide": str(guide),
+                "explanation": explanation,
+                "budget": budget_snapshot(state),
+            },
+        )
+        record_checkpoint(
+            run_dir=run_dir,
+            status_path=status_path,
+            plan=plan,
+            state=state,
+            phase="agent_failed_explained",
+            cycle=cycle,
+            agent=agent,
+            extra={"guide": str(guide), **explanation},
+        )
+    return completed.returncode, signal
 
 
 def acquire_lock(root: Path, run_id: str, force: bool) -> Path:
@@ -733,15 +1567,29 @@ def lane_docs(root: Path, lane: str) -> dict[str, str]:
     if lane == "root":
         return {}
     lane_path = root / DEFAULT_LANES[lane]
-    return {doc: read_text_if_exists(lane_path / doc) for doc in SECTION_DOCS}
+    docs = {doc: read_text_if_exists(lane_path / doc) for doc in SECTION_DOCS}
+    if lane == "vaultforge-business":
+        docs["../business-if-done.txt"] = read_text_if_exists(
+            root / "business-if-done.txt",
+            max_chars=12000,
+        )
+    return docs
 
 
 def main(argv: Sequence[str] | None = None) -> int:
+    global TERMINAL_DETAIL
     args = parse_args(argv)
+    TERMINAL_DETAIL = args.terminal_detail
     if args.cycles < 1:
         raise SystemExit("--cycles must be 1 or greater.")
     if args.workflow_review_every < 0:
         raise SystemExit("--workflow-review-every must be 0 or greater.")
+    if args.timebox_minutes < 0:
+        raise SystemExit("--timebox-minutes must be 0 or greater.")
+    if args.usage_budget_usd < 0:
+        raise SystemExit("--usage-budget-usd must be 0 or greater.")
+    if args.estimated_agent_usd < 0:
+        raise SystemExit("--estimated-agent-usd must be 0 or greater.")
 
     root = find_root(args.root or Path.cwd())
     lanes = tuple(dict.fromkeys(args.lane or ["root"]))
@@ -751,6 +1599,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     run_dir = out_root / run_id
     status_path = run_dir / "status.jsonl"
     run_dir.mkdir(parents=True, exist_ok=False)
+    budget_state = BudgetState(
+        started_monotonic=monotonic(),
+        timebox_minutes=args.timebox_minutes,
+        usage_budget_usd=args.usage_budget_usd,
+        estimated_agent_usd=args.estimated_agent_usd,
+    )
 
     lock_path = acquire_lock(root, run_id, args.force_unlock)
     try:
@@ -768,6 +1622,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             workflow_review_every=args.workflow_review_every,
             watch_workflows=args.watch_workflows,
             watch_workflow_files=tuple(str(path) for path in workflow_watch_files(root, args.watch_workflow_file)),
+            timebox_minutes=args.timebox_minutes,
+            usage_budget_usd=args.usage_budget_usd,
+            estimated_agent_usd=args.estimated_agent_usd,
+            hard_gate_mode=args.hard_gate_mode,
             agents=default_agents(
                 root=root,
                 lanes=lanes,
@@ -779,13 +1637,75 @@ def main(argv: Sequence[str] | None = None) -> int:
         workflow_state = workflow_fingerprints(watched_workflow_files)
         root_docs = {doc: read_text_if_exists(root / doc) for doc in ROOT_DOCS}
         write_plan_files(plan, run_dir)
-        append_status(status_path, {"event": "plan_created", "run_id": run_id})
+        append_status(
+            status_path,
+            {
+                "event": "plan_created",
+                "run_id": run_id,
+                "budget": budget_snapshot(budget_state),
+            },
+        )
+        record_checkpoint(
+            run_dir=run_dir,
+            status_path=status_path,
+            plan=plan,
+            state=budget_state,
+            phase="plan_created",
+            cycle=None,
+            extra={"run_dir": str(run_dir), "watch_files": list(plan.watch_workflow_files)},
+        )
 
         for cycle in range(1, args.cycles + 1):
+            cycle_stop_reason = budget_stop_reason(budget_state)
+            if cycle_stop_reason:
+                handoff = write_stop_handoff(
+                    run_dir=run_dir,
+                    reason=cycle_stop_reason,
+                    cycle=cycle,
+                    state=budget_state,
+                    next_action="Resume with a fresh budget or lower-risk task selection.",
+                )
+                append_status(
+                    status_path,
+                    {
+                        "event": "budget_stop",
+                        "cycle": cycle,
+                        "reason": cycle_stop_reason,
+                        "handoff": str(handoff),
+                        "budget": budget_snapshot(budget_state),
+                    },
+                )
+                record_checkpoint(
+                    run_dir=run_dir,
+                    status_path=status_path,
+                    plan=plan,
+                    state=budget_state,
+                    phase="budget_stop",
+                    cycle=cycle,
+                    extra={"reason": cycle_stop_reason, "handoff": str(handoff)},
+                )
+                print(f"Workflow B stopped for budget/timebox. Handoff: {handoff}")
+                return 0
             cycle_dir = run_dir / f"cycle-{cycle:02d}"
             outputs_dir = cycle_dir / "outputs"
             outputs_dir.mkdir(parents=True, exist_ok=True)
-            append_status(status_path, {"event": "cycle_started", "cycle": cycle})
+            append_status(
+                status_path,
+                {
+                    "event": "cycle_started",
+                    "cycle": cycle,
+                    "budget": budget_snapshot(budget_state),
+                },
+            )
+            record_checkpoint(
+                run_dir=run_dir,
+                status_path=status_path,
+                plan=plan,
+                state=budget_state,
+                phase="cycle_started",
+                cycle=cycle,
+                extra={"cycle_dir": str(cycle_dir), "outputs_dir": str(outputs_dir)},
+            )
             changed_files: tuple[str, ...] = ()
             if args.watch_workflows:
                 current_workflow_state = workflow_fingerprints(watched_workflow_files)
@@ -798,6 +1718,15 @@ def main(argv: Sequence[str] | None = None) -> int:
                             "cycle": cycle,
                             "files": list(changed_files),
                         },
+                    )
+                    record_checkpoint(
+                        run_dir=run_dir,
+                        status_path=status_path,
+                        plan=plan,
+                        state=budget_state,
+                        phase="workflow_docs_changed",
+                        cycle=cycle,
+                        extra={"files": list(changed_files)},
                     )
                     workflow_state = current_workflow_state
                 root_docs = {doc: read_text_if_exists(root / doc) for doc in ROOT_DOCS}
@@ -827,6 +1756,15 @@ def main(argv: Sequence[str] | None = None) -> int:
                         "path": str(review_path),
                     },
                 )
+                record_checkpoint(
+                    run_dir=run_dir,
+                    status_path=status_path,
+                    plan=plan,
+                    state=budget_state,
+                    phase="workflow_review_updated",
+                    cycle=cycle,
+                    extra={"path": str(review_path)},
+                )
                 root_docs = {doc: read_text_if_exists(root / doc) for doc in ROOT_DOCS}
                 workflow_state = workflow_fingerprints(watched_workflow_files)
 
@@ -847,6 +1785,15 @@ def main(argv: Sequence[str] | None = None) -> int:
                     encoding="utf-8",
                 )
                 prompt_jobs.append((agent, prompt_path, output_path))
+            record_checkpoint(
+                run_dir=run_dir,
+                status_path=status_path,
+                plan=plan,
+                state=budget_state,
+                phase="prompts_ready",
+                cycle=cycle,
+                extra={"prompt_count": len(prompt_jobs)},
+            )
 
             if args.execute:
                 if args.parallel:
@@ -858,57 +1805,288 @@ def main(argv: Sequence[str] | None = None) -> int:
                             prompt_path=prompt_path,
                             output_path=output_path,
                         )
+                        start_reason = budget_stop_reason(budget_state, before_agent=True)
+                        if start_reason:
+                            handoff = write_stop_handoff(
+                                run_dir=run_dir,
+                                reason=start_reason,
+                                cycle=cycle,
+                                state=budget_state,
+                                next_action="Resume with more budget or fewer parallel agents.",
+                            )
+                            append_status(
+                                status_path,
+                                {
+                                    "event": "budget_stop",
+                                    "cycle": cycle,
+                                    "agent": agent.name,
+                                    "reason": start_reason,
+                                    "handoff": str(handoff),
+                                    "budget": budget_snapshot(budget_state),
+                                },
+                            )
+                            record_checkpoint(
+                                run_dir=run_dir,
+                                status_path=status_path,
+                                plan=plan,
+                                state=budget_state,
+                                phase="budget_stop",
+                                cycle=cycle,
+                                agent=agent,
+                                extra={"reason": start_reason, "handoff": str(handoff)},
+                            )
+                            print(f"Workflow B stopped for budget/timebox. Handoff: {handoff}")
+                            return 0
+                        budget_state.agent_runs_started += 1
+                        if budget_state.estimated_agent_usd:
+                            budget_state.estimated_usage_usd += budget_state.estimated_agent_usd
                         append_status(
                             status_path,
                             {
                                 "event": "agent_started",
+                                "cycle": cycle,
                                 "agent": agent.name,
                                 "workdir": agent.workdir,
                                 "output": str(output_path),
+                                "budget": budget_snapshot(budget_state),
+                            },
+                        )
+                        record_checkpoint(
+                            run_dir=run_dir,
+                            status_path=status_path,
+                            plan=plan,
+                            state=budget_state,
+                            phase="agent_started",
+                            cycle=cycle,
+                            agent=agent,
+                            extra={
+                                "mode": "parallel",
+                                "output": str(output_path),
+                                "workdir": agent.workdir,
                             },
                         )
                         prompt_text = prompt_path.read_text(encoding="utf-8")
-                        processes.append(
-                            (
-                                agent,
-                                process := subprocess.Popen(
+                        try:
+                            process = subprocess.Popen(
                                     command,
                                     stdin=subprocess.PIPE,
                                     text=True,
                                     encoding="utf-8",
                                     errors="replace",
-                                ),
+                            )
+                        except OSError as exc:
+                            explanation = explain_codex_failure(
+                                returncode=None,
+                                output_path=output_path,
+                                exception=exc,
+                            )
+                            guide = write_error_guide(
+                                run_dir=run_dir,
+                                cycle=cycle,
+                                agent=agent,
+                                explanation=explanation,
+                            )
+                            print_failure_explanation(explanation)
+                            append_status(
+                                status_path,
+                                {
+                                    "event": "agent_launch_failed",
+                                    "cycle": cycle,
+                                    "agent": agent.name,
+                                    "guide": str(guide),
+                                    "explanation": explanation,
+                                    "budget": budget_snapshot(budget_state),
+                                },
+                            )
+                            record_checkpoint(
+                                run_dir=run_dir,
+                                status_path=status_path,
+                                plan=plan,
+                                state=budget_state,
+                                phase="agent_launch_failed",
+                                cycle=cycle,
+                                agent=agent,
+                                extra={"guide": str(guide), **explanation},
+                            )
+                            return 127
+                        processes.append(
+                            (
+                                agent,
+                                output_path,
+                                process,
                                 prompt_text,
                             )
                         )
-                    for agent, process, prompt_text in processes:
+                    for agent, output_path, process, prompt_text in processes:
                         process.communicate(prompt_text)
                         returncode = process.returncode
+                        signal = parse_agent_signal(output_path)
+                        reported_usage = signal_usage_usd(signal)
+                        if reported_usage:
+                            budget_state.reported_usage_usd += reported_usage
                         append_status(
                             status_path,
                             {
                                 "event": "agent_finished",
+                                "cycle": cycle,
                                 "agent": agent.name,
                                 "returncode": returncode,
+                                "signal": signal,
+                                "budget": budget_snapshot(budget_state),
+                            },
+                        )
+                        record_checkpoint(
+                            run_dir=run_dir,
+                            status_path=status_path,
+                            plan=plan,
+                            state=budget_state,
+                            phase="agent_finished",
+                            cycle=cycle,
+                            agent=agent,
+                            extra={
+                                "mode": "parallel",
+                                "returncode": returncode,
+                                "signal": signal,
+                                "output": str(output_path),
                             },
                         )
                         if returncode != 0:
+                            explanation = explain_codex_failure(
+                                returncode=returncode,
+                                output_path=output_path,
+                            )
+                            guide = write_error_guide(
+                                run_dir=run_dir,
+                                cycle=cycle,
+                                agent=agent,
+                                explanation=explanation,
+                            )
+                            print_failure_explanation(explanation)
+                            append_status(
+                                status_path,
+                                {
+                                    "event": "agent_failed_explained",
+                                    "cycle": cycle,
+                                    "agent": agent.name,
+                                    "guide": str(guide),
+                                    "explanation": explanation,
+                                    "budget": budget_snapshot(budget_state),
+                                },
+                            )
+                            record_checkpoint(
+                                run_dir=run_dir,
+                                status_path=status_path,
+                                plan=plan,
+                                state=budget_state,
+                                phase="agent_failed_explained",
+                                cycle=cycle,
+                                agent=agent,
+                                extra={"guide": str(guide), **explanation},
+                            )
                             return returncode
+                        if handle_hard_gate_signal(
+                            signal=signal,
+                            mode=args.hard_gate_mode,
+                            status_path=status_path,
+                            run_dir=run_dir,
+                            cycle=cycle,
+                            agent=agent,
+                            state=budget_state,
+                        ):
+                            return 3
                 else:
                     for agent, prompt_path, output_path in prompt_jobs:
-                        returncode = run_agent(
+                        start_reason = budget_stop_reason(budget_state, before_agent=True)
+                        if start_reason:
+                            handoff = write_stop_handoff(
+                                run_dir=run_dir,
+                                reason=start_reason,
+                                cycle=cycle,
+                                state=budget_state,
+                                next_action="Resume with more budget or fewer agent runs.",
+                            )
+                            append_status(
+                                status_path,
+                                {
+                                    "event": "budget_stop",
+                                    "cycle": cycle,
+                                    "agent": agent.name,
+                                    "reason": start_reason,
+                                    "handoff": str(handoff),
+                                    "budget": budget_snapshot(budget_state),
+                                },
+                            )
+                            record_checkpoint(
+                                run_dir=run_dir,
+                                status_path=status_path,
+                                plan=plan,
+                                state=budget_state,
+                                phase="budget_stop",
+                                cycle=cycle,
+                                agent=agent,
+                                extra={"reason": start_reason, "handoff": str(handoff)},
+                            )
+                            print(f"Workflow B stopped for budget/timebox. Handoff: {handoff}")
+                            return 0
+                        returncode, signal = run_agent(
                             args=args,
+                            plan=plan,
                             agent=agent,
                             prompt_path=prompt_path,
                             output_path=output_path,
+                            run_dir=run_dir,
                             status_path=status_path,
+                            state=budget_state,
+                            cycle=cycle,
                         )
                         if returncode != 0:
                             return returncode
+                        if handle_hard_gate_signal(
+                            signal=signal,
+                            mode=args.hard_gate_mode,
+                            status_path=status_path,
+                            run_dir=run_dir,
+                            cycle=cycle,
+                            agent=agent,
+                            state=budget_state,
+                        ):
+                            return 3
 
-            append_status(status_path, {"event": "cycle_finished", "cycle": cycle})
+            append_status(
+                status_path,
+                {
+                    "event": "cycle_finished",
+                    "cycle": cycle,
+                    "budget": budget_snapshot(budget_state),
+                },
+            )
+            record_checkpoint(
+                run_dir=run_dir,
+                status_path=status_path,
+                plan=plan,
+                state=budget_state,
+                phase="cycle_finished",
+                cycle=cycle,
+                extra={"cycle_dir": str(cycle_dir)},
+            )
 
-        append_status(status_path, {"event": "run_finished", "run_id": run_id})
+        append_status(
+            status_path,
+            {
+                "event": "run_finished",
+                "run_id": run_id,
+                "budget": budget_snapshot(budget_state),
+            },
+        )
+        record_checkpoint(
+            run_dir=run_dir,
+            status_path=status_path,
+            plan=plan,
+            state=budget_state,
+            phase="run_finished",
+            cycle=args.cycles,
+            extra={"run_dir": str(run_dir)},
+        )
         print(f"Workflow B run packet: {run_dir}")
         if not args.execute:
             print("Plan/dry-run only. Add --execute to launch codex exec agents.")

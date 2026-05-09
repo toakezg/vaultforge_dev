@@ -9,6 +9,10 @@
 - Added Workflow B as a root long-run controller design with `MULTI_AGENT_WORKFLOW_B.md`, `workflow_b_controller.py`, and `run_workflow_b.bat`; it creates locked cycle packets and can optionally launch section-scoped `codex exec` agents.
 - Added Workflow B commit policy flags so spawned agents can commit scoped work after review, per cycle, per agent, or never, while avoiding pre-existing dirty files.
 - Added `WORKFLOW_REVIEW.md` and Workflow B workflow-change watching so long runs can refresh root workflow docs between cycles, detect changed workflow guidance, and surface updates in later prompts.
+- Added `business-if-done.txt` as a watched business-lane direction input for Workflow B business agents.
+- Added Workflow B timebox, estimated usage budget, and hard-gate response modes, with controller budget snapshots, stop handoffs, and agent final signal parsing.
+- Added Workflow B checkpoint logging so long runs now write `checkpoints.jsonl`, update `workflow-b-live-status.md`, enrich `status.jsonl`, and print elapsed runtime, cycle progress, agent slots, and budget usage at controller checks.
+- Added `run_workflow_b_watch.bat`, `--terminal-detail verbose`, and Workflow B failure guides so watched runs stay open after exit and Codex CLI/plugin/sandbox failures get operator-facing explanations.
 
 ## 2026-05-03
 

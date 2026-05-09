@@ -2,6 +2,8 @@
 
 ## 2026-05-09
 
+- Recorded the manifest ownership decision after native metadata adoption: business `run.json` and `gallery-entry.json` stay authoritative for client/job/gallery review, while engine image sidecars remain per-image technical provenance.
+- Passed business `-InputImage` and `-ReferenceImage` through to the shared engine's native `--input-image` and `--reference-image` flags now that the engine exposes them, resolving relative paths before the engine call.
 - Passed native engine `--client`, `--job`, `--tag`, and `--variants` through `run_business.ps1` while preserving business output routing, prompt composition, and wrapper-owned `run.json` / `gallery-entry.json` manifests.
 - Switched the business wrappers' default engine root from the stale fixed `E:\tools\vaultforge\vaultforge-engine` path to the sibling `..\vaultforge-engine` path, while keeping `-EngineRoot` and `-ArtRoot` overrides available.
 - Verified the business wrapper path with PowerShell parser checks, direct `-WhatIf`, direct `-DryRun`, smoke batch dry-run, markdown-bank `-WhatIf`, and pack-runner `-WhatIf`.

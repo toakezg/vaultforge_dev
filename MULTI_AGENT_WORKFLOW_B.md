@@ -71,6 +71,7 @@ Use `--commit-prefix` to change the start of generated commit messages.
 
 - Python controller: `workflow_b_controller.py`
 - Batch launcher: `run_workflow_b.bat`
+- Watch-window launcher: `run_workflow_b_watch.bat`
 - Default run output: `runs/workflow-b/<timestamp-slug>/`
 - Lock file: `.workflow-b.lock`
 - Workflow review note: `WORKFLOW_REVIEW.md`
@@ -95,6 +96,8 @@ This writes:
 - `workflow-b-plan.md`
 - per-cycle prompt files
 - a status JSONL file
+- a checkpoint JSONL file with elapsed runtime, cycle progress, agent slots, and budget stats
+- a live markdown status note showing the latest checkpoint
 
 ### Execute
 
@@ -107,6 +110,123 @@ run_workflow_b.bat --cycles 7 --execute --lane vaultforge-engine --lane vaultfor
 Each agent prompt is sent through `codex exec` with a section-aware working
 directory. The default is sequential execution. Add `--parallel` only when the
 selected lanes have disjoint write scopes.
+
+## Time And Usage Budgets
+
+Workflow B can run by cycle count, timebox, estimated usage budget, or all
+three together.
+
+Example 2-hour run:
+
+```bat
+run_workflow_b.bat --cycles 99 --timebox-minutes 120 --usage-budget-usd 3.00 --estimated-agent-usd 0.08 --execute --bypass-sandbox --lane vaultforge-engine --lane vaultforge-business --task "Run approved section-local build slices"
+```
+
+Budget flags:
+
+| Flag | Behavior |
+|---|---|
+| `--timebox-minutes 120` | Stops before starting more work after the timebox is reached. |
+| `--usage-budget-usd 3.00` | Sets an estimated controller-side USD ceiling. |
+| `--estimated-agent-usd 0.08` | Reserves this much estimated budget before each `codex exec` agent starts. |
+
+The usage budget is intentionally conservative. Codex CLI does not currently
+give this controller a reliable live token/cost feed, so Workflow B enforces
+the estimate it is given and also asks agents to report a final
+`WORKFLOW_B_USAGE_USD` signal when they can.
+
+When a time or estimated usage budget is reached, the controller writes:
+
+- a `budget_stop` event in `status.jsonl`
+- `workflow-b-stop-handoff.md`
+- the current budget snapshot
+- the suggested next action
+
+## Checkpoint Logging
+
+Every controller check records the same operational shape so a long run can be
+reviewed without reconstructing state from scattered messages.
+
+Checkpoint records are written to:
+
+- `status.jsonl` as `checkpoint` events
+- `checkpoints.jsonl` as the clean checkpoint-only stream
+- `workflow-b-live-status.md` as the latest human-readable snapshot
+
+Each checkpoint includes:
+
+- current phase, such as `plan_created`, `cycle_started`, `prompts_ready`,
+  `agent_started`, `agent_finished`, `cycle_finished`, `budget_stop`, or
+  `run_finished`
+- current cycle, maximum cycle count, remaining cycles, and cycle percent
+- elapsed runtime, timebox limit, remaining timebox, and percent used
+- estimated usage used, reported usage, budget limit, remaining estimate, and
+  percent used
+- agents started, total possible agent slots, and remaining slots
+- current agent lane, role, and workdir when the checkpoint is agent-scoped
+
+The controller also prints a compact checkpoint line to the terminal as it
+runs, for example:
+
+```text
+[workflow-b] agent_started | cycle 2/7 | elapsed 18.4m/2h 0.0m | est usage $0.2400/$3.0000 | agents 6/28 | agent vaultforge-engine-builder
+```
+
+Use `--terminal-detail verbose` when the operator wants more live detail in the
+terminal. Verbose mode prints the compact checkpoint line plus remaining
+runtime, usage percentage, cycle progress, agent lane/role/workdir, and key
+paths such as output or handoff files.
+
+For a separate visible terminal that stays open after the run, use:
+
+```bat
+run_workflow_b_watch.bat --cycles 8 --timebox-minutes 20 --usage-budget-usd 1.00 --estimated-agent-usd 0.08 --hard-gate-mode switch-safe --lane vaultforge-engine --lane vaultforge-business --execute --bypass-sandbox --commit-mode review --task "Run approved section-local build slices while analyzing Workflow B launch, checkpoint logging, agent flow, hard gates, budget behavior, and run packet outputs"
+```
+
+Prefer the watch launcher over wrapping the command in `cmd /c` when another
+Codex thread needs to observe the process. Nested `cmd /c` quoting can leave
+the `--task` text unterminated if the doubled quotes are not balanced exactly.
+
+## Error Guide
+
+When Codex CLI fails to launch or returns a non-zero code, Workflow B now writes
+an `agent_failed_explained` or `agent_launch_failed` status event and creates
+`workflow-b-error-guide.md` in the run packet.
+
+The guide classifies common local failures:
+
+- Codex CLI missing or bad `--codex-bin`
+- Windows sandbox/tool failures, including `CryptUnprotectData`
+- Codex CLI argument mismatches
+- Codex plugin warnings or plugin/tool failures
+
+Plugin warnings are not automatically fatal. If the agent exits `0`, treat them
+as noise unless the output shows missing behavior. If the agent exits non-zero,
+use `workflow-b-error-guide.md` plus the terminal lines above the failure.
+
+## Hard Gate Modes
+
+Workflow B prompts every agent to end with a small signal block:
+
+```text
+WORKFLOW_B_HARD_GATE: yes|no
+WORKFLOW_B_SAFE_WORK_REMAINS: yes|no
+WORKFLOW_B_USAGE_USD: 0.00
+WORKFLOW_B_NEXT_ACTION: short next action
+```
+
+The controller reads that block after each agent run.
+
+Modes:
+
+| Mode | Behavior |
+|---|---|
+| `--hard-gate-mode stop` | Stop the run when an agent reports a hard gate. |
+| `--hard-gate-mode switch-safe` | Default. Continue only if the agent reports another approved safe slice remains; otherwise stop. |
+| `--hard-gate-mode record-continue` | Record the hard gate and continue. Use only when the task/prompt already makes the safe fallback clear. |
+
+This does not remove Workflow A's hard gate rules. It gives the batch
+controller a strict way to react when spawned agents report those gates.
 
 ## Agent Model
 
@@ -159,6 +279,7 @@ Watched files include:
 - `WORKFLOW_REVIEW.md`
 - `THREAD_MAP.md`
 - `TASKS.md`
+- `business-if-done.txt`
 - `F:\toakezg\workflows\workflow-types.md` when present
 
 If any watched file changes while the run is active, the controller:
@@ -171,6 +292,11 @@ If any watched file changes while the run is active, the controller:
 This does not mean agents may rewrite the workflow freely mid-task. It means
 new cycle prompts will include the latest workflow guidance and continue
 forward under the updated rules unless a hard gate appears.
+
+Business-lane runs also include `business-if-done.txt` in the
+`vaultforge-business` section doc snapshot. Treat it as a target-shape and
+direction note for the business lane, not as permission to bypass root routing,
+engine ownership, review gates, or task scope.
 
 Controls:
 
@@ -224,6 +350,9 @@ runs/workflow-b/<run-id>/
   workflow-b-plan.json
   workflow-b-plan.md
   status.jsonl
+  checkpoints.jsonl
+  workflow-b-live-status.md
+  workflow-b-error-guide.md  # only when a Codex launch/agent failure is explained
   cycle-01/
     root-coordinator.prompt.md
     vaultforge-engine-builder.prompt.md

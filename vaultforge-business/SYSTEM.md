@@ -32,14 +32,16 @@ Keep these lane-owned until they prove stable:
 - client/job/tag naming guidance
 - business presets, styles, and mods
 - business output routing and gallery/index metadata
-- wrapper-only bridge fields such as `tweak`, `input_image`, and `reference_image`
+- wrapper prompt context such as `tweak`
+- business manifest ownership for `run.json` and `gallery-entry.json`
 
 Candidates to share later:
 
 - slug creation once engine-native `--client`, `--job`, and `--tag` fields exist
 - stable preset/style/mod fragment libraries
 - generic gallery manifest fields used by both business and art lanes
-- direct edit/reference image API support
+- a merged manifest/index contract that can combine business manifests with
+  engine image sidecars without making review tools parse filenames or paths
 
 ## Naming Rules
 
@@ -95,3 +97,12 @@ Tags are data until injected into the prompt. The wrapper injects `-Tag` as indu
 Use short comma-separated tag strings in runnable packs, preferably without
 spaces. Markdown prompt-bank templates keep `tags` as a YAML list until the
 future markdown runner flattens them for `-Tag`.
+
+## Manifest Rule
+
+Business `run.json` and `gallery-entry.json` are the authoritative client-facing
+manifests for business review, galleries, packaging, and delivery. Engine
+per-image sidecar JSON files are technical provenance owned by the shared
+engine. Business tools may read sidecars as optional enrichment, but should not
+merge or replace the business manifests until that becomes a reviewed shared
+contract.

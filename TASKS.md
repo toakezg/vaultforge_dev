@@ -34,6 +34,10 @@ sort by priority
 - [x] Add Workflow B as a root long-run controller for repeated multi-agent Workflow A cycles, with a Python controller, batch launcher, cycle packets, lane scopes, and optional `codex exec` execution #root #threading #docs 2026-05-09
 - [x] Add Workflow B commit policy handling so long-run agents can commit after review or per cycle without staging unrelated dirty files #root #threading #git 2026-05-09
 - [x] Add root `WORKFLOW_REVIEW.md` and Workflow B change watching so long runs periodically review workflow health and refresh prompts when workflow docs change #root #threading #docs 2026-05-09
+- [x] Add `business-if-done.txt` as a watched business-lane direction input for Workflow B business prompts #root #business #threading 2026-05-09
+- [x] Add Workflow B timebox, estimated usage budget, and hard-gate mode controls for bounded long runs #root #threading #budget 2026-05-09
+- [x] Add Workflow B checkpoint logs and live run status snapshots with elapsed runtime, cycle progress, agent slots, and budget usage #root #threading #budget 2026-05-09
+- [x] Add Workflow B watch-window launcher, verbose terminal checkpoints, and Codex failure explanation guides #root #threading #ops 2026-05-09
 - [x] Add `MULTI_AGENT_WORKFLOW.md` as a lightweight root guide for simple Codex build runs with coordinator, builder, reviewer, recorder, decision gates, and handoff prompts #root #threading #docs 2026-05-03
 - [x] Add `CURRENT_STATE.md` as a root recovery anchor for Codex app project/thread visibility drift, and link it from startup and routing docs #root #threading #docs 2026-04-27
 - [x] Activate `vaultforge-xp4l` as an active section in root coordination docs

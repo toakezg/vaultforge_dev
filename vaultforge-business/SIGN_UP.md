@@ -78,3 +78,14 @@ Use this shape:
 - Read: run packet outputs for business builder and reviewer, plus the live business handoff
 - Changed: recorded that the reviewed native metadata bridge slice is closed for cycle 1
 - Handoff: no hard gate remains for `business-engine-native-metadata-adoption` or `business-wrapper-backcompat`. The next business slice remains `business-manifest-contract-review`; the `run-client-pack.ps1 -WhatIf` log side effect stays parked as `business-pack-whatif-log-side-effect`. No live generation was run or approved in this recorder pass.
+
+## 2026-05-09 - workflow-b business manifest and image-reference bridge
+
+- Role: builder for Workflow B cycle 1 business-lane follow-up slice
+- Scope: `vaultforge-business` section files only
+- Read: live `git status --short`, business docs/tasks/changelog/sign-up, `run_business.ps1`, `run_business_md_bank.ps1`, shared engine help and metadata-sidecar code paths, and Workflow B run packet status
+- Changed: documented that business `run.json` and `gallery-entry.json` stay authoritative while engine sidecars remain per-image provenance; passed business `-InputImage` and `-ReferenceImage` through to native engine flags with business-side relative path resolution
+- Handoff: next safe business slice is still `business-pack-whatif-log-side-effect`; broader preset/style/mod library migration remains a later engine/business coordination task
+- Verification: parser checks for `run_business.ps1` and `run_business_md_bank.ps1`; engine `--help`; direct wrapper `-DryRun`; image-reference direct wrapper `-WhatIf`; smoke batch dry-run; targeted markdown-bank `-WhatIf`; checked sample dry-run/WhatIf output folders stayed absent; `git diff --check` reported only LF-to-CRLF warnings
+- Blocker or decision: no hard gate hit; no live generation was run
+- Resume prompt: `Continue Workflow B for vaultforge-business as reviewer. Review the manifest ownership decision and input/reference passthrough, then run parser checks plus dry-run/WhatIf verification without live generation.`

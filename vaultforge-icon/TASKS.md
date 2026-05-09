@@ -13,7 +13,6 @@ No active icon task is selected. Use the next approved task unless Nath picks a
 different slice.
 
 ## Next
-
 - [ ] 🔼 Run a small media-folder icon-set proposal batch from `generated/proposals/inbox/media-style-guide-note.md`, using the icon-set workflow contract and stopping before selection or folder-icon application #icon #proposals #approved 🆔 icon-media-style-set-proposal 2026-05-04
 - [ ] 🔽 Draft the root-cooperative `$review-handoff-writer` spec/checklist for icon-to-root recording, without creating a real skill file until the spec is reviewed #icon #skills #approved 🆔 icon-review-handoff-root-coop-spec 2026-05-04
 - [ ] 🔽 Review the Gallable generated proposal image for taste and decide whether to reroll, resize-check further, or create a separate target-project build/apply task #icon #proposals #nath 🆔 icon-gallable-proposal-selection 2026-05-04

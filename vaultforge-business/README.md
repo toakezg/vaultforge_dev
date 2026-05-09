@@ -119,6 +119,7 @@ Each run writes:
 - `run.json`
 - `gallery-entry.json`
 - generated image files
+- engine image sidecar `.json` files when the shared engine writes per-image metadata
 
 ## Metadata Contract
 
@@ -141,8 +142,19 @@ The pack runner's `Project` value maps to the business wrapper's `job` field.
 Prompt-bank markdown uses `tags` as a YAML list; the markdown runner flattens
 that list into the wrapper's singular `-Tag` string.
 
+Business keeps `run.json` and `gallery-entry.json` as the authoritative
+client/job/gallery manifests. Engine image sidecars are per-image technical
+provenance: model, composed engine prompt, output path, variant index, native
+engine preset/style, and image-reference hashes when present. Do not replace
+the business manifests with sidecars yet. Review tools should read the business
+manifests first and optionally attach sidecar details per generated image.
+
 ## Current Bridge Behavior
 
 The shared generator supports the original VaultForge presets and styles only. The business wrapper accepts business-friendly fields, injects them into the prompt, maps to the closest supported generator preset/style, passes native engine `--client`, `--job`, `--tag`, and `--variants` fields through, and keeps the original business fields in business metadata.
 
-Edit-oriented fields like `-Tweak`, `-InputImage`, and `-ReferenceImage` are recorded and injected as prompt context for now. They are ready for direct edit API wiring later.
+`-InputImage` and `-ReferenceImage` now pass through to the shared engine when
+supplied. Relative paths are resolved from the business wrapper before the
+engine is called, and both raw and resolved paths are recorded in business
+metadata. `-Tweak` stays business-owned prompt context until a shared tweak/edit
+contract exists.

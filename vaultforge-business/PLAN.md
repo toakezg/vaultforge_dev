@@ -28,9 +28,10 @@
 - ~~The tiny retarget landed on 2026-04-12 by pointing `run_business.ps1` directly at `vaultforge-engine\src\generate.py` while preserving existing output routing, prompt composition, and metadata behavior.~~
 - ~~The engine now supports native `--client`, `--job`, `--tag`, and `--variants` primitives.~~
 - ~~Pass native engine `--client`, `--job`, `--tag`, and `--variants` through the business wrapper while preserving business routing and wrapper-owned manifests.~~
+- ~~Review the manifest split after native metadata adoption: business keeps `run.json` and `gallery-entry.json` authoritative, while engine sidecars remain per-image provenance.~~
+- ~~Pass native `--input-image` and `--reference-image` fields through from business now that shared engine plumbing exists.~~
 - The business wrapper now calls the shared engine once per business run and lets engine-native `--variants` fan out image outputs while business keeps its own output routing, prompt composition, `run.json`, and `gallery-entry.json`.
 - Keep `--tweak` as business-owned prompt context until a shared edit contract makes it worth moving into the engine.
-- Add native `--input-image` and `--reference-image` support to the engine, then pass them through from business.
 - Move business preset/style/mod fragments into engine libraries when stable.
 - Keep backward compatibility with the current wrappers.
 

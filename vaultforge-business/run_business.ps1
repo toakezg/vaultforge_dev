@@ -116,8 +116,8 @@ function Get-BusinessPrompt {
         $parts += "Make the result transparent-background friendly, readable at small sizes, and avoid mockup scenes."
     }
     if ($Tweak) { $parts += "Tweak request: $Tweak." }
-    if ($InputImage) { $parts += "Input image path noted for future edit workflow: $InputImage." }
-    if ($ReferenceImage) { $parts += "Reference image path noted for future reference workflow: $ReferenceImage." }
+    if ($InputImage) { $parts += "Input image supplied to shared engine: $InputImage." }
+    if ($ReferenceImage) { $parts += "Reference image supplied to shared engine: $ReferenceImage." }
 
     $parts += ""
     $parts += $Prompt
@@ -152,6 +152,8 @@ $jobSlug = ConvertTo-Slug $Job "manual"
 $tagSlug = ConvertTo-Slug $Tag "tag"
 $metadataTagSlug = if ([string]::IsNullOrWhiteSpace($Tag)) { "" } else { $tagSlug }
 $dateSlug = Get-Date -Format "yyyy-MM-dd"
+$inputImageEnginePath = if ([string]::IsNullOrWhiteSpace($InputImage)) { "" } else { Get-FullPath $InputImage }
+$referenceImageEnginePath = if ([string]::IsNullOrWhiteSpace($ReferenceImage)) { "" } else { Get-FullPath $ReferenceImage }
 
 $runDir = Join-Path $OutputRoot (Join-Path $clientSlug (Join-Path $assetSlug (Join-Path $presetSlug (Join-Path $styleSlug (Join-Path $dateSlug "job-$jobSlug")))))
 $runDirFull = Get-FullPath $runDir
@@ -199,8 +201,10 @@ $metadata = [ordered]@{
     source_prompt_file = $sourcePromptPath
     tweak = $Tweak
     input_image = $InputImage
+    input_image_resolved = $inputImageEnginePath
     reference_image = $ReferenceImage
-    note = "input_image, reference_image, and tweak are prompt-level bridge fields until the shared engine supports edit APIs directly."
+    reference_image_resolved = $referenceImageEnginePath
+    note = "input_image and reference_image are passed to the shared engine when supplied; tweak remains business prompt context until a shared tweak/edit contract exists."
 }
 
 $galleryEntry = [ordered]@{
@@ -264,6 +268,14 @@ $args = @(
 
 if (-not [string]::IsNullOrWhiteSpace($Tag)) {
     $args += @("--tag", $Tag)
+}
+
+if (-not [string]::IsNullOrWhiteSpace($inputImageEnginePath)) {
+    $args += @("--input-image", $inputImageEnginePath)
+}
+
+if (-not [string]::IsNullOrWhiteSpace($referenceImageEnginePath)) {
+    $args += @("--reference-image", $referenceImageEnginePath)
 }
 
 if ($DryRun) { $args += "--dry-run" }
