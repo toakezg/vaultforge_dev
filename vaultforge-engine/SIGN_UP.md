@@ -38,15 +38,31 @@ Use this shape:
 - Changed: recorded that the reviewed engine dry-run smoke and run-manifest slice is closed for cycle 1
 - Handoff: no hard gate remains for this engine slice. `engine-gallery-hooks` stays a later task gated behind `engine-run-manifest-field-list` / `RUN_MANIFEST.md` review, and should not start inside this recorder pass.
 
+## 2026-05-09 - workflow b engine no-write preview
+
+- Role: Builder for Workflow B cycle 1, engine lane
+- Scope: section-local docs and verification evidence for `engine-no-write-preview`
+- Read: root coordinator brief, active run packet status/checkpoints, engine `TASKS.md`, `RUN_MANIFEST.md`, `VERIFICATION.md`, and current generator metadata/dry-run paths
+- Changed: verified the committed smoke config as the current no-write preview path, marked `engine-no-write-preview` complete, and recorded the decision that no separate preview flag is needed yet
+- Handoff: reviewer should check the doc/task updates and the verification evidence. Gallery/contact-sheet work remains a later safe slice and should keep lane-owned gallery files separate unless root expands the sidecar contract.
+
+## 2026-05-09 - workflow b engine no-write preview reviewer
+
+- Role: Reviewer for Workflow B cycle 1, engine lane
+- Scope: review the no-write preview decision, task closure, and verification evidence
+- Read: builder diff, active run packet outputs, `assets\batch-input-smoke\smoke.conf`, `RUN_MANIFEST.md`, `VERIFICATION.md`, `TASKS.md`, and `src\generate.py` dry-run/metadata paths
+- Changed: updated this reviewer handoff only
+- Handoff: no blocking findings. The committed smoke config verifies `--dry-run` as the current no-write preview path without creating generated images, sidecar JSON, or batch state. Recorder can capture this pass and continue to the next approved safe slice.
+
 ## Multi-Agent Handoff
 
 - Task: Run approved section-local build slices
-- Current role: Recorder closed cycle 1 engine slice
-- Last verified state: Builder and reviewer both reported no blocking issues. The smoke config parses through `@file.conf`, stays dry-run, detects the local reference image, previews metadata paths, reports two image requests with no API call, and leaves `assets\generated` empty. `RUN_MANIFEST.md` matches the stable fields written by `build_run_metadata()`.
-- Files touched: `assets\batch-input-smoke\smoke.conf`, `tests\fixtures\smoke-reference.svg`, `RUN_MANIFEST.md`, `README.md`, `VERIFICATION.md`, `PLAN.md`, `TASKS.md`, `CHANGELOG.md`, `SIGN_UP.md`
-- Verification run: `py .\src\generate.py --help`; `$env:PYTHONPATH=(Resolve-Path 'src').Path; py -B -m unittest discover -s tests`; `py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'`; checked `assets\generated` before and after the dry-run command
-- Blocker or decision: No hard gate found. Gallery/contact-sheet hooks should read `RUN_MANIFEST.md` first and keep lane-owned gallery files separate until a later root-approved contract expands the sidecar shape.
-- Resume prompt: Continue Workflow B from root with the next approved safe slice. If returning to engine later, start with `engine-gallery-hooks` only after reading `RUN_MANIFEST.md`, current `TASKS.md`, and the latest root recorder handoff.
+- Current role: Reviewer passed engine no-write preview slice
+- Last verified state: reviewer reran `py .\src\generate.py --help`, unit tests, and the committed smoke config dry-run. The smoke config printed two output paths and two metadata paths, made no API call, left `assets\generated` empty, and did not create `assets\batch-input-smoke\.batch-state.json`.
+- Files touched: `PLAN.md`, `TASKS.md`, `CHANGELOG.md`, `VERIFICATION.md`, `SIGN_UP.md`
+- Verification run: `py .\src\generate.py --help`; `$env:PYTHONPATH=(Resolve-Path 'src').Path; py -B -m unittest discover -s tests`; `py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'`; checked `assets\generated` and `assets\batch-input-smoke\.batch-state.json` before and after the dry-run command
+- Blocker or decision: No hard gate found. `--dry-run` remains the engine's no-write preview path; no separate preview flag is needed until a lane wrapper proves a different behavior is required.
+- Resume prompt: Continue Workflow B with the next approved safe slice. For engine, `engine-gallery-hooks` remains the next later task and should start only after reading `RUN_MANIFEST.md`, current `TASKS.md`, and this reviewer handoff.
 
 ## 2026-04-16 - engine task review
 

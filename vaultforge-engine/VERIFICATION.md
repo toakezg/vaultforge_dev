@@ -152,3 +152,49 @@ Observed result:
 ```text
 Batch dry run complete: 1 prompt file(s) would run, 2 image request(s) would be made, 0 would skip.
 ```
+
+## Workflow B No-Write Preview Decision
+
+Date: 2026-05-09
+
+Help check:
+
+```powershell
+py .\src\generate.py --help
+```
+
+Unit tests:
+
+```powershell
+$env:PYTHONPATH=(Resolve-Path 'src').Path; py -B -m unittest discover -s tests
+```
+
+Result:
+
+```text
+Ran 20 tests
+OK
+```
+
+Dry-run no-write check:
+
+```powershell
+py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'
+```
+
+Observed result:
+
+```text
+Batch dry run complete: 1 prompt file(s) would run, 2 image request(s) would be made, 0 would skip.
+```
+
+No-write evidence:
+
+- `assets\generated` was empty before and after the dry-run command.
+- `assets\batch-input-smoke\.batch-state.json` did not exist before or after the dry-run command.
+- The dry-run printed intended image and metadata paths but did not create PNG or JSON outputs.
+
+Decision:
+
+- Keep `--dry-run` as the current no-write preview path.
+- Do not add a separate preview flag until a lane wrapper proves it needs behavior that differs from the engine dry-run contract.

@@ -2,6 +2,7 @@
 
 ## 2026-05-09
 
+- Verified the committed smoke config as the engine's current no-write preview path: `--dry-run` prints output and metadata paths without creating generated images, sidecar JSON, or batch state, so no separate preview flag is needed yet.
 - Added a committed dry-run `@file.conf` smoke path that exercises batch prompt routing, explicit output routing, native metadata previews, two variants, and a local reference image without live API writes.
 - Added `RUN_MANIFEST.md` as the first shared sidecar field list for future gallery/contact-sheet consumers.
 - Settled two engine-local build-slice decisions: future `@file.conf` smoke configs should include explicit dry-run variants, and gallery/contact-sheet work should wait for a minimal shared run-manifest field list instead of binding directly to incidental sidecar JSON.

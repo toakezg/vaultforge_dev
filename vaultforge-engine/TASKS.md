@@ -40,7 +40,7 @@ tag includes engine
 
 - [ ] 🔽 Split registries into dedicated preset/style/mod files if the single-file module becomes hard to maintain #engine #architecture 🆔 engine-split-registries
 - [x] ⏫ Add business-native metadata flags #engine #metadata 🆔 engine-business-metadata-flags
-- [ ] 🔽 Consider a future no-write preview mode for business dry-runs once config-safe testing is settled #engine #dry-run 🆔 engine-no-write-preview ⛔ engine-conf-dry-run-variants
+- [x] 🔽 Consider a future no-write preview mode for business dry-runs once config-safe testing is settled #engine #dry-run 🆔 engine-no-write-preview ⛔ engine-conf-dry-run-variants ✅ 2026-05-09
 - [x] 🔼 Add image edit plumbing for `--input-image` #engine #api 🆔 engine-input-image-plumbing ⛔ engine-edit-reference-contract 2026-05-09
 - [x] 🔼 Add reference image plumbing #engine #api 🆔 engine-reference-image-plumbing ⛔ engine-edit-reference-contract 2026-05-09
 - [ ] 🔽 Add gallery/contact-sheet generation hooks #engine #gallery 🆔 engine-gallery-hooks ⛔ engine-run-manifest-field-list

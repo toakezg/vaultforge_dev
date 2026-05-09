@@ -49,3 +49,4 @@
 - The first committed config smoke path now lives at `assets\batch-input-smoke\smoke.conf`; it is dry-run only and includes output routing, metadata preview, variants, and a local reference image.
 - The first shared sidecar field list now lives in `RUN_MANIFEST.md`.
 - Gallery/contact-sheet work can use `RUN_MANIFEST.md` as its minimum read contract, but lane-owned gallery files should stay separate from engine sidecars until a later root-approved contract expands the shape.
+- No separate no-write preview flag should be added yet. The engine's existing `--dry-run` is the no-write preview path: the committed smoke config verifies output and metadata previews without creating images, JSON sidecars, or batch state.
