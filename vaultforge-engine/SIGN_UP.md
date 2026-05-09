@@ -54,15 +54,31 @@ Use this shape:
 - Changed: updated this reviewer handoff only
 - Handoff: no blocking findings. The committed smoke config verifies `--dry-run` as the current no-write preview path without creating generated images, sidecar JSON, or batch state. Recorder can capture this pass and continue to the next approved safe slice.
 
+## 2026-05-09 - workflow b engine gallery index hook
+
+- Role: Builder for Workflow B cycle 1, engine lane
+- Scope: section-local gallery/contact-sheet hook slice after `RUN_MANIFEST.md` settled the minimum sidecar field list
+- Read: active run packet status and plan, `RUN_MANIFEST.md`, `TASKS.md`, `VERIFICATION.md`, `README.md`, `src\generate.py`, and `tests\test_generate.py`
+- Changed: added `--gallery-index`, `--gallery-source`, and `--gallery-output`; added sidecar index helpers and tests; documented the hook; marked `engine-gallery-hooks` complete and added a later contact-sheet renderer follow-up
+- Handoff: reviewer should check that the hook is index-only, API-free, and lane-neutral. Contact-sheet rendering remains a later task gated behind real gallery-index examples.
+
+## 2026-05-09 - workflow b engine gallery index reviewer
+
+- Role: Reviewer for Workflow B cycle 1, engine lane
+- Scope: review the gallery index hook, tests, docs, and dry-run contract behavior
+- Read: builder diff, `src\generate.py`, `tests\test_generate.py`, `RUN_MANIFEST.md`, `VERIFICATION.md`, and active run packet outputs
+- Changed: recorded a blocking review finding and reopened the gallery hook task pending a dry-run guard
+- Handoff: blocking finding: `py .\src\generate.py --gallery-index --dry-run --gallery-source assets\generated --gallery-output $env:TEMP\vaultforge-engine-gallery-index-dry-run-conflict.json` writes the output JSON even though engine `--dry-run` is documented as the no-write preview path. Next safe fix should reject the flag combination or implement a true gallery-index preview before review commits the slice.
+
 ## Multi-Agent Handoff
 
 - Task: Run approved section-local build slices
-- Current role: Reviewer passed engine no-write preview slice
-- Last verified state: reviewer reran `py .\src\generate.py --help`, unit tests, and the committed smoke config dry-run. The smoke config printed two output paths and two metadata paths, made no API call, left `assets\generated` empty, and did not create `assets\batch-input-smoke\.batch-state.json`.
-- Files touched: `PLAN.md`, `TASKS.md`, `CHANGELOG.md`, `VERIFICATION.md`, `SIGN_UP.md`
-- Verification run: `py .\src\generate.py --help`; `$env:PYTHONPATH=(Resolve-Path 'src').Path; py -B -m unittest discover -s tests`; `py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'`; checked `assets\generated` and `assets\batch-input-smoke\.batch-state.json` before and after the dry-run command
-- Blocker or decision: No hard gate found. `--dry-run` remains the engine's no-write preview path; no separate preview flag is needed until a lane wrapper proves a different behavior is required.
-- Resume prompt: Continue Workflow B with the next approved safe slice. For engine, `engine-gallery-hooks` remains the next later task and should start only after reading `RUN_MANIFEST.md`, current `TASKS.md`, and this reviewer handoff.
+- Current role: Reviewer blocked engine gallery index hook slice
+- Last verified state: `--gallery-index` appears in help, unit tests pass, a normal gallery-index smoke writes a temp index, and the committed batch smoke dry-run still avoids live API calls. Review found `--gallery-index --dry-run` writes an index file, which violates the current engine no-write dry-run contract.
+- Files touched: `src\generate.py`, `tests\test_generate.py`, `README.md`, `RUN_MANIFEST.md`, `PLAN.md`, `TASKS.md`, `CHANGELOG.md`, `VERIFICATION.md`, `SIGN_UP.md`
+- Verification run: `py .\src\generate.py --help`; `$env:PYTHONPATH=(Resolve-Path 'src').Path; py -B -m unittest discover -s tests`; `py .\src\generate.py --gallery-index --gallery-source assets\generated --gallery-output $env:TEMP\vaultforge-engine-gallery-index-review.json`; `py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'`; `py .\src\generate.py --gallery-index --dry-run --gallery-source assets\generated --gallery-output $env:TEMP\vaultforge-engine-gallery-index-dry-run-conflict.json`
+- Blocker or decision: No hard gate found. Blocking review finding remains inside the safe engine lane: guard the dry-run conflict before committing this slice.
+- Resume prompt: Fix `--gallery-index --dry-run` by rejecting the flag combination or making it preview-only, add a regression test, rerun the unit tests plus gallery-index smoke, then reviewer can re-check and commit the scoped engine changes.
 
 ## 2026-04-16 - engine task review
 

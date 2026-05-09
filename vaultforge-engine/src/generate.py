@@ -30,10 +30,12 @@ def get_project_root() -> Path:
 
 PROJECT_ROOT = get_project_root()
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "assets" / "generated"
+DEFAULT_GALLERY_INDEX_PATH = PROJECT_ROOT / "assets" / "gallery-index.json"
 DEFAULT_BATCH_INPUT_DIR = PROJECT_ROOT / "assets" / "batch-input"
 DEFAULT_SMOKE_BATCH_INPUT_DIR = PROJECT_ROOT / "assets" / "batch-input-smoke"
 DEFAULT_ENV_FILE = PROJECT_ROOT / ".env"
 BATCH_STATE_FILENAME = ".batch-state.json"
+GALLERY_INDEX_VERSION = 1
 DEFAULT_MODEL = "gpt-image-2-2026-04-21"
 DEFAULT_FALLBACK_MODELS = ("gpt-image-2", "gpt-5.5", "gpt-5.2")
 SUPPORTED_FORMATS = {"png", "jpeg", "webp"}
@@ -276,6 +278,26 @@ def parse_args() -> argparse.Namespace:
         help=argparse.SUPPRESS,
     )
     parser.add_argument(
+        "--gallery-index",
+        action="store_true",
+        help=(
+            "Build a gallery index JSON from existing engine sidecar metadata "
+            "and exit without generating images."
+        ),
+    )
+    parser.add_argument(
+        "--gallery-source",
+        default=str(DEFAULT_OUTPUT_DIR),
+        metavar="FOLDER",
+        help="Folder to scan for sidecar JSON when using --gallery-index.",
+    )
+    parser.add_argument(
+        "--gallery-output",
+        default=str(DEFAULT_GALLERY_INDEX_PATH),
+        metavar="FILE",
+        help="Output JSON file for --gallery-index (default: assets/gallery-index.json).",
+    )
+    parser.add_argument(
         "--model",
         default=DEFAULT_MODEL,
         help=f"Primary Responses model to use (default: {DEFAULT_MODEL}).",
@@ -425,7 +447,19 @@ def parse_args() -> argparse.Namespace:
 
 def validate_args(parser: argparse.ArgumentParser, args: argparse.Namespace) -> None:
     args.output_dir_path = resolve_project_path(args.output_dir)
+    args.gallery_source_path = resolve_project_path(args.gallery_source)
+    args.gallery_output_path = resolve_project_path(args.gallery_output)
     args.batch_folder = resolve_batch_folder(parser, args)
+
+    if args.gallery_index:
+        if args.prompt:
+            parser.error("The prompt argument cannot be used with --gallery-index.")
+        if args.batch is not None or args.batch_smoke or args.batch_input_legacy:
+            parser.error("--gallery-index cannot be combined with batch generation options.")
+        if args.rerun:
+            parser.error("--rerun can only be used together with --batch or --batch-smoke.")
+        return
+
     args.cli_image_references = build_cli_image_references(args)
     validate_image_references(parser, args.cli_image_references)
 
@@ -734,6 +768,114 @@ def write_run_metadata(output_path: Path, payload: dict[str, object]) -> Path:
         encoding="utf-8",
     )
     return metadata_path
+
+
+def is_gallery_sidecar_payload(payload: object) -> bool:
+    if not isinstance(payload, dict):
+        return False
+
+    required_string_fields = (
+        "created_at",
+        "output_path",
+        "prompt",
+        "composed_prompt",
+        "size",
+        "quality",
+        "format",
+        "background",
+    )
+    if payload.get("version") != 1:
+        return False
+    if any(not isinstance(payload.get(field), str) for field in required_string_fields):
+        return False
+    if not isinstance(payload.get("variant"), int):
+        return False
+    if not isinstance(payload.get("variants"), int):
+        return False
+    return True
+
+
+def build_gallery_entry(sidecar_path: Path, payload: dict[str, object]) -> dict[str, object]:
+    entry_fields = (
+        "created_at",
+        "output_path",
+        "prompt_file",
+        "prompt",
+        "composed_prompt",
+        "model",
+        "models_to_try",
+        "preset",
+        "style",
+        "mod",
+        "size",
+        "quality",
+        "format",
+        "background",
+        "client",
+        "client_slug",
+        "job",
+        "job_slug",
+        "tag",
+        "tag_slug",
+        "variant",
+        "variants",
+        "image_references",
+    )
+    entry = {
+        field: payload[field]
+        for field in entry_fields
+        if field in payload
+    }
+    entry["sidecar_path"] = to_project_relative_path(sidecar_path)
+    return entry
+
+
+def build_gallery_index(source_dir: Path) -> dict[str, object]:
+    if not source_dir.exists():
+        raise RuntimeError(f"Gallery source folder does not exist: {source_dir}")
+    if not source_dir.is_dir():
+        raise RuntimeError(f"Gallery source is not a folder: {source_dir}")
+
+    entries: list[dict[str, object]] = []
+    ignored = 0
+    for sidecar_path in sorted(source_dir.rglob("*.json")):
+        try:
+            payload = json.loads(sidecar_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            ignored += 1
+            continue
+
+        if not is_gallery_sidecar_payload(payload):
+            ignored += 1
+            continue
+        assert isinstance(payload, dict)
+        entries.append(build_gallery_entry(sidecar_path, payload))
+
+    entries.sort(
+        key=lambda entry: (
+            str(entry.get("created_at", "")),
+            str(entry.get("output_path", "")),
+            str(entry.get("sidecar_path", "")),
+        )
+    )
+    return {
+        "version": GALLERY_INDEX_VERSION,
+        "created_at": datetime.now().isoformat(timespec="seconds"),
+        "source_dir": str(source_dir),
+        "entry_count": len(entries),
+        "ignored_count": ignored,
+        "entries": entries,
+    }
+
+
+def write_gallery_index(source_dir: Path, output_path: Path) -> Path:
+    payload = build_gallery_index(source_dir)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(
+        json.dumps(payload, indent=2, sort_keys=True),
+        encoding="utf-8",
+    )
+    return output_path
 
 
 def build_batch_state_path(batch_input: Path) -> Path:
@@ -1317,9 +1459,17 @@ def run_batch(
 
 def main() -> int:
     args = parse_args()
-    args.output_dir_path.mkdir(parents=True, exist_ok=True)
 
     try:
+        if args.gallery_index:
+            gallery_path = write_gallery_index(
+                args.gallery_source_path,
+                args.gallery_output_path,
+            )
+            print(f"Gallery index written: {gallery_path}")
+            return 0
+
+        args.output_dir_path.mkdir(parents=True, exist_ok=True)
         api_env_var, api_key = get_api_key_for_run(args)
         fallback_models = (
             []

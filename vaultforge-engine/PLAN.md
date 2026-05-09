@@ -40,7 +40,7 @@
 
 - [x] Add native support for variants and client/job/tag metadata.
 - [ ] Add native support for tweaks, input images, and references after the edit/reference API contract is ready.
-- [ ] Add shared gallery/contact-sheet primitives only after metadata shape settles.
+- [x] Add the first shared gallery index hook after the metadata shape settles.
 
 ## 2026-05-09 Build Slice Decisions
 
@@ -50,3 +50,4 @@
 - The first shared sidecar field list now lives in `RUN_MANIFEST.md`.
 - Gallery/contact-sheet work can use `RUN_MANIFEST.md` as its minimum read contract, but lane-owned gallery files should stay separate from engine sidecars until a later root-approved contract expands the shape.
 - No separate no-write preview flag should be added yet. The engine's existing `--dry-run` is the no-write preview path: the committed smoke config verifies output and metadata previews without creating images, JSON sidecars, or batch state.
+- The first gallery hook is an index builder, not a contact-sheet renderer: `--gallery-index` scans existing engine sidecars and writes a compact JSON index for later lane or contact-sheet tooling.

@@ -53,3 +53,26 @@ should read, not every additive field the engine may include.
 - Use `image_references[].sha256` to detect changed local reference assets.
 - Do not require sidecars for dry-run previews; dry-runs print the intended metadata path but do not write JSON.
 - Keep lane-owned gallery files separate from engine sidecars unless a later root-approved contract says otherwise.
+
+## Gallery Index Hook
+
+The engine can now build an index over existing sidecars with:
+
+```powershell
+py .\src\generate.py --gallery-index --gallery-source assets\generated --gallery-output assets\gallery-index.json
+```
+
+The index is intentionally small and mechanical:
+
+| Field | Type | Meaning |
+|---|---|---|
+| `version` | number | Gallery index schema version. Current value is `1`. |
+| `created_at` | string | Local ISO timestamp for the index build. |
+| `source_dir` | string | Folder scanned for sidecar JSON. |
+| `entry_count` | number | Number of valid sidecars included. |
+| `ignored_count` | number | JSON files skipped because they were invalid or not run sidecars. |
+| `entries` | array of objects | Gallery-ready sidecar entries, sorted by `created_at`, `output_path`, and `sidecar_path`. |
+
+Each entry copies the stable sidecar fields needed for grouping and review, plus
+`sidecar_path`. Contact-sheet renderers can consume this index later without
+depending on incidental sidecar fields.

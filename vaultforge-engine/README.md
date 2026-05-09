@@ -25,6 +25,7 @@ That sibling project is dirty, so this prototype was copied without modifying th
 - API request building
 - native client/job/tag context metadata and variant loops
 - native image input/reference plumbing for local files and Markdown embeds
+- shared gallery index generation from engine sidecar metadata
 
 ## Consumers
 
@@ -64,6 +65,9 @@ The engine now accepts native low-risk business handoff flags:
 --reference-image
 --api-key
 --api-key-env
+--gallery-index
+--gallery-source
+--gallery-output
 ```
 
 The context and variant fields affect output naming, variant count, dry-run
@@ -133,3 +137,17 @@ JSON.
 
 The first shared sidecar field list for future gallery/contact-sheet consumers
 lives in `RUN_MANIFEST.md`.
+
+## Gallery Index
+
+The engine can build a small gallery index from existing sidecar JSON without
+calling the image API:
+
+```powershell
+py .\src\generate.py --gallery-index --gallery-source assets\generated --gallery-output assets\gallery-index.json
+```
+
+This reads engine-written sidecars, skips unrelated JSON, and writes a compact
+index with one entry per valid sidecar. It is a shared hook for later gallery or
+contact-sheet tooling; lane-specific gallery pages, review surfaces, and
+delivery folders still belong to their lanes.

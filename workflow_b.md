@@ -204,6 +204,8 @@ flowchart TD
     LockStop --> End
     CodexStop --> CleanupLock
     StopForNath --> CleanupLock
+    CtrlC["Operator presses Ctrl+C"] --> CancelFlow["Stop active Codex child, append cancel_requested, write workflow-b-cancel-handoff.md"]
+    CancelFlow --> CleanupLock
     CleanupLock --> End
 ```
 
@@ -213,6 +215,9 @@ flowchart TD
 - `--execute` launches Codex CLI through `codex exec`.
 - `run_workflow_b_watch.bat` opens a visible command window, adds
   `--terminal-detail verbose`, and pauses after the run with an exit-code guide.
+- Ctrl+C is handled as a cancellation request: the controller tries to stop the
+  active Codex child process, writes `workflow-b-cancel-handoff.md`, appends
+  `cancel_requested`, and returns exit code `130`.
 - Prompts are piped through UTF-8 stdin so VaultForge task markers do not break
   on Windows code pages.
 - `--bypass-sandbox` is available for trusted local runs when the Codex Windows
@@ -252,6 +257,7 @@ F:\vaultforge\
       status.jsonl
       checkpoints.jsonl
       workflow-b-live-status.md
+      workflow-b-cancel-handoff.md
       workflow-b-error-guide.md
       cycle-01\
       workflow-update-note.md

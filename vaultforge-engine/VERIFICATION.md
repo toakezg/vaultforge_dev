@@ -198,3 +198,84 @@ Decision:
 
 - Keep `--dry-run` as the current no-write preview path.
 - Do not add a separate preview flag until a lane wrapper proves it needs behavior that differs from the engine dry-run contract.
+
+## Workflow B Gallery Index Hook
+
+Date: 2026-05-09
+
+Help check:
+
+```powershell
+py .\src\generate.py --help
+```
+
+Unit tests:
+
+```powershell
+$env:PYTHONPATH=(Resolve-Path 'src').Path; py -B -m unittest discover -s tests
+```
+
+Result:
+
+```text
+Ran 23 tests
+OK
+```
+
+Gallery index smoke:
+
+```powershell
+py .\src\generate.py --gallery-index --gallery-source assets\generated --gallery-output $env:TEMP\vaultforge-engine-gallery-index-smoke.json
+```
+
+Observed result:
+
+```text
+Gallery index written: C:\Users\natha\AppData\Local\Temp\vaultforge-engine-gallery-index-smoke.json
+```
+
+Existing no-write smoke still passes:
+
+```powershell
+py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'
+```
+
+Observed result:
+
+```text
+Batch dry run complete: 1 prompt file(s) would run, 2 image request(s) would be made, 0 would skip.
+```
+
+Decision:
+
+- `--gallery-index` is the first shared gallery/contact-sheet hook.
+- It indexes existing sidecar JSON only; it does not call the API, render a contact sheet, or write lane-owned gallery pages.
+
+## Workflow B Gallery Index Hook Reviewer Finding
+
+Date: 2026-05-09
+
+Reviewer verification:
+
+```powershell
+py .\src\generate.py --help
+$env:PYTHONPATH=(Resolve-Path 'src').Path; py -B -m unittest discover -s tests
+py .\src\generate.py --gallery-index --gallery-source assets\generated --gallery-output $env:TEMP\vaultforge-engine-gallery-index-review.json
+py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'
+py .\src\generate.py --gallery-index --dry-run --gallery-source assets\generated --gallery-output $env:TEMP\vaultforge-engine-gallery-index-dry-run-conflict.json
+```
+
+Passing checks:
+
+- Help includes the gallery index flags.
+- Unit tests passed: `Ran 23 tests`, `OK`.
+- A normal gallery-index smoke wrote a temp JSON index.
+- The committed smoke config dry-run still completed without a live API call.
+
+Blocking finding:
+
+- `--gallery-index --dry-run` still writes the gallery index JSON. That conflicts with the current engine decision that `--dry-run` is the no-write preview path.
+
+Next safe fix:
+
+- Reject `--gallery-index --dry-run`, or make that combination preview-only, and add a regression test before marking `engine-gallery-hooks` complete.

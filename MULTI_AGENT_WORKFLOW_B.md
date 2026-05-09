@@ -204,6 +204,27 @@ Plugin warnings are not automatically fatal. If the agent exits `0`, treat them
 as noise unless the output shows missing behavior. If the agent exits non-zero,
 use `workflow-b-error-guide.md` plus the terminal lines above the failure.
 
+## Cancellation Workflow
+
+If the operator presses `Ctrl+C`, Workflow B treats that as a cancellation
+request rather than an unrecorded crash.
+
+The controller will try to:
+
+- stop the active Codex child process it launched
+- write a `cancel_requested` event in `status.jsonl`
+- write a `cancel_requested` checkpoint in `checkpoints.jsonl`
+- update `workflow-b-live-status.md`
+- write `workflow-b-cancel-handoff.md`
+- clear `.workflow-b.lock`
+- return exit code `130`
+
+On Windows, `cmd.exe` may still ask `Terminate batch job (Y/N)?`. If the
+controller has already printed `cancellation requested`, the handoff should be
+written. In the watch launcher, choosing `N` lets the launcher print the final
+exit-code guide and pause; choosing `Y` may close the batch window earlier, so
+review the latest run packet directly.
+
 ## Hard Gate Modes
 
 Workflow B prompts every agent to end with a small signal block:
@@ -352,6 +373,7 @@ runs/workflow-b/<run-id>/
   status.jsonl
   checkpoints.jsonl
   workflow-b-live-status.md
+  workflow-b-cancel-handoff.md # only when the operator cancels with Ctrl+C
   workflow-b-error-guide.md  # only when a Codex launch/agent failure is explained
   cycle-01/
     root-coordinator.prompt.md

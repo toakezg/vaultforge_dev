@@ -1446,14 +1446,21 @@ def run_agent(
         extra={"output": str(output_path), "workdir": agent.workdir},
     )
     prompt_text = prompt_path.read_text(encoding="utf-8")
+    process: subprocess.Popen[str] | None = None
     try:
-        completed = subprocess.run(
+        process = subprocess.Popen(
             command,
-            input=prompt_text,
+            stdin=subprocess.PIPE,
             text=True,
             encoding="utf-8",
             errors="replace",
         )
+        process.communicate(prompt_text)
+        returncode = process.returncode
+    except KeyboardInterrupt:
+        if process is not None:
+            stop_child_process(process, label=agent.name)
+        raise WorkflowBCancelled
     except OSError as exc:
         explanation = explain_codex_failure(
             returncode=None,
@@ -1492,7 +1499,7 @@ def run_agent(
             "event": "agent_finished",
             "cycle": cycle,
             "agent": agent.name,
-            "returncode": completed.returncode,
+            "returncode": returncode,
             "signal": signal,
             "budget": budget_snapshot(state),
         },
@@ -1506,14 +1513,14 @@ def run_agent(
         cycle=cycle,
         agent=agent,
         extra={
-            "returncode": completed.returncode,
+            "returncode": returncode,
             "signal": signal,
             "output": str(output_path),
         },
     )
-    if completed.returncode != 0:
+    if returncode != 0:
         explanation = explain_codex_failure(
-            returncode=completed.returncode,
+            returncode=returncode,
             output_path=output_path,
         )
         guide = write_error_guide(
@@ -1544,7 +1551,7 @@ def run_agent(
             agent=agent,
             extra={"guide": str(guide), **explanation},
         )
-    return completed.returncode, signal
+    return returncode, signal
 
 
 def acquire_lock(root: Path, run_id: str, force: bool) -> Path:
@@ -1605,6 +1612,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         usage_budget_usd=args.usage_budget_usd,
         estimated_agent_usd=args.estimated_agent_usd,
     )
+    plan: RunPlan | None = None
+    current_cycle: int | None = None
+    current_agent: AgentSpec | None = None
 
     lock_path = acquire_lock(root, run_id, args.force_unlock)
     try:
@@ -1656,6 +1666,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
 
         for cycle in range(1, args.cycles + 1):
+            current_cycle = cycle
+            current_agent = None
             cycle_stop_reason = budget_stop_reason(budget_state)
             if cycle_stop_reason:
                 handoff = write_stop_handoff(
@@ -1799,6 +1811,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 if args.parallel:
                     processes = []
                     for agent, prompt_path, output_path in prompt_jobs:
+                        current_agent = agent
                         command = build_codex_command(
                             args=args,
                             agent=agent,
@@ -1917,59 +1930,23 @@ def main(argv: Sequence[str] | None = None) -> int:
                                 prompt_text,
                             )
                         )
-                    for agent, output_path, process, prompt_text in processes:
-                        process.communicate(prompt_text)
-                        returncode = process.returncode
-                        signal = parse_agent_signal(output_path)
-                        reported_usage = signal_usage_usd(signal)
-                        if reported_usage:
-                            budget_state.reported_usage_usd += reported_usage
-                        append_status(
-                            status_path,
-                            {
-                                "event": "agent_finished",
-                                "cycle": cycle,
-                                "agent": agent.name,
-                                "returncode": returncode,
-                                "signal": signal,
-                                "budget": budget_snapshot(budget_state),
-                            },
-                        )
-                        record_checkpoint(
-                            run_dir=run_dir,
-                            status_path=status_path,
-                            plan=plan,
-                            state=budget_state,
-                            phase="agent_finished",
-                            cycle=cycle,
-                            agent=agent,
-                            extra={
-                                "mode": "parallel",
-                                "returncode": returncode,
-                                "signal": signal,
-                                "output": str(output_path),
-                            },
-                        )
-                        if returncode != 0:
-                            explanation = explain_codex_failure(
-                                returncode=returncode,
-                                output_path=output_path,
-                            )
-                            guide = write_error_guide(
-                                run_dir=run_dir,
-                                cycle=cycle,
-                                agent=agent,
-                                explanation=explanation,
-                            )
-                            print_failure_explanation(explanation)
+                    try:
+                        for agent, output_path, process, prompt_text in processes:
+                            current_agent = agent
+                            process.communicate(prompt_text)
+                            returncode = process.returncode
+                            signal = parse_agent_signal(output_path)
+                            reported_usage = signal_usage_usd(signal)
+                            if reported_usage:
+                                budget_state.reported_usage_usd += reported_usage
                             append_status(
                                 status_path,
                                 {
-                                    "event": "agent_failed_explained",
+                                    "event": "agent_finished",
                                     "cycle": cycle,
                                     "agent": agent.name,
-                                    "guide": str(guide),
-                                    "explanation": explanation,
+                                    "returncode": returncode,
+                                    "signal": signal,
                                     "budget": budget_snapshot(budget_state),
                                 },
                             )
@@ -1978,24 +1955,67 @@ def main(argv: Sequence[str] | None = None) -> int:
                                 status_path=status_path,
                                 plan=plan,
                                 state=budget_state,
-                                phase="agent_failed_explained",
+                                phase="agent_finished",
                                 cycle=cycle,
                                 agent=agent,
-                                extra={"guide": str(guide), **explanation},
+                                extra={
+                                    "mode": "parallel",
+                                    "returncode": returncode,
+                                    "signal": signal,
+                                    "output": str(output_path),
+                                },
                             )
-                            return returncode
-                        if handle_hard_gate_signal(
-                            signal=signal,
-                            mode=args.hard_gate_mode,
-                            status_path=status_path,
-                            run_dir=run_dir,
-                            cycle=cycle,
-                            agent=agent,
-                            state=budget_state,
-                        ):
-                            return 3
+                            if returncode != 0:
+                                explanation = explain_codex_failure(
+                                    returncode=returncode,
+                                    output_path=output_path,
+                                )
+                                guide = write_error_guide(
+                                    run_dir=run_dir,
+                                    cycle=cycle,
+                                    agent=agent,
+                                    explanation=explanation,
+                                )
+                                print_failure_explanation(explanation)
+                                append_status(
+                                    status_path,
+                                    {
+                                        "event": "agent_failed_explained",
+                                        "cycle": cycle,
+                                        "agent": agent.name,
+                                        "guide": str(guide),
+                                        "explanation": explanation,
+                                        "budget": budget_snapshot(budget_state),
+                                    },
+                                )
+                                record_checkpoint(
+                                    run_dir=run_dir,
+                                    status_path=status_path,
+                                    plan=plan,
+                                    state=budget_state,
+                                    phase="agent_failed_explained",
+                                    cycle=cycle,
+                                    agent=agent,
+                                    extra={"guide": str(guide), **explanation},
+                                )
+                                return returncode
+                            if handle_hard_gate_signal(
+                                signal=signal,
+                                mode=args.hard_gate_mode,
+                                status_path=status_path,
+                                run_dir=run_dir,
+                                cycle=cycle,
+                                agent=agent,
+                                state=budget_state,
+                            ):
+                                return 3
+                    except KeyboardInterrupt:
+                        for stop_agent, _output_path, process, _prompt_text in processes:
+                            stop_child_process(process, label=stop_agent.name)
+                        raise WorkflowBCancelled
                 else:
                     for agent, prompt_path, output_path in prompt_jobs:
+                        current_agent = agent
                         start_reason = budget_stop_reason(budget_state, before_agent=True)
                         if start_reason:
                             handoff = write_stop_handoff(
@@ -2069,6 +2089,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 cycle=cycle,
                 extra={"cycle_dir": str(cycle_dir)},
             )
+            current_agent = None
 
         append_status(
             status_path,
@@ -2091,6 +2112,41 @@ def main(argv: Sequence[str] | None = None) -> int:
         if not args.execute:
             print("Plan/dry-run only. Add --execute to launch codex exec agents.")
         return 0
+    except (KeyboardInterrupt, WorkflowBCancelled):
+        print()
+        print("[workflow-b] cancellation requested; writing handoff and clearing lock.")
+        if plan is not None:
+            handoff = write_cancel_handoff(
+                run_dir=run_dir,
+                plan=plan,
+                cycle=current_cycle,
+                agent=current_agent,
+                state=budget_state,
+            )
+            append_status(
+                status_path,
+                {
+                    "event": "cancel_requested",
+                    "cycle": current_cycle,
+                    "agent": None if current_agent is None else current_agent.name,
+                    "handoff": str(handoff),
+                    "budget": budget_snapshot(budget_state),
+                },
+            )
+            record_checkpoint(
+                run_dir=run_dir,
+                status_path=status_path,
+                plan=plan,
+                state=budget_state,
+                phase="cancel_requested",
+                cycle=current_cycle,
+                agent=current_agent,
+                extra={"handoff": str(handoff)},
+            )
+            print(f"Workflow B cancelled. Handoff: {handoff}")
+        else:
+            print("Workflow B cancelled before the run plan was fully created.")
+        return 130
     finally:
         if lock_path.exists():
             lock_path.unlink()

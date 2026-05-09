@@ -13,6 +13,7 @@
 - Added Workflow B timebox, estimated usage budget, and hard-gate response modes, with controller budget snapshots, stop handoffs, and agent final signal parsing.
 - Added Workflow B checkpoint logging so long runs now write `checkpoints.jsonl`, update `workflow-b-live-status.md`, enrich `status.jsonl`, and print elapsed runtime, cycle progress, agent slots, and budget usage at controller checks.
 - Added `run_workflow_b_watch.bat`, `--terminal-detail verbose`, and Workflow B failure guides so watched runs stay open after exit and Codex CLI/plugin/sandbox failures get operator-facing explanations.
+- Added a Workflow B Ctrl+C cancellation path that stops active Codex children, writes `workflow-b-cancel-handoff.md`, records `cancel_requested`, clears the lock, and returns exit code `130`.
 
 ## 2026-05-03
 

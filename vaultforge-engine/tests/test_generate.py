@@ -1,4 +1,5 @@
 import io
+import json
 import os
 import sys
 import tempfile
@@ -307,6 +308,82 @@ class PromptBuildingBlocksTests(unittest.TestCase):
 
         self.assertEqual(calls[0]["model"], "gpt-image-2-2026-04-21")
         self.assertNotIn("tools", calls[0])
+
+
+class GalleryIndexTests(unittest.TestCase):
+    def test_parse_args_accepts_gallery_index_without_prompt(self):
+        argv = [
+            "generate.py",
+            "--gallery-index",
+            "--gallery-source",
+            "assets/generated",
+            "--gallery-output",
+            "assets/gallery-index.json",
+        ]
+
+        with patch.object(sys, "argv", argv):
+            args = generate.parse_args()
+
+        self.assertTrue(args.gallery_index)
+        self.assertEqual(args.gallery_source_path, generate.PROJECT_ROOT / "assets" / "generated")
+        self.assertEqual(args.gallery_output_path, generate.PROJECT_ROOT / "assets" / "gallery-index.json")
+
+    def test_build_gallery_index_collects_valid_sidecars(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            source_dir = Path(temp_dir) / "generated"
+            source_dir.mkdir()
+            sidecar_path = source_dir / "sample.json"
+            sidecar_path.write_text(
+                """{
+  "background": "auto",
+  "client": "Empower You",
+  "client_slug": "empower-you",
+  "composed_prompt": "Premium logo direction. icon fragment.",
+  "created_at": "2026-05-09T22:45:00",
+  "format": "png",
+  "job": "Logo Pack 01",
+  "job_slug": "logo-pack-01",
+  "model": "gpt-image-2-2026-04-21",
+  "models_to_try": ["gpt-image-2-2026-04-21"],
+  "output_path": "generated/sample.png",
+  "preset": "icon",
+  "prompt": "Premium logo direction",
+  "quality": "medium",
+  "size": "1024x1024",
+  "style": ["geometric"],
+  "tag": "local, premium",
+  "tag_slug": "local-premium",
+  "variant": 1,
+  "variants": 1,
+  "version": 1
+}""",
+                encoding="utf-8",
+            )
+            (source_dir / "not-a-sidecar.json").write_text('{"version": 1}', encoding="utf-8")
+
+            index = generate.build_gallery_index(source_dir)
+
+        self.assertEqual(index["version"], 1)
+        self.assertEqual(index["entry_count"], 1)
+        self.assertEqual(index["ignored_count"], 1)
+        entry = index["entries"][0]
+        self.assertEqual(entry["client_slug"], "empower-you")
+        self.assertEqual(entry["output_path"], "generated/sample.png")
+        self.assertTrue(str(entry["sidecar_path"]).endswith("sample.json"))
+
+    def test_write_gallery_index_creates_json_output(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
+            source_dir = temp_path / "generated"
+            source_dir.mkdir()
+            output_path = temp_path / "index" / "gallery-index.json"
+
+            written_path = generate.write_gallery_index(source_dir, output_path)
+            payload = json.loads(written_path.read_text(encoding="utf-8"))
+
+        self.assertEqual(written_path, output_path)
+        self.assertEqual(payload["entry_count"], 0)
+        self.assertEqual(payload["entries"], [])
 
 
 class ApiKeyLoadingTests(unittest.TestCase):
