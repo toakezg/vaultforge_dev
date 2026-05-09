@@ -50,5 +50,7 @@ pack/
 svg-forge/samples/
 **/_template/
 
+plugins/
+processed/
 
 runs\workflow--b\ 

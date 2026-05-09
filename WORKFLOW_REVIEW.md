@@ -62,11 +62,11 @@ the workflow itself is still behaving well.
 <!-- workflow-b-controller-snapshot:start -->
 ## Controller Review Snapshot
 
-- Updated: `2026-05-10T01:57:50+10:00`
+- Updated: `2026-05-10T06:16:33+10:00`
 - Reason: cycle review cadence
-- Run id: `20260510T015750-use-multiagents-to-perform-a-clean-up-of-documen`
-- Cycle: `1` of `8`
-- Run packet: `F:\vaultforge\runs\workflow-b\20260510T015750-use-multiagents-to-perform-a-clean-up-of-documen`
+- Run id: `20260510T061633-prepare-nath-facing-business-decision-notes-only`
+- Cycle: `1` of `1`
+- Run packet: `F:\vaultforge\runs\workflow-b\20260510T061633-prepare-nath-facing-business-decision-notes-only`
 - Commit mode: `review`
 - Timebox minutes: `20.0`
 - Usage budget USD: `1.0`
@@ -89,6 +89,15 @@ the workflow itself is still behaving well.
 
 
 
+## Multi-Agent Handoff
+
+- Task: Workflow B cycle 1 recorder closure for run `20260510T061633-prepare-nath-facing-business-decision-notes-only`
+- Current role: root recorder
+- Last verified state: controller reached the cycle 1 root-recorder slot after creating an executable review-mode plan, updating the workflow review snapshot, and producing four cycle 1 prompts. Status and checkpoint streams are readable. Root coordinator routed the note-only decision slice to `vaultforge-business`. Business builder added the Nath-facing paid launch decision note and linked it from business startup docs. Business reviewer found no blocking issues and committed the reviewed business section change as `15aa39f`.
+- Files touched: root `CHANGELOG.md`, root `WORKFLOW_REVIEW.md`, and `vaultforge-business/SIGN_UP.md` by this recorder pass. Cycle work touched `vaultforge-business/BUSINESS_PAID_LAUNCH_DECISION_NOTE.md`, `vaultforge-business/README.md`, `vaultforge-business/NATH_START.md`, `vaultforge-business/TASKS.md`, `vaultforge-business/CHANGELOG.md`, and `vaultforge-business/SIGN_UP.md` in business commit `15aa39f`, plus run-packet outputs `root-coordinator-routing.md` and `vaultforge-business-reviewer-review.md`.
+- Verification run: inspected `workflow-b-live-status.md`, `status.jsonl`, `checkpoints.jsonl`, `workflow-b-plan.md`, root and business output notes, `root-coordinator-routing.md`, `vaultforge-business-builder.last-message.md`, `vaultforge-business-reviewer-review.md`, `vaultforge-business-reviewer.last-message.md`, root `git status --short`, active `.workflow-b.lock`, business `SIGN_UP.md`, business `CHANGELOG.md`, root `CHANGELOG.md`, `git show --stat --name-only --oneline -1 15aa39f`, and current checkpoint tail. Reviewer verification passed docs-only `git diff --check` on touched business docs with only LF-to-CRLF working-copy warnings, a no-trailing-whitespace scan on `BUSINESS_PAID_LAUNCH_DECISION_NOTE.md`, gated-language checks, and scoped status checks showing no generated or log output changes.
+- Blocker or decision: no hard gate was hit by note preparation or review. The next operator decision is Nath choosing `0` or `1` in `vaultforge-business/BUSINESS_PAID_LAUNCH_DECISION_NOTE.md` before any private pilot generation or paid-service launch work. No live generation, paid/API call, public launch, binding pricing or licensing terms, publication, asset move/delete, engine registry change, root Workflow B controller edit, destructive file operation, or cross-lane ownership change was run or approved in this recorder pass. `.workflow-b.lock` points at this active run id with pid `35556` and was left untouched. The generated resume command still omits `--execute`, `--commit-mode review`, and `--hard-gate-mode switch-safe`, so executable resumes should add them manually until `root-workflow-b-resume-execute-flag` is fixed. Root already had pre-existing dirty workflow/controller/engine/XP4L/untracked-note state at recorder verification time; this recorder did not stage or commit.
+- Resume prompt: `Continue Workflow B after Nath answers the 0/1 gate in vaultforge-business/BUSINESS_PAID_LAUNCH_DECISION_NOTE.md. If Nath chooses 1, prepare a scoped private pilot/demo brief and run only WhatIf/dry-run verification before any live paid/API generation. Keep pricing, licensing, public publication, broad launch, asset moves/deletes, engine registry changes, and cross-lane ownership changes gated unless Nath explicitly approves them.`
 
 
 
@@ -127,6 +136,32 @@ the workflow itself is still behaving well.
 
 
 
+
+
+
+
+
+
+
+## Multi-Agent Handoff
+
+- Task: Workflow B cycle 1 recorder closure for run `20260510T055419-run-approved-build-slices-while-analyzing-workfl`
+- Current role: root recorder
+- Last verified state: controller reached the cycle 1 root-recorder slot after creating an executable review-mode plan, updating the workflow review snapshot, and producing four cycle 1 prompts. Status and checkpoint streams are readable. Root coordinator recorded no hard gate and safe-switched the generated engine slot to evidence-only because no approved engine implementation slice remained. Engine builder recorded verification evidence only. Engine reviewer found no blocking issues, reran the engine checks, and committed the reviewed engine section change as `a667192`.
+- Files touched: root `CHANGELOG.md`, root `WORKFLOW_REVIEW.md`, and `vaultforge-engine/SIGN_UP.md` by this recorder pass. Cycle work also touched `vaultforge-engine/SIGN_UP.md` and `vaultforge-engine/VERIFICATION.md` in engine commit `a667192`, plus the run-packet outputs `root-coordinator-routing.md` and `vaultforge-engine-reviewer-review.md`.
+- Verification run: inspected `workflow-b-plan.md`, `workflow-b-live-status.md`, `status.jsonl`, `checkpoints.jsonl`, `workflow-update-note.md`, cycle 1 output notes, `root-coordinator-routing.md`, `vaultforge-engine-builder.last-message.md`, `vaultforge-engine-reviewer-review.md`, `vaultforge-engine-reviewer.last-message.md`, root `git status --short`, active `.workflow-b.lock`, engine `SIGN_UP.md`, root `CHANGELOG.md`, `git log -1 --oneline`, and `git show --stat --name-only -1 a667192`. Reviewer verification passed `py -B -m unittest discover -s tests` with 24 tests OK, the committed smoke config dry-run stayed no-live/no-write, normal empty gallery-index wrote only an explicitly requested temp zero-entry JSON, `--gallery-index --dry-run` rejected with exit code 2 without creating output, and `git diff --check` found no whitespace errors beyond LF-to-CRLF working-copy warnings.
+- Blocker or decision: no hard gate was recorded for this cycle. The contact-sheet renderer remains `#live-required` until real sidecar examples or a root-approved contact-sheet fixture strategy exists. No live generation, generated art, renderer implementation, fixture-policy decision, sidecar contract expansion, paid/API work, root Workflow B controller edit, or cross-lane ownership change was run or approved. `.workflow-b.lock` points at this active run id with pid `27596` and was left untouched. The generated resume command still omits `--execute`, `--commit-mode review`, and `--hard-gate-mode switch-safe`, so executable resumes should add them manually until `root-workflow-b-resume-execute-flag` is fixed. Root already had pre-existing dirty workflow/controller/business/XP4L/untracked-note state at recorder verification time; this recorder did not stage or commit.
+- Resume prompt: continue Workflow B with a root-capable pass on `root-workflow-b-resume-execute-flag`, or select another already approved docs-only/dry-run/build slice. If engine remains selected, keep contact-sheet rendering parked unless real sidecar examples exist or Nath approves a fixture strategy. Executable resumes should add `--execute --commit-mode review --hard-gate-mode switch-safe` manually.
+
+## Multi-Agent Handoff
+
+- Task: Workflow B cycle 1 recorder closure for run `20260510T015750-use-multiagents-to-perform-a-clean-up-of-documen`
+- Current role: root recorder
+- Last verified state: controller reached the cycle 1 root-recorder slot after creating an executable review-mode plan, updating the workflow review snapshot, and producing four cycle 1 prompts. Status and checkpoint streams are readable. Root coordinator recorded no hard gate and routed the safe slice to `vaultforge-business` for additive documentation/tool orientation. Business builder created `NATH_START.md` and small discoverability fixes. Business reviewer found no blocking issues, corrected the pack-preview example to use execution-policy bypass, reran no-live checks, and committed the reviewed business section change as `da7301f`.
+- Files touched: root `CHANGELOG.md`, root `WORKFLOW_REVIEW.md`, and `vaultforge-business/SIGN_UP.md` by this recorder pass. Cycle work also touched `vaultforge-business/CHANGELOG.md`, `CODEX_START.md`, `NATH_START.md`, `README.md`, `SIGN_UP.md`, `client-pack-readme.txt`, and `vaultforge-business.md` in business commit `da7301f`, plus the run-packet outputs `root-coordinator-routing.md` and `vaultforge-business-reviewer-review.md`.
+- Verification run: inspected `workflow-b-plan.md`, `workflow-b-live-status.md`, `status.jsonl`, `checkpoints.jsonl`, cycle 1 output notes, `root-coordinator-routing.md`, `vaultforge-business-builder.last-message.md`, `vaultforge-business-reviewer-review.md`, root `git status --short`, business `git status --short`, business `git log -1 --oneline`, business `git show --stat --name-only -1 da7301f`, business `SIGN_UP.md`, and root `CHANGELOG.md`. Reviewer verification passed parser checks for all business `.ps1` files, direct business `-WhatIf`, markdown-bank `-WhatIf -Limit 1`, pack-preview `-WhatIf` with `powershell -ExecutionPolicy Bypass -File`, `run_business_smoke.bat` dry-run, and `git diff --check` with only LF-to-CRLF warnings.
+- Blocker or decision: no hard gate was recorded for this cycle. No live generation, paid/API work, pricing/licensing/publication change, asset move/delete, root contract change, or engine registry change was run or approved. `.workflow-b.lock` points at this active run id and was left untouched. The generated resume command still omits `--execute`, `--commit-mode review`, and `--hard-gate-mode switch-safe`, so executable resumes should add them manually until `root-workflow-b-resume-execute-flag` is fixed. Root index already contained staged pre-existing dirty files at recorder verification time; this recorder did not stage or commit.
+- Resume prompt: continue Workflow B with the next safe business-local item as a Nath-facing paid-launch decision note only, keeping pricing, licensing, publication, live generation, paid/API work, asset moves/deletes, fragment-library movement, and engine registry changes gated unless Nath explicitly approves them. Executable resumes should add `--execute --commit-mode review --hard-gate-mode switch-safe` manually.
 
 ## Multi-Agent Handoff
 

@@ -624,17 +624,21 @@ def write_stop_handoff(
     cycle: int | None,
     state: BudgetState,
     next_action: str,
+    gate_question: str = "",
 ) -> Path:
     """Write a small stop handoff for budget or gate stops."""
 
     path = run_dir / "workflow-b-stop-handoff.md"
     cycle_text = "before cycle start" if cycle is None else str(cycle)
+    gate_question_text = (
+        f"- Gate question: {gate_question}\n" if gate_question.strip() else ""
+    )
     text = f"""# Workflow B Stop Handoff
 
 - Stopped: `{datetime.now().astimezone().isoformat(timespec="seconds")}`
 - Cycle: `{cycle_text}`
 - Reason: {reason}
-- Next action: {next_action}
+{gate_question_text}- Next action: {next_action}
 
 ## Budget Snapshot
 
@@ -838,6 +842,26 @@ def signal_usage_usd(signal: dict[str, str]) -> float:
         return 0.0
 
 
+def ask_hard_gate_decision(*, agent: AgentSpec, question: str) -> int | None:
+    """Ask the present operator to decide a clearly stated gate question."""
+
+    question = question.strip()
+    if not question or not sys.stdin.isatty():
+        return None
+    tprint("")
+    tprint(f"Workflow B hard gate question from {agent.name}:")
+    tprint(question)
+    tprint("Reply 0 to keep the gate closed. Reply 1 to pass this gate.")
+    while True:
+        try:
+            answer = input("Workflow B hard gate decision [0/1]: ").strip()
+        except EOFError:
+            return None
+        if answer in {"0", "1"}:
+            return int(answer)
+        tprint("Enter 0 or 1.")
+
+
 def handle_hard_gate_signal(
     *,
     signal: dict[str, str],
@@ -855,6 +879,7 @@ def handle_hard_gate_signal(
 
     safe_work_remains = signal_is_yes(signal, "WORKFLOW_B_SAFE_WORK_REMAINS")
     next_action = signal.get("WORKFLOW_B_NEXT_ACTION", "review hard gate")
+    gate_question = signal.get("WORKFLOW_B_GATE_QUESTION", "").strip()
     append_status(
         status_path,
         {
@@ -863,10 +888,53 @@ def handle_hard_gate_signal(
             "agent": agent.name,
             "mode": mode,
             "safe_work_remains": safe_work_remains,
+            "gate_question": gate_question,
             "next_action": next_action,
             "budget": budget_snapshot(state),
         },
     )
+
+    operator_decision = ask_hard_gate_decision(agent=agent, question=gate_question)
+    if operator_decision is not None:
+        event = (
+            "hard_gate_operator_passed"
+            if operator_decision == 1
+            else "hard_gate_operator_closed"
+        )
+        append_status(
+            status_path,
+            {
+                "event": event,
+                "cycle": cycle,
+                "agent": agent.name,
+                "gate_question": gate_question,
+                "operator_decision": operator_decision,
+                "next_action": next_action,
+            },
+        )
+        if operator_decision == 1:
+            tprint("Workflow B hard gate passed by operator decision 1.")
+            return False
+        write_stop_handoff(
+            run_dir=run_dir,
+            reason=f"hard gate kept closed by operator decision 0 from {agent.name}",
+            cycle=cycle,
+            state=state,
+            next_action=next_action,
+            gate_question=gate_question,
+        )
+        tprint(f"Workflow B stopped for hard gate. Run packet: {run_dir}")
+        append_status(
+            status_path,
+            {
+                "event": "hard_gate_stop",
+                "cycle": cycle,
+                "agent": agent.name,
+                "next_action": next_action,
+                "operator_decision": operator_decision,
+            },
+        )
+        return True
 
     if mode == "record-continue":
         return False
@@ -888,6 +956,7 @@ def handle_hard_gate_signal(
         cycle=cycle,
         state=state,
         next_action=next_action,
+        gate_question=gate_question,
     )
     tprint(f"Workflow B stopped for hard gate. Run packet: {run_dir}")
     append_status(
@@ -1048,6 +1117,7 @@ End your final answer with these exact lines so the controller can keep strict r
 ```text
 WORKFLOW_B_HARD_GATE: yes|no
 WORKFLOW_B_SAFE_WORK_REMAINS: yes|no
+WORKFLOW_B_GATE_QUESTION: blank unless a present operator can decide this gate with 0 closed or 1 pass
 WORKFLOW_B_USAGE_USD: 0.00
 WORKFLOW_B_NEXT_ACTION: short next action
 ```

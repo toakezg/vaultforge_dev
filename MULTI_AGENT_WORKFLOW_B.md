@@ -237,11 +237,24 @@ Workflow B prompts every agent to end with a small signal block:
 ```text
 WORKFLOW_B_HARD_GATE: yes|no
 WORKFLOW_B_SAFE_WORK_REMAINS: yes|no
+WORKFLOW_B_GATE_QUESTION: blank unless a present operator can decide this gate with 0 closed or 1 pass
 WORKFLOW_B_USAGE_USD: 0.00
 WORKFLOW_B_NEXT_ACTION: short next action
 ```
 
 The controller reads that block after each agent run.
+
+When an agent reports a hard gate and includes a clear
+`WORKFLOW_B_GATE_QUESTION`, the controller asks the present operator for a
+single digit decision:
+
+- `0` keeps the gate closed and stops the blocked path.
+- `1` passes that specifically stated gate and lets the controller continue.
+
+Use `WORKFLOW_B_GATE_QUESTION` only when the question itself already states the
+approval decision plainly enough to answer yes/pass or no/closed. If the gate
+needs discussion, options, taste judgment, or a rewritten brief, leave the
+question blank and use `WORKFLOW_B_NEXT_ACTION` to explain the needed decision.
 
 Modes:
 
@@ -401,3 +414,4 @@ run_workflow_b.bat --cycles 2 --lane vaultforge-engine --lane vaultforge-busines
 
 Review `workflow-b-plan.md`. If the lane scopes and tasks are correct, rerun
 with `--execute`.
+save propasol to F:\toakezg\workflows

@@ -1513,3 +1513,87 @@ Decision:
 - Treat the evidence-only engine builder pass as reviewed and non-blocking.
 - Keep `engine-contact-sheet-renderer` parked until real sidecar examples or a root-approved contact-sheet fixture strategy exists.
 - Continue Workflow B through root recorder or another approved safe slice outside engine.
+
+## Workflow B 055419 Cycle 3 Engine Builder Check
+
+Date: 2026-05-10
+
+Run id:
+
+```text
+20260510T055419-run-approved-build-slices-while-analyzing-workfl
+```
+
+Scope decision:
+
+- The cycle 3 coordinator routed the generated engine slot to evidence-only.
+- The root resume-command fix remains a root-capable controller task and was not edited from this engine slot.
+- `engine-contact-sheet-renderer` remains parked as `#live-required` until real sidecar examples or a root-approved contact-sheet fixture strategy exists.
+
+Unit tests:
+
+```powershell
+$env:PYTHONPATH=(Resolve-Path 'src').Path; py -B -m unittest discover -s tests
+```
+
+Result:
+
+```text
+Ran 24 tests
+OK
+Exit code: 0
+```
+
+Committed smoke config dry-run:
+
+```powershell
+py .\src\generate.py '@assets\batch-input-smoke\smoke.conf'
+```
+
+Observed result:
+
+```text
+Batch dry run complete: 1 prompt file(s) would run, 2 image request(s) would be made, 0 would skip.
+Exit code: 0
+Generated after: 0
+Batch state after: False
+```
+
+Empty gallery-index smoke:
+
+```powershell
+$out = Join-Path $env:TEMP 'vaultforge-engine-gallery-index-055419-cycle3-builder.json'
+py .\src\generate.py --gallery-index --gallery-source assets\generated --gallery-output $out
+```
+
+Observed result:
+
+```text
+Gallery index written: C:\Users\natha\AppData\Local\Temp\vaultforge-engine-gallery-index-055419-cycle3-builder.json
+Exit code: 0
+Output exists: True
+entry_count: 0
+ignored_count: 0
+```
+
+Dry-run conflict guard:
+
+```powershell
+$reject = Join-Path $env:TEMP 'vaultforge-engine-gallery-index-055419-cycle3-dry-run-reject.json'
+py .\src\generate.py --gallery-index --dry-run --gallery-source assets\generated --gallery-output $reject
+```
+
+Observed result:
+
+```text
+generate.py: error: --gallery-index cannot be combined with --dry-run because it writes an index file.
+Exit code: 2
+Output exists: False
+```
+
+Decision:
+
+- Treat `engine-contact-sheet-renderer` as correctly blocked by `#live-required`.
+- Do not implement contact-sheet rendering against an empty gallery source.
+- Do not edit `workflow_b_controller.py` from the engine slot.
+- No safe engine implementation slice remains until real sidecar examples or a root-approved contact-sheet fixture strategy exists.

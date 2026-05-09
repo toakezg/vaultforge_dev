@@ -283,3 +283,11 @@ Use this shape:
 - Verification: `git diff --check` on touched business docs reported only LF-to-CRLF working-copy warnings; trailing-whitespace scan on `BUSINESS_PAID_LAUNCH_DECISION_NOTE.md` returned no matches; targeted gated-language search confirmed the note preserves the no-launch-by-default boundary, records Nath's current live-generation/paid-API approval only for the current blocker, and requires scope/budget/output-path recording before future paid/API generation; scoped status showed no generated or log outputs.
 - Blocker or decision: no hard gate hit in the reviewer pass. Nath still needs to answer the note's `0` or `1` gate before any pilot generation or paid-service launch work.
 - Resume prompt: `Continue Workflow B for vaultforge-business as recorder. Record the reviewed paid launch decision note, the reviewer verification, and the business commit hash, then stop for Nath's 0 or 1 decision before live pilot generation.`
+
+## 2026-05-10 - workflow-b business paid launch decision note recorder closure
+
+- Role: root recorder closing the Workflow B cycle 1 business paid launch decision-note slice
+- Scope: affected section handoff note only
+- Read: active run packet output notes for root coordinator, business builder, and business reviewer; current business `SIGN_UP.md` and `CHANGELOG.md`; root `CHANGELOG.md`; root `WORKFLOW_REVIEW.md`; current root dirty baseline; active `.workflow-b.lock`; and `git show --stat --name-only --oneline -1 15aa39f`
+- Changed: recorded that the reviewed Nath-facing paid launch decision note is closed and committed as `15aa39f`
+- Handoff: no hard gate was hit by the note-writing or review work. The next required step is Nath choosing `0` or `1` in `BUSINESS_PAID_LAUNCH_DECISION_NOTE.md` before any private pilot generation or paid-service launch work. Keep live paid/API generation behind a named scope, budget ceiling, output path, and review purpose; keep binding pricing, licensing/legal terms, public publication, broad launch, asset moves/deletes, engine registry changes, and cross-lane ownership changes gated unless Nath explicitly approves them.

@@ -148,7 +148,11 @@ flowchart TD
         AgentReturn -- no --> ReturnFailure["Controller returns failure code and lock cleanup runs"]
         AgentReturn -- no --> ErrorGuide["Write workflow-b-error-guide.md and agent_failed_explained checkpoint"]
         AgentReturn -- yes --> SignalGate{"Agent reported hard gate?"}
-        SignalGate -- yes --> HardGateMode{"hard-gate-mode"}
+        SignalGate -- yes --> GateQuestion{"Clear 0/1 gate question present?"}
+        GateQuestion -- yes --> AskOperator["Ask operator: 0 gate closed, 1 pass gate"]
+        AskOperator -- 1 --> MoreAgents
+        AskOperator -- 0 --> StopForNath
+        GateQuestion -- no --> HardGateMode{"hard-gate-mode"}
         HardGateMode -- stop --> StopForNath
         HardGateMode -- switch-safe and no safe work --> StopForNath
         HardGateMode -- switch-safe and safe work --> MoreAgents
@@ -230,6 +234,9 @@ flowchart TD
   provide controller-side stop conditions for bounded long runs.
 - `--hard-gate-mode stop|switch-safe|record-continue` controls how the
   controller reacts to agent-reported hard gates.
+- If an agent supplies `WORKFLOW_B_GATE_QUESTION`, the controller can ask a
+  present operator for `0` to keep the gate closed or `1` to pass that stated
+  gate before falling back to the selected hard-gate mode.
 - `--terminal-detail compact|verbose` controls how much live checkpoint detail
   prints to the terminal.
 - Codex launch and non-zero agent failures create `workflow-b-error-guide.md`
