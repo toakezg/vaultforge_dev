@@ -62,17 +62,19 @@ the workflow itself is still behaving well.
 <!-- workflow-b-controller-snapshot:start -->
 ## Controller Review Snapshot
 
-- Updated: `2026-05-09T22:30:50+10:00`
-- Reason: cycle review cadence
+- Updated: `2026-05-09T22:50:11+10:00`
+- Reason: workflow file change detected
 - Run id: `20260509T223050-run-approved-section-local-build-slices-while-an`
-- Cycle: `1` of `8`
+- Cycle: `2` of `8`
 - Run packet: `F:\vaultforge\runs\workflow-b\20260509T223050-run-approved-section-local-build-slices-while-an`
 - Commit mode: `review`
 - Timebox minutes: `20.0`
 - Usage budget USD: `1.0`
 - Hard gate mode: `switch-safe`
 - Watched workflow changes this cycle:
-- none detected
+- `F:\vaultforge\MULTI_AGENT_WORKFLOW_B.md`
+- `F:\vaultforge\WORKFLOW_REVIEW.md`
+- `F:\vaultforge\TASKS.md`
 
 ## Current Workflow Lessons
 
@@ -84,6 +86,17 @@ the workflow itself is still behaving well.
 - Use Human-In-The-Loop gates for destructive, external, paid, secret, or taste-heavy decisions.
 - Keep Workflow B adaptive by refreshing workflow docs between cycles rather than freezing the first prompt forever.
 <!-- workflow-b-controller-snapshot:end -->
+
+
+## Multi-Agent Handoff
+
+- Task: Workflow B cycle 1 recorder closure for run `20260509T223050-run-approved-section-local-build-slices-while-an`
+- Current role: root recorder
+- Last verified state: controller launched six cycle prompts, no watched workflow document changes were detected before the cycle, checkpoint/status streams were readable, business reviewer committed `2279fcb`, and the active run had reached this recorder slot with estimated usage `$0.4800` of `$1.0000`.
+- Files touched: root `CHANGELOG.md`, root `WORKFLOW_REVIEW.md`, `vaultforge-engine/SIGN_UP.md`, and `vaultforge-business/SIGN_UP.md`.
+- Verification run: inspected `workflow-b-plan.md`, `workflow-b-live-status.md`, `status.jsonl`, `checkpoints.jsonl`, cycle output notes, `git status --short -uno`, `git diff --stat`, and `git log --oneline -5`.
+- Blocker or decision: no Workflow B hard gate was recorded. Safe work remains because the engine gallery-index slice needs `--gallery-index --dry-run` rejected or made preview-only before the slice is considered clean. Coordinator also found a root workflow follow-up: generated resume commands omit `--execute` even when the active plan says `Execute: True`.
+- Resume prompt: continue Workflow B with the engine safe fix first: guard `--gallery-index --dry-run`, add a regression test, rerun unit/gallery-index checks, then review and commit only scoped engine changes. After that, continue business only with already scoped safe work such as the preset/style/mod fragment migration planning task.
 
 
 

@@ -56,10 +56,12 @@ flowchart TD
         WatchList --> WatchRootDocs["MULTI_AGENT_WORKFLOW.md, MULTI_AGENT_WORKFLOW_B.md, WORKFLOW_REVIEW.md, THREAD_MAP.md, TASKS.md"]
         WatchList --> WatchBusinessDone["business-if-done.txt as business lane direction"]
         WatchList --> WatchExternal["F:/toakezg/workflows/workflow-types.md if present"]
+        WatchList --> WatchEscape["F:/toakezg/workflows/esape-hatch.md if present"]
         WatchList --> WatchExtra["plus any --watch-workflow-file paths"]
         WatchRootDocs --> Fingerprint0["Hash watched workflow files"]
         WatchBusinessDone --> Fingerprint0
         WatchExternal --> Fingerprint0
+        WatchEscape --> Fingerprint0
         WatchExtra --> Fingerprint0
         Fingerprint0 --> RootDocs0["Read root doc snapshots"]
         RootDocs0 --> WritePlan["Write workflow-b-plan.json and workflow-b-plan.md"]
@@ -204,7 +206,7 @@ flowchart TD
     LockStop --> End
     CodexStop --> CleanupLock
     StopForNath --> CleanupLock
-    CtrlC["Operator presses Ctrl+C"] --> CancelFlow["Stop active Codex child, append cancel_requested, write workflow-b-cancel-handoff.md"]
+    CtrlC["Operator presses Ctrl+C"] --> CancelFlow["Use Esape Hatch: stop active Codex child, capture state, classify partial work, append cancel_requested, write workflow-b-cancel-handoff.md"]
     CancelFlow --> CleanupLock
     CleanupLock --> End
 ```
@@ -218,6 +220,8 @@ flowchart TD
 - Ctrl+C is handled as a cancellation request: the controller tries to stop the
   active Codex child process, writes `workflow-b-cancel-handoff.md`, appends
   `cancel_requested`, and returns exit code `130`.
+- Cancellation handoffs follow the Esape Hatch workflow from
+  `F:\toakezg\workflows\esape-hatch.md` when present.
 - Prompts are piped through UTF-8 stdin so VaultForge task markers do not break
   on Windows code pages.
 - `--bypass-sandbox` is available for trusted local runs when the Codex Windows

@@ -215,9 +215,14 @@ The controller will try to:
 - write a `cancel_requested` event in `status.jsonl`
 - write a `cancel_requested` checkpoint in `checkpoints.jsonl`
 - update `workflow-b-live-status.md`
-- write `workflow-b-cancel-handoff.md`
+- write `workflow-b-cancel-handoff.md` using the Esape Hatch handoff shape
 - clear `.workflow-b.lock`
 - return exit code `130`
+
+Workflow B treats `F:\toakezg\workflows\esape-hatch.md` as the cancellation
+workflow reference when that file exists. The cancel handoff follows its core
+rule: stop new progress, capture evidence, classify partial work, and provide a
+resume/verification point.
 
 On Windows, `cmd.exe` may still ask `Terminate batch job (Y/N)?`. If the
 controller has already printed `cancellation requested`, the handoff should be
@@ -302,6 +307,7 @@ Watched files include:
 - `TASKS.md`
 - `business-if-done.txt`
 - `F:\toakezg\workflows\workflow-types.md` when present
+- `F:\toakezg\workflows\esape-hatch.md` when present
 
 If any watched file changes while the run is active, the controller:
 

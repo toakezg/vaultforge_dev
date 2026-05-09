@@ -111,3 +111,11 @@ Use this shape:
 - Verification: parser checks passed for `run-client-pack.ps1` and `run_business.ps1`; temp-workspace default `-WhatIf` left no `logs\run-log.csv`; temp-workspace `-WhatIf -LogWhatIf` wrote one `whatif` row; temp-workspace normal harmless run wrote one `success` row; `git diff --check` reported only LF-to-CRLF warnings
 - Blocker or decision: no hard gate hit; no live generation was run
 - Resume prompt: `Continue Workflow B for vaultforge-business as recorder. Record the reviewed pack-runner WhatIf logging fix, keep preset/style/mod fragment migration as a later engine/business coordination task, and do not run live generation unless Nath approves it.`
+
+## 2026-05-09 - workflow-b business pack WhatIf logging recorder closure
+
+- Role: root recorder closing the Workflow B cycle 1 business pack logging slice
+- Scope: affected section handoff note only
+- Read: active run packet status/checkpoints, business builder output, business reviewer output, reviewer note, current business `SIGN_UP.md`, current business `TASKS.md`, and current git status/diff state
+- Changed: recorded that the reviewed `run-client-pack.ps1 -WhatIf` logging fix is closed and committed as `2279fcb`
+- Handoff: no hard gate remains for `business-pack-whatif-log-side-effect`. Default `-WhatIf` should stay no-write for `logs\run-log.csv`; `-LogWhatIf` is the explicit audit-row opt-in. No live generation was run or approved in this recorder pass. The remaining business-safe work is `business-fragment-library-move`, which should stay scoped to planning or review until engine/business ownership is clear.

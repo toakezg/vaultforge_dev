@@ -80,6 +80,14 @@ Use this shape:
 - Blocker or decision: No hard gate found. Blocking review finding remains inside the safe engine lane: guard the dry-run conflict before committing this slice.
 - Resume prompt: Fix `--gallery-index --dry-run` by rejecting the flag combination or making it preview-only, add a regression test, rerun the unit tests plus gallery-index smoke, then reviewer can re-check and commit the scoped engine changes.
 
+## 2026-05-09 - workflow b root recorder cycle 1 gallery guard handoff
+
+- Role: Root recorder for Workflow B cycle 1
+- Scope: affected section handoff note only
+- Read: active run packet status/checkpoints, coordinator output, engine builder output, engine reviewer output, current engine `SIGN_UP.md`, current engine `TASKS.md`, and current git status/diff state
+- Changed: recorded that the gallery-index hook is not closed because reviewer found `--gallery-index --dry-run` writes JSON despite the no-write dry-run contract
+- Handoff: no hard gate is needed for this engine issue. The next safe engine slice is `engine-gallery-index-dry-run-guard`: reject the flag combination or make it preview-only, add a regression test, rerun unit tests and gallery-index smoke checks, then reviewer can commit scoped engine changes.
+
 ## 2026-04-16 - engine task review
 
 - Role: Task Master review for the engine section

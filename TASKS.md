@@ -39,6 +39,7 @@ sort by priority
 - [x] Add Workflow B checkpoint logs and live run status snapshots with elapsed runtime, cycle progress, agent slots, and budget usage #root #threading #budget 2026-05-09
 - [x] Add Workflow B watch-window launcher, verbose terminal checkpoints, and Codex failure explanation guides #root #threading #ops 2026-05-09
 - [x] Add Workflow B Ctrl+C cancellation handoff handling with child-process stop, cancel checkpoint, lock cleanup, and exit code 130 #root #threading #ops 2026-05-09
+- [x] Wire the external Esape Hatch workflow into Workflow B cancellation handoffs and watched workflow inputs #root #threading #ops 2026-05-09
 - [x] Add `MULTI_AGENT_WORKFLOW.md` as a lightweight root guide for simple Codex build runs with coordinator, builder, reviewer, recorder, decision gates, and handoff prompts #root #threading #docs 2026-05-03
 - [x] Add `CURRENT_STATE.md` as a root recovery anchor for Codex app project/thread visibility drift, and link it from startup and routing docs #root #threading #docs 2026-04-27
 - [x] Activate `vaultforge-xp4l` as an active section in root coordination docs

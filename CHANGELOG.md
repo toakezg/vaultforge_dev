@@ -2,6 +2,7 @@
 
 ## 2026-05-09
 
+- Recorded Workflow B cycle 1 for run `20260509T223050-run-approved-section-local-build-slices-while-an`: business pack `-WhatIf` logging passed reviewer checks and was committed as `2279fcb`, while the engine gallery-index hook was reopened for a safe dry-run guard because `--gallery-index --dry-run` still writes JSON output. No hard gate or live generation was recorded.
 - Recorded Workflow B cycle 1 for run `20260509T204905-run-approved-section-local-build-slices`: engine dry-run smoke/manifest work and business native metadata bridge both passed reviewer checks with no hard gates and no live generation.
 - Recorded a Workflow B cycle 1 root-recorder blocker for run `20260509T201250-run-approved-section-local-build-slices`: local shell inspection failed before PowerShell started with `windows sandbox: CryptUnprotectData failed: 2148073483`, so the recorder handoff explicitly avoids inferring builder or reviewer results.
 - Added engine-local `.env` API-key loading and lane override flags in `vaultforge-engine`, with the default model pinned to `gpt-image-2-2026-04-21`.
@@ -14,6 +15,7 @@
 - Added Workflow B checkpoint logging so long runs now write `checkpoints.jsonl`, update `workflow-b-live-status.md`, enrich `status.jsonl`, and print elapsed runtime, cycle progress, agent slots, and budget usage at controller checks.
 - Added `run_workflow_b_watch.bat`, `--terminal-detail verbose`, and Workflow B failure guides so watched runs stay open after exit and Codex CLI/plugin/sandbox failures get operator-facing explanations.
 - Added a Workflow B Ctrl+C cancellation path that stops active Codex children, writes `workflow-b-cancel-handoff.md`, records `cancel_requested`, clears the lock, and returns exit code `130`.
+- Wired the external Esape Hatch workflow (`F:\toakezg\workflows\esape-hatch.md`) into Workflow B cancellation handoffs and workflow-change watching.
 
 ## 2026-05-03
 

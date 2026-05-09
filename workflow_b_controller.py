@@ -56,6 +56,7 @@ DEFAULT_LANES = {
 
 ROLE_ORDER = ("coordinator", "builder", "reviewer", "recorder")
 DEFAULT_EXTERNAL_WORKFLOW_FILE = Path(r"F:\toakezg\workflows\workflow-types.md")
+DEFAULT_ESCAPE_HATCH_FILE = Path(r"F:\toakezg\workflows\esape-hatch.md")
 TERMINAL_DETAIL = "compact"
 
 
@@ -338,6 +339,8 @@ def workflow_watch_files(root: Path, extras: Sequence[str]) -> tuple[Path, ...]:
     ]
     if DEFAULT_EXTERNAL_WORKFLOW_FILE.exists():
         watched.append(DEFAULT_EXTERNAL_WORKFLOW_FILE)
+    if DEFAULT_ESCAPE_HATCH_FILE.exists():
+        watched.append(DEFAULT_ESCAPE_HATCH_FILE)
     for item in extras:
         watched.append(Path(item))
     deduped: list[Path] = []
@@ -470,6 +473,45 @@ def write_stop_handoff(
     return path
 
 
+def git_status_short(root: Path) -> str:
+    try:
+        completed = subprocess.run(
+            ["git", "status", "--short"],
+            cwd=root,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=15,
+        )
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        return f"[git status unavailable: {exc}]"
+    output = (completed.stdout or "").strip()
+    if completed.returncode != 0:
+        detail = (completed.stderr or completed.stdout or "").strip()
+        return f"[git status failed: {detail}]"
+    return output or "[clean or no tracked changes reported]"
+
+
+def list_run_artifacts(run_dir: Path, *, limit: int = 40) -> str:
+    if not run_dir.exists():
+        return "[run directory missing]"
+    files = sorted(
+        (path for path in run_dir.rglob("*") if path.is_file()),
+        key=lambda path: path.stat().st_mtime,
+        reverse=True,
+    )
+    if not files:
+        return "[no run artifacts found]"
+    lines = []
+    for path in files[:limit]:
+        rel = path.relative_to(run_dir)
+        lines.append(f"- `{rel}` ({path.stat().st_size} bytes)")
+    if len(files) > limit:
+        lines.append(f"- [... {len(files) - limit} more artifacts omitted]")
+    return "\n".join(lines)
+
+
 def write_cancel_handoff(
     *,
     run_dir: Path,
@@ -496,6 +538,12 @@ def write_cancel_handoff(
     if not resume_lanes:
         resume_lanes = "--lane root"
     escaped_task = plan.task.replace('"', '\\"')
+    current_stage = "before cycle start" if cycle is None else f"cycle {cycle} of {plan.cycles}"
+    if agent is not None:
+        current_stage += f", active agent {agent.name}"
+    root = Path(plan.root)
+    git_status = git_status_short(root)
+    artifacts = list_run_artifacts(run_dir)
     text = f"""# Workflow B Cancel Handoff
 
 - Cancelled: `{datetime.now().astimezone().isoformat(timespec="seconds")}`
@@ -503,6 +551,61 @@ def write_cancel_handoff(
 - Cycle: `{cycle_text}` of `{plan.cycles}`
 - Active agent: {agent_text}
 - Reason: operator requested cancellation with Ctrl+C or batch termination.
+- Escape hatch workflow: `{DEFAULT_ESCAPE_HATCH_FILE}`
+
+## Escape Hatch Summary
+
+Stop reason:
+: operator cancellation / manual interrupt
+
+Active workflow:
+: VaultForge Workflow B running Workflow A-style lane agents
+
+Current stage:
+: {current_stage}
+
+Completed:
+: Review `checkpoints.jsonl` and `status.jsonl` for all `agent_finished`,
+  `cycle_finished`, and verification records before the cancellation point.
+
+Partial or uncertain:
+: The active agent and any outputs without a matching final signal block should
+  be treated as partial or uncertain.
+
+Changed files/artifacts:
+
+```text
+{git_status}
+```
+
+Run artifacts:
+
+{artifacts}
+
+Commands/checks already run:
+: The controller command is represented by `workflow-b-plan.md`; agent-level
+  checks are recorded in each `cycle-XX/outputs/*.last-message.md` file when
+  the agent completed cleanly.
+
+Known errors or risks:
+: Cancellation may leave the active lane with partial edits or no final
+  `WORKFLOW_B_*` signal block. Do not assume the active agent completed.
+
+Do not repeat without checking:
+: Do not rerun the same lane slice blindly until the run packet, dirty git
+  status, and active agent output are reviewed.
+
+Recommended resume workflow:
+: Esape Hatch verification cycle, then Workflow B with a narrower task if the
+  interrupted lane is clean enough to continue.
+
+First next action:
+: Inspect this handoff, `workflow-b-live-status.md`, `checkpoints.jsonl`, and
+  `status.jsonl`; then check the active lane's git diff before continuing.
+
+Verification before continuing:
+: Confirm whether the active agent produced a final message and whether any
+  changed files are complete, incomplete, uncertain, or unsafe to repeat.
 
 ## What To Review
 
