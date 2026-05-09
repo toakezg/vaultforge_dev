@@ -53,7 +53,7 @@ ____
 - [x] 🔼 Add a delivery package skeleton with export folders and a client-facing README template #business #packaging 🆔 business-client-package-skeleton ⛔ business-client-ready-definition ✅ 2026-05-09
 - [x] 🔼 Create a preset/style/mod service catalog from current business wrapper names and prompt-bank usage #business #docs #clients 🆔 business-service-catalog ⛔ business-client-ready-definition ✅ 2026-05-09
 - [x] 🔼 Add a client-ready output review checklist for gallery/contact-sheet selection #business #review #packaging 🆔 business-client-output-review-checklist ⛔ business-client-ready-definition ✅ 2026-05-09
-- [ ] 🔼 Prepare Nath-facing pricing, licensing, publication, and paid-service launch decision note #business #planning #nath 🆔 business-paid-launch-decision-gate ⛔ business-service-catalog
+- [x] 🔼 Prepare Nath-facing pricing, licensing, publication, and paid-service launch decision note #business #planning #nath 🆔 business-paid-launch-decision-gate ⛔ business-service-catalog ✅ 2026-05-10
 
 ____
 ## All Tasks

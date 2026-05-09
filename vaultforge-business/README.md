@@ -24,6 +24,11 @@ operator catalog, not a price sheet or launch approval.
 gallery/contact-sheet review into selected, rejected, archived, and packaged
 client-ready files.
 
+`BUSINESS_PAID_LAUNCH_DECISION_NOTE.md` is the Nath-facing decision surface for
+pricing shape, service positioning, licensing wording, publication channel,
+pilot/live generation scope, revision policy, and example/privacy choices. It
+prepares the launch gate; it does not approve paid launch by itself.
+
 ## Prompt Bank Map
 
 - Root `*-pack.txt` files are the current runnable text packs for `run-client-pack.ps1`.

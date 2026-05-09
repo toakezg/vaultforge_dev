@@ -63,6 +63,7 @@ Use these as the lane map:
 - `BUSINESS_CLIENT_READY_CRITERIA.md` - definition of client-ready.
 - `BUSINESS_SERVICE_CATALOG.md` - internal preset/style/mod service menu.
 - `BUSINESS_OUTPUT_REVIEW_CHECKLIST.md` - selection and packaging checklist.
+- `BUSINESS_PAID_LAUNCH_DECISION_NOTE.md` - Nath-facing launch decision surface.
 - `BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md` - business-owned fragment migration review and gate.
 
 ## Main Tools
@@ -159,7 +160,8 @@ Stop and ask Nath/root/engine before:
 
 Likely next improvements:
 
-- Nath-facing paid launch decision note for pricing, licensing, publication, and service positioning.
+- One approved private pilot/demo package after Nath chooses the launch posture,
+  pricing shape, publication channel, and live generation budget.
 - More reviewed examples for low-evidence catalog entries such as `wordmark`, `badge-emblem`, `luxury-minimal`, and `neon-signage`.
 - A clearer prompt-pack folder only after pack-runner compatibility is updated.
 - More automated package assembly after the manual delivery skeleton proves stable.

@@ -2,6 +2,10 @@
 
 ## 2026-05-10
 
+- Added `BUSINESS_PAID_LAUNCH_DECISION_NOTE.md` as the Nath-facing decision
+  surface for service positioning, pricing shape, licensing wording,
+  publication channel, pilot/live generation scope, revision policy, and
+  example/privacy choices without approving launch by default.
 - Added `NATH_START.md` as the business-lane operator start note with read
   order, feature map, safe examples, hard gates, standard handoff guidance, and
   future work.

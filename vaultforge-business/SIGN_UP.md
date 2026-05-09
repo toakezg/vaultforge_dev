@@ -254,3 +254,32 @@ Use this shape:
 - Verification: local PowerShell parser check passed for all `.ps1` files; direct business `-WhatIf` passed; markdown-bank `-WhatIf -Limit 1` passed without generation; pack-preview `-WhatIf` passed with the bypass command and did not update the run log; smoke dry-run passed without business output writes; `git diff --check` reported only LF-to-CRLF warnings.
 - Blocker or decision: no hard gate hit; no live generation, pricing, licensing, publication, asset moves/deletes, or engine registry changes were run or approved.
 - Resume prompt: `Continue Workflow B for vaultforge-business as recorder. Record the reviewed NATH_START.md documentation cleanup, the reviewer verification, and the business commit hash, then keep the next safe business item to the Nath-facing paid launch decision note.`
+
+## 2026-05-10 - workflow-b business NATH start recorder closure
+
+- Role: root recorder closing the Workflow B cycle 1 business NATH start slice
+- Scope: affected section handoff note only
+- Read: active run packet output notes for root coordinator, business builder, and business reviewer; current business `SIGN_UP.md`; recent business commit log; root and business dirty status
+- Changed: recorded that the reviewed `NATH_START.md` documentation/tool orientation cleanup is closed and committed as `da7301f`
+- Handoff: no hard gate remains for the business-local start note. The next safe business-local item is the Nath-facing paid launch decision note only; keep actual pricing, licensing, publication, live generation, paid/API work, asset moves/deletes, fragment-library movement, and engine registry changes gated unless Nath explicitly approves them. The root Workflow B resume command still needs manual `--execute --commit-mode review --hard-gate-mode switch-safe` until the root resume-command task lands.
+
+## 2026-05-10 - workflow-b business paid launch decision note builder
+
+- Role: builder for Workflow B cycle 1 business-lane Nath-facing decision note
+- Scope: `vaultforge-business` section files only
+- Read: live `git status --short`, Workflow B skill guidance, business `README.md`, `NATH_START.md`, `TASKS.md`, `CHANGELOG.md`, `SIGN_UP.md`, `BUSINESS_CLIENT_READY_CRITERIA.md`, `BUSINESS_SERVICE_CATALOG.md`, `BUSINESS_OUTPUT_REVIEW_CHECKLIST.md`, and `delivery-package-template\CLIENT_README.md`
+- Changed: added `BUSINESS_PAID_LAUNCH_DECISION_NOTE.md`, linked it from `README.md` and `NATH_START.md`, marked `business-paid-launch-decision-gate` complete in `TASKS.md`, updated `CHANGELOG.md`, and recorded this handoff
+- Handoff: reviewer should verify that the note prepares Nath decisions without treating pricing, licensing, publication, live generation, paid/API use, or public launch as already approved. If Nath answers the note's 0/1 gate with `1`, the next safe slice is a scoped private pilot/demo brief plus `-WhatIf`/dry-run verification before any live paid/API generation.
+- Verification: `git diff --check -- README.md NATH_START.md TASKS.md CHANGELOG.md SIGN_UP.md` reported no whitespace errors beyond LF-to-CRLF working-copy warnings; trailing-whitespace scan on `BUSINESS_PAID_LAUNCH_DECISION_NOTE.md` returned no matches; targeted search confirmed the note says it does not approve launch by itself and presents a 0/1 decision gate; no live generation or paid/API call was run
+- Blocker or decision: no hard gate hit during note preparation; actual launch choices remain Nath decisions
+- Resume prompt: `Continue Workflow B for vaultforge-business as reviewer. Review BUSINESS_PAID_LAUNCH_DECISION_NOTE.md plus README/NATH_START/TASKS/CHANGELOG/SIGN_UP updates, verify no live generation or paid/API calls were run, and confirm the next action is Nath choosing 0 or 1 before any pilot generation.`
+
+## 2026-05-10 - workflow-b business paid launch decision note reviewer
+
+- Role: reviewer for Workflow B cycle 1 business-lane Nath-facing decision note
+- Scope: `vaultforge-business` verification, review findings, and handoff note
+- Read: live dirty baseline, run packet status/checkpoint outputs, root coordinator and business builder last messages, business diffs, `BUSINESS_PAID_LAUNCH_DECISION_NOTE.md`, `README.md`, `NATH_START.md`, `TASKS.md`, `CHANGELOG.md`, and `SIGN_UP.md`
+- Findings: no blocking findings. The decision note prepares service positioning, pricing shape, licensing wording, publication channel, live pilot scope, revision policy, and example/privacy decisions without launching or approving a broad paid/public service.
+- Verification: `git diff --check` on touched business docs reported only LF-to-CRLF working-copy warnings; trailing-whitespace scan on `BUSINESS_PAID_LAUNCH_DECISION_NOTE.md` returned no matches; targeted gated-language search confirmed the note preserves the no-launch-by-default boundary, records Nath's current live-generation/paid-API approval only for the current blocker, and requires scope/budget/output-path recording before future paid/API generation; scoped status showed no generated or log outputs.
+- Blocker or decision: no hard gate hit in the reviewer pass. Nath still needs to answer the note's `0` or `1` gate before any pilot generation or paid-service launch work.
+- Resume prompt: `Continue Workflow B for vaultforge-business as recorder. Record the reviewed paid launch decision note, the reviewer verification, and the business commit hash, then stop for Nath's 0 or 1 decision before live pilot generation.`
