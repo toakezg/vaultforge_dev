@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-05-10
+
+- Added `NATH_START.md` as the business-lane operator start note with read
+  order, feature map, safe examples, hard gates, standard handoff guidance, and
+  future work.
+- Updated the business README and Obsidian MOC stub to point new business-lane
+  work at the new start note and current operator surfaces.
+- Replaced the stale missing `catch-up-here.txt` startup reference in
+  `CODEX_START.md` with `NATH_START.md` and fixed the visible `-WWhatIf`
+  typo in `client-pack-readme.txt`.
+
 ## 2026-05-09
 
 - Added `BUSINESS_OUTPUT_REVIEW_CHECKLIST.md` to define the curation path from

@@ -5,7 +5,7 @@ Read these first:
 1. `..\CODEX_START.md`
 2. `..\SYSTEM.md`
 3. `..\THREAD_MAP.md`
-4. `catch-up-here.txt`
+4. `NATH_START.md`
 5. `README.md`
 6. `SYSTEM.md`
 7. `PLAN.md`

@@ -4,6 +4,10 @@ VaultForge Business is the client-facing generation lane for logos, icons, cover
 
 Business now targets the sibling shared generator at `..\vaultforge-engine` by default. This folder provides business wrappers, prompt banks, metadata, and output routing so client work does not mix with playground output.
 
+Start with `NATH_START.md` when you want the shortest operator map for this
+lane: read order, feature map, safe command examples, hard gates, and future
+work.
+
 `BUSINESS_CLIENT_READY_CRITERIA.md` defines the current paid-client readiness
 target and separates safe packaging/intake work from pricing, licensing,
 publication, live generation, and cross-lane approval gates.
@@ -63,7 +67,7 @@ run-client-pack.bat "Empower You Plan Management" "empower-you" "logo-pack-01" "
 Preview a pack without running commands or touching `logs\run-log.csv`:
 
 ```powershell
-.\run-client-pack.ps1 -InputValue "Empower You Plan Management" -Client "empower-you" -Project "logo-pack-01" -Tag "round1" -PromptFile ".\logo-pack.txt" -WhatIf
+powershell -ExecutionPolicy Bypass -File .\run-client-pack.ps1 -InputValue "Empower You Plan Management" -Client "empower-you" -Project "logo-pack-01" -Tag "round1" -PromptFile ".\logo-pack.txt" -WhatIf
 ```
 
 Add `-LogWhatIf` when you intentionally want preview rows appended to

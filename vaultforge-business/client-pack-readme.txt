@@ -40,7 +40,7 @@ powershell -ExecutionPolicy Bypass -File .\run-client-pack.ps1 ^
   -Project "icon-pack-01" ^
   -Tag "test-003" ^
   -PromptFile ".\icon-pack.txt" ^
-  -WWhatIf
+  -WhatIf
 _____________________________________________________________
 
 

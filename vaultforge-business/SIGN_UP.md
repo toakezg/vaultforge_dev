@@ -233,3 +233,24 @@ Use this shape:
 - Workflow B observation: assigned run packet `20260509T235211-run-approved-section-local-build-slices-while-an` showed execute true, commit mode review, hard-gate mode `switch-safe`, estimated usage `$0.3200` of `$1.0000`, and the business builder slot active when inspected.
 - Blocker or decision: no new hard gate hit
 - Resume prompt: `Continue Workflow B for vaultforge-business as reviewer. Review BUSINESS_OUTPUT_REVIEW_CHECKLIST.md against the existing gallery/contact-sheet/review-summary helpers and delivery package skeleton, verify it does not make pricing/licensing/publication/live-generation claims, and keep the next business item to the Nath-facing paid launch decision note only.`
+
+## 2026-05-10 - workflow-b business NATH start builder
+
+- Role: builder for Workflow B cycle 1 business-lane documentation/tool cleanup
+- Scope: `vaultforge-business` section files only
+- Read: live `git status --short`, root and business prompt packet docs, business `README.md`, `SYSTEM.md`, `PLAN.md`, `TASKS.md`, `CHANGELOG.md`, `SIGN_UP.md`, prompt-bank README, client-ready criteria, service catalog, output review checklist, and `business-if-done.txt`
+- Changed: added `NATH_START.md` as the operator start note, pointed `README.md` and `vaultforge-business.md` at it, replaced the stale missing `catch-up-here.txt` startup reference in `CODEX_START.md`, fixed the visible `-WWhatIf` typo in `client-pack-readme.txt`, and recorded this handoff
+- Handoff: reviewer should verify the new start note matches current tools and does not claim paid launch, pricing, licensing, live generation, or cross-lane registry approval. Next safe business-local item remains the Nath-facing paid launch decision note.
+- Blocker or decision: no hard gate hit; no live generation, file moves, deletes, pricing, licensing, publication, or engine registry changes were run or approved
+- Resume prompt: `Continue Workflow B for vaultforge-business as reviewer. Review NATH_START.md, CODEX_START.md, README.md, vaultforge-business.md, client-pack-readme.txt, CHANGELOG.md, and SIGN_UP.md for accuracy against current business tools, then run parser/smoke-safe checks without live generation.`
+
+## 2026-05-10 - workflow-b business NATH start reviewer
+
+- Role: reviewer for Workflow B cycle 1 business-lane documentation/tool cleanup
+- Scope: `vaultforge-business` verification notes and safe docs correction only
+- Read: live dirty baseline, builder diff, `NATH_START.md`, affected business docs, run packet status, builder last message, script entry-point parameters, and current tool files
+- Findings: no blocking findings after review. The new start note stayed business-local and kept pricing, licensing, publication, live generation, asset move/delete, and shared engine registry changes gated.
+- Changed: corrected the pack-preview examples in `NATH_START.md` and `README.md` to use `powershell -ExecutionPolicy Bypass -File .\run-client-pack.ps1` because the direct script form can fail on this machine's execution policy.
+- Verification: local PowerShell parser check passed for all `.ps1` files; direct business `-WhatIf` passed; markdown-bank `-WhatIf -Limit 1` passed without generation; pack-preview `-WhatIf` passed with the bypass command and did not update the run log; smoke dry-run passed without business output writes; `git diff --check` reported only LF-to-CRLF warnings.
+- Blocker or decision: no hard gate hit; no live generation, pricing, licensing, publication, asset moves/deletes, or engine registry changes were run or approved.
+- Resume prompt: `Continue Workflow B for vaultforge-business as recorder. Record the reviewed NATH_START.md documentation cleanup, the reviewer verification, and the business commit hash, then keep the next safe business item to the Nath-facing paid launch decision note.`
