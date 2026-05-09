@@ -180,3 +180,24 @@ Use this shape:
 - Verification: `run_business_md_bank.ps1 -Path ".\my-prompts-bank\_intake\client-intake-template.md" -WhatIf` skipped the note as non-prompt markdown with 0 ran, 1 skipped, 0 failed; `git diff --check` on touched business files reported only LF-to-CRLF warnings
 - Blocker or decision: no new hard gate hit; no live generation was run; paid launch, pricing/licensing, publication, and fragment-library movement remain gated separately
 - Resume prompt: `Continue Workflow B for vaultforge-business as recorder. Record the reviewed client intake template slice and keep the next safe business-local slice to delivery package skeleton, service catalog, or output review checklist work only.`
+
+## 2026-05-09 - workflow-b business delivery package skeleton builder
+
+- Role: builder for Workflow B cycle 1 business-lane safe local packaging slice
+- Scope: `vaultforge-business` section files only
+- Read: live `git status --short`, root workflow and routing docs, business docs/tasks/changelog/sign-up, `BUSINESS_CLIENT_READY_CRITERIA.md`, prompt-bank notes, existing generated output shape, and `business-if-done.txt`
+- Changed: added `delivery-package-template` with export, preview, source, review, archive, and usage-note folders plus a client-facing README template; documented the skeleton in `README.md`; marked `business-client-package-skeleton` complete in `TASKS.md`; updated `CHANGELOG.md`
+- Handoff: next safe business-local slices are `business-service-catalog` or `business-client-output-review-checklist`. Pricing, licensing, publication, live generation, and fragment-library movement remain gated.
+- Verification: listed `delivery-package-template` recursively; `git diff --check` on touched tracked business docs reported only LF-to-CRLF warnings; `git status --short` showed only this business slice plus pre-existing root/run-packet dirty state
+- Blocker or decision: no new hard gate hit; no live generation was run
+- Resume prompt: `Continue Workflow B for vaultforge-business as reviewer. Review the delivery package skeleton, verify the folder map and client README stay business-local and do not make pricing/licensing claims, then keep the next safe slice to service catalog or output review checklist work.`
+
+## 2026-05-09 - workflow-b business delivery package skeleton reviewer
+
+- Role: reviewer for Workflow B cycle 1 business-lane safe local packaging slice
+- Scope: `vaultforge-business` verification notes and review findings
+- Read: Workflow B run packet outputs, live `git status --short`, business delivery skeleton files, `README.md`, `TASKS.md`, `CHANGELOG.md`, and this handoff note
+- Findings: no blocking findings; the delivery package skeleton is additive, business-local, and keeps pricing, licensing, publication, live generation, and fragment-library movement gated
+- Verification: listed `delivery-package-template` recursively; inspected `CLIENT_README.md` and `PACKAGE_MAP.md`; searched touched business files for pricing/licensing/publication language; `git diff --check` on touched tracked business docs reported only LF-to-CRLF warnings
+- Blocker or decision: no new hard gate hit; no live generation was run
+- Resume prompt: `Continue Workflow B for vaultforge-business. The next safe business-local slice is either business-service-catalog or business-client-output-review-checklist; keep pricing/licensing/publication, live generation, and fragment-library movement gated.`

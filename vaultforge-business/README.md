@@ -8,6 +8,10 @@ Business now targets the sibling shared generator at `..\vaultforge-engine` by d
 target and separates safe packaging/intake work from pricing, licensing,
 publication, live generation, and cross-lane approval gates.
 
+`delivery-package-template\` is the reusable delivery skeleton for reviewed
+client jobs. It includes export, preview, source, review, archive, and usage
+note folders plus a client-facing README template.
+
 ## Prompt Bank Map
 
 - Root `*-pack.txt` files are the current runnable text packs for `run-client-pack.ps1`.
@@ -84,6 +88,23 @@ build-gallery.bat -GeneratedRoot ".\generated"
 
 The gallery is written to `generated\_gallery\index.html` and groups generated
 runs into image-backed cards using contact sheets when available.
+
+Prepare a reviewed client delivery package:
+
+```text
+delivery-package-template\
+  CLIENT_README.md
+  exports\
+  previews\
+  usage-notes\
+  sources\
+  review\
+  archive\
+```
+
+Copy this skeleton for a real package only after outputs are selected from the
+gallery or contact sheets. Keep `exports\final` for approved client files and
+keep prompts/manifests under `sources` for reproducibility.
 
 Update a markdown prompt note after review:
 

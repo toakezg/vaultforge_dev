@@ -2,6 +2,9 @@
 
 ## 2026-05-09
 
+- Added `delivery-package-template\` with export, preview, source, review,
+  archive, and usage-note folders plus a client-facing README template for
+  reviewed business delivery packages.
 - Added `my-prompts-bank\_intake\client-intake-template.md` as a non-runnable
   client brief template for converting service-style requests into later
   runnable business prompt notes.
