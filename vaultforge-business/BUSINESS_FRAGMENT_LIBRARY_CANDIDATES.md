@@ -127,27 +127,42 @@ Keep business-owned for now:
 
 ## Migration Gate
 
-Do not directly add business mods to the current engine `--mod` choices yet.
-The engine's modifier registry currently means emotional mood. Business mods
-mix brand tone, production constraints, and delivery requirements. Moving them
-as-is would change shared engine semantics and could leak business assumptions
-into art/icon lanes.
+Resolved for the approved subset on 2026-05-10: the engine accepted a narrow
+registry shape with business-facing preset/style aliases and a separate
+`--constraint` registry for production constraints. Business mods were not
+added to engine `--mod`; that registry still means emotional mood.
 
-Recommended next shape:
+Do not directly add the remaining business mods to the engine `--mod` choices.
+Business mods mix brand tone, market positioning, production constraints, and
+delivery requirements. Moving them as-is would change shared engine semantics
+and could leak business assumptions into art/icon lanes.
 
-1. Keep business wrapper mappings as the production path.
-2. In an engine/root-approved pass, add registry structure that can distinguish
-   preset, style, mood, production constraint, and lane alias.
-3. Move only the stable candidates after the engine registry shape exists.
-4. Preserve business-facing names in business metadata even if the engine gains
-   shared aliases.
+Implemented shared shape:
+
+1. Engine supports selected business preset aliases: `business-icon`,
+   `business-cover`, `brand-board`, and `social-brand-tile`.
+2. Engine supports selected business style aliases: `clean-corporate`,
+   `modern-startup`, `vector-crisp`, and `editorial-brand`.
+3. Engine supports selected production constraints: `high-contrast`,
+   `print-safe`, `small-size-readable`, and `transparent-bg-ready`.
+4. Business preserves business-facing names in business metadata and passes the
+   accepted aliases/constraints through for engine provenance.
+
+Still business-owned:
+
+- `client-pack`, `business-logo`, `brand-mark`, `mascot-logo`, `wordmark`, and
+  `badge-emblem`.
+- `trustworthy`, `premium`, `playful`, `bold`, `elegant`, and
+  `local-friendly`.
+- `tweak` wording and any future client-lane delivery requirements until a
+  shared engine contract explicitly adopts them.
 
 ## Resume Prompt
 
 ```text
 Continue Workflow B for vaultforge-business and vaultforge-engine. Read
-vaultforge-business/BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md, then decide the
-engine registry shape for business fragment migration. Do not move business
-mods into engine MOOD_PROMPTS directly; first choose whether the engine should
-support lane-aware aliases or separate production-constraint fragments.
+vaultforge-business/BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md, then review the
+accepted alias/constraint bridge. Do not move the remaining business-only
+presets or brand-tone modifiers into engine registries without a new scoped
+approval and review.
 ```

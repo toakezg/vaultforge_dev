@@ -2,6 +2,10 @@
 
 ## 2026-05-10
 
+- Adopted the approved engine registry shape in the business wrapper: selected
+  business preset/style aliases now pass directly to the engine, approved
+  production modifiers pass as native `--constraint` values, and remaining
+  brand-tone modifiers stay business-owned prompt context.
 - Added `BUSINESS_PAID_LAUNCH_DECISION_NOTE.md` as the Nath-facing decision
   surface for service positioning, pricing shape, licensing wording,
   publication channel, pilot/live generation scope, revision policy, and

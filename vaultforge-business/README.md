@@ -195,6 +195,12 @@ for downstream sorting and review.
 same raw naming fields plus the slug fields needed to reconstruct folder and
 filename-safe grouping without parsing the path.
 
+`engine_constraints` records any business production modifiers passed through
+to the shared engine as native `--constraint` fields. Current pass-through
+constraints are `high-contrast`, `print-safe`, `small-size-readable`, and
+`transparent-bg-ready`; other business modifiers remain business-owned prompt
+context.
+
 Raw fields preserve what the operator typed. Slug fields are lower-case,
 folder-safe values made from letters, numbers, and hyphens. Prefer kebab-case
 for `client`, `asset_type`, and `job` inputs. Use `tag` as a short
@@ -214,7 +220,12 @@ manifests first and optionally attach sidecar details per generated image.
 
 ## Current Bridge Behavior
 
-The shared generator supports the original VaultForge presets and styles only. The business wrapper accepts business-friendly fields, injects them into the prompt, maps to the closest supported generator preset/style, passes native engine `--client`, `--job`, `--tag`, and `--variants` fields through, and keeps the original business fields in business metadata.
+The shared generator now supports a small approved set of business-facing
+preset/style aliases and production constraints. The business wrapper accepts
+business-friendly fields, injects them into the prompt, passes approved aliases
+and constraints to the engine where available, passes native engine `--client`,
+`--job`, `--tag`, and `--variants` fields through, and keeps the original
+business fields in business metadata.
 
 `-InputImage` and `-ReferenceImage` now pass through to the shared engine when
 supplied. Relative paths are resolved from the business wrapper before the

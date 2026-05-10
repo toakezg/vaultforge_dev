@@ -32,7 +32,7 @@
 - ~~Pass native `--input-image` and `--reference-image` fields through from business now that shared engine plumbing exists.~~
 - The business wrapper now calls the shared engine once per business run and lets engine-native `--variants` fan out image outputs while business keeps its own output routing, prompt composition, `run.json`, and `gallery-entry.json`.
 - Keep `--tweak` as business-owned prompt context until a shared edit contract makes it worth moving into the engine.
-- Business fragment migration has a business-owned candidate review in `BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md`; do not move fragments into engine libraries until root/engine approve a registry shape for lane aliases and production constraints.
+- Business fragment migration has a business-owned candidate review in `BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md`; the approved 2026-05-10 subset now passes business preset/style aliases and production constraints through to the engine while keeping remaining business-only names in this lane.
 - Keep backward compatibility with the current wrappers.
 
 ## Phase 4 - Gallery

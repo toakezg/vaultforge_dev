@@ -57,10 +57,10 @@ function ConvertTo-DisplayCommand {
 function Get-EnginePreset {
     param([string]$BusinessPreset)
     switch ($BusinessPreset) {
-        "business-icon" { "icon" }
-        "business-cover" { "obsidian-cover" }
-        "social-brand-tile" { "artifact-card" }
-        "brand-board" { "artifact-card" }
+        "business-icon" { "business-icon" }
+        "business-cover" { "business-cover" }
+        "social-brand-tile" { "social-brand-tile" }
+        "brand-board" { "brand-board" }
         default { "vaultforge" }
     }
 }
@@ -68,17 +68,42 @@ function Get-EnginePreset {
 function Get-EngineStyle {
     param([string]$BusinessStyle)
     switch ($BusinessStyle) {
+        "clean-corporate" { "clean-corporate" }
         "luxury-minimal" { "fine-line" }
-        "modern-startup" { "geometric" }
+        "modern-startup" { "modern-startup" }
         "bold-retro-brand" { "pixel" }
         "friendly-flat" { "geometric" }
         "premium-3d" { "photoreal" }
         "mono-mark" { "fine-line" }
-        "vector-crisp" { "geometric" }
-        "editorial-brand" { "painterly" }
+        "vector-crisp" { "vector-crisp" }
+        "editorial-brand" { "editorial-brand" }
         "neon-signage" { "cinematic" }
         default { "geometric" }
     }
+}
+
+function Get-EngineConstraints {
+    param([string[]]$BusinessMods, [switch]$TransparentSafe)
+
+    $allowed = @(
+        "high-contrast",
+        "print-safe",
+        "small-size-readable",
+        "transparent-bg-ready"
+    )
+    $constraints = New-Object System.Collections.Generic.List[string]
+
+    foreach ($businessMod in @($BusinessMods)) {
+        if ($allowed -contains $businessMod -and -not $constraints.Contains($businessMod)) {
+            $constraints.Add($businessMod)
+        }
+    }
+
+    if ($TransparentSafe -and -not $constraints.Contains("transparent-bg-ready")) {
+        $constraints.Add("transparent-bg-ready")
+    }
+
+    return @($constraints.ToArray())
 }
 
 function ConvertTo-ValueList {
@@ -166,6 +191,7 @@ $promptPathFull = Get-FullPath $promptPath
 $sourcePromptPath = ""
 $enginePreset = Get-EnginePreset $Preset
 $engineStyle = Get-EngineStyle ($Style | Select-Object -First 1)
+$engineConstraints = @(Get-EngineConstraints -BusinessMods $Mod -TransparentSafe:$TransparentSafe)
 $effectiveBackground = if ($TransparentSafe) { "transparent" } else { $Background }
 $engineOutputDir = $runDirFull
 $dryRunTempRoot = ""
@@ -191,6 +217,7 @@ $metadata = [ordered]@{
     business_mods = $Mod
     engine_preset = $enginePreset
     engine_style = $engineStyle
+    engine_constraints = $engineConstraints
     variants = $Variants
     size = $Size
     quality = $Quality
@@ -268,6 +295,10 @@ $args = @(
 
 if (-not [string]::IsNullOrWhiteSpace($Tag)) {
     $args += @("--tag", $Tag)
+}
+
+foreach ($engineConstraint in $engineConstraints) {
+    $args += @("--constraint", $engineConstraint)
 }
 
 if (-not [string]::IsNullOrWhiteSpace($inputImageEnginePath)) {

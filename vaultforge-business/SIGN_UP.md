@@ -291,3 +291,24 @@ Use this shape:
 - Read: active run packet output notes for root coordinator, business builder, and business reviewer; current business `SIGN_UP.md` and `CHANGELOG.md`; root `CHANGELOG.md`; root `WORKFLOW_REVIEW.md`; current root dirty baseline; active `.workflow-b.lock`; and `git show --stat --name-only --oneline -1 15aa39f`
 - Changed: recorded that the reviewed Nath-facing paid launch decision note is closed and committed as `15aa39f`
 - Handoff: no hard gate was hit by the note-writing or review work. The next required step is Nath choosing `0` or `1` in `BUSINESS_PAID_LAUNCH_DECISION_NOTE.md` before any private pilot generation or paid-service launch work. Keep live paid/API generation behind a named scope, budget ceiling, output path, and review purpose; keep binding pricing, licensing/legal terms, public publication, broad launch, asset moves/deletes, engine registry changes, and cross-lane ownership changes gated unless Nath explicitly approves them.
+
+## 2026-05-10 - workflow-b business alias constraint bridge builder
+
+- Role: builder for Workflow B cycle 1 approved engine/business registry slice
+- Scope: `vaultforge-business` section files only
+- Read: live `git status --short`, root `HARD_GATES.md`, run packet coordinator/engine builder/engine reviewer outputs, business docs/tasks/changelog/sign-up, `BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md`, `run_business.ps1`, and engine `generate.py --help`
+- Changed: `run_business.ps1` now passes accepted business preset/style aliases directly to the engine and passes `high-contrast`, `print-safe`, `small-size-readable`, and `transparent-bg-ready` as native `--constraint` values; business docs and tasks record the approved subset while keeping remaining business-only names lane-owned
+- Handoff: reviewer should verify the wrapper maps only the approved aliases/constraints, preserves business metadata, does not pass brand-tone modifiers as engine moods, and keeps live generation out of scope
+- Verification: parser check for `run_business.ps1`; direct wrapper `-WhatIf` with `business-icon`, `vector-crisp`, and production constraints; direct wrapper `-DryRun` through engine dry-run; markdown-bank `-WhatIf` against the VaultForge client pack; `git diff --check` on touched business files
+- Blocker or decision: no new hard gate hit; no live generation or paid/API call was run
+- Resume prompt: `Continue Workflow B for vaultforge-business as reviewer. Review the business alias/constraint bridge in run_business.ps1 plus README, PLAN, TASKS, CHANGELOG, SIGN_UP, and BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md, then verify WhatIf/dry-run behavior without live generation.`
+
+## 2026-05-10 - workflow-b business alias constraint bridge reviewer
+
+- Role: reviewer for Workflow B cycle 1 approved business alias/constraint bridge
+- Scope: `vaultforge-business` verification, review findings, and handoff note
+- Read: live dirty baseline, root `HARD_GATES.md`, run packet coordinator/engine reviewer/business builder outputs, engine commit `c0e2d37`, business wrapper diff, and touched business docs
+- Findings: no blocking findings; the wrapper passes only the accepted business preset/style aliases and production constraints to the engine, while brand-tone modifiers stay in business prompt context and out of engine mood args
+- Verification: parser check for `run_business.ps1`; engine help confirmed accepted aliases and `--constraint`; direct business `-WhatIf` showed `--preset business-icon`, `--style vector-crisp`, and native constraints without `trustworthy` as an engine arg; direct business `-DryRun` reached engine dry-run and left no business output folder; markdown-bank file `-WhatIf` ran one VaultForge prompt preview; pack-runner `-WhatIf` passed with execution-policy bypass; `git diff --check` passed with only LF-to-CRLF warnings
+- Blocker or decision: no new hard gate hit; no live generation, paid/API call, asset move/delete, root workflow edit, or cross-lane ownership expansion was run by this reviewer
+- Resume prompt: `Continue Workflow B for vaultforge-business after the alias/constraint bridge review. Use the next approved safe slice from TASKS.md, keep live paid/API generation behind HG-004 scope, and do not move additional business-only fragments into engine registries without a new scoped approval.`
