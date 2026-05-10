@@ -124,10 +124,10 @@ run_workflow_b.bat --cycles 99 --timebox-minutes 120 --usage-budget-usd 3.00 --e
 
 Budget flags:
 
-| Flag | Behavior |
-|---|---|
-| `--timebox-minutes 120` | Stops before starting more work after the timebox is reached. |
-| `--usage-budget-usd 3.00` | Sets an estimated controller-side USD ceiling. |
+| Flag                         | Behavior                                                                   |
+| ---------------------------- | -------------------------------------------------------------------------- |
+| `--timebox-minutes 120`      | Stops before starting more work after the timebox is reached.              |
+| `--usage-budget-usd 3.00`    | Sets an estimated controller-side USD ceiling.                             |
 | `--estimated-agent-usd 0.08` | Reserves this much estimated budget before each `codex exec` agent starts. |
 
 The usage budget is intentionally conservative. Codex CLI does not currently

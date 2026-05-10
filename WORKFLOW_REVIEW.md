@@ -62,17 +62,17 @@ the workflow itself is still behaving well.
 <!-- workflow-b-controller-snapshot:start -->
 ## Controller Review Snapshot
 
-- Updated: `2026-05-10T06:16:33+10:00`
-- Reason: cycle review cadence
-- Run id: `20260510T061633-prepare-nath-facing-business-decision-notes-only`
-- Cycle: `1` of `1`
-- Run packet: `F:\vaultforge\runs\workflow-b\20260510T061633-prepare-nath-facing-business-decision-notes-only`
+- Updated: `2026-05-10T13:28:28+10:00`
+- Reason: workflow file change detected
+- Run id: `20260510T130343-hard-gate-doc-updated-with-0-or-1-approvals-b`
+- Cycle: `2` of `7`
+- Run packet: `F:\vaultforge\runs\workflow-b\20260510T130343-hard-gate-doc-updated-with-0-or-1-approvals-b`
 - Commit mode: `review`
-- Timebox minutes: `20.0`
-- Usage budget USD: `1.0`
+- Timebox minutes: `30.0`
+- Usage budget USD: `0.0`
 - Hard gate mode: `switch-safe`
 - Watched workflow changes this cycle:
-- none detected
+- `F:\vaultforge\WORKFLOW_REVIEW.md`
 
 ## Current Workflow Lessons
 
@@ -84,6 +84,18 @@ the workflow itself is still behaving well.
 - Use Human-In-The-Loop gates for destructive, external, paid, secret, or taste-heavy decisions.
 - Keep Workflow B adaptive by refreshing workflow docs between cycles rather than freezing the first prompt forever.
 <!-- workflow-b-controller-snapshot:end -->
+
+
+
+## Multi-Agent Handoff
+
+- Task: Workflow B cycle 1 recorder closure for run `20260510T130343-hard-gate-doc-updated-with-0-or-1-approvals-b`
+- Current role: root recorder
+- Last verified state: controller reached the cycle 1 root-recorder slot after creating an executable review-mode plan, updating the workflow review snapshot, and producing ten cycle 1 prompts. Status and checkpoint streams are readable. `HARD_GATES.md` contained explicit 0/1 approvals. Root coordinator routed the approved engine/business registry slice. Engine builder added business-facing preset/style aliases and separate production constraints; engine reviewer found no blocking issues and committed `c0e2d37`. Business builder adopted the accepted aliases/constraints in the wrapper and docs; business reviewer found no blocking issues and committed `4e59f85`. Icon builder/reviewer verified a no-op because icon work was out of scope. XP4L builder/reviewer recorded scope-only hard-gate evidence and committed the XP4L repo note as `ea89b37`, leaving mixed pre-existing XP4L docs unstaged.
+- Files touched: root `CHANGELOG.md`, root `WORKFLOW_REVIEW.md`, `vaultforge-engine/SIGN_UP.md`, `vaultforge-business/SIGN_UP.md`, and `vaultforge-icon/SIGN_UP.md` by this recorder pass. Cycle work touched engine files in commit `c0e2d37`, business files in commit `4e59f85`, XP4L repo note `WORKFLOW_B_XP4L_BUILDER_NOTE_20260510T130343.md` in commit `ea89b37`, and run-packet outputs under `runs/workflow-b/20260510T130343-hard-gate-doc-updated-with-0-or-1-approvals-b/cycle-01/outputs/`.
+- Verification run: inspected `HARD_GATES.md`, `workflow-b-plan.md`, `workflow-b-live-status.md`, `status.jsonl`, `checkpoints.jsonl`, `.workflow-b.lock`, root/section dirty status, root coordinator routing, engine/business/icon/XP4L builder and reviewer outputs, section handoff notes, recent root commits `c0e2d37` and `4e59f85`, XP4L repo commit `ea89b37`, and current diffs. Reviewer verification passed engine `PYTHONPATH=src; py -B -m unittest discover -s tests` with 26 tests OK plus alias/constraint dry-run, smoke config dry-run, gallery-index guard checks, and `git diff --check`; business parser, engine help, direct `-WhatIf`, direct `-DryRun`, markdown-bank `-WhatIf`, pack-runner `-WhatIf`, and diff checks; icon no-op status/diff/diff-check plus proposal-directory checks; XP4L `python -m unittest discover -s tests -v` with 22 tests OK.
+- Blocker or decision: no hard gate was hit during this recorder closure. The cycle consumed `HG-001` for the exact executable run controls, `HG-003` for the scoped engine/business registry migration, and treated `HG-004` as still limited to a later scoped mocked/private pilot brief before any live paid/API generation. `HG-002` remains insufficient for contact-sheet implementation until a named evidence path or fixture strategy exists. `HG-008` remains `0`, so XP4L scoring/progression semantics stay blocked. No live generation, paid/API call, generated art, contact-sheet renderer implementation, public launch, pricing/licensing commitment, asset move/delete, folder-icon apply work, XP scoring/progression change, event-source expansion, root controller edit, or unapproved cross-lane ownership expansion was run. `.workflow-b.lock` points at this active run id with pid `32420` and was left untouched. The generated resume command still omits `--execute`, `--commit-mode review`, and `--hard-gate-mode switch-safe`, so executable resumes should add them manually until `root-workflow-b-resume-execute-flag` is fixed.
+- Resume prompt: `Continue Workflow B cycle 2 from run 20260510T130343-hard-gate-doc-updated-with-0-or-1-approvals-b. Start with current root/section docs, HARD_GATES.md, git status, and the cycle 1 recorder handoff. Prefer the next approved safe engine/business slice from TASKS.md. Keep contact-sheet rendering parked until a named evidence path or fixture strategy exists, keep paid/API generation behind a scoped mocked/private pilot brief with WhatIf/dry-run checks first, leave XP4L scoring/progression semantics blocked by HG-008:0, and do not enter icon taste/apply work without an explicit scoped prompt. Executable resumes should include --execute --commit-mode review --hard-gate-mode switch-safe.`
 
 
 

@@ -375,3 +375,27 @@ Use this shape:
 - Read: root startup docs, root thread map, engine docs, Nath notes, business step 7 note
 - Changed: added and verified `--client`, `--job`, `--tag`, and `--variants` in `src\generate.py`
 - Handoff: root/business notes can mark business step 7 complete; edit/reference image APIs remain a later engine task
+
+## 2026-05-10 - workflow-b engine/business registry recorder closure
+
+- Role: root recorder closing Workflow B cycle 1 for run `20260510T130343-hard-gate-doc-updated-with-0-or-1-approvals-b`
+- Scope: affected section handoff note only
+- Read: active run packet outputs for root coordinator, engine builder, engine reviewer, business builder, and business reviewer; current engine `SIGN_UP.md`; recent root commit log; root dirty status; and `git show --stat --name-only --oneline -1 c0e2d37`
+- Changed: recorded that the reviewed engine registry shape is closed and committed as `c0e2d37`
+- Handoff: no engine hard gate was hit by the alias/constraint registry slice. Business-facing preset/style aliases and production constraints are now represented separately from moods. The contact-sheet renderer remains parked until a named evidence path or fixture strategy exists; no live generation, generated art, renderer implementation, fixture-policy decision, paid/API work, or unapproved cross-lane ownership expansion was run.
+
+## 2026-05-10 - workflow b 130343 cycle 2 engine builder
+
+- Role: Builder for Workflow B cycle 2, engine lane
+- Scope: evidence-only contact-sheet renderer gate check for run `20260510T130343-hard-gate-doc-updated-with-0-or-1-approvals-b`
+- Read: cycle 2 root coordinator routing note, `HARD_GATES.md`, dirty baseline, engine `TASKS.md`, `SIGN_UP.md`, `RUN_MANIFEST.md`, `VERIFICATION.md`, and current `assets\generated`
+- Changed: recorded this evidence-only handoff only; no engine code, renderer, sidecar contract, fixture policy, paid/API, generated-art, or business wrapper changes were made
+- Handoff: `HG-002` is set to `1`, but its own approval text still requires a named renderer evidence path/budget or a root-approved fixture strategy. The coordinator found none and `assets\generated` is empty, so `engine-contact-sheet-renderer` remains parked as `#live-required`. Verification passed with 26 unit tests OK, the committed smoke config dry-run stayed no-live/no-write with `assets\generated` still empty and no batch state, normal gallery-index wrote only a temp zero-entry index, and `--gallery-index --dry-run` rejected without creating output. Continue through reviewer, then switch to the business mocked pilot brief unless new approved engine evidence appears.
+
+## 2026-05-10 - workflow b 130343 cycle 2 engine reviewer
+
+- Role: Reviewer for Workflow B cycle 2, engine lane
+- Scope: review the evidence-only contact-sheet blocker check for run `20260510T130343-hard-gate-doc-updated-with-0-or-1-approvals-b`
+- Read: cycle 2 root coordinator routing note, engine builder output, `HARD_GATES.md`, dirty baseline, engine `TASKS.md`, `SIGN_UP.md`, `RUN_MANIFEST.md`, `VERIFICATION.md`, `src\generate.py`, smoke config, and current `assets\generated`
+- Changed: recorded this reviewer handoff and run-packet review note only
+- Handoff: no blocking findings. Reviewer verified the builder stayed evidence-only, `assets\generated` is empty, and `HG-002:1` still does not name the required renderer evidence path/budget or fixture strategy. Verification passed with 26 unit tests OK, smoke config dry-run no-live/no-write behavior, normal gallery-index output to a temp zero-entry JSON, `--gallery-index --dry-run` rejection without output, and `git diff --check -- vaultforge-engine/SIGN_UP.md` with only the existing LF-to-CRLF warning. No renderer implementation, generated art, live/API call, sidecar contract expansion, fixture-policy decision, business wrapper edit, or cross-lane ownership change was performed. No commit was made from this reviewer slot because `SIGN_UP.md` already contained pre-existing mixed handoff edits in the dirty baseline.

@@ -25,7 +25,7 @@ source_files: MULTI_AGENT_WORKFLOW_B.md; WORKFLOW_REVIEW.md; TASKS.md; NATH_STAR
 notes:
 
 ### HG-002 - Engine Contact Sheet Renderer Evidence
-decision_0_or_1: 
+decision_0_or_1:  1
 lane_scope: vaultforge-engine
 gate_type: live-generation
 trigger_condition: When Workflow B reaches `engine-contact-sheet-renderer` and needs real sidecar examples, generated art, or an approved fixture strategy before implementing the renderer.
@@ -37,7 +37,7 @@ source_files: vaultforge-engine/TASKS.md; vaultforge-engine/SIGN_UP.md; vaultfor
 notes:
 
 ### HG-003 - Business Fragment Registry Migration
-decision_0_or_1: 
+decision_0_or_1:  1 
 lane_scope: vaultforge-business, vaultforge-engine
 gate_type: cross-lane-ownership
 trigger_condition: When stable business preset/style/mod fragments are ready to move from business-owned candidate review into shared engine registries or shared lane aliases.
@@ -46,10 +46,10 @@ decision_1_allows: Moving only the reviewed business fragments named in the migr
 decision_0_blocks: Any migration of business preset/style/mod fragments into engine-owned registries or shared aliases.
 default_if_blank: stop/report before acting
 source_files: vaultforge-business/PLAN.md; vaultforge-business/TASKS.md; vaultforge-business/BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md; vaultforge-engine/PLAN.md
-notes:
+notes: be strict on what should be business laned and what can be put in engine, engine neatness adn cleaness is a priority. include in engine args such as editting tweaking, compatbale inputs, key handling (each lane willl own its own key and be passed with prompts to engine)
 
 ### HG-004 - Business Paid Pilot Or Launch
-decision_0_or_1:
+decision_0_or_1: 1
 lane_scope: vaultforge-business
 gate_type: paid-api
 trigger_condition: When business work moves from docs, WhatIf, dry-run, or internal demo packaging into a private paid pilot, live paid/API generation, pricing, licensing, publication, or public launch.
@@ -58,10 +58,10 @@ decision_1_allows: One private paid-pilot/demo package with fixed scope, limited
 decision_0_blocks: Paid pilot work, public launch work, binding pricing/licensing claims, and live paid/API generation for business packages.
 default_if_blank: stop/report before acting #live-required
 source_files: vaultforge-business/BUSINESS_PAID_LAUNCH_DECISION_NOTE.md; vaultforge-business/PLAN.md; vaultforge-business/TASKS.md; vaultforge-business/SIGN_UP.md
-notes:
+notes: passed as 1 with the rule of doing this in a dummy mocced text run, in the manner of the task to create a fake client who is vague and a fake client who isa articulative. use vaultforge and xp4l as fake clients
 
 ### HG-005 - Coding Bridge Live Responses API Use
-decision_0_or_1: 
+decision_0_or_1:  1 
 lane_scope: vaultforge-coding
 gate_type: secret
 trigger_condition: When the coding bridge MVP moves from local smoke/manual usage artifacts into real OpenAI Responses API calls requiring a loaded key, spend, model choice, or remote request.
@@ -70,7 +70,7 @@ decision_1_allows: One named coding bridge live run using the approved key sourc
 decision_0_blocks: Live Responses API calls from the coding bridge; local smoke/test artifact work may continue.
 default_if_blank: stop/report before acting
 source_files: vaultforge-coding/CODEX_START.md; vaultforge-coding/SYSTEM.md; vaultforge-coding/PLAN.md; vaultforge-coding/TASKS.md
-notes:
+notes: 
 
 ### HG-006 - Coding Bridge Write Or Patch Mode
 decision_0_or_1:
@@ -82,10 +82,10 @@ decision_1_allows: Implementing only the approved write/patch mode design with e
 decision_0_blocks: Any bridge feature that writes patches, overwrites files, or mutates project files.
 default_if_blank: stop/report before acting
 source_files: vaultforge-coding/SYSTEM.md; vaultforge-coding/PLAN.md; vaultforge-coding/TASKS.md; vaultforge-coding/vaultforge_code_codex_api_bridge_spec_v_2.md
-notes:
+notes: 1
 
 ### HG-007 - XP4L Live Vault Materialization
-decision_0_or_1:
+decision_0_or_1: 1 
 lane_scope: vaultforge-xp4l
 gate_type: other
 trigger_condition: When XP4L moves from dry-run, mirror, or docs-only output checks into non-dry-run writes against the live `E:\XP4Life` vault.
@@ -97,7 +97,7 @@ source_files: vaultforge-xp4l/PLAN.md; vaultforge-xp4l/TASKS.md; vaultforge-xp4l
 notes:
 
 ### HG-008 - XP4L Scoring And Progression Semantics
-decision_0_or_1:
+decision_0_or_1: 0
 lane_scope: vaultforge-xp4l
 gate_type: taste-quality
 trigger_condition: When a run changes XP values, scoring semantics, rarity/prestige rules, achievement/reward thresholds, persistent progression behavior, or rule config meaning.
@@ -109,7 +109,7 @@ source_files: vaultforge-xp4l/XP_RULES_SURFACE.md; vaultforge-xp4l/HEURISTIC_BOU
 notes:
 
 ### HG-009 - XP4L Event Source Expansion
-decision_0_or_1:
+decision_0_or_1: 1
 lane_scope: vaultforge-xp4l, vaultforge-coding, vaultforge-business, vaultforge-art
 gate_type: cross-lane-ownership
 trigger_condition: When XP4L starts accepting new event sources beyond the current contract, especially art or business-derived signals, or when upstream lanes must change event payloads for XP4L.
@@ -121,7 +121,7 @@ source_files: vaultforge-xp4l/EVENT_CONTRACT.md; vaultforge-xp4l/SYSTEM.md; vaul
 notes:
 
 ### HG-010 - Art Runtime Migration Or Rewrite
-decision_0_or_1:
+decision_0_or_1: 1 
 lane_scope: vaultforge-art
 gate_type: destructive-move
 trigger_condition: When a run proposes moving, deleting, rewriting, or migrating the sibling art runtime at `E:\tools\image_generation\vaultforge-art` into the VaultForge root.
@@ -130,10 +130,10 @@ decision_1_allows: The specific migration or copy plan named in the brief, after
 decision_0_blocks: Moving, deleting, rewriting, or migrating the sibling art runtime or experiments.
 default_if_blank: stop/report before acting
 source_files: vaultforge-art/CODEX_START.md; vaultforge-art/SYSTEM.md; vaultforge-art/PLAN.md; vaultforge-art/TASKS.md; ARCHITECTURE - engine extraction.md
-notes:
+notes: rewrite , store legacy 
 
 ### HG-011 - Icon Proposal Generation And Taste Selection
-decision_0_or_1:
+decision_0_or_1: 1
 lane_scope: vaultforge-icon
 gate_type: taste-quality
 trigger_condition: When icon work leaves approved dry-run/docs paths and needs paid/API proposal generation, generated output folders, selection of a winning visual direction, reroll/resize taste decisions, or activation of an inactive style guide.
@@ -142,10 +142,10 @@ decision_1_allows: One named icon proposal or selection action using the approve
 decision_0_blocks: Paid/API proposal generation, new generated proposal outputs, rerolls, selected/applied outputs, and taste selection decisions.
 default_if_blank: stop/report before acting #live-required
 source_files: vaultforge-icon/SYSTEM.md; vaultforge-icon/PLAN.md; vaultforge-icon/TASKS.md; vaultforge-icon/SIGN_UP.md; vaultforge-icon/documents/decisions/MEDIA_STYLE_PROPOSAL_STATUS_GATE.md
-notes:
+notes:  5 max
 
 ### HG-012 - Icon Apply Plan, Asset Moves, And Folder Icons
-decision_0_or_1:
+decision_0_or_1: 1
 lane_scope: vaultforge-icon
 gate_type: asset-move-delete
 trigger_condition: When icon work proposes building or running `apply_icon.py`, creating apply-plan artifacts, moving/deleting/renaming assets, writing target-project files, or applying folder/file icons.
@@ -154,6 +154,6 @@ decision_1_allows: The exact apply-plan or asset operation listed in the brief, 
 decision_0_blocks: `apply_icon.py` implementation or execution, generated apply-plan artifacts, asset move/delete/rename operations, target-project writes, and folder/file icon application.
 default_if_blank: stop/report before acting
 source_files: vaultforge-icon/CODEX_START.md; vaultforge-icon/SYSTEM.md; vaultforge-icon/PLAN.md; vaultforge-icon/documents/contracts/APPLY_ICON_APPLY_PLAN_CONTRACT.md
-notes:
+notes: 5 applied max
 
 ## Archived Gates

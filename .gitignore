@@ -46,6 +46,9 @@ pack/
 **/.obsidian/
 */.obsidan/
 /.obsidian/
+# DCS Docs
+dcs/
+
 # Testing
 svg-forge/samples/
 **/_template/

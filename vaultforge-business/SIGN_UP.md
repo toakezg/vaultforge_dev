@@ -312,3 +312,11 @@ Use this shape:
 - Verification: parser check for `run_business.ps1`; engine help confirmed accepted aliases and `--constraint`; direct business `-WhatIf` showed `--preset business-icon`, `--style vector-crisp`, and native constraints without `trustworthy` as an engine arg; direct business `-DryRun` reached engine dry-run and left no business output folder; markdown-bank file `-WhatIf` ran one VaultForge prompt preview; pack-runner `-WhatIf` passed with execution-policy bypass; `git diff --check` passed with only LF-to-CRLF warnings
 - Blocker or decision: no new hard gate hit; no live generation, paid/API call, asset move/delete, root workflow edit, or cross-lane ownership expansion was run by this reviewer
 - Resume prompt: `Continue Workflow B for vaultforge-business after the alias/constraint bridge review. Use the next approved safe slice from TASKS.md, keep live paid/API generation behind HG-004 scope, and do not move additional business-only fragments into engine registries without a new scoped approval.`
+
+## 2026-05-10 - workflow-b business alias constraint bridge recorder closure
+
+- Role: root recorder closing Workflow B cycle 1 for run `20260510T130343-hard-gate-doc-updated-with-0-or-1-approvals-b`
+- Scope: affected section handoff note only
+- Read: active run packet outputs for root coordinator, engine builder, engine reviewer, business builder, and business reviewer; current business `SIGN_UP.md`; root `CHANGELOG.md`; root `WORKFLOW_REVIEW.md`; current root dirty baseline; and `git show --stat --name-only --oneline -1 4e59f85`
+- Changed: recorded that the reviewed business alias/constraint bridge is closed and committed as `4e59f85`
+- Handoff: no business hard gate was hit by the wrapper/docs bridge. Business now passes only the approved engine aliases and production constraints natively, while brand-tone and client-pack language stays business-owned. Keep private paid/API generation behind the exact `HG-004` mocked/private pilot scope, with scope, budget, output path, and review purpose recorded before generation. Do not move additional business-only fragments into engine registries without a new scoped approval.
