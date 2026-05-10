@@ -148,6 +148,44 @@ class PromptBuildingBlocksTests(unittest.TestCase):
         self.assertEqual(args.preset, "icon")
         self.assertEqual(args.style, ["geometric", "fine-line", "mystica"])
 
+    def test_compose_prompt_keeps_business_aliases_and_constraints_out_of_moods(self):
+        prompt = generate.compose_prompt(
+            "Premium app tile",
+            "business-icon",
+            ["vector-crisp"],
+            ["hopeful"],
+            ["small-size-readable", "transparent-bg-ready"],
+        )
+
+        self.assertIn(generate.PRESET_PROMPTS["icon"], prompt)
+        self.assertIn(generate.STYLE_PROMPTS["geometric"], prompt)
+        self.assertIn(generate.MOOD_PROMPTS["hopeful"], prompt)
+        self.assertIn(generate.PRODUCTION_CONSTRAINT_PROMPTS["small-size-readable"], prompt)
+        self.assertIn(generate.PRODUCTION_CONSTRAINT_PROMPTS["transparent-bg-ready"], prompt)
+        self.assertNotIn("business-icon", generate.MOOD_PROMPTS)
+        self.assertNotIn("small-size-readable", generate.MOOD_PROMPTS)
+
+    def test_parse_args_accepts_business_aliases_and_constraints(self):
+        argv = [
+            "generate.py",
+            "Premium app tile",
+            "--preset",
+            "business-icon",
+            "--style",
+            "vector-crisp",
+            "--constraint",
+            "small-size-readable",
+            "--constraint",
+            "transparent-bg-ready",
+        ]
+
+        with patch.object(sys, "argv", argv):
+            args = generate.parse_args()
+
+        self.assertEqual(args.preset, "business-icon")
+        self.assertEqual(args.style, ["vector-crisp"])
+        self.assertEqual(args.constraint, ["small-size-readable", "transparent-bg-ready"])
+
     def test_parse_args_accepts_reference_image(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             image_path = Path(temp_dir) / "reference.jpeg"
@@ -356,6 +394,7 @@ class GalleryIndexTests(unittest.TestCase):
   "client": "Empower You",
   "client_slug": "empower-you",
   "composed_prompt": "Premium logo direction. icon fragment.",
+  "constraint": ["small-size-readable"],
   "created_at": "2026-05-09T22:45:00",
   "format": "png",
   "job": "Logo Pack 01",
@@ -385,6 +424,7 @@ class GalleryIndexTests(unittest.TestCase):
         self.assertEqual(index["ignored_count"], 1)
         entry = index["entries"][0]
         self.assertEqual(entry["client_slug"], "empower-you")
+        self.assertEqual(entry["constraint"], ["small-size-readable"])
         self.assertEqual(entry["output_path"], "generated/sample.png")
         self.assertTrue(str(entry["sidecar_path"]).endswith("sample.json"))
 

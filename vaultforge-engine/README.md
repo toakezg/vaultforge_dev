@@ -65,6 +65,7 @@ The engine now accepts native low-risk business handoff flags:
 --reference-image
 --api-key
 --api-key-env
+--constraint
 --gallery-index
 --gallery-source
 --gallery-output
@@ -74,6 +75,12 @@ The context and variant fields affect output naming, variant count, dry-run
 previews, and optional sidecar run metadata. They do not inject lane context
 into prompt text; business and art wrappers still own their lane-specific prompt
 composition.
+
+The engine also accepts a small set of approved business-facing preset and
+style aliases, such as `business-icon` and `vector-crisp`, without mixing those
+names into the base shared prompt registries. Production constraints such as
+`small-size-readable` and `transparent-bg-ready` use `--constraint` so they stay
+separate from emotional `--mod` moods.
 
 `--input-image` and `--reference-image` attach local `.png`, `.jpg`, `.jpeg`,
 `.webp`, `.gif`, `.svg`, or `.ico` files to the Responses API request as image

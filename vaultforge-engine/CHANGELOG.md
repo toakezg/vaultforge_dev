@@ -1,5 +1,10 @@
 # Engine Changelog
 
+## 2026-05-10
+
+- Added the first engine-side registry migration shape for approved business fragments: preset/style alias maps plus a separate `--constraint` production-constraint registry, keeping `MOOD_PROMPTS` limited to emotional modifiers.
+- Added tests and a dry-run smoke check for business-facing aliases and production constraints without running live generation.
+
 ## 2026-05-09
 
 - Rejected `--gallery-index --dry-run` at argument validation so the engine dry-run contract remains no-write while normal gallery-index output still writes explicitly requested JSON.

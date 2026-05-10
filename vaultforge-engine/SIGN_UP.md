@@ -14,6 +14,22 @@ Use this shape:
 - Handoff:
 ```
 
+## 2026-05-10 - workflow b 130343 cycle 1 engine builder
+
+- Role: Builder for Workflow B cycle 1, engine lane
+- Scope: section-local engine registry shape for run `20260510T130343-hard-gate-doc-updated-with-0-or-1-approvals-b`
+- Read: root coordinator routing note, `HARD_GATES.md`, dirty baseline, engine `README.md`, `PLAN.md`, `TASKS.md`, `RUN_MANIFEST.md`, `SIGN_UP.md`, `src\generate.py`, `tests\test_generate.py`, and business `BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md`
+- Changed: added engine preset/style alias maps for approved business-facing names, added a separate `--constraint` production-constraint registry, preserved emotional `--mod` behavior, and documented the new sidecar field and CLI shape
+- Handoff: no live generation, paid/API work, contact-sheet renderer work, generated art, fixture-policy decision, or client package work was performed. Verification passed with `PYTHONPATH=src; py -B -m unittest discover -s tests`, a dry-run alias/constraint smoke command, the committed smoke config dry-run, normal empty gallery-index output to a temp JSON, `--gallery-index --dry-run` rejection without output, and `git diff --check` with only LF-to-CRLF warnings. Business can now evaluate replacing wrapper-only mappings for the approved candidates while keeping `client-pack`, broad logo/wordmark/mascot names, and market-tone modifiers lane-owned unless a later gate explicitly moves them.
+
+## 2026-05-10 - workflow b 130343 cycle 1 engine reviewer
+
+- Role: Reviewer for Workflow B cycle 1, engine lane
+- Scope: review the scoped registry-shape builder result for run `20260510T130343-hard-gate-doc-updated-with-0-or-1-approvals-b`
+- Read: root coordinator routing note, builder output, `HARD_GATES.md`, dirty baseline, engine diff, engine `README.md`, `TASKS.md`, `RUN_MANIFEST.md`, `SIGN_UP.md`, `src\generate.py`, `tests\test_generate.py`, and business `BUSINESS_FRAGMENT_LIBRARY_CANDIDATES.md`
+- Changed: recorded this reviewer handoff and run-packet review note only
+- Handoff: no blocking findings. Reviewer reran 26 unit tests, an alias/constraint dry-run, the committed smoke config dry-run, normal empty gallery-index output to a temp zero-entry JSON, `--gallery-index --dry-run` rejection without output, and `git diff --check` for scoped engine files. The registry shape keeps approved business-facing preset/style aliases and production constraints out of `MOOD_PROMPTS`; no live generation, paid/API work, contact-sheet renderer work, generated art, fixture-policy decision, client package work, or business wrapper edit was performed.
+
 ## 2026-05-10 - workflow b 055419 cycle 3 engine builder
 
 - Role: Builder for Workflow B cycle 3, engine lane

@@ -77,10 +77,28 @@ PRESET_PROMPTS = {
     "obsidian-cover": "strong cover-image composition, bold focal subject, readable negative space, moody editorial finish",
     "sacred-scene": "sacred tableau composition, reverent symbolism, ceremonial details, serene focal storytelling",
 }
+PRESET_ALIASES = {
+    "business-icon": "icon",
+    "business-cover": "obsidian-cover",
+    "brand-board": "artifact-card",
+    "social-brand-tile": "artifact-card",
+}
+STYLE_ALIASES = {
+    "clean-corporate": "geometric",
+    "modern-startup": "geometric",
+    "vector-crisp": "geometric",
+    "editorial-brand": "painterly",
+}
 MOOD_PROMPTS = {
     "peaceful": "peaceful emotional tone, calm stillness, soft visual rhythm, restorative atmosphere",
     "hopeful": "hopeful emotional tone, uplifting light, quiet optimism, forward-looking warmth",
     "compassionate": "compassionate emotional tone, tender presence, humane warmth, gentle emotional clarity",
+}
+PRODUCTION_CONSTRAINT_PROMPTS = {
+    "high-contrast": "high-contrast production constraint, clear foreground-background separation, strong readability",
+    "print-safe": "print-safe production constraint, clean edges, limited fragile detail, reproducible design language",
+    "small-size-readable": "small-size readability constraint, simple silhouette, reduced clutter, recognizable at icon scale",
+    "transparent-bg-ready": "transparent-background production constraint, isolated subject edges, no mockup scene, clean cutout readiness",
 }
 
 MARKDOWN_HEADING_PATTERN = re.compile(r"^#{1,6}\s+(.*\S)\s*$")
@@ -127,6 +145,14 @@ def optional_slug(value: str, fallback: str) -> str:
     if not value or not value.strip():
         return ""
     return slugify(value, fallback=fallback)
+
+
+def registry_choices(registry: dict[str, str], aliases: dict[str, str] | None = None) -> list[str]:
+    return sorted({*registry, *(aliases or {})})
+
+
+def resolve_registry_key(name: str, aliases: dict[str, str]) -> str:
+    return aliases.get(name, name)
 
 
 def build_context_slugs(args: argparse.Namespace) -> dict[str, str]:
@@ -336,13 +362,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--style",
         action="append",
-        choices=sorted(STYLE_PROMPTS),
+        choices=registry_choices(STYLE_PROMPTS, STYLE_ALIASES),
         default=[],
         help="Named style prompt fragment to append. Repeat to combine multiple styles.",
     )
     parser.add_argument(
         "--preset",
-        choices=sorted(PRESET_PROMPTS),
+        choices=registry_choices(PRESET_PROMPTS, PRESET_ALIASES),
         help="Named prompt preset for repeatable VaultForge-oriented outputs.",
     )
     parser.add_argument(
@@ -351,6 +377,16 @@ def parse_args() -> argparse.Namespace:
         choices=sorted(MOOD_PROMPTS),
         default=[],
         help="Named mood modifier to append. Repeat to combine multiple moods.",
+    )
+    parser.add_argument(
+        "--constraint",
+        action="append",
+        choices=sorted(PRODUCTION_CONSTRAINT_PROMPTS),
+        default=[],
+        help=(
+            "Named production constraint fragment to append without treating it "
+            "as an emotional mood. Repeat to combine multiple constraints."
+        ),
     )
     parser.add_argument(
         "--size",
@@ -607,14 +643,19 @@ def compose_prompt(
     preset: str | None,
     styles: list[str],
     mods: list[str],
+    constraints: list[str] | None = None,
 ) -> str:
     fragments = [prompt.strip()]
     if preset:
-        fragments.append(PRESET_PROMPTS[preset])
+        fragments.append(PRESET_PROMPTS[resolve_registry_key(preset, PRESET_ALIASES)])
     if styles:
-        fragments.append("; ".join(STYLE_PROMPTS[style] for style in styles))
+        fragments.append(
+            "; ".join(STYLE_PROMPTS[resolve_registry_key(style, STYLE_ALIASES)] for style in styles)
+        )
     if mods:
         fragments.append("; ".join(MOOD_PROMPTS[mod] for mod in mods))
+    if constraints:
+        fragments.append("; ".join(PRODUCTION_CONSTRAINT_PROMPTS[constraint] for constraint in constraints))
     return ". ".join(fragment for fragment in fragments if fragment)
 
 
@@ -743,6 +784,7 @@ def build_run_metadata(
         "preset": args.preset,
         "style": list(args.style),
         "mod": list(args.mod),
+        "constraint": list(getattr(args, "constraint", [])),
         "size": args.size,
         "quality": args.quality,
         "format": args.format,
@@ -809,6 +851,7 @@ def build_gallery_entry(sidecar_path: Path, payload: dict[str, object]) -> dict[
         "preset",
         "style",
         "mod",
+        "constraint",
         "size",
         "quality",
         "format",
@@ -958,6 +1001,7 @@ def build_batch_request_hash(
         "models_to_try": models_to_try,
         "output_dir": str(args.output_dir_path.resolve()),
         "preset": args.preset,
+        "constraint": list(getattr(args, "constraint", [])),
         "prompt_text": prompt_text,
         "quality": args.quality,
         "size": args.size,
@@ -1343,7 +1387,13 @@ def run_batch(
             context_prefix=context_prefix,
             variant_count=args.variants,
         )
-        composed_prompt = compose_prompt(prompt_text, args.preset, args.style, args.mod)
+        composed_prompt = compose_prompt(
+            prompt_text,
+            args.preset,
+            args.style,
+            args.mod,
+            args.constraint,
+        )
         write_metadata_for_entry = write_metadata or bool(image_references)
 
         if args.dry_run:
@@ -1490,7 +1540,13 @@ def main() -> int:
             )
 
         assert args.prompt is not None
-        composed_prompt = compose_prompt(args.prompt, args.preset, args.style, args.mod)
+        composed_prompt = compose_prompt(
+            args.prompt,
+            args.preset,
+            args.style,
+            args.mod,
+            args.constraint,
+        )
         image_references = dedupe_image_references(args.cli_image_references)
         context_prefix = build_context_filename_prefix(args)
         write_metadata = should_write_run_metadata(args)

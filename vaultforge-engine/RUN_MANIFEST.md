@@ -22,8 +22,9 @@ should read, not every additive field the engine may include.
 | `model` | string or null | Model that produced the image. Dry-run previews can show metadata paths but do not write sidecars. |
 | `models_to_try` | array of strings | Ordered model fallback list for the run. |
 | `preset` | string or null | Shared engine preset name, if supplied. |
-| `style` | array of strings | Shared engine style names, in CLI order. |
+| `style` | array of strings | Shared engine style names or accepted aliases, in CLI order. |
 | `mod` | array of strings | Shared engine modifier names, in CLI order. |
+| `constraint` | array of strings | Shared engine production constraint names, in CLI order. |
 | `size` | string | Requested image size. |
 | `quality` | string | Requested image quality. |
 | `format` | string | Requested output format. |
