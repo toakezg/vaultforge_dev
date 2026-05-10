@@ -5,6 +5,7 @@
 **/.env
 **/.venv/
 **/__pycache__/
+vaultforge-init/.env
 vaultforge-icon/svg-forge/.env
 vaultforge-icon/svg-forge/.venv/
 vaultforge-icon/svg-forge/__pycache__/  
@@ -22,7 +23,13 @@ vaultforge-art/.venv/
 vaultforge-art/__pycache__/
 vaultforge-art/*.pyc
 vaultforge-art/*.log
+vaultforge-init/.venv/
+vaultforge-init/__pycache__/
+vaultforge-init/*.pyc
+vaultforge-init/*.log
+vaultforge-init/
 
+ICON/
 # Generated outputs
 vaultforge-business/generated/
 vaultforge-art/assets/generated/

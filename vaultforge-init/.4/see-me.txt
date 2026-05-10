@@ -1,6 +1,0 @@
-XP: Quest | Find Dot4 | +100xp
-Achievement: unlock | TWO 4 FOUND| +110xp
-Title: earned | Finder | +120xp
-Reward: earned | Rest | +50xp 
-
-
