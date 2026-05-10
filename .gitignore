@@ -28,7 +28,7 @@ vaultforge-init/__pycache__/
 vaultforge-init/*.pyc
 vaultforge-init/*.log
 vaultforge-init/
-
+.obsidan/
 ICON/
 # Generated outputs
 vaultforge-business/generated/

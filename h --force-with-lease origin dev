@@ -1,0 +1,555 @@
+[33mcommit 130426411ef93abcf1f8f11fd2f4a24619d4068e[m
+Author: toakezg <nvn4_4@outlook.com>
+Date:   Fri Apr 24 21:22:29 2026 +1000
+
+    flatten repo: removed embedded repos and unified vaultforge
+
+ .obsidian/app.json                                 |     3 [32m+[m
+ .obsidian/appearance.json                          |     1 [32m+[m
+ .obsidian/community-plugins.json                   |     9 [32m+[m
+ .obsidian/core-plugins.json                        |    33 [32m+[m
+ .obsidian/graph.json                               |    65 [32m+[m
+ .obsidian/hotkeys.json                             |    37 [32m+[m
+ .obsidian/plugins/homepage/main.js                 |     3 [32m+[m
+ .obsidian/plugins/homepage/manifest.json           |    13 [32m+[m
+ .obsidian/plugins/homepage/styles.css              |   231 [32m+[m
+ .obsidian/plugins/litegallery/main.js              |   229 [32m+[m
+ .obsidian/plugins/litegallery/manifest.json        |    10 [32m+[m
+ .obsidian/plugins/litegallery/styles.css           |   111 [32m+[m
+ .obsidian/plugins/media-companion/data.json        |    22 [32m+[m
+ .obsidian/plugins/media-companion/main.js          |  2841 [32m+[m
+ .obsidian/plugins/media-companion/manifest.json    |    10 [32m+[m
+ .obsidian/plugins/media-companion/styles.css       |   255 [32m+[m
+ .obsidian/plugins/obsidian-folder-index/data.json  |    23 [32m+[m
+ .obsidian/plugins/obsidian-folder-index/main.js    |  1077 [32m+[m
+ .../plugins/obsidian-folder-index/manifest.json    |    11 [32m+[m
+ .obsidian/plugins/obsidian-folder-index/styles.css |     4 [32m+[m
+ .obsidian/plugins/obsidian-tasks-plugin/main.js    |   508 [32m+[m
+ .../plugins/obsidian-tasks-plugin/manifest.json    |    12 [32m+[m
+ .obsidian/plugins/obsidian-tasks-plugin/styles.css |     1 [32m+[m
+ .obsidian/plugins/obsidian-theme-toggler/data.json |     8 [32m+[m
+ .obsidian/plugins/obsidian-theme-toggler/main.js   |     8 [32m+[m
+ .../plugins/obsidian-theme-toggler/manifest.json   |    10 [32m+[m
+ .../plugins/obsidian-theme-toggler/styles.css      |    14 [32m+[m
+ .obsidian/plugins/oz-image-plugin/main.js          |   191 [32m+[m
+ .obsidian/plugins/oz-image-plugin/manifest.json    |    11 [32m+[m
+ .obsidian/plugins/oz-image-plugin/styles.css       |   349 [32m+[m
+ .../plugins/start-page/backup/data-2026-04-15.json |    62 [32m+[m
+ .../plugins/start-page/backup/data-2026-04-16.json |    62 [32m+[m
+ .../plugins/start-page/backup/data-2026-04-17.json |    62 [32m+[m
+ .../plugins/start-page/backup/data-2026-04-23.json |    62 [32m+[m
+ .obsidian/plugins/start-page/data.json             |    62 [32m+[m
+ .obsidian/plugins/start-page/main.js               |     8 [32m+[m
+ .obsidian/plugins/start-page/manifest.json         |    10 [32m+[m
+ .obsidian/plugins/start-page/styles.css            |     1 [32m+[m
+ .obsidian/types.json                               |    29 [32m+[m
+ .obsidian/workspace.json                           |   322 [32m+[m
+ ARCHITECTURE - engine extraction.md                |   199 [32m+[m
+ CHANGELOG.md                                       |    71 [32m+[m
+ CODEX_START.md                                     |    39 [32m+[m
+ ICON/ICON.md                                       |     5 [32m+[m
+ ICON/ICON_update.txt                               |     0
+ ICON/XP4Life/README.md                             |    19 [32m+[m
+ .../XP4Life/part-a/generated/achievements/.gitkeep |     1 [32m+[m
+ .../achievements/20260411-095409-laurel-badge.png  |   Bin [31m0[m -> [32m1229113[m bytes
+ .../20260411-095409-laurel-badge.png.sidecar.md    |    19 [32m+[m
+ .../achievements/20260411-095444-medal-star.png    |   Bin [31m0[m -> [32m1389062[m bytes
+ .../20260411-095444-medal-star.png.sidecar.md      |    11 [32m+[m
+ .../achievements/20260411-095532-shield-star.png   |   Bin [31m0[m -> [32m1618395[m bytes
+ .../20260411-095532-shield-star.png.sidecar.md     |    23 [32m+[m
+ ICON/XP4Life/part-a/generated/quests/.gitkeep      |     1 [32m+[m
+ .../quests/20260411-095154-footsteps-path.png      |   Bin [31m0[m -> [32m1506989[m bytes
+ .../20260411-095154-footsteps-path.png.sidecar.md  |    19 [32m+[m
+ .../quests/20260411-095241-forward-compass.png     |   Bin [31m0[m -> [32m1230163[m bytes
+ .../20260411-095241-forward-compass.png.sidecar.md |    27 [32m+[m
+ .../quests/20260411-095315-quest-scroll.png        |   Bin [31m0[m -> [32m1469898[m bytes
+ .../20260411-095315-quest-scroll.png.sidecar.md    |    11 [32m+[m
+ .../20260415-134710-batch-generation-scripts.png   |   Bin [31m0[m -> [32m1393101[m bytes
+ ...-134710-batch-generation-scripts.png.sidecar.md |    11 [32m+[m
+ ...0415-134747-business-pipeline-stabilization.png |   Bin [31m0[m -> [32m1374151[m bytes
+ ...-business-pipeline-stabilization.png.sidecar.md |    11 [32m+[m
+ ...0260415-134849-vaultforge-engine-seperation.png |   Bin [31m0[m -> [32m1507692[m bytes
+ ...849-vaultforge-engine-seperation.png.sidecar.md |    11 [32m+[m
+ .../20260415-135130-batch-generation-scripts.png   |   Bin [31m0[m -> [32m1390882[m bytes
+ ...-135130-batch-generation-scripts.png.sidecar.md |    15 [32m+[m
+ ...0415-135207-business-pipeline-stabilization.png |   Bin [31m0[m -> [32m1375307[m bytes
+ ...-business-pipeline-stabilization.png.sidecar.md |    27 [32m+[m
+ ...0260415-135245-vaultforge-engine-seperation.png |   Bin [31m0[m -> [32m1503745[m bytes
+ ...245-vaultforge-engine-seperation.png.sidecar.md |    19 [32m+[m
+ ICON/XP4Life/part-a/generated/rewards/.gitkeep     |     1 [32m+[m
+ .../generated/rewards/20260417-022955-xp4l-mix.png |   Bin [31m0[m -> [32m1134919[m bytes
+ .../20260417-022955-xp4l-mix.png.sidecar.md        |    19 [32m+[m
+ .../generated/rewards/20260417-023151-xp4l-mix.png |   Bin [31m0[m -> [32m1932781[m bytes
+ .../20260417-023151-xp4l-mix.png.sidecar.md        |    19 [32m+[m
+ .../generated/rewards/20260417-023419-xp4l-mix.png |   Bin [31m0[m -> [32m1399411[m bytes
+ .../20260417-023419-xp4l-mix.png.sidecar.md        |    11 [32m+[m
+ .../generated/rewards/20260417-023542-xp4l-mix.png |   Bin [31m0[m -> [32m1471303[m bytes
+ .../20260417-023542-xp4l-mix.png.sidecar.md        |    19 [32m+[m
+ .../generated/rewards/20260417-023639-xp4l-mix.png |   Bin [31m0[m -> [32m1586917[m bytes
+ .../20260417-023639-xp4l-mix.png.sidecar.md        |    23 [32m+[m
+ .../generated/rewards/20260417-023730-xp4l-mix.png |   Bin [31m0[m -> [32m1477231[m bytes
+ .../20260417-023730-xp4l-mix.png.sidecar.md        |    19 [32m+[m
+ .../generated/rewards/20260417-023822-xp4l-mix.png |   Bin [31m0[m -> [32m1560981[m bytes
+ .../20260417-023822-xp4l-mix.png.sidecar.md        |    23 [32m+[m
+ .../generated/rewards/20260417-023925-xp4l-mix.png |   Bin [31m0[m -> [32m1637743[m bytes
+ .../20260417-023925-xp4l-mix.png.sidecar.md        |    15 [32m+[m
+ .../generated/rewards/20260417-024024-xp4l-mix.png |   Bin [31m0[m -> [32m1384288[m bytes
+ .../20260417-024024-xp4l-mix.png.sidecar.md        |    23 [32m+[m
+ .../generated/rewards/20260417-024115-xp4l-mix.png |   Bin [31m0[m -> [32m1822438[m bytes
+ .../20260417-024115-xp4l-mix.png.sidecar.md        |    15 [32m+[m
+ .../generated/rewards/20260417-024231-xp4l-mix.png |   Bin [31m0[m -> [32m1403692[m bytes
+ .../20260417-024231-xp4l-mix.png.sidecar.md        |    23 [32m+[m
+ .../generated/rewards/20260417-024348-xp4l-mix.png |   Bin [31m0[m -> [32m1454256[m bytes
+ .../20260417-024348-xp4l-mix.png.sidecar.md        |    19 [32m+[m
+ .../generated/rewards/20260417-105528-xp4l-mix.png |   Bin [31m0[m -> [32m1616125[m bytes
+ .../20260417-105528-xp4l-mix.png.sidecar.md        |    23 [32m+[m
+ .../generated/rewards/20260417-105626-xp4l-mix.png |   Bin [31m0[m -> [32m1573959[m bytes
+ .../20260417-105626-xp4l-mix.png.sidecar.md        |    15 [32m+[m
+ .../generated/rewards/20260417-105737-xp4l-mix.png |   Bin [31m0[m -> [32m1471032[m bytes
+ .../20260417-105737-xp4l-mix.png.sidecar.md        |    15 [32m+[m
+ .../generated/rewards/20260417-105844-xp4l-mix.png |   Bin [31m0[m -> [32m1412935[m bytes
+ .../20260417-105844-xp4l-mix.png.sidecar.md        |    23 [32m+[m
+ .../generated/rewards/20260417-105939-xp4l-mix.png |   Bin [31m0[m -> [32m1898492[m bytes
+ .../20260417-105939-xp4l-mix.png.sidecar.md        |    19 [32m+[m
+ .../generated/rewards/20260417-110028-xp4l-mix.png |   Bin [31m0[m -> [32m1336934[m bytes
+ .../20260417-110028-xp4l-mix.png.sidecar.md        |     7 [32m+[m
+ .../generated/rewards/20260417-110158-xp4l-mix.png |   Bin [31m0[m -> [32m1520248[m bytes
+ .../20260417-110158-xp4l-mix.png.sidecar.md        |    11 [32m+[m
+ .../generated/rewards/20260417-110317-xp4l-mix.png |   Bin [31m0[m -> [32m1452664[m bytes
+ .../20260417-110317-xp4l-mix.png.sidecar.md        |    19 [32m+[m
+ .../generated/rewards/20260417-110427-xp4l-mix.png |   Bin [31m0[m -> [32m1540733[m bytes
+ .../20260417-110427-xp4l-mix.png.sidecar.md        |    19 [32m+[m
+ .../generated/rewards/20260417-110555-xp4l-mix.png |   Bin [31m0[m -> [32m1592319[m bytes
+ .../20260417-110555-xp4l-mix.png.sidecar.md        |    23 [32m+[m
+ ICON/XP4Life/part-a/generated/titles/.gitkeep      |     1 [32m+[m
+ .../titles/20260411-095613-crown-emblem.png        |   Bin [31m0[m -> [32m1586216[m bytes
+ .../20260411-095613-crown-emblem.png.sidecar.md    |    23 [32m+[m
+ .../titles/20260411-095653-rune-sigil.png          |   Bin [31m0[m -> [32m1395642[m bytes
+ .../20260411-095653-rune-sigil.png.sidecar.md      |     7 [32m+[m
+ ICON/XP4Life/part-a/in use prompts/element.md      |     8 [32m+[m
+ ICON/XP4Life/part-a/in use prompts/gear.md         |    23 [32m+[m
+ ICON/XP4Life/part-a/in use prompts/keys.md         |     5 [32m+[m
+ ICON/XP4Life/part-a/in use prompts/theme.md        |    26 [32m+[m
+ ICON/XP4Life/part-a/in use prompts/tier.md         |    14 [32m+[m
+ ICON/XP4Life/part-a/in use prompts/weapon.md       |     3 [32m+[m
+ ICON/XP4Life/part-a/in use prompts/weapon_type.md  |    44 [32m+[m
+ .../in use prompts/xp4l-icon-theme-element.txt     |     1 [32m+[m
+ .../in use prompts/xp4l-icon-weapon-elemental.txt  |     1 [32m+[m
+ .../part-a/in use prompts/xp4l-icon-weapon.txt     |     1 [32m+[m
+ ICON/XP4Life/part-a/in use prompts/xp4l-icon.md    |     1 [32m+[m
+ .../xp4l-theme-icon-element-weapon.txt             |     1 [32m+[m
+ .../part-a/in use prompts/xp4l-theme-icon.txt      |     0
+ .../old prompts/Icon-diff-type-generator-test.md   |    14 [32m+[m
+ ICON/XP4Life/part-a/old prompts/gear.md            |    14 [32m+[m
+ ICON/XP4Life/part-a/old prompts/magic-item.md      |    22 [32m+[m
+ ICON/XP4Life/part-a/old prompts/weapon.md          |    44 [32m+[m
+ ICON/XP4Life/part-a/pools/archetype.txt            |    10 [32m+[m
+ ICON/XP4Life/part-a/pools/behavior.txt             |    10 [32m+[m
+ ICON/XP4Life/part-a/pools/concept.txt              |    14 [32m+[m
+ ICON/XP4Life/part-a/pools/cosmic.txt               |    10 [32m+[m
+ ICON/XP4Life/part-a/pools/eco.txt                  |     8 [32m+[m
+ ICON/XP4Life/part-a/pools/element.txt              |    55 [32m+[m
+ ICON/XP4Life/part-a/pools/elemental.txt            |    25 [32m+[m
+ ICON/XP4Life/part-a/pools/function.txt             |    12 [32m+[m
+ .../XP4Life/part-a/pools/item-theme-alch-magic.txt |     8 [32m+[m
+ ICON/XP4Life/part-a/pools/magic.txt                |    45 [32m+[m
+ ICON/XP4Life/part-a/pools/material.txt             |    12 [32m+[m
+ ICON/XP4Life/part-a/pools/mind.txt                 |    10 [32m+[m
+ ICON/XP4Life/part-a/pools/rarity.txt               |    11 [32m+[m
+ ICON/XP4Life/part-a/pools/reward.txt               |   100 [32m+[m
+ ICON/XP4Life/part-a/pools/shape.txt                |    10 [32m+[m
+ ICON/XP4Life/part-a/pools/spells.txt               |    45 [32m+[m
+ ICON/XP4Life/part-a/pools/state.txt                |    10 [32m+[m
+ ICON/XP4Life/part-a/pools/style.txt                |    10 [32m+[m
+ ICON/XP4Life/part-a/pools/system.txt               |    10 [32m+[m
+ ICON/XP4Life/part-a/pools/theme.txt                |    26 [32m+[m
+ ICON/XP4Life/part-a/pools/truth.txt                |    50 [32m+[m
+ ICON/XP4Life/part-a/pools/xp4l.txt                 |     1 [32m+[m
+ .../pass-01/Batch Generation Scripts.md            |     1 [32m+[m
+ .../pass-01/Business Pipeline Stabilization.md     |     1 [32m+[m
+ .../pass-01/Vaultforge Engine seperation.md        |     1 [32m+[m
+ .../pass-01/.batch-state.json                      |    40 [32m+[m
+ .../pass-01/Icon-diff-type-generator-test.md       |    14 [32m+[m
+ .../pass-01/gear.md                                |    21 [32m+[m
+ .../pass-01/keys.md                                |     3 [32m+[m
+ .../pass-01/magic-item.md                          |    22 [32m+[m
+ .../pass-01/weapon.md                              |     3 [32m+[m
+ .../part-a/prompts/quests/.batch-state.json        |    20 [32m+[m
+ .../prompts/quests/Batch Generation Scripts.md     |     1 [32m+[m
+ .../quests/Business Pipeline Stabilization.md      |     1 [32m+[m
+ .../prompts/quests/Vaultforge Engine seperation.md |     2 [32m+[m
+ .../part-a/prompts/rewards/.batch-state.json       |    65 [32m+[m
+ ICON/XP4Life/part-a/prompts/rewards/xp4l-mix.txt   |     4 [32m+[m
+ ICON/XP4Life/part-a/selected/achievements/.gitkeep |     1 [32m+[m
+ .../part-a/selected/achievements/laurel-badge.md   |     8 [32m+[m
+ .../part-a/selected/achievements/medal-star.md     |     8 [32m+[m
+ .../part-a/selected/achievements/shield-star.md    |     8 [32m+[m
+ ICON/XP4Life/part-a/selected/quests/.gitkeep       |     1 [32m+[m
+ .../part-a/selected/quests/footsteps-path.md       |     8 [32m+[m
+ .../part-a/selected/quests/forward-compass.md      |     8 [32m+[m
+ .../XP4Life/part-a/selected/quests/quest-scroll.md |     8 [32m+[m
+ ICON/XP4Life/part-a/selected/rewards/.gitkeep      |     1 [32m+[m
+ .../XP4Life/part-a/selected/rewards/coin-reward.md |     8 [32m+[m
+ ICON/XP4Life/part-a/selected/rewards/energy-orb.md |     8 [32m+[m
+ ICON/XP4Life/part-a/selected/titles/.gitkeep       |     1 [32m+[m
+ .../XP4Life/part-a/selected/titles/crown-emblem.md |     8 [32m+[m
+ ICON/XP4Life/part-a/selected/titles/rune-sigil.md  |     8 [32m+[m
+ ICON/__pycache__/run_icon_batch.cpython-314.pyc    |   Bin [31m0[m -> [32m32212[m bytes
+ ICON/run_icon_batch.py                             |   603 [32m+[m
+ ICON/run_loop_rewards.bat                          |     4 [32m+[m
+ INDEX.md                                           |     7 [32m+[m
+ INDEX/DOCUMENTATION_INDEX.md                       |    39 [32m+[m
+ INDEX/INDEX.md                                     |     5 [32m+[m
+ Loopers Logiic.md                                  |    89 [32m+[m
+ NATHS NOTES/Engine Thread Boot Order.md            |    14 [32m+[m
+ NATHS NOTES/NATHS NOTES.md                         |     5 [32m+[m
+ NATHS NOTES/QUICK JOT Notes For Later.md           |    10 [32m+[m
+ NATHS NOTES/VaultForge -sect Orchestration.md      |   314 [32m+[m
+ NATHS NOTES/notes & tracking.md                    |    42 [32m+[m
+ .../How to - Create XP4Life Icon set (obsidian).md |   156 [32m+[m
+ NOTE/Icons - part A - output review.md             |    70 [32m+[m
+ NOTE/Icons - part A - quick use guide.md           |   155 [32m+[m
+ NOTE/Icons - part A - todo.md                      |    41 [32m+[m
+ NOTE/Icons - part A.md                             |    93 [32m+[m
+ NOTE/VaultForge Icons - branch plan.md             |   180 [32m+[m
+ PLAN.md                                            |    78 [32m+[m
+ README.md                                          |    98 [32m+[m
+ Reference/Reference.md                             |     5 [32m+[m
+ Reference/VaultForge Icons - client template.md    |    54 [32m+[m
+ Reference/VaultForge Icons - facebook ads.md       |    48 [32m+[m
+ Reference/VaultForge Icons - price guide.md        |    60 [32m+[m
+ Reference/VaultForge Icons - usage stats.md        |    31 [32m+[m
+ SEE-ME..md                                         |   130 [32m+[m
+ SYSTEM.md                                          |    71 [32m+[m
+ TASKS.md                                           |    67 [32m+[m
+ THREAD_MAP.md                                      |   280 [32m+[m
+ TODAYS GOAL.md                                     |    14 [32m+[m
+ Untitled 1.canvas                                  |     1 [32m+[m
+ Untitled.base                                      |     3 [32m+[m
+ Untitled.canvas                                    |     1 [32m+[m
+ _template/.obsidian/app.json                       |     4 [32m+[m
+ _template/.obsidian/appearance.json                |     1 [32m+[m
+ _template/.obsidian/community-plugins.json         |     5 [32m+[m
+ _template/.obsidian/core-plugins.json              |    33 [32m+[m
+ _template/.obsidian/plugins/any-block/main.js      | 55547 [32m+++++++++++++++++++[m
+ .../.obsidian/plugins/any-block/manifest.json      |    15 [32m+[m
+ _template/.obsidian/plugins/any-block/styles.css   |  1210 [32m+[m
+ _template/.obsidian/plugins/codename/main.js       |  3057 [32m+[m
+ _template/.obsidian/plugins/codename/manifest.json |    10 [32m+[m
+ _template/.obsidian/plugins/css-editor/main.js     | 13937 [32m+++++[m
+ .../.obsidian/plugins/css-editor/manifest.json     |    11 [32m+[m
+ _template/.obsidian/plugins/css-editor/styles.css  |    51 [32m+[m
+ .../plugins/custom-syntax-highlights/main.js       |     9 [32m+[m
+ .../plugins/custom-syntax-highlights/manifest.json |    10 [32m+[m
+ .../plugins/custom-syntax-highlights/styles.css    |   101 [32m+[m
+ _template/.obsidian/plugins/dataview/main.js       | 20876 [32m+++++++[m
+ _template/.obsidian/plugins/dataview/manifest.json |    11 [32m+[m
+ _template/.obsidian/plugins/dataview/styles.css    |   141 [32m+[m
+ _template/.obsidian/plugins/vscode-editor/main.js  |  1370 [32m+[m
+ .../.obsidian/plugins/vscode-editor/manifest.json  |    11 [32m+[m
+ .../.obsidian/plugins/vscode-editor/styles.css     |  4616 [32m++[m
+ _template/.obsidian/workspace.json                 |   253 [32m+[m
+ _template/Home.md                                  |    25 [32m+[m
+ .../XP4Life/part-a/generated/achievements/.gitkeep |     1 [32m+[m
+ .../XP4Life/part-a/generated/quests/.gitkeep       |     1 [32m+[m
+ .../XP4Life/part-a/generated/rewards/.gitkeep      |     1 [32m+[m
+ .../XP4Life/part-a/generated/titles/.gitkeep       |     1 [32m+[m
+ .../part-a/prompts/achievements/laurel-badge.md    |     8 [32m+[m
+ .../part-a/prompts/achievements/medal-star.md      |     8 [32m+[m
+ .../part-a/prompts/achievements/shield-star.md     |     8 [32m+[m
+ .../part-a/prompts/quests/footsteps-path.md        |     8 [32m+[m
+ .../part-a/prompts/quests/forward-compass.md       |     8 [32m+[m
+ .../XP4Life/part-a/prompts/quests/quest-scroll.md  |     8 [32m+[m
+ .../XP4Life/part-a/prompts/rewards/coin-reward.md  |     8 [32m+[m
+ .../XP4Life/part-a/prompts/rewards/energy-orb.md   |     8 [32m+[m
+ .../XP4Life/part-a/prompts/titles/crown-emblem.md  |     8 [32m+[m
+ .../XP4Life/part-a/prompts/titles/rune-sigil.md    |     8 [32m+[m
+ .../XP4Life/part-a/generated/achievements/.gitkeep |     1 [32m+[m
+ .../achievements/20260411-095409-laurel-badge.png  |   Bin [31m0[m -> [32m1229113[m bytes
+ .../20260411-095409-laurel-badge.png.sidecar.md    |    19 [32m+[m
+ .../achievements/20260411-095444-medal-star.png    |   Bin [31m0[m -> [32m1389062[m bytes
+ .../20260411-095444-medal-star.png.sidecar.md      |    11 [32m+[m
+ .../achievements/20260411-095532-shield-star.png   |   Bin [31m0[m -> [32m1618395[m bytes
+ .../20260411-095532-shield-star.png.sidecar.md     |    23 [32m+[m
+ .../20260411-154531-trail-initiate.png             |   Bin [31m0[m -> [32m1539967[m bytes
+ .../20260411-154531-trail-initiate.png.sidecar.md  |    11 [32m+[m
+ .../ICON/XP4Life/part-a/generated/quests/.gitkeep  |     1 [32m+[m
+ .../quests/20260411-095154-footsteps-path.png      |   Bin [31m0[m -> [32m1506989[m bytes
+ .../20260411-095154-footsteps-path.png.sidecar.md  |    19 [32m+[m
+ .../quests/20260411-095241-forward-compass.png     |   Bin [31m0[m -> [32m1230163[m bytes
+ .../20260411-095241-forward-compass.png.sidecar.md |    27 [32m+[m
+ .../quests/20260411-095315-quest-scroll.png        |   Bin [31m0[m -> [32m1469898[m bytes
+ .../20260411-095315-quest-scroll.png.sidecar.md    |    11 [32m+[m
+ .../ICON/XP4Life/part-a/generated/rewards/.gitkeep |     1 [32m+[m
+ .../rewards/20260411-095737-coin-reward.png        |   Bin [31m0[m -> [32m1493472[m bytes
+ .../20260411-095737-coin-reward.png.sidecar.md     |    11 [32m+[m
+ .../rewards/20260411-095816-energy-orb.png         |   Bin [31m0[m -> [32m1216136[m bytes
+ .../20260411-095816-energy-orb.png.sidecar.md      |    27 [32m+[m
+ .../ICON/XP4Life/part-a/generated/titles/.gitkeep  |     1 [32m+[m
+ .../titles/20260411-095613-crown-emblem.png        |   Bin [31m0[m -> [32m1586216[m bytes
+ .../20260411-095613-crown-emblem.png.sidecar.md    |    23 [32m+[m
+ .../titles/20260411-095653-rune-sigil.png          |   Bin [31m0[m -> [32m1395642[m bytes
+ .../20260411-095653-rune-sigil.png.sidecar.md      |     7 [32m+[m
+ .../prompts-used/achievements/Trail Initiate.md    |     1 [32m+[m
+ .../prompts-used/achievements/laurel-badge.md      |     8 [32m+[m
+ .../part-a/prompts-used/achievements/medal-star.md |     8 [32m+[m
+ .../prompts-used/achievements/shield-star.md       |     8 [32m+[m
+ .../part-a/prompts-used/quests/footsteps-path.md   |     8 [32m+[m
+ .../part-a/prompts-used/quests/forward-compass.md  |     8 [32m+[m
+ .../part-a/prompts-used/quests/quest-scroll 1.md   |     8 [32m+[m
+ .../part-a/prompts-used/quests/quest-scroll.md     |     8 [32m+[m
+ .../part-a/prompts-used/rewards/coin-reward.md     |     8 [32m+[m
+ .../part-a/prompts-used/rewards/energy-orb.md      |     8 [32m+[m
+ .../part-a/prompts-used/titles/crown-emblem.md     |     8 [32m+[m
+ .../part-a/prompts-used/titles/master-generator.md |     1 [32m+[m
+ .../part-a/prompts-used/titles/rune-sigil.md       |     8 [32m+[m
+ .../part-a/prompts/achievements/.batch-state.json  |    25 [32m+[m
+ .../part-a/prompts/quests/.batch-state.json        |    25 [32m+[m
+ .../part-a/prompts/rewards/.batch-state.json       |    15 [32m+[m
+ .../part-a/prompts/titles/.batch-state.json        |    15 [32m+[m
+ .../XP4Life/part-a/selected/achievements/.gitkeep  |     1 [32m+[m
+ .../achievements/xp4l-achievement-medal.png        |   Bin [31m0[m -> [32m1389062[m bytes
+ .../xp4l-achievement-medal.png.sidecar.md          |    11 [32m+[m
+ .../selected/achievements/xp4l-rune-sigil-0.png    |   Bin [31m0[m -> [32m1395642[m bytes
+ .../achievements/xp4l-rune-sigil-0.png.sidecar.md  |     7 [32m+[m
+ .../selected/achievements/xp4l-trail-initiate.png  |   Bin [31m0[m -> [32m1553828[m bytes
+ .../xp4l-trail-initiate.png.sidecar.md             |    11 [32m+[m
+ .../ICON/XP4Life/part-a/selected/quests/.gitkeep   |     1 [32m+[m
+ .../part-a/selected/quests/xp4l-quest-compass.png  |   Bin [31m0[m -> [32m1230163[m bytes
+ .../quests/xp4l-quest-compass.png.sidecar.md       |    27 [32m+[m
+ .../part-a/selected/quests/xp4l-quest-scroll.png   |   Bin [31m0[m -> [32m1469898[m bytes
+ .../quests/xp4l-quest-scroll.png.sidecar.md        |    11 [32m+[m
+ .../ICON/XP4Life/part-a/selected/rewards/.gitkeep  |     1 [32m+[m
+ .../part-a/selected/rewards/xp4l-reward-coin.png   |   Bin [31m0[m -> [32m1493472[m bytes
+ .../rewards/xp4l-reward-coin.png.sidecar.md        |    11 [32m+[m
+ .../ICON/XP4Life/part-a/selected/titles/.gitkeep   |     1 [32m+[m
+ .../titles/xp4l-reward-master-generator.png        |   Bin [31m0[m -> [32m1386549[m bytes
+ .../xp4l-reward-master-generator.png.sidecar.md    |    19 [32m+[m
+ .../part-a/selected/titles/xp4l-title-crown.png    |   Bin [31m0[m -> [32m1586216[m bytes
+ .../titles/xp4l-title-crown.png.sidecar.md         |    23 [32m+[m
+ .../How to - Create XP4Life Icon set (obsidian).md |   156 [32m+[m
+ _template/NOTE/Icons - part A - output review.md   |    70 [32m+[m
+ _template/NOTE/Icons - part A - quick use guide.md |   125 [32m+[m
+ _template/NOTE/Icons - part A.md                   |    93 [32m+[m
+ _template/NOTE/test.md                             |     1 [32m+[m
+ _template/run-icons-part-a.bat                     |   118 [32m+[m
+ create-vault-workspace.bat                         |    56 [32m+[m
+ create-vault.bat                                   |    40 [32m+[m
+ desktop.ini                                        |     6 [32m+[m
+ doc_temple/.obsidian/app.json                      |     1 [32m+[m
+ doc_temple/.obsidian/appearance.json               |     1 [32m+[m
+ doc_temple/.obsidian/community-plugins.json        |     3 [32m+[m
+ doc_temple/.obsidian/core-plugins.json             |    33 [32m+[m
+ .../plugins/obsidian-quiet-outline/data.json       |    55 [32m+[m
+ .../plugins/obsidian-quiet-outline/main.js         |  1010 [32m+[m
+ .../plugins/obsidian-quiet-outline/manifest.json   |    11 [32m+[m
+ .../obsidian-quiet-outline/markdown-states.json    |   193 [32m+[m
+ .../plugins/obsidian-quiet-outline/styles.css      |   425 [32m+[m
+ doc_temple/.obsidian/workspace.json                |   235 [32m+[m
+ doc_temple/DOC PACK - induction and staged plan.md |   285 [32m+[m
+ doc_temple/audit/02-section-deltas.md              |   240 [32m+[m
+ doc_temple/audit/03-template-parameterization.md   |   208 [32m+[m
+ doc_temple/audit/04-parallel-thread-briefs.md      |   127 [32m+[m
+ doc_temple/audit/README.md                         |    94 [32m+[m
+ doc_temple/foundation-pack/README.md               |   111 [32m+[m
+ doc_temple/foundation-pack/examples/README.md      |    44 [32m+[m
+ .../CHANGELOG.md                                   |     7 [32m+[m
+ .../CODEX_START.md                                 |    20 [32m+[m
+ .../external-runtime-coordination-section/PLAN.md  |    26 [32m+[m
+ .../README.md                                      |     9 [32m+[m
+ .../SIGN_UP.md                                     |    24 [32m+[m
+ .../SYSTEM.md                                      |    44 [32m+[m
+ .../external-runtime-coordination-section/TASKS.md |    19 [32m+[m
+ .../examples/operator-lane-section/CHANGELOG.md    |     7 [32m+[m
+ .../examples/operator-lane-section/CODEX_START.md  |    20 [32m+[m
+ .../examples/operator-lane-section/PLAN.md         |    25 [32m+[m
+ .../examples/operator-lane-section/README.md       |    14 [32m+[m
+ .../examples/operator-lane-section/SIGN_UP.md      |    24 [32m+[m
+ .../examples/operator-lane-section/SYSTEM.md       |    44 [32m+[m
+ .../examples/operator-lane-section/TASKS.md        |    20 [32m+[m
+ .../examples/root-coordinator/CHANGELOG.md         |     7 [32m+[m
+ .../examples/root-coordinator/CODEX_START.md       |    31 [32m+[m
+ .../examples/root-coordinator/PLAN.md              |    27 [32m+[m
+ .../examples/root-coordinator/README.md            |    21 [32m+[m
+ .../examples/root-coordinator/SYSTEM.md            |    34 [32m+[m
+ .../examples/root-coordinator/TASKS.md             |    16 [32m+[m
+ .../examples/root-coordinator/THREAD_MAP.md        |    59 [32m+[m
+ .../examples/setup-tooling-section/CHANGELOG.md    |     6 [32m+[m
+ .../examples/setup-tooling-section/CODEX_START.md  |    20 [32m+[m
+ .../examples/setup-tooling-section/PLAN.md         |    25 [32m+[m
+ .../examples/setup-tooling-section/README.md       |    13 [32m+[m
+ .../examples/setup-tooling-section/SIGN_UP.md      |    24 [32m+[m
+ .../examples/setup-tooling-section/SYSTEM.md       |    43 [32m+[m
+ .../examples/setup-tooling-section/TASKS.md        |    18 [32m+[m
+ .../examples/shared-contract-section/CHANGELOG.md  |     6 [32m+[m
+ .../shared-contract-section/CODEX_START.md         |    20 [32m+[m
+ .../examples/shared-contract-section/PLAN.md       |    25 [32m+[m
+ .../examples/shared-contract-section/README.md     |    13 [32m+[m
+ .../examples/shared-contract-section/SIGN_UP.md    |    24 [32m+[m
+ .../examples/shared-contract-section/SYSTEM.md     |    44 [32m+[m
+ .../examples/shared-contract-section/TASKS.md      |    20 [32m+[m
+ doc_temple/foundation-pack/install-guide.md        |   110 [32m+[m
+ .../external-runtime-coordination/README.md        |    56 [32m+[m
+ .../profiles/operator-lane/README.md               |    62 [32m+[m
+ .../profiles/setup-tooling/README.md               |    58 [32m+[m
+ .../profiles/shared-contract/README.md             |    53 [32m+[m
+ doc_temple/foundation-pack/root/CHANGELOG.md       |    13 [32m+[m
+ doc_temple/foundation-pack/root/CODEX_START.md     |    31 [32m+[m
+ doc_temple/foundation-pack/root/PLAN.md            |    32 [32m+[m
+ doc_temple/foundation-pack/root/README.md          |    25 [32m+[m
+ doc_temple/foundation-pack/root/SYSTEM.md          |    59 [32m+[m
+ doc_temple/foundation-pack/root/TASKS.md           |    29 [32m+[m
+ doc_temple/foundation-pack/root/THREAD_MAP.md      |    70 [32m+[m
+ .../foundation-pack/section-core/CHANGELOG.md      |    13 [32m+[m
+ .../foundation-pack/section-core/CODEX_START.md    |    25 [32m+[m
+ doc_temple/foundation-pack/section-core/PLAN.md    |    20 [32m+[m
+ doc_temple/foundation-pack/section-core/SIGN_UP.md |    24 [32m+[m
+ doc_temple/foundation-pack/section-core/SYSTEM.md  |    40 [32m+[m
+ doc_temple/foundation-pack/section-core/TASKS.md   |    29 [32m+[m
+ doc_temple/project-pack/ADOPT_THIS_PACK.md         |   107 [32m+[m
+ doc_temple/project-pack/README.md                  |   124 [32m+[m
+ doc_temple/project-pack/START_HERE.md              |    78 [32m+[m
+ doc_temple/project-pack/examples/README.md         |    19 [32m+[m
+ .../examples/delivery-lane-workstream/CHANGELOG.md |     7 [32m+[m
+ .../delivery-lane-workstream/CODEX_START.md        |    24 [32m+[m
+ .../examples/delivery-lane-workstream/PLAN.md      |    21 [32m+[m
+ .../examples/delivery-lane-workstream/README.md    |    13 [32m+[m
+ .../examples/delivery-lane-workstream/SIGN_UP.md   |    17 [32m+[m
+ .../examples/delivery-lane-workstream/SYSTEM.md    |    40 [32m+[m
+ .../examples/delivery-lane-workstream/TASKS.md     |    24 [32m+[m
+ .../external-runtime-workstream/CHANGELOG.md       |     7 [32m+[m
+ .../external-runtime-workstream/CODEX_START.md     |    25 [32m+[m
+ .../examples/external-runtime-workstream/PLAN.md   |    21 [32m+[m
+ .../examples/external-runtime-workstream/README.md |    13 [32m+[m
+ .../external-runtime-workstream/SIGN_UP.md         |    17 [32m+[m
+ .../examples/external-runtime-workstream/SYSTEM.md |    40 [32m+[m
+ .../examples/external-runtime-workstream/TASKS.md  |    24 [32m+[m
+ .../examples/root-coordinator/CHANGELOG.md         |     7 [32m+[m
+ .../examples/root-coordinator/CODEX_START.md       |    25 [32m+[m
+ .../project-pack/examples/root-coordinator/PLAN.md |    22 [32m+[m
+ .../examples/root-coordinator/README.md            |    21 [32m+[m
+ .../examples/root-coordinator/SYSTEM.md            |    38 [32m+[m
+ .../examples/root-coordinator/TASKS.md             |    22 [32m+[m
+ .../examples/root-coordinator/THREAD_MAP.md        |    97 [32m+[m
+ .../examples/setup-tooling-workstream/CHANGELOG.md |     7 [32m+[m
+ .../setup-tooling-workstream/CODEX_START.md        |    24 [32m+[m
+ .../examples/setup-tooling-workstream/PLAN.md      |    21 [32m+[m
+ .../examples/setup-tooling-workstream/README.md    |    13 [32m+[m
+ .../examples/setup-tooling-workstream/SIGN_UP.md   |    17 [32m+[m
+ .../examples/setup-tooling-workstream/SYSTEM.md    |    40 [32m+[m
+ .../examples/setup-tooling-workstream/TASKS.md     |    24 [32m+[m
+ .../shared-platform-workstream/CHANGELOG.md        |     7 [32m+[m
+ .../shared-platform-workstream/CODEX_START.md      |    24 [32m+[m
+ .../examples/shared-platform-workstream/PLAN.md    |    21 [32m+[m
+ .../examples/shared-platform-workstream/README.md  |    13 [32m+[m
+ .../examples/shared-platform-workstream/SIGN_UP.md |    17 [32m+[m
+ .../examples/shared-platform-workstream/SYSTEM.md  |    40 [32m+[m
+ .../examples/shared-platform-workstream/TASKS.md   |    24 [32m+[m
+ doc_temple/project-pack/install-guide.md           |   128 [32m+[m
+ doc_temple/project-pack/operating-model.md         |    91 [32m+[m
+ .../project-pack/profiles/delivery-lane/README.md  |    62 [32m+[m
+ .../profiles/external-runtime/README.md            |    59 [32m+[m
+ .../project-pack/profiles/setup-tooling/README.md  |    61 [32m+[m
+ .../profiles/shared-platform/README.md             |    62 [32m+[m
+ doc_temple/project-pack/root/CHANGELOG.md          |     7 [32m+[m
+ doc_temple/project-pack/root/CODEX_START.md        |    32 [32m+[m
+ doc_temple/project-pack/root/PLAN.md               |    19 [32m+[m
+ doc_temple/project-pack/root/README.md             |    25 [32m+[m
+ doc_temple/project-pack/root/SYSTEM.md             |    63 [32m+[m
+ doc_temple/project-pack/root/TASKS.md              |    29 [32m+[m
+ doc_temple/project-pack/root/THREAD_MAP.md         |    41 [32m+[m
+ .../project-pack/workstream-core/CHANGELOG.md      |     7 [32m+[m
+ .../project-pack/workstream-core/CODEX_START.md    |    26 [32m+[m
+ doc_temple/project-pack/workstream-core/PLAN.md    |    19 [32m+[m
+ doc_temple/project-pack/workstream-core/SIGN_UP.md |    24 [32m+[m
+ doc_temple/project-pack/workstream-core/SYSTEM.md  |    40 [32m+[m
+ doc_temple/project-pack/workstream-core/TASKS.md   |    29 [32m+[m
+ doc_temple/reload/01-shared-core-contract.md       |   282 [32m+[m
+ images.base                                        |     5 [32m+[m
+ obsidian-cmd.bat                                   |    58 [32m+[m
+ obsidian-cmd.txt                                   |    73 [32m+[m
+ run-icons-part-a.bat                               |   127 [32m+[m
+ run_loop_rewards.bat                               |     4 [32m+[m
+ ssee-this-plz.txt                                  |  1222 [32m+[m
+ system tasks pathtest.md                           |     0
+ vault-ws-1.bat                                     |    54 [32m+[m
+ vaultforge-core/desktop.ini                        |     6 [32m+[m
+ vaultforge-core/vaultforge-core.md                 |     5 [32m+[m
+ vaultforge-design/desktop.ini                      |     6 [32m+[m
+ vaultforge-design/vaultforge-design.md             |     5 [32m+[m
+ vaultforge-engine/.obsidian/app.json               |     1 [32m+[m
+ vaultforge-engine/.obsidian/appearance.json        |     1 [32m+[m
+ vaultforge-engine/.obsidian/core-plugins.json      |    33 [32m+[m
+ vaultforge-engine/.obsidian/workspace.json         |   204 [32m+[m
+ vaultforge-engine/CHANGELOG.md                     |    31 [32m+[m
+ vaultforge-engine/CODEX_START.md                   |    23 [32m+[m
+ vaultforge-engine/COMPATIBILITY.md                 |   143 [32m+[m
+ vaultforge-engine/COMPATIBILITY_BUSINESS.md        |   224 [32m+[m
+ vaultforge-engine/PLAN.md                          |    43 [32m+[m
+ vaultforge-engine/README.md                        |    83 [32m+[m
+ vaultforge-engine/SIGN_UP.md                       |    47 [32m+[m
+ vaultforge-engine/SYSTEM.md                        |    47 [32m+[m
+ vaultforge-engine/TASKS.md                         |    54 [32m+[m
+ vaultforge-engine/VERIFICATION.md                  |   115 [32m+[m
+ .../assets/batch-input-smoke/engine-smoke.md       |     8 [32m+[m
+ .../assets/batch-input-smoke/smoke.conf            |     4 [32m+[m
+ vaultforge-engine/desktop.ini                      |     2 [32m+[m
+ vaultforge-engine/pyproject.toml                   |    17 [32m+[m
+ vaultforge-engine/requirements.txt                 |     1 [32m+[m
+ vaultforge-engine/run_engine.bat                   |    46 [32m+[m
+ vaultforge-engine/src/.gitkeep                     |     1 [32m+[m
+ .../src/__pycache__/generate.cpython-314.pyc       |   Bin [31m0[m -> [32m51606[m bytes
+ vaultforge-engine/src/generate.py                  |  1054 [32m+[m
+ vaultforge-engine/tests/.gitkeep                   |     1 [32m+[m
+ vaultforge-engine/tests/Untitled.md                |     0
+ .../__pycache__/test_generate.cpython-314.pyc      |   Bin [31m0[m -> [32m11587[m bytes
+ vaultforge-engine/tests/test_generate.py           |   207 [32m+[m
+ vaultforge-engine/vaultforge-engine.md             |     7 [32m+[m
+ vaultforge-init/.4/extract_xp.py                   |     2 [32m+[m
+ vaultforge-init/.4/find_dot4_folders.py            |    47 [32m+[m
+ vaultforge-init/.4/recurse_find_dot4_folders.py    |    14 [32m+[m
+ vaultforge-init/.4/run_find_dot4_folders.bat       |     6 [32m+[m
+ vaultforge-init/.4/run_main.bat                    |    11 [32m+[m
+ vaultforge-init/.4/see-me.txt                      |     6 [32m+[m
+ vaultforge-init/.bat/cmds.txt                      |   143 [32m+[m
+ vaultforge-init/.bat/create-vault-workspace.bat    |    56 [32m+[m
+ vaultforge-init/.bat/create-vault.bat              |    40 [32m+[m
+ vaultforge-init/.bat/dir-all-fold.txt              |     1 [32m+[m
+ vaultforge-init/.bat/dir-all.txt                   |     1 [32m+[m
+ vaultforge-init/.bat/dir-file.txt                  |     1 [32m+[m
+ vaultforge-init/.bat/dir-fold.txt                  |     1 [32m+[m
+ vaultforge-init/.bat/dir.bat                       |     1 [32m+[m
+ vaultforge-init/.bat/filelist.txt                  |    12 [32m+[m
+ vaultforge-init/.bat/find.bat                      |     1 [32m+[m
+ vaultforge-init/.bat/goto.bat                      |     0
+ vaultforge-init/.bat/obsidian-cmd.bat              |    58 [32m+[m
+ vaultforge-init/.bat/obsidian-cmd.txt              |    73 [32m+[m
+ vaultforge-init/.bat/tree.txt                      |     1 [32m+[m
+ vaultforge-init/.bat/tree2file-all.bat             |     1 [32m+[m
+ vaultforge-init/.bat/tree2file.bat                 |     1 [32m+[m
+ vaultforge-init/.bat/whats-here-all.bat            |     0
+ vaultforge-init/.env                               |     3 [32m+[m
+ vaultforge-init/desktop.ini                        |     6 [32m+[m
+ vaultforge-init/extract_xp.py                      |     2 [32m+[m
+ vaultforge-init/install_requirements.bat           |    28 [32m+[m
+ vaultforge-init/main.zip                           |   Bin [31m0[m -> [32m376[m bytes
+ vaultforge-init/main/main.py                       |     3 [32m+[m
+ vaultforge-init/main/run_main.bat                  |    11 [32m+[m
+ vaultforge-init/open_venv_terminal.bat             |    21 [32m+[m
+ vaultforge-init/recurse_find_dot4_folders.py       |    14 [32m+[m
+ vaultforge-init/requirements.txt                   |     1 [32m+[m
+ vaultforge-init/see-me.txt                         |     6 [32m+[m
+ vaultforge-init/setup_all.bat                      |    13 [32m+[m
+ vaultforge-init/setup_venv.bat                     |    51 [32m+[m
+ vaultforge-init/vaultforge-init.md                 |     6 [32m+[m
+ vaultforge-init/venv_all.zip                       |   Bin [31m0[m -> [32m1871[m bytes
+ vaultforge-init/venv_all/install_requirements.bat  |    28 [32m+[m
+ vaultforge-init/venv_all/open_venv_terminal.bat    |    21 [32m+[m
+ vaultforge-init/venv_all/requirements.txt          |     1 [32m+[m
+ vaultforge-init/venv_all/setup_all.bat             |    13 [32m+[m
+ vaultforge-init/venv_all/setup_venv.bat            |    51 [32m+[m
+ vaultforge-system/desktop.ini                      |     6 [32m+[m
+ vaultforge-system/vaultforge-system.md             |     5 [32m+[m
+ vaultforge-ws.bat                                  |    12 [32m+[m
+ vaultforge-xp4l                                    |     1 [32m+[m
+ 548 files changed, 125675 insertions(+)
