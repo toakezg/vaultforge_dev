@@ -1,5 +1,10 @@
 # Engine Changelog
 
+## 2026-05-11
+
+- Added `ENGINE_KEY` as an accepted engine `.env` API key name, verified it as
+  the active key source, and covered it with an API-key loading regression test.
+
 ## 2026-05-10
 
 - Added the first engine-side registry migration shape for approved business fragments: preset/style alias maps plus a separate `--constraint` production-constraint registry, keeping `MOOD_PROMPTS` limited to emotional modifiers.

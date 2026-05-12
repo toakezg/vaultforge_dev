@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "start": "node scripts/launch-interface.mjs",
     "test": "node tests/check-interface.mjs && node tests/smoke-interface.mjs"
   },
   "devDependencies": {}

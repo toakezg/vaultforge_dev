@@ -149,7 +149,7 @@ function buildCommandDraft() {
   const plan = currentPlan();
   const laneFlags = state.lanes.map((lane) => `--lane ${lane}`).join(" ");
   const lanes = laneFlags || "--lane interface";
-  return `run_workflow_b.bat --cycles ${plan.cycles} --timebox-minutes ${plan.timebox} --hard-gate-mode ${plan.gate} --commit-mode ${plan.commit} ${lanes} --task "${shortPrompt()}"`;
+  return `..\\run_workflow_b.bat --cycles ${plan.cycles} --timebox-minutes ${plan.timebox} --hard-gate-mode ${plan.gate} --commit-mode ${plan.commit} ${lanes} --task "${shortPrompt()}"`;
 }
 
 function buildHandoffDraft() {

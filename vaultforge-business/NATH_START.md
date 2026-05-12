@@ -1,4 +1,4 @@
-# NATH START - VaultForge Business
+[[]]# NATH START - VaultForge Business
 
 This is the quick start note for using the `vaultforge-business` lane.
 
@@ -98,6 +98,12 @@ Preview the markdown prompt bank without generation:
 
 ```bat
 run_business_md_bank.bat -Path ".\my-prompts-bank" -IncludeTemplates -WhatIf -Limit 1
+```
+
+Preview all runnable prompt-bank notes with three generated variants each:
+
+```bat
+run_business_md_bank.bat -Path ".\my-prompts-bank" -All -WhatIf -VariantsOverride 3
 ```
 
 Dry-run draft markdown notes without business metadata fixtures:

@@ -5,6 +5,8 @@
 **/.env
 **/.venv/
 **/__pycache__/
+*.pyc
+**/*.pyc
 vaultforge-init/.env
 vaultforge-icon/svg-forge/.env
 vaultforge-icon/svg-forge/.venv/
@@ -66,8 +68,6 @@ svg-forge/samples/
 plugins/
 processed/
 
-runs\workflow--b\
-
 doc_temple/
 assets/
 .4/
@@ -116,3 +116,15 @@ doc_templte/pack/
 doc_temple/processed/
 doc_temple/runs/
 
+vaultforge-business/my-prompts-bank/anton/cover-01.md
+vaultforge-business/my-prompts-bank/anton/icon-01.md
+vaultforge-business/my-prompts-bank/anton/logo-01.md
+vaultforge-business/my-prompts-bank/example-client/brand-board-01.md
+vaultforge-business/my-prompts-bank/github-profile/github-profile-picture-request_01.md
+vaultforge-business/my-prompts-bank/pilot-demo/controlled-client-style-pilot-demo-01.md
+vaultforge-business/my-prompts-bank/pilot-demo/controlled-client-style-pilot-demo-02.md
+vaultforge-business/my-prompts-bank/pilot-demo/controlled-client-style-pilot-demo-03.md
+interface/tests/artifacts/launch-interface.err.log
+interface/tests/artifacts/launch-interface.out.log
+vaultforge-business/PILOT_DEMO_SCOPE_2026-05-11.md
+vaultforge-business/my-prompts-bank/anton/brand-board-01.md

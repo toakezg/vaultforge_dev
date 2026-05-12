@@ -141,6 +141,39 @@ Report changes to:
 - affected section notes when a later code bridge integration changes their
   workflow
 
+## Interface Thread
+
+Use `interface` for:
+
+- the local VaultForge operator interface
+- screen/UI implementation from reference sketches
+- interface-local settings, theme, keybind, tooltip, navigation, prompt, input,
+  preview, and gallery surfaces
+- interface documentation under `interface/docs/`
+- interface-local tests and browser verification
+
+Current status:
+
+- `interface\` is the root-local operator UI work area.
+- Interface work should stay in `interface\` and should not rewrite engine,
+  business, icon, XP4L, or art behavior unless a separate routed task approves
+  that lane change.
+
+Read first:
+
+- `..\CODEX_START.md`
+- `..\SYSTEM.md`
+- `..\CURRENT_STATE.md`
+- `..\THREAD_MAP.md`
+- `README.md` when present
+- `docs\README.md` when present
+
+Report changes to:
+
+- `interface\docs\CHANGELOG.md` when present
+- root `CHANGELOG.md` only when the change affects coordination or Workflow B
+  routing
+
 ## XP4L Thread
 
 Use `vaultforge-xp4l` for:

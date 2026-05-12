@@ -47,6 +47,7 @@ SECTION_DOCS = (
 
 DEFAULT_LANES = {
     "root": ".",
+    "interface": "interface",
     "vaultforge-engine": "vaultforge-engine",
     "vaultforge-business": "vaultforge-business",
     "vaultforge-art": "vaultforge-art",
@@ -1012,13 +1013,19 @@ def default_agents(
         if lane == "root":
             continue
         lane_path = root / DEFAULT_LANES[lane]
+        if lane == "interface":
+            builder_scope = "interface app files, interface docs, and interface-local test artifacts only"
+            reviewer_scope = "interface verification notes, review findings, docs, and tests only"
+        else:
+            builder_scope = f"{lane} section files only unless root explicitly approves a handoff"
+            reviewer_scope = f"{lane} verification notes, review findings, and safe docs updates"
         agents.append(
             AgentSpec(
                 name=f"{lane}-builder",
                 lane=lane,
                 role="builder",
                 workdir=str(lane_path),
-                write_scope=f"{lane} section files only unless root explicitly approves a handoff",
+                write_scope=builder_scope,
                 tasks=assigned_tasks.get(f"{lane}-builder", (base_task,)),
             )
         )
@@ -1028,7 +1035,7 @@ def default_agents(
                 lane=lane,
                 role="reviewer",
                 workdir=str(lane_path),
-                write_scope=f"{lane} verification notes, review findings, and safe docs updates",
+                write_scope=reviewer_scope,
                 tasks=assigned_tasks.get(
                     f"{lane}-reviewer",
                     (f"Review the {lane} builder result for Workflow B task: {base_task}",),

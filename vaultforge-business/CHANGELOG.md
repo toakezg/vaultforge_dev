@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-05-11
+
+- Added a controlled client-style pilot/demo scope note and a runnable
+  prompt-bank note for no-live `WhatIf`/`DryRun` verification before the
+  HG-004 live paid/API gate.
+- Ran the approved private pilot/demo live scope after `ENGINE_KEY` passed
+  Responses write verification: one prompt note, two generated variants, local
+  review summary, contact sheet, and HTML gallery. Marked the prompt note
+  `review` because the outputs are workflow proof only and still show
+  lettering/text artifacts.
+- Ran the approved rating-improvement rerun scope: two additional private
+  pilot-demo prompt notes, two variants each, refreshed review surfaces, and
+  marked demo 02 rating 8 and demo 03 rating 7. Demo 02 is the strongest
+  private review result so far.
+
 ## 2026-05-10
 
 - Adopted the approved engine registry shape in the business wrapper: selected

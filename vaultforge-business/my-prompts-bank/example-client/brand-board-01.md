@@ -1,17 +1,26 @@
 ---
-client: example-client
-asset_type: brand-board
-preset: brand-board
+client: anton
+asset_type: board
+preset: kingdom
 styles:
-  - clean-corporate
+  - keen
+  - clean
   - vector-crisp
+  - relax
+  - intrugue 
+  - inspire
+  - sooth
 mods:
+  - Lumen
   - premium
   - print-safe
+  - gift
+  - cared
 tags:
-  - local
-  - service-business
-job: example-pack-01
+  - gift
+  - anton
+  - service-for-fun
+job: Visualizing-another-world
 status: draft
 rating:
 image:
@@ -20,6 +29,6 @@ background: opaque
 
 # Example Client Brand Board 01
 
-Create a simple brand board direction for Example Client.
-Include a main mark direction, supporting color mood, graphic shapes, and overall visual tone.
-Keep it clean, practical, and suitable for a local service business client presentation.
+Create board for anton as he visiaulizes another world and brings to life to his own kinngdom.
+Include a main mark, achetrype, supporting color mood, graphic shapes, containner system, support & foundation and overall visual tone.
+Keep it clean, a sign of kingdom and worth and modest values suitable for a deed and hope of all good service.

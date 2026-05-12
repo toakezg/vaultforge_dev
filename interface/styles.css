@@ -457,6 +457,36 @@ textarea {
   color: var(--text);
 }
 
+.execution-gate {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--panel), var(--bg) 34%);
+}
+
+.execution-gate label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.execution-gate input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--danger);
+}
+
+.execution-gate p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -54,6 +54,7 @@ BATCH_HELPER_EXTENSIONS = {".bat", ".cfg", ".cmd", ".conf", ".ini", ".json", ".p
 API_KEY_ENV_VAR = "VAULTFORGE_ENGINE_OPENAI_API_KEY"
 API_KEY_ENV_VARS = (
     API_KEY_ENV_VAR,
+    "ENGINE_KEY",
     "IMAGE_GENERATION_KEY_B_OPENAI_API_KEY",
     "OPENAI_API_KEY",
 )

@@ -320,3 +320,11 @@ Use this shape:
 - Read: active run packet outputs for root coordinator, engine builder, engine reviewer, business builder, and business reviewer; current business `SIGN_UP.md`; root `CHANGELOG.md`; root `WORKFLOW_REVIEW.md`; current root dirty baseline; and `git show --stat --name-only --oneline -1 4e59f85`
 - Changed: recorded that the reviewed business alias/constraint bridge is closed and committed as `4e59f85`
 - Handoff: no business hard gate was hit by the wrapper/docs bridge. Business now passes only the approved engine aliases and production constraints natively, while brand-tone and client-pack language stays business-owned. Keep private paid/API generation behind the exact `HG-004` mocked/private pilot scope, with scope, budget, output path, and review purpose recorded before generation. Do not move additional business-only fragments into engine registries without a new scoped approval.
+
+## 2026-05-11 - controlled client-style pilot demo
+
+- Role: local operator for a no-live pilot/demo workflow proof
+- Scope: root hygiene fixes, business pilot scope, prompt-bank demo note, XP4Life quest note, and no-live verification
+- Read: root hard gates, business paid launch decision note, client-ready criteria, output checklist, prompt-bank examples, and create-quest-from-workflow quest pattern
+- Changed: added `PILOT_DEMO_SCOPE_2026-05-11.md` and `my-prompts-bank\pilot-demo\controlled-client-style-pilot-demo-01.md`
+- Handoff: run only `WhatIf` and `DryRun` checks until HG-004 has a named live scope, budget ceiling, output path, and review purpose. Do not run live paid/API generation from this handoff alone.

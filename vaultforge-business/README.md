@@ -151,6 +151,13 @@ Preview markdown prompt-bank execution without generating anything:
 run_business_md_bank.bat -Path ".\my-prompts-bank" -IncludeTemplates -WhatIf -Limit 1
 ```
 
+Preview all runnable notes with three variants per prompt, overriding any
+frontmatter `variants` value:
+
+```bat
+run_business_md_bank.bat -Path ".\my-prompts-bank" -All -WhatIf -VariantsOverride 3
+```
+
 Run draft markdown notes through the business wrapper in dry-run mode:
 
 ```bat

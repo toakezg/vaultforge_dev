@@ -4,6 +4,7 @@ param(
     [string]$EngineRoot = "",
     [string]$Status = "draft",
     [int]$Limit = 0,
+    [int]$VariantsOverride = 0,
     [switch]$All,
     [switch]$IncludeTemplates,
     [switch]$DryRun,
@@ -13,6 +14,11 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+
+if ($VariantsOverride -lt 0) {
+    Write-Host "VariantsOverride must be 0 or greater." -ForegroundColor Red
+    exit 1
+}
 
 if ([string]::IsNullOrWhiteSpace($EngineRoot)) {
     $EngineRoot = Join-Path $PSScriptRoot "..\vaultforge-engine"
@@ -290,6 +296,9 @@ foreach ($file in $promptFiles) {
     $variants = 1
     if (-not [int]::TryParse($variantsText, [ref]$variants) -or $variants -lt 1) {
         $variants = 1
+    }
+    if ($VariantsOverride -gt 0) {
+        $variants = $VariantsOverride
     }
 
     $runArgs = New-Object System.Collections.Generic.List[string]

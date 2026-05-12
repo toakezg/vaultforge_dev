@@ -355,6 +355,7 @@ Default write scopes:
 | Lane | Working Directory | Write Scope |
 |---|---|---|
 | root | `F:\vaultforge` | root coordination docs and run packet |
+| interface | `F:\vaultforge\interface` | interface app files, interface docs, and interface-local tests |
 | vaultforge-engine | `F:\vaultforge\vaultforge-engine` | engine docs, source, tests, changelog |
 | vaultforge-business | `F:\vaultforge\vaultforge-business` | business wrappers, prompt bank, review docs |
 | vaultforge-art | `F:\vaultforge\vaultforge-art` | art lane docs and wrappers only |

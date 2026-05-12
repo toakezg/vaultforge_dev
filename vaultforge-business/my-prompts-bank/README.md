@@ -66,12 +66,15 @@ Useful checks:
 
 ```powershell
 .\run_business_md_bank.ps1 -Path ".\my-prompts-bank" -IncludeTemplates -WhatIf -Limit 1
+.\run_business_md_bank.ps1 -Path ".\my-prompts-bank" -All -WhatIf -VariantsOverride 3
 .\run_business_md_bank.ps1 -Path ".\my-prompts-bank" -DryRun
 .\run_business_md_bank.ps1 -Path ".\my-prompts-bank" -DryRun -WriteMetadata
 ```
 
 The runner defaults to `status: draft`. Use `-All` when you intentionally want
 to run notes with any status, or `-Status review` to target another queue.
+Use `-VariantsOverride 3` when you want every runnable prompt note to generate
+three variants without editing each note's frontmatter.
 Plain `-DryRun` does not write business metadata; add `-WriteMetadata` only when
 you want dry-run fixture files in `generated`.
 

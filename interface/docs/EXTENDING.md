@@ -16,6 +16,8 @@ points for later mods or plugin-style additions.
   `buildHandoffDraft()`, and the matching form controls in `index.html`.
 - Add preview/gallery cards by extending `renderGallery()` without wiring those
   cards to live VaultForge command execution.
+- Adjust the local app launcher in `scripts/launch-interface.mjs` or
+  `run-interface.bat` when the interface needs a different static-serving path.
 
 Runtime helpers are exposed on `window.VaultForgeOperator` for light local
 experiments:
@@ -28,3 +30,6 @@ window.VaultForgeOperator.setMode("technical");
 
 Keep extensions interface-local until a routed Workflow B task approves changes
 to engine, business, icon, XP4L, art, or coding behavior.
+
+Do not enable the disabled local execution gate or add `--execute` to command
+drafts without a separate approved task.

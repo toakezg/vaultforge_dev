@@ -229,6 +229,8 @@ try {
   assert(await evaluate(client, "document.querySelector('#promptPreview').textContent.includes('Cycles: 3')"), "preview should include cycle plan");
   assert(await evaluate(client, "document.querySelector('#commandDraft').textContent.includes('--cycles 3')"), "command draft should include cycles");
   assert(await evaluate(client, "!document.querySelector('#commandDraft').textContent.includes('--execute')"), "command draft should not execute");
+  assert(await evaluate(client, "document.querySelector('#executionGate').disabled === true"), "execution gate should remain disabled");
+  assert(await evaluate(client, "document.querySelector('.execution-gate').textContent.includes('only drafts commands')"), "execution gate should describe draft-only behavior");
   assert(await evaluate(client, "document.querySelector('#handoffDraft').textContent.includes('npm.cmd test')"), "handoff draft should include evidence");
   assert(await evaluate(client, "document.querySelectorAll('#galleryGrid .gallery-card').length >= 5"), "gallery should render planning and evidence cards");
 

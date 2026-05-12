@@ -2,6 +2,10 @@
 
 ## 2026-05-13
 
+- Added a local executable app launch path with `run-interface.bat`,
+  `npm.cmd start`, and a dependency-free Node static launcher bound to
+  `127.0.0.1`; added a visible disabled local execution gate and expanded
+  contract/smoke checks to keep command drafts no-exec.
 - Reviewed the cycle 2 evidence packet and handoff draft slice, reverified the
   interface contract plus Edge smoke flow, inspected desktop/mobile smoke
   screenshots, and found no blocking scope, layout, or no-execute issues.

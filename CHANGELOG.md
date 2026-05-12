@@ -1,5 +1,30 @@
 # CHANGELOG
 
+## 2026-05-13
+
+- Recorded Workflow B cycle 1 for run `20260513T023458-continue-the-approved-vaultforge-operator-interf`: root coordinator routed the approved interface-local preview/gallery and run-planning slice, the interface builder added draft-only run-planning controls, prompt and command draft ergonomics, and dynamic gallery/evidence cards, and the interface reviewer fixed the Edge smoke harness and committed the reviewed interface scope as `a40cd4f`. Reviewer verification passed `npm.cmd test` and `git diff --check -- interface`. No hard gate, real command execution, `--execute` command draft, engine/business/icon/XP4L/art/coding change, secret use, paid/API behavior, live generation, or cross-lane ownership change was recorded.
+- Added Workflow B `interface` lane routing for the root-local operator UI work
+  area, with scoped builder/reviewer write rules and thread-map documentation.
+- Ran the approved 5-cycle, 18-minute Workflow B interface build from
+  `Reference/build_draft.jpg`; the controller stopped at the timebox after the
+  builder, then a local review tail refined and verified the first static
+  operator interface under `interface/`.
+
+## 2026-05-11
+
+- Fixed root workflow hygiene for the controlled client-style pilot/demo run:
+  repaired the invalid ignore glob that broke `rg`, added a local
+  `.gitmodules` mapping for the nested `vaultforge-xp4l` lane so submodule
+  status no longer errors, removed tracked Python bytecode artifacts from the
+  trusted workflow surface, and verified the pilot path stops before HG-004
+  live paid/API generation.
+- Recorded the approved live pilot/demo pass: `ENGINE_KEY` was verified for
+  Responses write access, the business lane generated two private review-only
+  variants for the scoped prompt note, and local review surfaces were built.
+- Recorded the approved rating-improvement rerun: two additional pilot-demo
+  prompt notes generated four private review-only variants, refreshed the
+  review surfaces, and moved the best reviewed result from rating 6 to rating 8.
+
 ## 2026-05-10
 
 - Recorded Workflow B cycle 1 for run `20260510T130343-hard-gate-doc-updated-with-0-or-1-approvals-b`: `HARD_GATES.md` carried explicit 0/1 approvals, root coordinator routed the approved registry slice to engine/business, engine added business-facing preset/style aliases plus separate production constraints committed as `c0e2d37`, business adopted the accepted aliases/constraints in `run_business.ps1` and docs committed as `4e59f85`, icon correctly no-oped with clean lane verification, and XP4L recorded a scope-only hard-gate note committed in the XP4L repo as `ea89b37`. Reviewer checks passed for engine tests/dry-runs, business parser/WhatIf/DryRun previews, icon no-op scope, and XP4L tests. No live generation, paid/API call, generated art, contact-sheet renderer implementation, public launch, pricing/licensing commitment, asset move/delete, folder-icon apply work, XP scoring/progression change, event-source expansion, root controller edit, or unapproved cross-lane ownership expansion was recorded.

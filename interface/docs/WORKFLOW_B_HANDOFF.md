@@ -1,5 +1,34 @@
 # Workflow B Handoff
 
+## 2026-05-13 Cycle 1 Interface Builder Launch Readiness
+
+- Task: make the VaultForge operator interface executable-app ready for local
+  use while preserving the no-exec command/prompt workflow.
+- Current role: interface builder.
+- Last verified state: added `run-interface.bat`, `npm.cmd start`, and
+  `scripts/launch-interface.mjs` as the smallest local launch path; added a
+  visible disabled local execution gate in the preview panel; preserved
+  command drafts without `--execute`; expanded interface contract and Edge
+  smoke coverage for the launcher/gate behavior.
+- Files touched: `run-interface.bat`, `scripts/launch-interface.mjs`,
+  `app.js`, `package.json`, `index.html`, `styles.css`, `tests/check-interface.mjs`,
+  `tests/smoke-interface.mjs`, docs under `docs/`, and refreshed smoke
+  screenshots after verification.
+- Verification run:
+  - `npm.cmd test`
+  - `git diff --check -- interface`
+  - local launch check with `node scripts/launch-interface.mjs 4187 --no-open`
+  - app left running for viewing at `http://127.0.0.1:4173/` with launcher
+    logs in `tests/artifacts/launch-interface.out.log` and
+    `tests/artifacts/launch-interface.err.log`
+- Blocker or decision: no hard gate. Real VaultForge command execution,
+  `--execute` command drafts, secrets, paid/API behavior, live generation,
+  engine/business/icon/XP4L/art/coding edits, destructive moves/deletes, and
+  cross-lane ownership changes remain out of scope.
+- Resume prompt: review the local launcher, disabled execution gate, no-exec
+  command draft behavior, app-ready docs, and verification artifacts; commit
+  only the scoped interface changes if review passes.
+
 ## 2026-05-13 Cycle 2 Interface Reviewer
 
 - Task: review the cycle 2 interface builder result for draft-only evidence,

@@ -495,6 +495,22 @@ class ApiKeyLoadingTests(unittest.TestCase):
         self.assertEqual(source, "VAULTFORGE_ICON_OPENAI_API_KEY")
         self.assertEqual(value, "sk-icon")
 
+    def test_get_api_key_reads_engine_key_from_env_file(self):
+        args = generate.argparse.Namespace(
+            api_key=None,
+            api_key_env=[],
+            dry_run=False,
+        )
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            env_file = Path(temp_dir) / ".env"
+            env_file.write_text("ENGINE_KEY=sk-engine-key\n", encoding="utf-8")
+            with patch.object(generate, "DEFAULT_ENV_FILE", env_file), patch.dict(os.environ, {}, clear=True):
+                source, value = generate.get_api_key_for_run(args)
+
+        self.assertEqual(source, ".env:ENGINE_KEY")
+        self.assertEqual(value, "sk-engine-key")
+
 
 class EngineProjectRootTests(unittest.TestCase):
     def test_project_root_resolves_to_engine_folder_not_src(self):
