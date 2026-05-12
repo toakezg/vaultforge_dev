@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VaultForge Operator</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="splashing">
+    <div class="splash" id="splash" role="status" aria-live="polite">
+      <img class="splash-image" src="assets/vaultforge-intro.svg" alt="" aria-hidden="true">
+      <div>
+        <p class="eyebrow">VaultForge</p>
+        <h1>Operator Interface</h1>
+        <p class="muted">Loading workshop controls</p>
+      </div>
+      <button class="icon-text" type="button" id="enterApp">Enter</button>
+    </div>
+
+    <div class="app-shell" id="appShell" aria-hidden="true">
+      <header class="topbar">
+        <div class="brand">
+          <button class="icon-button" type="button" id="navToggle" data-tooltip="Toggle quick access" aria-label="Toggle quick access">
+            <span class="icon-grid" aria-hidden="true"></span>
+          </button>
+          <div>
+            <p class="eyebrow">VaultForge</p>
+            <h1>Operator</h1>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="segmented" role="group" aria-label="Prompt mode">
+            <button type="button" class="active" data-mode="natural">Natural</button>
+            <button type="button" data-mode="technical">Technical</button>
+          </div>
+          <select id="themeSelect" aria-label="Theme">
+            <option value="dark">Dark forge</option>
+            <option value="slate">Slate table</option>
+            <option value="ember">Ember workbench</option>
+          </select>
+          <button class="icon-button" type="button" id="settingsButton" data-tooltip="Settings and keybinds" aria-label="Settings">
+            <span class="icon-cog" aria-hidden="true"></span>
+          </button>
+        </div>
+      </header>
+
+      <aside class="quick-access" id="quickAccess" aria-label="Quick access navigation">
+        <nav>
+          <button type="button" class="nav-item active" data-view="workshop" data-tooltip="Workshop">
+            <span class="icon-hammer" aria-hidden="true"></span>
+            <span>Workshop</span>
+          </button>
+          <button type="button" class="nav-item" data-view="lanes" data-tooltip="Lane and multilane access">
+            <span class="icon-lanes" aria-hidden="true"></span>
+            <span>Lanes</span>
+          </button>
+          <button type="button" class="nav-item" data-view="tools" data-tooltip="Tools">
+            <span class="icon-tool" aria-hidden="true"></span>
+            <span>Tools</span>
+          </button>
+          <button type="button" class="nav-item" data-view="templates" data-tooltip="Templates">
+            <span class="icon-doc" aria-hidden="true"></span>
+            <span>Templates</span>
+          </button>
+          <button type="button" class="nav-item" data-view="preview" data-tooltip="Preview and gallery">
+            <span class="icon-eye" aria-hidden="true"></span>
+            <span>Preview</span>
+          </button>
+        </nav>
+      </aside>
+
+      <main class="workspace" id="workspace">
+        <section class="status-strip" aria-label="Run status">
+          <div>
+            <p class="eyebrow">Current bench</p>
+            <strong id="activeViewLabel">Workshop</strong>
+          </div>
+          <div>
+            <p class="eyebrow">Selected lanes</p>
+            <strong id="laneSummary">business + engine</strong>
+          </div>
+          <div>
+            <p class="eyebrow">Mode</p>
+            <strong id="modeSummary">Natural</strong>
+          </div>
+          <button class="primary-action" type="button" id="runButton" data-tooltip="Ctrl+Enter">
+            Start run
+          </button>
+        </section>
+
+        <section class="panel hero-panel" data-panel="workshop">
+          <div class="panel-copy">
+            <p class="eyebrow">Forge workshop</p>
+            <h2>Build, route, and review VaultForge runs from one bench.</h2>
+            <p>
+              Choose lanes, shape prompts, prepare inputs, and keep later preview
+              and gallery work visible without reaching into other sections.
+            </p>
+          </div>
+          <div class="run-meter" aria-label="Run readiness">
+            <span>Scope</span>
+            <div class="meter"><i style="width: 72%"></i></div>
+            <span>Prompt</span>
+            <div class="meter"><i style="width: 54%"></i></div>
+            <span>Review</span>
+            <div class="meter"><i style="width: 38%"></i></div>
+          </div>
+        </section>
+
+        <section class="grid two-column">
+          <div class="panel" data-panel="lanes">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Lane access</p>
+                <h2>Single or multilane</h2>
+              </div>
+              <button class="small-button" type="button" id="selectCore">Core lanes</button>
+            </div>
+            <div class="lane-grid" id="laneGrid">
+              <label><input type="checkbox" value="engine" checked> Engine</label>
+              <label><input type="checkbox" value="business" checked> Business</label>
+              <label><input type="checkbox" value="coding"> Coding</label>
+              <label><input type="checkbox" value="xp4l"> XP4L</label>
+              <label><input type="checkbox" value="art"> Art</label>
+              <label><input type="checkbox" value="icon"> Icon</label>
+            </div>
+          </div>
+
+          <div class="panel" data-panel="tools">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Tools</p>
+                <h2>Run helpers</h2>
+              </div>
+            </div>
+            <div class="tool-list">
+              <button type="button" data-template="handoff">Handoff note</button>
+              <button type="button" data-template="review">Review pass</button>
+              <button type="button" data-template="workflow">Workflow B prompt</button>
+              <button type="button" data-template="docs">Docs polish</button>
+              <button type="button" data-template="plan">Run plan</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="grid prompt-grid">
+          <div class="panel prompt-panel" data-panel="templates">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Quick prompt builder</p>
+                <h2>Template stack</h2>
+              </div>
+              <button class="small-button" type="button" id="clearPrompt">Clear</button>
+            </div>
+            <div class="template-list">
+              <button type="button" data-template="build">Build slice</button>
+              <button type="button" data-template="tighten">Tighten UI</button>
+              <button type="button" data-template="test">Test and verify</button>
+              <button type="button" data-template="handoff">Recorder handoff</button>
+            </div>
+            <label class="field">
+              <span>Input</span>
+              <textarea id="promptInput" rows="9" placeholder="Describe the operator action, target lane, and expected evidence."></textarea>
+            </label>
+            <div class="run-plan" aria-label="Run planning controls">
+              <label class="field compact-field">
+                <span>Cycles</span>
+                <input id="cycleCount" type="number" min="1" max="12" value="1">
+              </label>
+              <label class="field compact-field">
+                <span>Timebox</span>
+                <input id="timeboxMinutes" type="number" min="5" max="240" value="30">
+              </label>
+              <label class="field compact-field">
+                <span>Gate</span>
+                <select id="hardGateMode" aria-label="Hard gate mode">
+                  <option value="switch-safe">switch-safe</option>
+                  <option value="stop">stop</option>
+                  <option value="record-continue">record-continue</option>
+                </select>
+              </label>
+              <label class="field compact-field">
+                <span>Commit</span>
+                <select id="commitMode" aria-label="Commit mode">
+                  <option value="review">review</option>
+                  <option value="never">never</option>
+                  <option value="cycle">cycle</option>
+                  <option value="agent">agent</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="panel" data-panel="preview">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Preview</p>
+                <h2>Run draft</h2>
+              </div>
+              <button class="small-button" type="button" id="copyPrompt">Copy</button>
+            </div>
+            <pre class="preview-box" id="promptPreview"></pre>
+            <div class="command-panel">
+              <div class="panel-heading mini-heading">
+                <div>
+                  <p class="eyebrow">Command draft</p>
+                  <h3>No execute flag</h3>
+                </div>
+                <button class="small-button" type="button" id="copyCommand">Copy command</button>
+              </div>
+              <pre class="command-box" id="commandDraft"></pre>
+            </div>
+            <div class="gallery-grid" id="galleryGrid" aria-label="Preview gallery">
+              <article class="gallery-card">
+                <strong>Run plan</strong>
+                <span>Waiting for draft details.</span>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <aside class="run-dock" aria-label="Workshop runs">
+        <div class="panel compact">
+          <p class="eyebrow">Forging runs</p>
+          <ol id="runQueue">
+            <li><span>Draft prompt</span><b>Ready</b></li>
+            <li><span>Review scope</span><b>Waiting</b></li>
+            <li><span>Record evidence</span><b>Later</b></li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+
+    <dialog class="settings-dialog" id="settingsDialog">
+      <form method="dialog">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Settings</p>
+            <h2>Controls and theme</h2>
+          </div>
+          <button class="icon-button" value="close" aria-label="Close settings">
+            <span class="icon-close" aria-hidden="true"></span>
+          </button>
+        </div>
+        <label class="field inline">
+          <span>Dense layout</span>
+          <input type="checkbox" id="densityToggle">
+        </label>
+        <div class="keybind-list" id="keybindList" aria-label="Custom keybinds"></div>
+      </form>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>
