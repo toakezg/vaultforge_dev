@@ -1,0 +1,58 @@
+{
+  "category": "Core Registry & Contracts",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes",
+      "ungated external calls",
+      "ungated paid API calls"
+    ],
+    "contract_line": "inputs=target_root,baseline_ref,scope,filters | outputs=added,changed,missing,risk_level | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated external calls;ungated paid API calls | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "baseline_ref",
+      "scope",
+      "filters"
+    ],
+    "outputs": [
+      "added",
+      "changed",
+      "missing",
+      "risk_level"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "diff": {
+    "added": [],
+    "baseline": "generated contract catalog",
+    "changed": [],
+    "missing": [],
+    "risk_level": "low"
+  },
+  "dry_run": false,
+  "family": "registry",
+  "id": "T0024",
+  "implementation_shape": "diff-summary",
+  "operation": "diff",
+  "safety_tags": [
+    "external-gated",
+    "paid-gated",
+    "read-only"
+  ],
+  "shared_handler_key": "registry::diff::diff-summary",
+  "status": "completed",
+  "timestamp": "2026-05-12T23:46:52.576545+00:00",
+  "tool": "registry-permission-scopes-diff"
+}

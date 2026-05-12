@@ -1,0 +1,56 @@
+{
+  "category": "Tool Builder Meta Scaffolding",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "max_items"
+    ],
+    "outputs": [
+      "summary",
+      "source_refs",
+      "blockers"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "tool-builder",
+  "id": "T0968",
+  "implementation_shape": "handoff-pack",
+  "operation": "summarize",
+  "safety_tags": [
+    "read-only"
+  ],
+  "shared_handler_key": "tool-builder::summarize::handoff-pack",
+  "status": "completed",
+  "summary": {
+    "blockers": [],
+    "brief": "toolbuilder-registry-updates-summarize is a handoff summary tool in Tool Builder Meta Scaffolding; it uses handoff-pack and belongs to tool-builder.",
+    "matched_items": [
+      "tests\\test_context_builder.py",
+      "tools\\tool-list-builder-workflow.md",
+      "tools\\example-tool-result-build\\registry-cycle-1\\batch-summary.json",
+      "tools\\example-tool-result-build\\registry-cycle-1\\dry-run-output.json",
+      "tools\\example-tool-result-build\\registry-cycle-1\\live-run-output.json"
+    ]
+  },
+  "timestamp": "2026-05-12T23:47:47.359775+00:00",
+  "tool": "toolbuilder-registry-updates-summarize"
+}

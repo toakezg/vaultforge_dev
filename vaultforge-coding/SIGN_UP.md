@@ -42,3 +42,33 @@ Use this shape:
 - Handoff: build config loading and environment-backed path resolution next, then
   wire prompt compilation and bridge execution without adding write-capable file
   mutation or XP interpretation
+
+## 2026-05-13 - tool-list builder workflow pass
+
+- Role: apply `tool-list-to-builder-workflow` to the local tool catalog
+- Scope: listing/pre-build artifacts only; no tool implementation and no first
+  build batch selection
+- Read: `CODEX_START.md`, `README.md`, `SYSTEM.md`, `PLAN.md`, `TASKS.md`,
+  `CHANGELOG.md`, `SIGN_UP.md`, `VERIFICATION.md`,
+  `vaultforge_code_codex_api_bridge_spec_v_2.md`, and `tools/tool-list.md`
+- Changed: generated `tools/tool-list-builder-workflow.md`,
+  `tools/tool-list-index.jsonl`, and `tools/tool-list-contracts.jsonl`, then
+  linked those artifacts from `tools/tool-list.md`
+- Handoff: use the generated index and contracts for the next merge/detail
+  sweep; do not build tools until a bounded batch is explicitly selected
+
+## 2026-05-13 - fixed tool runtime build
+
+- Role: build the first local fixed-contract tool runtime and live example
+  batch surface
+- Scope: `vaultforge-tool`, generated catalog execution, local dry/live examples,
+  tests, and status docs; no external MCP/GPT live calls
+- Read: section operating docs, generated tool index/contracts, and the
+  tool-list builder workflow report
+- Changed: added `src/vf_code_bridge/tool_runtime.py`,
+  `tests/test_tool_runtime.py`, `tools/tool-runtime-build-status.md`, and
+  `tools/example-tool-result-build/` examples; updated `pyproject.toml`,
+  `README.md`, `CHANGELOG.md`, `SIGN_UP.md`, and `tools/tool-list.md`
+- Handoff: next cycle should enrich family-specific validation and catalog
+  status/export summaries before attempting live external or write-capable
+  integrations

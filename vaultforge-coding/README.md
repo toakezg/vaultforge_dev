@@ -51,6 +51,9 @@ rewards, or dashboard logic. That belongs in a separate sibling section:
   rebuilds `assets\reports\usage_summary.json`
 - environment-backed config loading now supports repo-local defaults plus
   validated overrides for section/model/provider, token rates, and asset paths
+- `tools/tool-list.md` now has a large fixed-contract tool catalog, generated
+  tag/contract artifacts, and a first local `vaultforge-tool` runtime for
+  executing known catalog tools with dry/live local example outputs
 - prompt compilation, broader context collection, and OpenAI Responses API
   execution are still ahead
 

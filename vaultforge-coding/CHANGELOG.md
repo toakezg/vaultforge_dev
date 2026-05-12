@@ -1,5 +1,33 @@
 # Changelog
 
+## 2026-05-13
+
+- Added `src/vf_code_bridge/tool_runtime.py` and the `vaultforge-tool` console
+  entry point for running fixed local tools from the generated tool catalog.
+- Added selector mode for `vaultforge-tool` so batches can be chosen by family,
+  priority, operation, and limit instead of manually passing every tool name.
+- Added read-only catalog listing mode with `vaultforge-tool --list` for quick
+  filtered handoffs before a build batch is selected.
+- Added `tests/test_tool_runtime.py` covering catalog loading, scan/validate,
+  dry versus live export, live batch result storage, selector filtering, list
+  mode, and blocked outside-root targets.
+- Live-tested four local example batches under
+  `tools/example-tool-result-build`: 30 registry tools, 20 `.4` queue tools,
+  20 cost-route tools, and 20 tool-builder tools.
+- Added `tools/tool-runtime-build-status.md` to record the runtime surface,
+  supported operations, example batches, verification commands, and next build
+  slice.
+- Added the first `tool-list-to-builder-workflow` pass over
+  `tools/tool-list.md`, generating tagged JSONL index and compact contract
+  artifacts for all 1,825 listed tools.
+- Added `tools/tool-list-builder-workflow.md` as the pre-build sweep report
+  covering catalog integrity, merge candidates, near-duplicates, inferred
+  priority/safety/family/shape tags, shared-handler groups, and next sweep
+  guidance without selecting or implementing a first build batch.
+- Linked the generated workflow artifacts from the top of `tools/tool-list.md`
+  so future builder threads can use the structured index and contract layer
+  without reparsing the raw catalog.
+
 ## 2026-04-17
 
 - Split run artifacts into `assets\runs\live` for active outputs and

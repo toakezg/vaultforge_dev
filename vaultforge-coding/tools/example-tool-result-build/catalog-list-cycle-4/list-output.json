@@ -1,0 +1,61 @@
+{
+  "status": "completed",
+  "dry_run": true,
+  "tools": [
+    {
+      "id": "T0001",
+      "tool": "registry-tool-manifests-scan",
+      "family": "registry",
+      "operation": "scan",
+      "priority_tag": "p0-foundation",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "path-list"
+    },
+    {
+      "id": "T0002",
+      "tool": "registry-tool-manifests-validate",
+      "family": "registry",
+      "operation": "validate",
+      "priority_tag": "p0-foundation",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "status-summary"
+    },
+    {
+      "id": "T0003",
+      "tool": "registry-tool-manifests-summarize",
+      "family": "registry",
+      "operation": "summarize",
+      "priority_tag": "p0-foundation",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "handoff-pack"
+    },
+    {
+      "id": "T0004",
+      "tool": "registry-tool-manifests-diff",
+      "family": "registry",
+      "operation": "diff",
+      "priority_tag": "p0-foundation",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "diff-summary"
+    },
+    {
+      "id": "T0005",
+      "tool": "registry-tool-manifests-export",
+      "family": "registry",
+      "operation": "export",
+      "priority_tag": "p0-foundation",
+      "safety_tags": [
+        "preview-write"
+      ],
+      "implementation_shape": "markdown-report"
+    }
+  ]
+}

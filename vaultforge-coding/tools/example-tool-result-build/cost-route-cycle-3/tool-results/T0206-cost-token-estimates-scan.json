@@ -1,0 +1,73 @@
+{
+  "category": "Cost Token & Budget Control",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,filters | outputs=items,counts,source_paths | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "filters"
+    ],
+    "outputs": [
+      "items",
+      "counts",
+      "source_paths"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "cost-route",
+  "id": "T0206",
+  "implementation_shape": "path-list",
+  "operation": "scan",
+  "safety_tags": [
+    "read-only"
+  ],
+  "scan": {
+    "counts": {
+      "candidate_files": 50,
+      "matched_items": 5
+    },
+    "items": [
+      "tests\\test_usage_tracker.py",
+      "tools\\tool-list-builder-workflow.md",
+      "tools\\tool-list-contracts.jsonl",
+      "tools\\tool-list-index.jsonl",
+      "tools\\tool-list.md"
+    ],
+    "keywords": [
+      "cost",
+      "token",
+      "estimates",
+      "scan",
+      "budget",
+      "control",
+      "usage",
+      "management",
+      "find",
+      "list",
+      "rough",
+      "counts"
+    ],
+    "source_root": "F:\\vaultforge\\vaultforge-coding"
+  },
+  "shared_handler_key": "cost-route::scan::path-list",
+  "status": "completed",
+  "timestamp": "2026-05-12T23:47:38.036883+00:00",
+  "tool": "cost-token-estimates-scan"
+}

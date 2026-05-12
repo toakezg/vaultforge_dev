@@ -1,0 +1,60 @@
+{
+  "category": "Core Registry & Contracts",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes",
+      "ungated external calls",
+      "ungated paid API calls"
+    ],
+    "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated external calls;ungated paid API calls | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "max_items"
+    ],
+    "outputs": [
+      "summary",
+      "source_refs",
+      "blockers"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "registry",
+  "id": "T0023",
+  "implementation_shape": "handoff-pack",
+  "operation": "summarize",
+  "safety_tags": [
+    "external-gated",
+    "paid-gated",
+    "read-only"
+  ],
+  "shared_handler_key": "registry::summarize::handoff-pack",
+  "status": "completed",
+  "summary": {
+    "blockers": [],
+    "brief": "registry-permission-scopes-summarize is a handoff summary tool in Core Registry & Contracts; it uses handoff-pack and belongs to registry.",
+    "matched_items": [
+      "tools\\tool-list.md",
+      "tools\\tool-list-index.jsonl",
+      "tools\\tool-list-contracts.jsonl",
+      "tools\\tool-list-builder-workflow.md",
+      ".obsidian\\core-plugins.json"
+    ]
+  },
+  "timestamp": "2026-05-12T23:46:52.441618+00:00",
+  "tool": "registry-permission-scopes-summarize"
+}

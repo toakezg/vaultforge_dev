@@ -1,0 +1,1364 @@
+{
+  "status": "completed",
+  "dry_run": true,
+  "tool_count": 20,
+  "results": [
+    {
+      "tool": "dot4-inbox-queues-scan",
+      "id": "T1751",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:18.784344+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "scan",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "path-list",
+      "shared_handler_key": "dot4-queue::scan::path-list",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "filters"
+        ],
+        "outputs": [
+          "items",
+          "counts",
+          "source_paths"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test"
+        ],
+        "contract_line": "inputs=target_root,scope,filters | outputs=items,counts,source_paths | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test"
+      },
+      "scan": {
+        "keywords": [
+          "dot4",
+          "inbox",
+          "queues",
+          "scan",
+          "operations",
+          "courier",
+          "intake",
+          "find",
+          "list",
+          "queue",
+          "folders",
+          "pending"
+        ],
+        "items": [
+          "tools\\tool-list-builder-workflow.md",
+          "tools\\tool-list-contracts.jsonl",
+          "tools\\tool-list-index.jsonl",
+          "tools\\tool-list.md",
+          "tools\\example-tool-result-build\\registry-cycle-1\\tool-results\\T0001-registry-tool-manifests-scan.json"
+        ],
+        "counts": {
+          "candidate_files": 50,
+          "matched_items": 5
+        },
+        "source_root": "F:\\vaultforge\\vaultforge-coding"
+      }
+    },
+    {
+      "tool": "dot4-inbox-queues-validate",
+      "id": "T1752",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:18.943473+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "validate",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "status-summary",
+      "shared_handler_key": "dot4-queue::validate::status-summary",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "ruleset"
+        ],
+        "outputs": [
+          "pass",
+          "issues",
+          "next_tool"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test",
+          "known-pass and known-fail fixtures"
+        ],
+        "contract_line": "inputs=target_root,scope,ruleset | outputs=pass,issues,next_tool | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test;known-pass and known-fail fixtures"
+      },
+      "validation": {
+        "pass": true,
+        "issues": [],
+        "next_tool": "",
+        "catalog": {
+          "tool_count": 1825,
+          "min_id": 1,
+          "max_id": 1825,
+          "missing_ids": [],
+          "duplicate_names": [],
+          "top_families": [
+            [
+              "cost-route",
+              100
+            ],
+            [
+              "dot4-queue",
+              75
+            ],
+            [
+              "vaultforge-section",
+              65
+            ],
+            [
+              "codex-run",
+              65
+            ],
+            [
+              "mcp-proof",
+              55
+            ],
+            [
+              "obsidian-plugin",
+              55
+            ],
+            [
+              "windows-local",
+              55
+            ],
+            [
+              "builder-packet",
+              55
+            ],
+            [
+              "registry",
+              50
+            ],
+            [
+              "workspace-discovery",
+              50
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "tool": "dot4-inbox-queues-summarize",
+      "id": "T1753",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:19.092647+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "summarize",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "handoff-pack",
+      "shared_handler_key": "dot4-queue::summarize::handoff-pack",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "max_items"
+        ],
+        "outputs": [
+          "summary",
+          "source_refs",
+          "blockers"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test"
+        ],
+        "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test"
+      },
+      "summary": {
+        "brief": "dot4-inbox-queues-summarize is a handoff summary tool in .4 Operations and Courier Intake; it uses handoff-pack and belongs to dot4-queue.",
+        "matched_items": [
+          "tools\\example-tool-result-build\\registry-cycle-1\\tool-results\\T0003-registry-tool-manifests-summarize.json",
+          "tools\\example-tool-result-build\\registry-cycle-1\\tool-results\\T0008-registry-tool-contracts-summarize.json"
+        ],
+        "blockers": []
+      }
+    },
+    {
+      "tool": "dot4-inbox-queues-route",
+      "id": "T1754",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:19.237985+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "route",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "routing-decision",
+      "shared_handler_key": "dot4-queue::route::routing-decision",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "item_id",
+          "available_lanes",
+          "constraints"
+        ],
+        "outputs": [
+          "target_lane",
+          "confidence",
+          "blockers",
+          "required_proof"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test"
+        ],
+        "contract_line": "inputs=target_root,item_id,available_lanes,constraints | outputs=target_lane,confidence,blockers,required_proof | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test"
+      },
+      "route": {
+        "target_lane": "dot4-queue",
+        "confidence": "medium",
+        "blockers": [],
+        "required_proof": [
+          "fixture run",
+          "blocked-path negative test"
+        ]
+      }
+    },
+    {
+      "tool": "dot4-inbox-queues-export",
+      "id": "T1755",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:19.370579+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "export",
+      "safety_tags": [
+        "preview-write"
+      ],
+      "implementation_shape": "queue-report",
+      "shared_handler_key": "dot4-queue::export::queue-report",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "artifact_id",
+          "format"
+        ],
+        "outputs": [
+          "artifact_path",
+          "artifact_id",
+          "summary"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "tools/artifacts",
+          "assets/reports"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test",
+          "artifact-exists check"
+        ],
+        "contract_line": "inputs=target_root,scope,artifact_id,format | outputs=artifact_path,artifact_id,summary | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=tools/artifacts;assets/reports | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test;artifact-exists check"
+      },
+      "artifact_preview": "F:\\vaultforge\\vaultforge-coding\\tools\\example-tool-result-build\\T1755-dot4-inbox-queues-export.json"
+    },
+    {
+      "tool": "dot4-courier-batches-scan",
+      "id": "T1756",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:19.510057+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "scan",
+      "safety_tags": [
+        "live-write-gated",
+        "read-only"
+      ],
+      "implementation_shape": "path-list",
+      "shared_handler_key": "dot4-queue::scan::path-list",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "filters"
+        ],
+        "outputs": [
+          "items",
+          "counts",
+          "source_paths"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes",
+          "ungated live writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test"
+        ],
+        "contract_line": "inputs=target_root,scope,filters | outputs=items,counts,source_paths | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated live writes | proof=parse fixture;bad-input test;blocked-path test"
+      },
+      "scan": {
+        "keywords": [
+          "dot4",
+          "courier",
+          "batches",
+          "scan",
+          "operations",
+          "intake",
+          "find",
+          "list",
+          "batch",
+          "files",
+          "ids",
+          "delivery"
+        ],
+        "items": [
+          "tools\\tool-list-builder-workflow.md",
+          "tools\\tool-list-contracts.jsonl",
+          "tools\\tool-list-index.jsonl",
+          "tools\\tool-list.md",
+          "tools\\example-tool-result-build\\registry-cycle-1\\batch-summary.json"
+        ],
+        "counts": {
+          "candidate_files": 50,
+          "matched_items": 5
+        },
+        "source_root": "F:\\vaultforge\\vaultforge-coding"
+      }
+    },
+    {
+      "tool": "dot4-courier-batches-validate",
+      "id": "T1757",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:19.659820+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "validate",
+      "safety_tags": [
+        "live-write-gated",
+        "read-only"
+      ],
+      "implementation_shape": "status-summary",
+      "shared_handler_key": "dot4-queue::validate::status-summary",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "ruleset"
+        ],
+        "outputs": [
+          "pass",
+          "issues",
+          "next_tool"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes",
+          "ungated live writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test",
+          "known-pass and known-fail fixtures"
+        ],
+        "contract_line": "inputs=target_root,scope,ruleset | outputs=pass,issues,next_tool | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated live writes | proof=parse fixture;bad-input test;blocked-path test;known-pass and known-fail fixtures"
+      },
+      "validation": {
+        "pass": true,
+        "issues": [],
+        "next_tool": "",
+        "catalog": {
+          "tool_count": 1825,
+          "min_id": 1,
+          "max_id": 1825,
+          "missing_ids": [],
+          "duplicate_names": [],
+          "top_families": [
+            [
+              "cost-route",
+              100
+            ],
+            [
+              "dot4-queue",
+              75
+            ],
+            [
+              "vaultforge-section",
+              65
+            ],
+            [
+              "codex-run",
+              65
+            ],
+            [
+              "mcp-proof",
+              55
+            ],
+            [
+              "obsidian-plugin",
+              55
+            ],
+            [
+              "windows-local",
+              55
+            ],
+            [
+              "builder-packet",
+              55
+            ],
+            [
+              "registry",
+              50
+            ],
+            [
+              "workspace-discovery",
+              50
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "tool": "dot4-courier-batches-summarize",
+      "id": "T1758",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:19.822561+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "summarize",
+      "safety_tags": [
+        "live-write-gated",
+        "read-only"
+      ],
+      "implementation_shape": "handoff-pack",
+      "shared_handler_key": "dot4-queue::summarize::handoff-pack",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "max_items"
+        ],
+        "outputs": [
+          "summary",
+          "source_refs",
+          "blockers"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes",
+          "ungated live writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test"
+        ],
+        "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated live writes | proof=parse fixture;bad-input test;blocked-path test"
+      },
+      "summary": {
+        "brief": "dot4-courier-batches-summarize is a handoff summary tool in .4 Operations and Courier Intake; it uses handoff-pack and belongs to dot4-queue.",
+        "matched_items": [
+          "tools\\example-tool-result-build\\registry-cycle-1\\batch-summary.json",
+          "tools\\example-tool-result-build\\registry-cycle-1\\tool-results\\T0003-registry-tool-manifests-summarize.json",
+          "tools\\example-tool-result-build\\registry-cycle-1\\tool-results\\T0008-registry-tool-contracts-summarize.json"
+        ],
+        "blockers": []
+      }
+    },
+    {
+      "tool": "dot4-courier-batches-route",
+      "id": "T1759",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:19.961650+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "route",
+      "safety_tags": [
+        "live-write-gated",
+        "read-only"
+      ],
+      "implementation_shape": "routing-decision",
+      "shared_handler_key": "dot4-queue::route::routing-decision",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "item_id",
+          "available_lanes",
+          "constraints"
+        ],
+        "outputs": [
+          "target_lane",
+          "confidence",
+          "blockers",
+          "required_proof"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes",
+          "ungated live writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test"
+        ],
+        "contract_line": "inputs=target_root,item_id,available_lanes,constraints | outputs=target_lane,confidence,blockers,required_proof | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated live writes | proof=parse fixture;bad-input test;blocked-path test"
+      },
+      "route": {
+        "target_lane": "dot4-queue",
+        "confidence": "medium",
+        "blockers": [],
+        "required_proof": [
+          "fixture run",
+          "blocked-path negative test"
+        ]
+      }
+    },
+    {
+      "tool": "dot4-courier-batches-export",
+      "id": "T1760",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:20.091117+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "export",
+      "safety_tags": [
+        "live-write-gated",
+        "preview-write"
+      ],
+      "implementation_shape": "queue-report",
+      "shared_handler_key": "dot4-queue::export::queue-report",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "artifact_id",
+          "format"
+        ],
+        "outputs": [
+          "artifact_path",
+          "artifact_id",
+          "summary"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "tools/artifacts",
+          "assets/reports"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes",
+          "ungated live writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test",
+          "artifact-exists check"
+        ],
+        "contract_line": "inputs=target_root,scope,artifact_id,format | outputs=artifact_path,artifact_id,summary | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=tools/artifacts;assets/reports | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated live writes | proof=parse fixture;bad-input test;blocked-path test;artifact-exists check"
+      },
+      "artifact_preview": "F:\\vaultforge\\vaultforge-coding\\tools\\example-tool-result-build\\T1760-dot4-courier-batches-export.json"
+    },
+    {
+      "tool": "dot4-event-envelopes-scan",
+      "id": "T1761",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:20.239183+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "scan",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "path-list",
+      "shared_handler_key": "dot4-queue::scan::path-list",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "filters"
+        ],
+        "outputs": [
+          "items",
+          "counts",
+          "source_paths"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test"
+        ],
+        "contract_line": "inputs=target_root,scope,filters | outputs=items,counts,source_paths | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test"
+      },
+      "scan": {
+        "keywords": [
+          "dot4",
+          "event",
+          "envelopes",
+          "scan",
+          "operations",
+          "courier",
+          "intake",
+          "find",
+          "list",
+          "required",
+          "fields",
+          "source"
+        ],
+        "items": [
+          "tests\\test_event_writer.py",
+          "tools\\tool-list-builder-workflow.md",
+          "tools\\tool-list-contracts.jsonl",
+          "tools\\tool-list-index.jsonl",
+          "tools\\tool-list.md"
+        ],
+        "counts": {
+          "candidate_files": 50,
+          "matched_items": 5
+        },
+        "source_root": "F:\\vaultforge\\vaultforge-coding"
+      }
+    },
+    {
+      "tool": "dot4-event-envelopes-validate",
+      "id": "T1762",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:20.372375+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "validate",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "status-summary",
+      "shared_handler_key": "dot4-queue::validate::status-summary",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "ruleset"
+        ],
+        "outputs": [
+          "pass",
+          "issues",
+          "next_tool"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test",
+          "known-pass and known-fail fixtures"
+        ],
+        "contract_line": "inputs=target_root,scope,ruleset | outputs=pass,issues,next_tool | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test;known-pass and known-fail fixtures"
+      },
+      "validation": {
+        "pass": true,
+        "issues": [],
+        "next_tool": "",
+        "catalog": {
+          "tool_count": 1825,
+          "min_id": 1,
+          "max_id": 1825,
+          "missing_ids": [],
+          "duplicate_names": [],
+          "top_families": [
+            [
+              "cost-route",
+              100
+            ],
+            [
+              "dot4-queue",
+              75
+            ],
+            [
+              "vaultforge-section",
+              65
+            ],
+            [
+              "codex-run",
+              65
+            ],
+            [
+              "mcp-proof",
+              55
+            ],
+            [
+              "obsidian-plugin",
+              55
+            ],
+            [
+              "windows-local",
+              55
+            ],
+            [
+              "builder-packet",
+              55
+            ],
+            [
+              "registry",
+              50
+            ],
+            [
+              "workspace-discovery",
+              50
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "tool": "dot4-event-envelopes-summarize",
+      "id": "T1763",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:20.569696+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "summarize",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "handoff-pack",
+      "shared_handler_key": "dot4-queue::summarize::handoff-pack",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "max_items"
+        ],
+        "outputs": [
+          "summary",
+          "source_refs",
+          "blockers"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test"
+        ],
+        "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test"
+      },
+      "summary": {
+        "brief": "dot4-event-envelopes-summarize is a handoff summary tool in .4 Operations and Courier Intake; it uses handoff-pack and belongs to dot4-queue.",
+        "matched_items": [
+          "tests\\test_event_writer.py",
+          "tools\\example-tool-result-build\\registry-cycle-1\\tool-results\\T0003-registry-tool-manifests-summarize.json",
+          "tools\\example-tool-result-build\\registry-cycle-1\\tool-results\\T0008-registry-tool-contracts-summarize.json"
+        ],
+        "blockers": []
+      }
+    },
+    {
+      "tool": "dot4-event-envelopes-route",
+      "id": "T1764",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:20.703282+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "route",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "routing-decision",
+      "shared_handler_key": "dot4-queue::route::routing-decision",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "item_id",
+          "available_lanes",
+          "constraints"
+        ],
+        "outputs": [
+          "target_lane",
+          "confidence",
+          "blockers",
+          "required_proof"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test"
+        ],
+        "contract_line": "inputs=target_root,item_id,available_lanes,constraints | outputs=target_lane,confidence,blockers,required_proof | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test"
+      },
+      "route": {
+        "target_lane": "dot4-queue",
+        "confidence": "medium",
+        "blockers": [],
+        "required_proof": [
+          "fixture run",
+          "blocked-path negative test"
+        ]
+      }
+    },
+    {
+      "tool": "dot4-event-envelopes-export",
+      "id": "T1765",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:20.888259+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "export",
+      "safety_tags": [
+        "preview-write"
+      ],
+      "implementation_shape": "markdown-report",
+      "shared_handler_key": "dot4-queue::export::markdown-report",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "artifact_id",
+          "format"
+        ],
+        "outputs": [
+          "artifact_path",
+          "artifact_id",
+          "summary"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "tools/artifacts",
+          "assets/reports"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test",
+          "artifact-exists check"
+        ],
+        "contract_line": "inputs=target_root,scope,artifact_id,format | outputs=artifact_path,artifact_id,summary | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=tools/artifacts;assets/reports | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test;artifact-exists check"
+      },
+      "artifact_preview": "F:\\vaultforge\\vaultforge-coding\\tools\\example-tool-result-build\\T1765-dot4-event-envelopes-export.json"
+    },
+    {
+      "tool": "dot4-intake-adapters-scan",
+      "id": "T1766",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:21.050176+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "scan",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "path-list",
+      "shared_handler_key": "dot4-queue::scan::path-list",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "filters"
+        ],
+        "outputs": [
+          "items",
+          "counts",
+          "source_paths"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test"
+        ],
+        "contract_line": "inputs=target_root,scope,filters | outputs=items,counts,source_paths | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test"
+      },
+      "scan": {
+        "keywords": [
+          "dot4",
+          "intake",
+          "adapters",
+          "scan",
+          "operations",
+          "courier",
+          "find",
+          "list",
+          "parser",
+          "files",
+          "supported",
+          "input"
+        ],
+        "items": [
+          "tools\\tool-list-builder-workflow.md",
+          "tools\\tool-list-contracts.jsonl",
+          "tools\\tool-list-index.jsonl",
+          "tools\\tool-list.md",
+          "tools\\example-tool-result-build\\registry-cycle-1\\T0030-registry-input-specs-export.json"
+        ],
+        "counts": {
+          "candidate_files": 50,
+          "matched_items": 5
+        },
+        "source_root": "F:\\vaultforge\\vaultforge-coding"
+      }
+    },
+    {
+      "tool": "dot4-intake-adapters-validate",
+      "id": "T1767",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:21.190837+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "validate",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "status-summary",
+      "shared_handler_key": "dot4-queue::validate::status-summary",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "ruleset"
+        ],
+        "outputs": [
+          "pass",
+          "issues",
+          "next_tool"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test",
+          "known-pass and known-fail fixtures"
+        ],
+        "contract_line": "inputs=target_root,scope,ruleset | outputs=pass,issues,next_tool | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test;known-pass and known-fail fixtures"
+      },
+      "validation": {
+        "pass": true,
+        "issues": [],
+        "next_tool": "",
+        "catalog": {
+          "tool_count": 1825,
+          "min_id": 1,
+          "max_id": 1825,
+          "missing_ids": [],
+          "duplicate_names": [],
+          "top_families": [
+            [
+              "cost-route",
+              100
+            ],
+            [
+              "dot4-queue",
+              75
+            ],
+            [
+              "vaultforge-section",
+              65
+            ],
+            [
+              "codex-run",
+              65
+            ],
+            [
+              "mcp-proof",
+              55
+            ],
+            [
+              "obsidian-plugin",
+              55
+            ],
+            [
+              "windows-local",
+              55
+            ],
+            [
+              "builder-packet",
+              55
+            ],
+            [
+              "registry",
+              50
+            ],
+            [
+              "workspace-discovery",
+              50
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "tool": "dot4-intake-adapters-summarize",
+      "id": "T1768",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:21.337217+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "summarize",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "handoff-pack",
+      "shared_handler_key": "dot4-queue::summarize::handoff-pack",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "max_items"
+        ],
+        "outputs": [
+          "summary",
+          "source_refs",
+          "blockers"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test"
+        ],
+        "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test"
+      },
+      "summary": {
+        "brief": "dot4-intake-adapters-summarize is a handoff summary tool in .4 Operations and Courier Intake; it uses handoff-pack and belongs to dot4-queue.",
+        "matched_items": [
+          "tools\\example-tool-result-build\\registry-cycle-1\\T0030-registry-input-specs-export.json",
+          "tools\\example-tool-result-build\\registry-cycle-1\\tool-results\\T0003-registry-tool-manifests-summarize.json",
+          "tools\\example-tool-result-build\\registry-cycle-1\\tool-results\\T0008-registry-tool-contracts-summarize.json"
+        ],
+        "blockers": []
+      }
+    },
+    {
+      "tool": "dot4-intake-adapters-route",
+      "id": "T1769",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:21.473063+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "route",
+      "safety_tags": [
+        "read-only"
+      ],
+      "implementation_shape": "routing-decision",
+      "shared_handler_key": "dot4-queue::route::routing-decision",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "item_id",
+          "available_lanes",
+          "constraints"
+        ],
+        "outputs": [
+          "target_lane",
+          "confidence",
+          "blockers",
+          "required_proof"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "none"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test"
+        ],
+        "contract_line": "inputs=target_root,item_id,available_lanes,constraints | outputs=target_lane,confidence,blockers,required_proof | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test"
+      },
+      "route": {
+        "target_lane": "dot4-queue",
+        "confidence": "medium",
+        "blockers": [],
+        "required_proof": [
+          "fixture run",
+          "blocked-path negative test"
+        ]
+      }
+    },
+    {
+      "tool": "dot4-intake-adapters-export",
+      "id": "T1770",
+      "status": "completed",
+      "dry_run": true,
+      "timestamp": "2026-05-12T23:47:21.598129+00:00",
+      "category": ".4 Operations and Courier Intake",
+      "family": "dot4-queue",
+      "operation": "export",
+      "safety_tags": [
+        "preview-write"
+      ],
+      "implementation_shape": "markdown-report",
+      "shared_handler_key": "dot4-queue::export::markdown-report",
+      "contract": {
+        "inputs": [
+          "target_root",
+          "scope",
+          "artifact_id",
+          "format"
+        ],
+        "outputs": [
+          "artifact_path",
+          "artifact_id",
+          "summary"
+        ],
+        "reads": [
+          "allowlisted repo roots",
+          ".4 inbox processed rejected rerun queues"
+        ],
+        "writes": [
+          "tools/artifacts",
+          "assets/reports"
+        ],
+        "blocked": [
+          "arbitrary shell",
+          "arbitrary paths",
+          "secret printing",
+          "destructive writes"
+        ],
+        "proof": [
+          "parse fixture",
+          "bad-input test",
+          "blocked-path test",
+          "artifact-exists check"
+        ],
+        "contract_line": "inputs=target_root,scope,artifact_id,format | outputs=artifact_path,artifact_id,summary | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=tools/artifacts;assets/reports | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test;artifact-exists check"
+      },
+      "artifact_preview": "F:\\vaultforge\\vaultforge-coding\\tools\\example-tool-result-build\\T1770-dot4-intake-adapters-export.json"
+    }
+  ]
+}

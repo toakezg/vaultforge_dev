@@ -1,0 +1,131 @@
+{
+  "catalog": {
+    "duplicate_names": [],
+    "max_id": 1825,
+    "min_id": 1,
+    "missing_ids": [],
+    "tool_count": 1825,
+    "top_families": [
+      [
+        "cost-route",
+        100
+      ],
+      [
+        "dot4-queue",
+        75
+      ],
+      [
+        "vaultforge-section",
+        65
+      ],
+      [
+        "codex-run",
+        65
+      ],
+      [
+        "mcp-proof",
+        55
+      ],
+      [
+        "obsidian-plugin",
+        55
+      ],
+      [
+        "windows-local",
+        55
+      ],
+      [
+        "builder-packet",
+        55
+      ],
+      [
+        "registry",
+        50
+      ],
+      [
+        "workspace-discovery",
+        50
+      ]
+    ]
+  },
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,artifact_id,format | outputs=artifact_path,artifact_id,summary | reads=allowlisted repo roots | writes=tools/artifacts;assets/reports | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test;artifact-exists check",
+    "inputs": [
+      "target_root",
+      "scope",
+      "artifact_id",
+      "format"
+    ],
+    "outputs": [
+      "artifact_path",
+      "artifact_id",
+      "summary"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test",
+      "artifact-exists check"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "tools/artifacts",
+      "assets/reports"
+    ]
+  },
+  "generated_at": "2026-05-12T23:47:45.226742+00:00",
+  "record": {
+    "build": "preview-write by default; create under tools/artifacts or assets/reports only",
+    "category": "Tool Builder Meta Scaffolding",
+    "domain": "tool construction",
+    "family": "tool-builder",
+    "id": "T0955",
+    "implementation_shape": "markdown-report",
+    "operation": "export",
+    "priority_tag": "p0-foundation",
+    "purpose": "create a structured artifact covering canonical blueprint for a new tool contract",
+    "rel": "foundation",
+    "safety_tags": [
+      "preview-write"
+    ],
+    "shared_handler_key": "tool-builder::export::markdown-report",
+    "specialty": "preview artifact",
+    "tool": "toolbuilder-tool-blueprints-export"
+  },
+  "scan": {
+    "counts": {
+      "candidate_files": 50,
+      "matched_items": 5
+    },
+    "items": [
+      "tests\\test_context_builder.py",
+      "tools\\tool-list-builder-workflow.md",
+      "tools\\example-tool-result-build\\cost-route-cycle-3\\T0205-cost-usage-ledgers-export.json",
+      "tools\\example-tool-result-build\\cost-route-cycle-3\\T0210-cost-token-estimates-export.json",
+      "tools\\example-tool-result-build\\cost-route-cycle-3\\T0215-cost-model-choices-export.json"
+    ],
+    "keywords": [
+      "toolbuilder",
+      "blueprints",
+      "export",
+      "builder",
+      "meta",
+      "scaffolding",
+      "construction",
+      "create",
+      "structured",
+      "artifact",
+      "covering",
+      "canonical"
+    ],
+    "source_root": "F:\\vaultforge\\vaultforge-coding"
+  }
+}

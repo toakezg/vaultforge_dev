@@ -20,6 +20,7 @@ dev = [
 
 [project.scripts]
 vaultforge-code = "vf_code_bridge.cli:main"
+vaultforge-tool = "vf_code_bridge.tool_runtime:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
