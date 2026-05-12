@@ -128,6 +128,31 @@
               <label><input type="checkbox" value="art"> Art</label>
               <label><input type="checkbox" value="icon"> Icon</label>
             </div>
+            <div class="lane-tabs" id="laneTabs" role="tablist" aria-label="Lane ownership tabs"></div>
+            <article class="lane-card" id="laneCard" aria-live="polite">
+              <div>
+                <p class="eyebrow">Lane owner</p>
+                <h3 id="laneTabTitle">Interface</h3>
+              </div>
+              <dl>
+                <div>
+                  <dt>Path</dt>
+                  <dd id="laneTabPath">interface/</dd>
+                </div>
+                <div>
+                  <dt>Owns</dt>
+                  <dd id="laneTabScope">operator UI, docs, and tests</dd>
+                </div>
+                <div>
+                  <dt>Checks</dt>
+                  <dd id="laneTabChecks">npm.cmd test</dd>
+                </div>
+                <div>
+                  <dt>Gate</dt>
+                  <dd id="laneTabGate">draft only</dd>
+                </div>
+              </dl>
+            </article>
           </div>
 
           <div class="panel" data-panel="tools">
@@ -276,9 +301,15 @@
           <div class="terminal-heading">
             <div>
               <p class="eyebrow">Operator terminal</p>
-              <strong>Draft log</strong>
+              <strong id="terminalTitle">Operating viewer</strong>
             </div>
             <span id="executionState">locked</span>
+          </div>
+          <div class="terminal-filters" role="group" aria-label="Terminal filters">
+            <button type="button" class="active" data-terminal-filter="all">All</button>
+            <button type="button" data-terminal-filter="action">Action</button>
+            <button type="button" data-terminal-filter="gate">Gate</button>
+            <button type="button" data-terminal-filter="system">System</button>
           </div>
           <div class="usage-grid" aria-label="Usage counters">
             <div>

@@ -2,6 +2,13 @@
 
 ## 2026-05-13
 
+- Reviewed the lane-owned tabs and operating terminal viewer slice; verified
+  the interface contract, Edge smoke flow, desktop/mobile smoke artifacts, and
+  no-execute command draft behavior with no blocking findings.
+- Added lane-owned tabs in the lane panel with per-lane owner, path, scope,
+  checks, and gate metadata; upgraded the operator terminal into a filterable
+  operating viewer for action, gate, and system draft events while keeping real
+  command execution locked.
 - Added an operator terminal draft log, queued-draft counter, approximate draft
   token ticker, `All lanes` selection, clearer `Queue draft` wording, and full
   Workflow B lane ids in command drafts while keeping real execution locked and

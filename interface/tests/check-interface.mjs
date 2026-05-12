@@ -41,6 +41,13 @@ for (const id of [
   "splash",
   "quickAccess",
   "laneGrid",
+  "laneTabs",
+  "laneCard",
+  "laneTabTitle",
+  "laneTabPath",
+  "laneTabScope",
+  "laneTabChecks",
+  "laneTabGate",
   "selectAllLanes",
   "promptInput",
   "promptPreview",
@@ -57,6 +64,7 @@ for (const id of [
   "evidenceNext",
   "galleryGrid",
   "terminalLog",
+  "terminalTitle",
   "tokenEstimate",
   "queuedCount",
   "commandState",
@@ -89,13 +97,16 @@ assert(js.includes("window.VaultForgeOperator"), "missing extension surface");
 assert(js.includes("localStorage"), "missing persistent settings");
 assert(js.includes("Ctrl+Enter"), "missing run keybind");
 assert(js.includes("laneIds"), "missing lane id mapping");
+assert(js.includes("laneCatalog"), "missing lane ownership catalog");
 assert(js.includes("vaultforge-engine"), "missing Workflow B engine lane id");
+assert(js.includes("renderLaneTabs"), "missing lane tab renderer");
 assert(js.includes("selectAllLanes"), "missing all-lanes control");
 assert(js.includes("buildCommandDraft"), "missing command draft builder");
 assert(js.includes("..\\\\run_workflow_b.bat"), "command draft should target parent root launcher");
 assert(js.includes("buildHandoffDraft"), "missing handoff draft builder");
 assert(js.includes("renderGallery"), "missing preview gallery renderer");
 assert(js.includes("renderRuntimeSurface"), "missing terminal/runtime surface renderer");
+assert(js.includes("terminalFilter"), "missing terminal filter state");
 assert(js.includes("estimateDraftTokens"), "missing draft usage estimate");
 assert(js.includes('event.key === "Enter"'), "missing Enter intro shortcut");
 assert(js.includes("technical"), "missing technical mode");
@@ -106,9 +117,15 @@ assert(js.includes("commandState"), "missing command draft state indicator");
 assert(html.includes("Real VaultForge command execution locked"), "missing visible local execution gate");
 assert(html.includes('id="executionGate" disabled'), "execution gate must stay disabled");
 assert(html.includes("Operator terminal"), "missing operator terminal section");
+assert(html.includes("Operating viewer"), "missing terminal viewer title");
+assert(html.includes('data-terminal-filter="gate"'), "missing terminal gate filter");
+assert(html.includes("Lane owner"), "missing lane ownership card");
 assert(html.includes("Queue draft"), "run button should make draft-only behavior visible");
 assert(css.includes(".execution-gate"), "missing execution gate styling");
 assert(css.includes(".terminal-log"), "missing terminal log styling");
+assert(css.includes(".terminal-filters"), "missing terminal filter styling");
+assert(css.includes(".lane-tabs"), "missing lane tab styling");
+assert(css.includes(".lane-card"), "missing lane card styling");
 assert(css.includes(".usage-grid"), "missing usage counter styling");
 assert(launcher.includes("127.0.0.1"), "launcher should bind locally");
 assert(launcher.includes("no-store"), "launcher should avoid stale app cache");

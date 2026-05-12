@@ -382,6 +382,70 @@ input {
   text-align: left;
 }
 
+.lane-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.lane-tabs button,
+.terminal-filters button {
+  flex: 0 0 auto;
+  min-height: 34px;
+  border-radius: 8px;
+  padding: 0 10px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.lane-tabs button.active,
+.terminal-filters button.active {
+  border-color: var(--accent);
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent), var(--panel-2) 82%);
+}
+
+.lane-card {
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: color-mix(in srgb, var(--panel-2), var(--bg) 28%);
+}
+
+.lane-card h3 {
+  margin: 0;
+}
+
+.lane-card dl {
+  display: grid;
+  gap: 10px;
+  margin: 12px 0 0;
+}
+
+.lane-card dl div {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 10px;
+}
+
+.lane-card dt {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.lane-card dd {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.86rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
 .field {
   display: grid;
   gap: 8px;
@@ -577,6 +641,17 @@ textarea {
   display: block;
 }
 
+.terminal-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.terminal-filters button {
+  flex: 1 1 calc(50% - 6px);
+}
+
 #executionState {
   min-width: 58px;
   border: 1px solid var(--line);
@@ -636,6 +711,18 @@ textarea {
   gap: 3px;
   border-left: 2px solid var(--accent-2);
   padding: 0 0 0 8px;
+}
+
+.terminal-log li[data-entry-type="gate"] {
+  border-left-color: var(--danger);
+}
+
+.terminal-log li[data-entry-type="action"] {
+  border-left-color: var(--accent);
+}
+
+.terminal-log li[data-entry-type="system"] {
+  border-left-color: var(--accent-2);
 }
 
 .terminal-log span {

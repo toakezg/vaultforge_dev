@@ -245,6 +245,10 @@ try {
   await evaluate(client, "document.querySelector('#selectAllLanes').click();");
   assert(await evaluate(client, "document.querySelector('#laneSummary').textContent.includes('icon')"), "all lanes should be selectable");
   assert(await evaluate(client, "document.querySelector('#commandDraft').textContent.includes('--lane vaultforge-icon')"), "command draft should include icon lane id");
+  assert(await evaluate(client, "document.querySelectorAll('#laneTabs [role=\"tab\"]').length >= 7"), "lane-owned tabs should render selected lanes plus interface");
+  await evaluate(client, "document.querySelector('[data-lane-tab=\"icon\"]').click();");
+  assert(await evaluate(client, "document.querySelector('#laneTabTitle').textContent === 'Icon'"), "lane tab should show selected lane owner");
+  assert(await evaluate(client, "document.querySelector('#laneTabPath').textContent === 'vaultforge-icon/'"), "lane tab should show lane path");
 
   await evaluate(client, "document.querySelector('[data-template=\"build\"]').click();");
   assert(await evaluate(client, "document.querySelector('#promptInput').value.includes('Target lane:')"), "template should append to input");
@@ -270,6 +274,11 @@ try {
   assert(await evaluate(client, "document.querySelector('#runQueue li span').textContent.includes('engine + business + coding')"), "Ctrl+Enter should add an all-lane run draft");
   assert(await evaluate(client, "document.querySelector('#queuedCount').textContent === '1'"), "queued count should update");
   assert(await evaluate(client, "document.querySelector('#terminalLog').textContent.includes('queued draft only')"), "terminal log should record queued draft");
+  await evaluate(client, "document.querySelector('[data-terminal-filter=\"gate\"]').click();");
+  assert(await evaluate(client, "document.querySelector('#terminalTitle').textContent === 'gate viewer'"), "terminal filter title should update");
+  assert(await evaluate(client, "document.querySelector('#terminalLog').textContent.includes('no gate entries')"), "gate filter should show empty state before gate events");
+  await evaluate(client, "document.querySelector('[data-terminal-filter=\"all\"]').click();");
+  assert(await evaluate(client, "document.querySelector('#terminalLog').textContent.includes('queued draft only')"), "all terminal filter should restore draft activity");
 
   await evaluate(client, "location.reload();");
   await wait(900);
@@ -278,6 +287,7 @@ try {
   assert(await evaluate(client, "document.querySelector('#promptInput').value.includes('Target lane:')"), "prompt should persist");
   assert(await evaluate(client, "document.querySelector('#cycleCount').value === '3'"), "run plan should persist");
   assert(await evaluate(client, "document.querySelector('#evidenceFiles').value.includes('app.js')"), "evidence files should persist");
+  assert(await evaluate(client, "document.querySelector('#laneTabTitle').textContent === 'Icon'"), "lane tab should persist");
   assert(await evaluate(client, "document.querySelector('#terminalLog').textContent.includes('queued draft only')"), "terminal log should persist");
   await key(client, "Enter");
   await wait(150);

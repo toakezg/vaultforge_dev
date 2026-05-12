@@ -6,20 +6,23 @@
    Templates, and Preview.
 4. Choose one or more lanes in the lane panel. Use `All lanes` when you want
    the command draft to include every current VaultForge lane.
-5. Pick Natural or Technical mode from the top bar.
-6. Use template buttons to assemble a prompt, or type directly in the input.
-7. Set the local run plan: cycle count, timebox, hard-gate mode, and commit
+5. Open the lane-owned tabs to review the selected lane's path, ownership,
+   verification checks, and gate note before drafting a handoff.
+6. Pick Natural or Technical mode from the top bar.
+7. Use template buttons to assemble a prompt, or type directly in the input.
+8. Set the local run plan: cycle count, timebox, hard-gate mode, and commit
    mode.
-8. Fill the evidence fields for files touched, verification, blocker or
+9. Fill the evidence fields for files touched, verification, blocker or
    decision, and next action when preparing a handoff.
-9. Review the generated run draft, command draft, evidence handoff, and preview
+10. Review the generated run draft, command draft, evidence handoff, and preview
    gallery.
-10. Check the local execution gate. It is visible but disabled during this
+11. Check the local execution gate. It is visible but disabled during this
     Workflow B run.
-11. Press `Queue draft` or `Ctrl+Enter` to add a local draft entry.
-12. Read the Operator terminal for draft activity. It shows what the interface
+12. Press `Queue draft` or `Ctrl+Enter` to add a local draft entry.
+13. Read the Operator terminal for draft activity. Use the terminal filters to
+    separate action, gate, and system entries. It shows what the interface
     staged or copied, but it does not mean a VaultForge process started.
-13. Open Settings to change theme, density, and keybinds.
+14. Open Settings to change theme, density, and keybinds.
 
 Default keybinds:
 

@@ -20,6 +20,58 @@ const laneIds = {
   icon: "vaultforge-icon"
 };
 
+const laneCatalog = {
+  interface: {
+    title: "Interface",
+    path: "interface/",
+    scope: "operator UI, interface docs, and interface-local tests",
+    checks: "npm.cmd test; browser smoke",
+    gate: "draft-only command surface; no real execution"
+  },
+  engine: {
+    title: "Engine",
+    path: "vaultforge-engine/",
+    scope: "shared generator behavior, CLI contracts, metadata, and dry-runs",
+    checks: "engine tests and dry-run parity checks",
+    gate: "no live generation or contract expansion without approval"
+  },
+  business: {
+    title: "Business",
+    path: "vaultforge-business/",
+    scope: "client workflows, prompt banks, wrappers, galleries, and review surfaces",
+    checks: "business previews, WhatIf/DryRun, and scoped docs checks",
+    gate: "no paid/API launch, pricing, or public delivery without approval"
+  },
+  coding: {
+    title: "Coding",
+    path: "vaultforge-coding/",
+    scope: "local-first code bridge, run reporting, and coding task presets",
+    checks: "bridge tests and local artifact review",
+    gate: "report execution facts only; do not absorb XP meaning"
+  },
+  xp4l: {
+    title: "XP4L",
+    path: "vaultforge-xp4l/",
+    scope: "event interpretation, progression, quests, achievements, and dashboards",
+    checks: "XP4L tests and fixture contract checks",
+    gate: "no scoring or live-vault behavior changes without approval"
+  },
+  art: {
+    title: "Art",
+    path: "vaultforge-art/",
+    scope: "creative prompt packs, art experiments, presets, and curation",
+    checks: "dry-run bridge checks before live generation",
+    gate: "no live generation or asset moves without approval"
+  },
+  icon: {
+    title: "Icon",
+    path: "vaultforge-icon/",
+    scope: "icon notes, icon asset review, and SVG-Forge validation",
+    checks: "SVG-Forge dry-runs and icon-lane docs checks",
+    gate: "no asset move/delete or folder-icon application without approval"
+  }
+};
+
 const templates = {
   build: "Build a scoped VaultForge interface slice.\n\nTarget lane:\nSuccess check:\nStop condition:\nEvidence to record:",
   tighten: "Tighten the operator interface for clarity, density, and keyboard use. Keep changes interface-local and verify responsive behavior.",
@@ -44,6 +96,12 @@ const activeViewLabel = document.querySelector("#activeViewLabel");
 const themeSelect = document.querySelector("#themeSelect");
 const laneGrid = document.querySelector("#laneGrid");
 const laneSummary = document.querySelector("#laneSummary");
+const laneTabs = document.querySelector("#laneTabs");
+const laneTabTitle = document.querySelector("#laneTabTitle");
+const laneTabPath = document.querySelector("#laneTabPath");
+const laneTabScope = document.querySelector("#laneTabScope");
+const laneTabChecks = document.querySelector("#laneTabChecks");
+const laneTabGate = document.querySelector("#laneTabGate");
 const selectCore = document.querySelector("#selectCore");
 const selectAllLanes = document.querySelector("#selectAllLanes");
 const promptInput = document.querySelector("#promptInput");
@@ -70,6 +128,8 @@ const settingsDialog = document.querySelector("#settingsDialog");
 const densityToggle = document.querySelector("#densityToggle");
 const keybindList = document.querySelector("#keybindList");
 const terminalLog = document.querySelector("#terminalLog");
+const terminalTitle = document.querySelector("#terminalTitle");
+const terminalFilters = document.querySelectorAll("[data-terminal-filter]");
 const tokenEstimate = document.querySelector("#tokenEstimate");
 const queuedCount = document.querySelector("#queuedCount");
 const commandState = document.querySelector("#commandState");
@@ -84,6 +144,8 @@ function loadState() {
       theme: "dark",
       dense: false,
       lanes: ["engine", "business"],
+      laneTab: "interface",
+      terminalFilter: "all",
       prompt: "",
       plan: { cycles: "1", timebox: "30", gate: "switch-safe", commit: "review" },
       evidence: { files: "", verification: "npm.cmd test", blocker: "no hard gate", next: "" },
@@ -98,6 +160,8 @@ function loadState() {
       theme: "dark",
       dense: false,
       lanes: ["engine", "business"],
+      laneTab: "interface",
+      terminalFilter: "all",
       prompt: "",
       plan: { cycles: "1", timebox: "30", gate: "switch-safe", commit: "review" },
       evidence: { files: "", verification: "npm.cmd test", blocker: "no hard gate", next: "" },
@@ -136,6 +200,10 @@ function setTheme(theme) {
 function updateLanes() {
   state.lanes = Array.from(laneGrid.querySelectorAll("input:checked")).map((input) => input.value);
   laneSummary.textContent = state.lanes.length ? state.lanes.join(" + ") : "none";
+  if (state.laneTab !== "interface" && !state.lanes.includes(state.laneTab)) {
+    state.laneTab = state.lanes[0] || "interface";
+  }
+  renderLaneTabs();
   updatePreview();
   saveState();
 }
@@ -243,7 +311,7 @@ function appendTemplate(name) {
   const next = templates[name] || "";
   promptInput.value = current ? `${current}\n\n${next}` : next;
   promptInput.focus();
-  addTerminalEntry(`template appended: ${name}`);
+  addTerminalEntry(`template appended: ${name}`, { type: "action" });
   updatePreview();
 }
 
@@ -253,7 +321,7 @@ function startRun() {
   item.innerHTML = `<span>${state.lanes.join(" + ") || "unrouted"} draft</span><b>${stamp}</b>`;
   runQueue.prepend(item);
   state.queued = Number(state.queued || 0) + 1;
-  addTerminalEntry(`queued draft only: ${workflowLaneFlags() || "--lane interface"}`);
+  addTerminalEntry(`queued draft only: ${workflowLaneFlags() || "--lane interface"}`, { type: "action" });
   updatePreview();
 }
 
@@ -270,7 +338,8 @@ function addTerminalEntry(message, options = {}) {
   const now = new Date();
   const entry = {
     time: now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" }),
-    message
+    message,
+    type: options.type || "system"
   };
   state.activity = [entry, ...(state.activity || [])].slice(0, 10);
   if (!options.silent) {
@@ -284,19 +353,59 @@ function renderRuntimeSurface(command) {
   queuedCount.textContent = String(state.queued || 0);
   commandState.textContent = command.includes("--execute") ? "live" : "draft";
   executionState.textContent = "locked";
+  terminalTitle.textContent = state.terminalFilter === "all" ? "Operating viewer" : `${state.terminalFilter} viewer`;
   renderTerminalLog();
 }
 
 function renderTerminalLog() {
   terminalLog.innerHTML = "";
-  const entries = state.activity?.length ? state.activity : [
-    { time: "--:--:--", message: "ready; execution gate locked; no process started" }
+  const allEntries = state.activity?.length ? state.activity : [
+    { time: "--:--:--", message: "ready; execution gate locked; no process started", type: "gate" }
   ];
+  const entries = state.terminalFilter === "all"
+    ? allEntries
+    : allEntries.filter((entry) => (entry.type || "system") === state.terminalFilter);
   for (const entry of entries) {
     const item = document.createElement("li");
+    item.dataset.entryType = entry.type || "system";
     item.innerHTML = `<time>${entry.time}</time><span>${entry.message}</span>`;
     terminalLog.append(item);
   }
+  if (!entries.length) {
+    const item = document.createElement("li");
+    item.dataset.entryType = "system";
+    item.innerHTML = `<time>--:--:--</time><span>no ${state.terminalFilter} entries in this draft session</span>`;
+    terminalLog.append(item);
+  }
+}
+
+function renderLaneTabs() {
+  laneTabs.innerHTML = "";
+  const tabs = ["interface", ...state.lanes.filter((lane, index, lanes) => lanes.indexOf(lane) === index)];
+  for (const lane of tabs) {
+    const meta = laneCatalog[lane];
+    if (!meta) continue;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.role = "tab";
+    button.dataset.laneTab = lane;
+    button.className = state.laneTab === lane ? "active" : "";
+    button.setAttribute("aria-selected", String(state.laneTab === lane));
+    button.textContent = meta.title;
+    button.addEventListener("click", () => {
+      state.laneTab = lane;
+      addTerminalEntry(`lane tab opened: ${meta.title}`, { type: "action" });
+      renderLaneTabs();
+      saveState();
+    });
+    laneTabs.append(button);
+  }
+  const active = laneCatalog[state.laneTab] || laneCatalog.interface;
+  laneTabTitle.textContent = active.title;
+  laneTabPath.textContent = active.path;
+  laneTabScope.textContent = active.scope;
+  laneTabChecks.textContent = active.checks;
+  laneTabGate.textContent = active.gate;
 }
 
 function renderGallery(command, evidence) {
@@ -394,6 +503,8 @@ function syncFromState() {
   promptInput.value = state.prompt || "";
   state.plan = { cycles: "1", timebox: "30", gate: "switch-safe", commit: "review", ...(state.plan || {}) };
   state.evidence = { files: "", verification: "npm.cmd test", blocker: "no hard gate", next: "", ...(state.evidence || {}) };
+  state.laneTab = state.laneTab || "interface";
+  state.terminalFilter = state.terminalFilter || "all";
   cycleCount.value = state.plan.cycles;
   timeboxMinutes.value = state.plan.timebox;
   hardGateMode.value = state.plan.gate;
@@ -409,6 +520,9 @@ function syncFromState() {
   setMode(state.mode);
   document.body.classList.toggle("dense", Boolean(state.dense));
   densityToggle.checked = Boolean(state.dense);
+  terminalFilters.forEach((button) => {
+    button.classList.toggle("active", button.dataset.terminalFilter === state.terminalFilter);
+  });
   updateLanes();
   updatePreview();
 }
@@ -433,7 +547,7 @@ document.querySelectorAll("[data-template]").forEach((button) => {
 
 themeSelect.addEventListener("change", () => setTheme(themeSelect.value));
 laneGrid.addEventListener("change", () => {
-  addTerminalEntry(`lanes staged: ${Array.from(laneGrid.querySelectorAll("input:checked")).map((input) => input.value).join(" + ") || "none"}`);
+  addTerminalEntry(`lanes staged: ${Array.from(laneGrid.querySelectorAll("input:checked")).map((input) => input.value).join(" + ") || "none"}`, { type: "action" });
   updateLanes();
 });
 cycleCount.addEventListener("input", updatePlanState);
@@ -448,7 +562,7 @@ selectCore.addEventListener("click", () => {
   laneGrid.querySelectorAll("input").forEach((input) => {
     input.checked = ["engine", "business", "coding"].includes(input.value);
   });
-  addTerminalEntry("core lane set staged");
+  addTerminalEntry("core lane set staged", { type: "action" });
   updateLanes();
 });
 
@@ -456,8 +570,18 @@ selectAllLanes.addEventListener("click", () => {
   laneGrid.querySelectorAll("input").forEach((input) => {
     input.checked = true;
   });
-  addTerminalEntry("all lanes staged");
+  addTerminalEntry("all lanes staged", { type: "action" });
   updateLanes();
+});
+
+terminalFilters.forEach((button) => {
+  button.addEventListener("click", () => {
+    state.terminalFilter = button.dataset.terminalFilter;
+    terminalFilters.forEach((item) => item.classList.toggle("active", item === button));
+    addTerminalEntry(`terminal filter: ${state.terminalFilter}`, { type: "system", silent: true });
+    renderRuntimeSurface(commandDraft.textContent);
+    saveState();
+  });
 });
 
 promptInput.addEventListener("input", updatePreview);
@@ -468,17 +592,17 @@ clearPrompt.addEventListener("click", () => {
 
 copyPrompt.addEventListener("click", async () => {
   await navigator.clipboard?.writeText(promptPreview.textContent);
-  addTerminalEntry("prompt preview copied");
+  addTerminalEntry("prompt preview copied", { type: "action" });
 });
 
 copyCommand.addEventListener("click", async () => {
   await navigator.clipboard?.writeText(commandDraft.textContent);
-  addTerminalEntry("command draft copied; still no --execute");
+  addTerminalEntry("command draft copied; still no --execute", { type: "gate" });
 });
 
 copyHandoff.addEventListener("click", async () => {
   await navigator.clipboard?.writeText(handoffDraft.textContent);
-  addTerminalEntry("handoff draft copied");
+  addTerminalEntry("handoff draft copied", { type: "action" });
 });
 
 runButton.addEventListener("click", startRun);
