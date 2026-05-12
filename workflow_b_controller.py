@@ -161,6 +161,7 @@ class RunPlan:
     watch_workflows: bool
     watch_workflow_files: tuple[str, ...]
     timebox_minutes: float
+    agent_timeout_minutes: float
     usage_budget_usd: float
     estimated_agent_usd: float
     hard_gate_mode: str
@@ -261,6 +262,15 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         type=float,
         default=0.0,
         help="Stop before starting more work after this many minutes. 0 disables.",
+    )
+    parser.add_argument(
+        "--agent-timeout-minutes",
+        type=float,
+        default=0.0,
+        help=(
+            "Maximum minutes for one codex exec agent. 0 uses the remaining "
+            "timebox when --timebox-minutes is set, otherwise disables."
+        ),
     )
     parser.add_argument(
         "--usage-budget-usd",
@@ -412,6 +422,7 @@ def tprint(*values: object, sep: str = " ", end: str = "\n", file=None, flush: b
 def run_process_with_terminal_color(
     command: Sequence[str],
     prompt_text: str,
+    timeout_seconds: float | None = None,
 ) -> tuple[subprocess.Popen[str], int]:
     """Run a child process while colorizing only its live terminal stream."""
 
@@ -423,7 +434,18 @@ def run_process_with_terminal_color(
             encoding="utf-8",
             errors="replace",
         )
-        process.communicate(prompt_text)
+        try:
+            process.communicate(prompt_text, timeout=timeout_seconds)
+        except subprocess.TimeoutExpired:
+            timeout_text = "unknown" if timeout_seconds is None else f"{timeout_seconds / 60:.2f}m"
+            tprint(f"[workflow-b] agent process exceeded timeout ({timeout_text}); stopping it.")
+            process.terminate()
+            try:
+                process.communicate(timeout=8)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.communicate()
+            return process, -124
         return process, process.returncode
 
     process = subprocess.Popen(
@@ -436,19 +458,27 @@ def run_process_with_terminal_color(
         errors="replace",
     )
     try:
-        if process.stdin is not None:
-            process.stdin.write(prompt_text)
-            process.stdin.close()
-    except (BrokenPipeError, OSError):
-        pass
-
-    if process.stdout is not None:
-        for line in process.stdout:
-            sys.stdout.write(colorize_terminal_text(line))
+        output, _stderr = process.communicate(prompt_text, timeout=timeout_seconds)
+    except subprocess.TimeoutExpired:
+        timeout_text = "unknown" if timeout_seconds is None else f"{timeout_seconds / 60:.2f}m"
+        tprint(f"[workflow-b] agent process exceeded timeout ({timeout_text}); stopping it.")
+        process.terminate()
+        try:
+            output, _stderr = process.communicate(timeout=8)
+        except subprocess.TimeoutExpired:
+            process.kill()
+            output, _stderr = process.communicate()
+        if output:
+            sys.stdout.write(colorize_terminal_text(output))
             sys.stdout.flush()
+        return process, -124
+    except (BrokenPipeError, OSError):
+        return process, process.returncode or 1
 
-    returncode = process.wait()
-    return process, returncode
+    if output:
+        sys.stdout.write(colorize_terminal_text(output))
+        sys.stdout.flush()
+    return process, process.returncode
 
 
 def resolve_codex_bin(explicit_path: str | None = None) -> str:
@@ -616,6 +646,21 @@ def budget_stop_reason(state: BudgetState, *, before_agent: bool = False) -> str
             f"{state.usage_budget_usd:.4f}"
         )
     return None
+
+
+def agent_timeout_seconds(args: argparse.Namespace, state: BudgetState) -> float | None:
+    """Return the max runtime for the next agent, bounded by the run timebox."""
+
+    candidates: list[float] = []
+    if args.agent_timeout_minutes:
+        candidates.append(max(args.agent_timeout_minutes * 60.0, 1.0))
+    if state.timebox_minutes:
+        elapsed_minutes = (monotonic() - state.started_monotonic) / 60.0
+        remaining_minutes = max(state.timebox_minutes - elapsed_minutes, 0.0)
+        candidates.append(max(remaining_minutes * 60.0, 1.0))
+    if not candidates:
+        return None
+    return min(candidates)
 
 
 def write_stop_handoff(
@@ -1087,6 +1132,7 @@ Write scope: {agent.write_scope}
 Commit mode: {plan.commit_mode}
 Hard gate mode: {plan.hard_gate_mode}
 Timebox minutes: {plan.timebox_minutes}
+Agent timeout minutes: {plan.agent_timeout_minutes}
 Usage budget USD: {plan.usage_budget_usd}
 Estimated agent USD: {plan.estimated_agent_usd}
 Run packet: {run_dir}
@@ -1239,12 +1285,18 @@ def write_plan_files(plan: RunPlan, run_dir: Path) -> None:
     budget_args = []
     if plan.timebox_minutes:
         budget_args.append(f"--timebox-minutes {plan.timebox_minutes}")
+    if plan.agent_timeout_minutes:
+        budget_args.append(f"--agent-timeout-minutes {plan.agent_timeout_minutes}")
     if plan.usage_budget_usd:
         budget_args.append(f"--usage-budget-usd {plan.usage_budget_usd}")
     if plan.estimated_agent_usd:
         budget_args.append(f"--estimated-agent-usd {plan.estimated_agent_usd}")
-    if plan.hard_gate_mode != "switch-safe":
-        budget_args.append(f"--hard-gate-mode {plan.hard_gate_mode}")
+    budget_args.append(f"--hard-gate-mode {plan.hard_gate_mode}")
+    budget_args.append(f"--commit-mode {plan.commit_mode}")
+    if plan.execute:
+        budget_args.append("--execute")
+    if plan.parallel:
+        budget_args.append("--parallel")
     budget_arg_text = " ".join(budget_args)
     if budget_arg_text:
         budget_arg_text += " "
@@ -1261,6 +1313,7 @@ def write_plan_files(plan: RunPlan, run_dir: Path) -> None:
 - Workflow review every: `{plan.workflow_review_every}`
 - Watch workflows: `{plan.watch_workflows}`
 - Timebox minutes: `{plan.timebox_minutes}`
+- Agent timeout minutes: `{plan.agent_timeout_minutes}`
 - Usage budget USD: `{plan.usage_budget_usd}`
 - Estimated agent USD: `{plan.estimated_agent_usd}`
 - Hard gate mode: `{plan.hard_gate_mode}`
@@ -1643,6 +1696,17 @@ def explain_codex_failure(
             "Run codex exec --help and compare supported flags.",
             "Keep Workflow B controller compatibility flags out of the Codex command path.",
         ]
+    elif returncode == -124:
+        issue = "agent_timeout"
+        meaning = (
+            "Workflow B stopped an agent because it exceeded the per-agent "
+            "timeout or remaining run timebox."
+        )
+        next_steps = [
+            "Inspect the agent last-message file; it may contain useful partial or final work.",
+            "Check for a foreground dev server or long-lived process started by the agent.",
+            "Resume with a smaller review-only task after confirming the lock is clear.",
+        ]
     elif "plugin" in combined or "plugins" in combined:
         issue = "codex_plugin_warning_or_failure"
         meaning = (
@@ -1801,7 +1865,12 @@ def run_agent(
     prompt_text = prompt_path.read_text(encoding="utf-8")
     process: subprocess.Popen[str] | None = None
     try:
-        process, returncode = run_process_with_terminal_color(command, prompt_text)
+        timeout_seconds = agent_timeout_seconds(args, state)
+        process, returncode = run_process_with_terminal_color(
+            command,
+            prompt_text,
+            timeout_seconds=timeout_seconds,
+        )
     except KeyboardInterrupt:
         if process is not None:
             stop_child_process(process, label=agent.name)
@@ -1846,6 +1915,7 @@ def run_agent(
             "agent": agent.name,
             "returncode": returncode,
             "signal": signal,
+            "timeout_seconds": timeout_seconds,
             "budget": budget_snapshot(state),
         },
     )
@@ -1861,6 +1931,7 @@ def run_agent(
             "returncode": returncode,
             "signal": signal,
             "output": str(output_path),
+            "timeout_seconds": timeout_seconds,
         },
     )
     if returncode != 0:
@@ -1939,6 +2010,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         raise SystemExit("--workflow-review-every must be 0 or greater.")
     if args.timebox_minutes < 0:
         raise SystemExit("--timebox-minutes must be 0 or greater.")
+    if args.agent_timeout_minutes < 0:
+        raise SystemExit("--agent-timeout-minutes must be 0 or greater.")
     if args.usage_budget_usd < 0:
         raise SystemExit("--usage-budget-usd must be 0 or greater.")
     if args.estimated_agent_usd < 0:
@@ -1979,6 +2052,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             watch_workflows=args.watch_workflows,
             watch_workflow_files=tuple(str(path) for path in workflow_watch_files(root, args.watch_workflow_file)),
             timebox_minutes=args.timebox_minutes,
+            agent_timeout_minutes=args.agent_timeout_minutes,
             usage_budget_usd=args.usage_budget_usd,
             estimated_agent_usd=args.estimated_agent_usd,
             hard_gate_mode=args.hard_gate_mode,
@@ -2279,8 +2353,18 @@ def main(argv: Sequence[str] | None = None) -> int:
                     try:
                         for agent, output_path, process, prompt_text in processes:
                             current_agent = agent
-                            process.communicate(prompt_text)
-                            returncode = process.returncode
+                            timeout_seconds = agent_timeout_seconds(args, budget_state)
+                            timed_out = False
+                            try:
+                                process.communicate(prompt_text, timeout=timeout_seconds)
+                            except subprocess.TimeoutExpired:
+                                timed_out = True
+                                tprint(
+                                    "[workflow-b] agent process exceeded timeout "
+                                    f"({timeout_seconds / 60:.2f}m); stopping it."
+                                )
+                                stop_child_process(process, label=agent.name)
+                            returncode = -124 if timed_out else process.returncode
                             signal = parse_agent_signal(output_path)
                             reported_usage = signal_usage_usd(signal)
                             if reported_usage:
@@ -2293,6 +2377,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                                     "agent": agent.name,
                                     "returncode": returncode,
                                     "signal": signal,
+                                    "timeout_seconds": timeout_seconds,
                                     "budget": budget_snapshot(budget_state),
                                 },
                             )
@@ -2309,6 +2394,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                                     "returncode": returncode,
                                     "signal": signal,
                                     "output": str(output_path),
+                                    "timeout_seconds": timeout_seconds,
                                 },
                             )
                             if returncode != 0:

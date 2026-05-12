@@ -142,6 +142,19 @@ When a time or estimated usage budget is reached, the controller writes:
 - the current budget snapshot
 - the suggested next action
 
+`--agent-timeout-minutes` can set a hard ceiling for each individual
+`codex exec` agent. When it is `0`, the controller still uses the remaining
+`--timebox-minutes` value as the agent timeout. This prevents one finished or
+blocked child process from trapping the full Workflow B run after the session
+budget has already expired.
+
+Agents should not leave foreground long-lived processes running under
+Workflow B. For interface work, a builder may add or verify a local launcher,
+but the actual persistent server/browser view should be launched after the
+controller run or as a clearly detached operator step. If an agent must verify
+HTTP locally, prefer a short smoke check, `--no-open` mode, or an already
+running server, then exit cleanly with the required signal block.
+
 ## Checkpoint Logging
 
 Every controller check records the same operational shape so a long run can be

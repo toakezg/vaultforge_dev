@@ -2,6 +2,14 @@
 
 ## 2026-05-13
 
+- Recovered the stalled executable Workflow B interface run
+  `20260513T032920-make-the-vaultforge-operator-interface-executabl`: the
+  interface builder completed and launched the local app, but the controller
+  stayed pinned behind the persistent builder child process. Stopped only that
+  run's stale process chain, kept the interface server live on
+  `http://127.0.0.1:4173/`, removed the tracked runtime lock, ignored future
+  `.workflow-b.lock` files, and added controller per-agent timeout handling
+  tied to the remaining timebox.
 - Recorded Workflow B cycle 1 for run `20260513T023458-continue-the-approved-vaultforge-operator-interf`: root coordinator routed the approved interface-local preview/gallery and run-planning slice, the interface builder added draft-only run-planning controls, prompt and command draft ergonomics, and dynamic gallery/evidence cards, and the interface reviewer fixed the Edge smoke harness and committed the reviewed interface scope as `a40cd4f`. Reviewer verification passed `npm.cmd test` and `git diff --check -- interface`. No hard gate, real command execution, `--execute` command draft, engine/business/icon/XP4L/art/coding change, secret use, paid/API behavior, live generation, or cross-lane ownership change was recorded.
 - Added Workflow B `interface` lane routing for the root-local operator UI work
   area, with scoped builder/reviewer write rules and thread-map documentation.

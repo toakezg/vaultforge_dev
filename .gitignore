@@ -42,6 +42,7 @@ vaultforge-icon/svg-forge/XP4Life/part-a/output/
 vaultforge-icon/svg-forge/XP4Life/part-a/generated/
 vaultforge-icon/generated/
 runs/
+/.workflow-b.lock
 
 # Assets
 assets/

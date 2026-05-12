@@ -57,6 +57,8 @@ the workflow itself is still behaving well.
 - For business-lane work, did the agent check `business-if-done.txt` without
   treating it as a blank approval for broad changes?
 - Did the run stay inside its time and estimated usage budgets?
+- Did every spawned agent exit cleanly, without leaving a foreground local
+  server or browser-launch process holding the controller open?
 - If a hard gate appeared, did the selected hard-gate mode handle it correctly?
 
 <!-- workflow-b-controller-snapshot:start -->
@@ -88,6 +90,14 @@ the workflow itself is still behaving well.
 
 
 ## Multi-Agent Handoff
+
+- Task: Workflow B recovery for run `20260513T032920-make-the-vaultforge-operator-interface-executabl`
+- Current role: CLI recovery reviewer/recorder
+- Last verified state: the root coordinator finished and the interface builder wrote a successful final message, but the controller stayed stuck waiting on the builder child process after the app launcher started a persistent local server. The stale process chain was stopped manually, the interface server stayed live on `http://127.0.0.1:4173/`, and `.workflow-b.lock` was removed after confirming the recorded PID was no longer alive.
+- Files touched: `.gitignore`, `.workflow-b.lock` removal from tracked state, `workflow_b_controller.py`, `MULTI_AGENT_WORKFLOW_B.md`, `WORKFLOW_REVIEW.md`, and this recovery changelog entry path. Prior committed interface launch work is in `870cadd`.
+- Verification run: inspect the stopped run packet at `runs/workflow-b/20260513T032920-make-the-vaultforge-operator-interface-executabl/`, the builder last-message, current process/port state, `git status --short`, `npm.cmd test` from `interface`, and a controller smoke plan with a short timebox before any new long execution.
+- Blocker or decision: no hard gate was hit by the interface work. The Workflow B runtime lesson is core to Workflow B: spawned agents must not hold the controller open with foreground persistent local servers. The controller now has a per-agent timeout tied to the remaining timebox, and runtime locks are ignored/removed from tracked repo state.
+- Resume prompt: continue with a review-only interface pass from current `HEAD` and the live app at `http://127.0.0.1:4173/`. Do not rerun the launcher from inside a Workflow B agent. Verify the committed interface launch path, docs, and no-exec command workflow, then record only scoped fixes if review finds them.
 
 - Task: Workflow B cycle 1 recorder closure for run `20260513T023458-continue-the-approved-vaultforge-operator-interf`
 - Current role: root recorder
