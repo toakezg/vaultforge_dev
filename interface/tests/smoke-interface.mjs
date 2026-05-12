@@ -148,6 +148,29 @@ async function evaluate(client, expression) {
   return result.result?.value;
 }
 
+async function navigateToApp(client, url) {
+  await client.send("Page.navigate", { url });
+  const started = Date.now();
+  const expected = JSON.stringify(url);
+
+  while (Date.now() - started < 10000) {
+    try {
+      const ready = await evaluate(
+        client,
+        `location.href === ${expected} && document.readyState === "complete"`
+      );
+      if (ready) {
+        return;
+      }
+    } catch {
+      // The first CDP target can briefly be an opaque startup page.
+    }
+    await wait(100);
+  }
+
+  throw new Error(`App page did not finish loading: ${url}`);
+}
+
 async function key(client, key, modifiers = 0) {
   const code = key === "Enter" ? "Enter" : `Key${key.toUpperCase()}`;
   const windowsVirtualKeyCode = key === "Enter" ? 13 : key.toUpperCase().charCodeAt(0);
@@ -195,6 +218,7 @@ try {
     deviceScaleFactor: 1,
     mobile: false
   });
+  await navigateToApp(client, appServer.url);
   await evaluate(client, "localStorage.removeItem('vaultforge.operator.v1'); location.reload();");
   await wait(700);
 
