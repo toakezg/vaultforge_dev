@@ -40,10 +40,15 @@ for (const id of [
   "promptInput",
   "promptPreview",
   "commandDraft",
+  "handoffDraft",
   "cycleCount",
   "timeboxMinutes",
   "hardGateMode",
   "commitMode",
+  "evidenceFiles",
+  "evidenceVerification",
+  "evidenceBlocker",
+  "evidenceNext",
   "galleryGrid",
   "settingsDialog",
   "keybindList"
@@ -73,11 +78,13 @@ assert(js.includes("window.VaultForgeOperator"), "missing extension surface");
 assert(js.includes("localStorage"), "missing persistent settings");
 assert(js.includes("Ctrl+Enter"), "missing run keybind");
 assert(js.includes("buildCommandDraft"), "missing command draft builder");
+assert(js.includes("buildHandoffDraft"), "missing handoff draft builder");
 assert(js.includes("renderGallery"), "missing preview gallery renderer");
 assert(js.includes('event.key === "Enter"'), "missing Enter intro shortcut");
 assert(js.includes("technical"), "missing technical mode");
 assert(js.includes("natural"), "missing natural mode");
 assert(js.includes("draft only, no local command is run"), "missing no-exec preview copy");
+assert(js.includes("Evidence packet"), "missing evidence packet template");
 assert(!js.includes("--execute"), "command drafts should not add execute flag");
 assert(!html.includes("http://") && !html.includes("https://"), "interface should not depend on remote assets");
 

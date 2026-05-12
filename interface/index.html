@@ -140,6 +140,7 @@
               <button type="button" data-template="workflow">Workflow B prompt</button>
               <button type="button" data-template="docs">Docs polish</button>
               <button type="button" data-template="plan">Run plan</button>
+              <button type="button" data-template="evidence">Evidence packet</button>
             </div>
           </div>
         </section>
@@ -190,6 +191,24 @@
                 </select>
               </label>
             </div>
+            <div class="evidence-plan" aria-label="Evidence draft controls">
+              <label class="field compact-field">
+                <span>Files touched</span>
+                <input id="evidenceFiles" type="text" placeholder="app.js, tests, docs">
+              </label>
+              <label class="field compact-field">
+                <span>Verification</span>
+                <input id="evidenceVerification" type="text" placeholder="npm.cmd test">
+              </label>
+              <label class="field compact-field">
+                <span>Blocker or decision</span>
+                <input id="evidenceBlocker" type="text" placeholder="no hard gate">
+              </label>
+              <label class="field compact-field">
+                <span>Next action</span>
+                <input id="evidenceNext" type="text" placeholder="review and commit scoped interface change">
+              </label>
+            </div>
           </div>
 
           <div class="panel" data-panel="preview">
@@ -210,6 +229,16 @@
                 <button class="small-button" type="button" id="copyCommand">Copy command</button>
               </div>
               <pre class="command-box" id="commandDraft"></pre>
+            </div>
+            <div class="handoff-panel">
+              <div class="panel-heading mini-heading">
+                <div>
+                  <p class="eyebrow">Evidence handoff</p>
+                  <h3>Copy-ready draft</h3>
+                </div>
+                <button class="small-button" type="button" id="copyHandoff">Copy handoff</button>
+              </div>
+              <pre class="handoff-box" id="handoffDraft"></pre>
             </div>
             <div class="gallery-grid" id="galleryGrid" aria-label="Preview gallery">
               <article class="gallery-card">

@@ -19,7 +19,8 @@ const templates = {
   review: "Review the current interface slice for scope drift, layout breaks, missing tests, and operator workflow gaps.",
   workflow: "Use Workflow B with switch-safe hard gates. Route work through THREAD_MAP.md, keep writes inside the interface lane, and end with evidence.",
   docs: "Update interface docs with setup, how to use, verification, and next safe work.",
-  plan: "Run plan:\n- Cycle budget:\n- Lane scope:\n- Hard gate mode:\n- Verification:\n- Safe next action:"
+  plan: "Run plan:\n- Cycle budget:\n- Lane scope:\n- Hard gate mode:\n- Verification:\n- Safe next action:",
+  evidence: "Evidence packet:\n- Files touched:\n- Verification run:\n- Blocker or decision:\n- Resume prompt:"
 };
 
 const state = loadState();
@@ -38,8 +39,10 @@ const selectCore = document.querySelector("#selectCore");
 const promptInput = document.querySelector("#promptInput");
 const promptPreview = document.querySelector("#promptPreview");
 const commandDraft = document.querySelector("#commandDraft");
+const handoffDraft = document.querySelector("#handoffDraft");
 const copyPrompt = document.querySelector("#copyPrompt");
 const copyCommand = document.querySelector("#copyCommand");
+const copyHandoff = document.querySelector("#copyHandoff");
 const clearPrompt = document.querySelector("#clearPrompt");
 const runButton = document.querySelector("#runButton");
 const runQueue = document.querySelector("#runQueue");
@@ -47,6 +50,10 @@ const cycleCount = document.querySelector("#cycleCount");
 const timeboxMinutes = document.querySelector("#timeboxMinutes");
 const hardGateMode = document.querySelector("#hardGateMode");
 const commitMode = document.querySelector("#commitMode");
+const evidenceFiles = document.querySelector("#evidenceFiles");
+const evidenceVerification = document.querySelector("#evidenceVerification");
+const evidenceBlocker = document.querySelector("#evidenceBlocker");
+const evidenceNext = document.querySelector("#evidenceNext");
 const galleryGrid = document.querySelector("#galleryGrid");
 const settingsButton = document.querySelector("#settingsButton");
 const settingsDialog = document.querySelector("#settingsDialog");
@@ -64,6 +71,7 @@ function loadState() {
       lanes: ["engine", "business"],
       prompt: "",
       plan: { cycles: "1", timebox: "30", gate: "switch-safe", commit: "review" },
+      evidence: { files: "", verification: "npm.cmd test", blocker: "no hard gate", next: "" },
       keybinds: { ...defaultKeybinds },
       ...JSON.parse(localStorage.getItem(storageKey) || "{}")
     };
@@ -75,6 +83,7 @@ function loadState() {
       lanes: ["engine", "business"],
       prompt: "",
       plan: { cycles: "1", timebox: "30", gate: "switch-safe", commit: "review" },
+      evidence: { files: "", verification: "npm.cmd test", blocker: "no hard gate", next: "" },
       keybinds: { ...defaultKeybinds }
     };
   }
@@ -121,6 +130,15 @@ function currentPlan() {
   };
 }
 
+function currentEvidence() {
+  return {
+    files: evidenceFiles.value.trim(),
+    verification: evidenceVerification.value.trim(),
+    blocker: evidenceBlocker.value.trim(),
+    next: evidenceNext.value.trim()
+  };
+}
+
 function shortPrompt() {
   const firstLine = promptInput.value.trim().split("\n").find(Boolean);
   if (!firstLine) return "<task brief>";
@@ -134,8 +152,29 @@ function buildCommandDraft() {
   return `run_workflow_b.bat --cycles ${plan.cycles} --timebox-minutes ${plan.timebox} --hard-gate-mode ${plan.gate} --commit-mode ${plan.commit} ${lanes} --task "${shortPrompt()}"`;
 }
 
+function buildHandoffDraft() {
+  const evidence = currentEvidence();
+  return [
+    "## Multi-Agent Handoff",
+    "",
+    `- Task: ${shortPrompt()}`,
+    "- Current role: interface builder.",
+    `- Last verified state: ${promptInput.value.trim() ? "draft prompt and planning surface are ready for review" : "draft prompt still needs operator text"}.`,
+    `- Files touched: ${evidence.files || "not recorded yet"}.`,
+    `- Verification run: ${evidence.verification || "not recorded yet"}.`,
+    `- Blocker or decision: ${evidence.blocker || "not recorded yet"}.`,
+    `- Resume prompt: ${evidence.next || "review the interface-local draft and keep real execution gated"}.`
+  ].join("\n");
+}
+
 function updatePlanState() {
   state.plan = currentPlan();
+  updatePreview();
+  saveState();
+}
+
+function updateEvidenceState() {
+  state.evidence = currentEvidence();
   updatePreview();
   saveState();
 }
@@ -162,13 +201,16 @@ function promptModeHeader() {
 function updatePreview() {
   const laneText = state.lanes.length ? state.lanes.join(", ") : "unselected";
   const plan = currentPlan();
+  const evidence = currentEvidence();
   const body = promptInput.value.trim() || "No prompt drafted yet.";
   const command = buildCommandDraft();
   promptPreview.textContent = `${promptModeHeader()}\nLanes: ${laneText}\nCycles: ${plan.cycles}\nTimebox minutes: ${plan.timebox}\nHard gate mode: ${plan.gate}\nCommit mode: ${plan.commit}\nExecution: draft only, no local command is run from this interface.\n\n${body}`;
   commandDraft.textContent = command;
+  handoffDraft.textContent = buildHandoffDraft();
   state.prompt = promptInput.value;
   state.plan = plan;
-  renderGallery(command);
+  state.evidence = evidence;
+  renderGallery(command, evidence);
   saveState();
 }
 
@@ -187,14 +229,15 @@ function startRun() {
   runQueue.prepend(item);
 }
 
-function renderGallery(command) {
+function renderGallery(command, evidence) {
   galleryGrid.innerHTML = "";
   const laneText = state.lanes.length ? state.lanes.join(" + ") : "unrouted";
   const cards = [
     ["Run plan", `${currentPlan().cycles} cycle, ${currentPlan().timebox} minute draft for ${laneText}`],
     ["Prompt preview", promptInput.value.trim() ? "Prompt body ready for review" : "Waiting for operator prompt text"],
     ["Command draft", command],
-    ["Evidence", "Record files touched, tests run, blocker, and next prompt"]
+    ["Evidence", evidence.files || evidence.verification || evidence.blocker || evidence.next ? `${evidence.verification || "verification pending"}; ${evidence.blocker || "decision pending"}` : "Record files touched, tests run, blocker, and next prompt"],
+    ["Handoff draft", "Copy-ready Workflow B handoff text is prepared below"]
   ];
 
   for (const [title, detail] of cards) {
@@ -280,10 +323,15 @@ function openSettings() {
 function syncFromState() {
   promptInput.value = state.prompt || "";
   state.plan = { cycles: "1", timebox: "30", gate: "switch-safe", commit: "review", ...(state.plan || {}) };
+  state.evidence = { files: "", verification: "npm.cmd test", blocker: "no hard gate", next: "", ...(state.evidence || {}) };
   cycleCount.value = state.plan.cycles;
   timeboxMinutes.value = state.plan.timebox;
   hardGateMode.value = state.plan.gate;
   commitMode.value = state.plan.commit;
+  evidenceFiles.value = state.evidence.files;
+  evidenceVerification.value = state.evidence.verification;
+  evidenceBlocker.value = state.evidence.blocker;
+  evidenceNext.value = state.evidence.next;
   laneGrid.querySelectorAll("input").forEach((input) => {
     input.checked = state.lanes.includes(input.value);
   });
@@ -319,6 +367,10 @@ cycleCount.addEventListener("input", updatePlanState);
 timeboxMinutes.addEventListener("input", updatePlanState);
 hardGateMode.addEventListener("change", updatePlanState);
 commitMode.addEventListener("change", updatePlanState);
+evidenceFiles.addEventListener("input", updateEvidenceState);
+evidenceVerification.addEventListener("input", updateEvidenceState);
+evidenceBlocker.addEventListener("input", updateEvidenceState);
+evidenceNext.addEventListener("input", updateEvidenceState);
 selectCore.addEventListener("click", () => {
   laneGrid.querySelectorAll("input").forEach((input) => {
     input.checked = ["engine", "business", "coding"].includes(input.value);
@@ -338,6 +390,10 @@ copyPrompt.addEventListener("click", async () => {
 
 copyCommand.addEventListener("click", async () => {
   await navigator.clipboard?.writeText(commandDraft.textContent);
+});
+
+copyHandoff.addEventListener("click", async () => {
+  await navigator.clipboard?.writeText(handoffDraft.textContent);
 });
 
 runButton.addEventListener("click", startRun);

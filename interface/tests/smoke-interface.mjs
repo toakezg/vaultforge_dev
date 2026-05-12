@@ -223,10 +223,14 @@ try {
   await evaluate(client, "document.querySelector('#cycleCount').value = '3'; document.querySelector('#cycleCount').dispatchEvent(new Event('input'));");
   await evaluate(client, "document.querySelector('#timeboxMinutes').value = '45'; document.querySelector('#timeboxMinutes').dispatchEvent(new Event('input'));");
   await evaluate(client, "const gate = document.querySelector('#hardGateMode'); gate.value = 'stop'; gate.dispatchEvent(new Event('change'));");
+  await evaluate(client, "document.querySelector('#evidenceFiles').value = 'app.js, docs'; document.querySelector('#evidenceFiles').dispatchEvent(new Event('input'));");
+  await evaluate(client, "document.querySelector('#evidenceVerification').value = 'npm.cmd test'; document.querySelector('#evidenceVerification').dispatchEvent(new Event('input'));");
+  await evaluate(client, "document.querySelector('#evidenceNext').value = 'review scoped interface slice'; document.querySelector('#evidenceNext').dispatchEvent(new Event('input'));");
   assert(await evaluate(client, "document.querySelector('#promptPreview').textContent.includes('Cycles: 3')"), "preview should include cycle plan");
   assert(await evaluate(client, "document.querySelector('#commandDraft').textContent.includes('--cycles 3')"), "command draft should include cycles");
   assert(await evaluate(client, "!document.querySelector('#commandDraft').textContent.includes('--execute')"), "command draft should not execute");
-  assert(await evaluate(client, "document.querySelectorAll('#galleryGrid .gallery-card').length >= 4"), "gallery should render planning cards");
+  assert(await evaluate(client, "document.querySelector('#handoffDraft').textContent.includes('npm.cmd test')"), "handoff draft should include evidence");
+  assert(await evaluate(client, "document.querySelectorAll('#galleryGrid .gallery-card').length >= 5"), "gallery should render planning and evidence cards");
 
   await key(client, "Enter", 2);
   await wait(150);
@@ -238,6 +242,7 @@ try {
   assert(await evaluate(client, "document.body.classList.contains('dense')"), "density should persist");
   assert(await evaluate(client, "document.querySelector('#promptInput').value.includes('Target lane:')"), "prompt should persist");
   assert(await evaluate(client, "document.querySelector('#cycleCount').value === '3'"), "run plan should persist");
+  assert(await evaluate(client, "document.querySelector('#evidenceFiles').value.includes('app.js')"), "evidence files should persist");
   await key(client, "Enter");
   await wait(150);
   await evaluate(client, "window.scrollTo(0, 0);");

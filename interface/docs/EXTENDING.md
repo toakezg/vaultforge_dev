@@ -12,6 +12,8 @@ points for later mods or plugin-style additions.
   `app.js`.
 - Add draft-only planning fields by extending `currentPlan()`,
   `buildCommandDraft()`, and the matching form controls in `index.html`.
+- Add evidence or handoff fields by extending `currentEvidence()`,
+  `buildHandoffDraft()`, and the matching form controls in `index.html`.
 - Add preview/gallery cards by extending `renderGallery()` without wiring those
   cards to live VaultForge command execution.
 

@@ -8,9 +8,12 @@
 5. Use template buttons to assemble a prompt, or type directly in the input.
 6. Set the local run plan: cycle count, timebox, hard-gate mode, and commit
    mode.
-7. Review the generated run draft, command draft, and preview gallery.
-8. Press `Start run` or `Ctrl+Enter` to add a local draft entry.
-9. Open Settings to change theme, density, and keybinds.
+7. Fill the evidence fields for files touched, verification, blocker or
+   decision, and next action when preparing a handoff.
+8. Review the generated run draft, command draft, evidence handoff, and preview
+   gallery.
+9. Press `Start run` or `Ctrl+Enter` to add a local draft entry.
+10. Open Settings to change theme, density, and keybinds.
 
 Default keybinds:
 

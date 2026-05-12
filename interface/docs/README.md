@@ -29,13 +29,14 @@ npm test
 ```
 
 The tests verify that the expected screens, lane controls, prompt surfaces,
-draft-only run-planning controls, command preview, gallery cards, settings,
-tooltip styling, keybind registry, responsive breakpoint, and local docs are
-present. The smoke test also opens the page in local Microsoft Edge headless,
+draft-only run-planning controls, command preview, evidence handoff draft,
+gallery cards, settings, tooltip styling, keybind registry, responsive
+breakpoint, and local docs are present. The smoke test also opens the page in
+local Microsoft Edge headless,
 clears the intro screen with `Enter`, toggles mode/theme/density, changes lanes,
-appends a template, updates the run plan, verifies that the command draft omits
-`--execute`, starts a draft with `Ctrl+Enter`, checks localStorage persistence,
-checks mobile overflow, and saves screenshots.
+appends a template, updates the run plan, fills evidence fields, verifies that
+the command draft omits `--execute`, starts a draft with `Ctrl+Enter`, checks
+localStorage persistence, checks mobile overflow, and saves screenshots.
 
 Headless render artifacts from the latest builder pass are kept under:
 
