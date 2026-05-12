@@ -11,6 +11,15 @@ const defaultKeybinds = {
   preview: "Ctrl+5"
 };
 
+const laneIds = {
+  engine: "vaultforge-engine",
+  business: "vaultforge-business",
+  coding: "vaultforge-coding",
+  xp4l: "vaultforge-xp4l",
+  art: "vaultforge-art",
+  icon: "vaultforge-icon"
+};
+
 const templates = {
   build: "Build a scoped VaultForge interface slice.\n\nTarget lane:\nSuccess check:\nStop condition:\nEvidence to record:",
   tighten: "Tighten the operator interface for clarity, density, and keyboard use. Keep changes interface-local and verify responsive behavior.",
@@ -36,6 +45,7 @@ const themeSelect = document.querySelector("#themeSelect");
 const laneGrid = document.querySelector("#laneGrid");
 const laneSummary = document.querySelector("#laneSummary");
 const selectCore = document.querySelector("#selectCore");
+const selectAllLanes = document.querySelector("#selectAllLanes");
 const promptInput = document.querySelector("#promptInput");
 const promptPreview = document.querySelector("#promptPreview");
 const commandDraft = document.querySelector("#commandDraft");
@@ -59,6 +69,11 @@ const settingsButton = document.querySelector("#settingsButton");
 const settingsDialog = document.querySelector("#settingsDialog");
 const densityToggle = document.querySelector("#densityToggle");
 const keybindList = document.querySelector("#keybindList");
+const terminalLog = document.querySelector("#terminalLog");
+const tokenEstimate = document.querySelector("#tokenEstimate");
+const queuedCount = document.querySelector("#queuedCount");
+const commandState = document.querySelector("#commandState");
+const executionState = document.querySelector("#executionState");
 
 let captureAction = null;
 
@@ -73,6 +88,8 @@ function loadState() {
       plan: { cycles: "1", timebox: "30", gate: "switch-safe", commit: "review" },
       evidence: { files: "", verification: "npm.cmd test", blocker: "no hard gate", next: "" },
       keybinds: { ...defaultKeybinds },
+      activity: [],
+      queued: 0,
       ...JSON.parse(localStorage.getItem(storageKey) || "{}")
     };
   } catch {
@@ -84,7 +101,9 @@ function loadState() {
       prompt: "",
       plan: { cycles: "1", timebox: "30", gate: "switch-safe", commit: "review" },
       evidence: { files: "", verification: "npm.cmd test", blocker: "no hard gate", next: "" },
-      keybinds: { ...defaultKeybinds }
+      keybinds: { ...defaultKeybinds },
+      activity: [],
+      queued: 0
     };
   }
 }
@@ -145,9 +164,13 @@ function shortPrompt() {
   return firstLine.replaceAll('"', "'").slice(0, 96);
 }
 
+function workflowLaneFlags() {
+  return state.lanes.map((lane) => `--lane ${laneIds[lane] || lane}`).join(" ");
+}
+
 function buildCommandDraft() {
   const plan = currentPlan();
-  const laneFlags = state.lanes.map((lane) => `--lane ${lane}`).join(" ");
+  const laneFlags = workflowLaneFlags();
   const lanes = laneFlags || "--lane interface";
   return `..\\run_workflow_b.bat --cycles ${plan.cycles} --timebox-minutes ${plan.timebox} --hard-gate-mode ${plan.gate} --commit-mode ${plan.commit} ${lanes} --task "${shortPrompt()}"`;
 }
@@ -211,6 +234,7 @@ function updatePreview() {
   state.plan = plan;
   state.evidence = evidence;
   renderGallery(command, evidence);
+  renderRuntimeSurface(command);
   saveState();
 }
 
@@ -219,6 +243,7 @@ function appendTemplate(name) {
   const next = templates[name] || "";
   promptInput.value = current ? `${current}\n\n${next}` : next;
   promptInput.focus();
+  addTerminalEntry(`template appended: ${name}`);
   updatePreview();
 }
 
@@ -227,6 +252,51 @@ function startRun() {
   const stamp = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
   item.innerHTML = `<span>${state.lanes.join(" + ") || "unrouted"} draft</span><b>${stamp}</b>`;
   runQueue.prepend(item);
+  state.queued = Number(state.queued || 0) + 1;
+  addTerminalEntry(`queued draft only: ${workflowLaneFlags() || "--lane interface"}`);
+  updatePreview();
+}
+
+function estimateDraftTokens(command) {
+  const text = [
+    promptPreview.textContent,
+    command,
+    handoffDraft.textContent
+  ].join("\n");
+  return Math.max(0, Math.ceil(text.trim().split(/\s+/).filter(Boolean).length * 1.35));
+}
+
+function addTerminalEntry(message, options = {}) {
+  const now = new Date();
+  const entry = {
+    time: now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" }),
+    message
+  };
+  state.activity = [entry, ...(state.activity || [])].slice(0, 10);
+  if (!options.silent) {
+    renderTerminalLog();
+    saveState();
+  }
+}
+
+function renderRuntimeSurface(command) {
+  tokenEstimate.textContent = estimateDraftTokens(command).toLocaleString();
+  queuedCount.textContent = String(state.queued || 0);
+  commandState.textContent = command.includes("--execute") ? "live" : "draft";
+  executionState.textContent = "locked";
+  renderTerminalLog();
+}
+
+function renderTerminalLog() {
+  terminalLog.innerHTML = "";
+  const entries = state.activity?.length ? state.activity : [
+    { time: "--:--:--", message: "ready; execution gate locked; no process started" }
+  ];
+  for (const entry of entries) {
+    const item = document.createElement("li");
+    item.innerHTML = `<time>${entry.time}</time><span>${entry.message}</span>`;
+    terminalLog.append(item);
+  }
 }
 
 function renderGallery(command, evidence) {
@@ -362,7 +432,10 @@ document.querySelectorAll("[data-template]").forEach((button) => {
 });
 
 themeSelect.addEventListener("change", () => setTheme(themeSelect.value));
-laneGrid.addEventListener("change", updateLanes);
+laneGrid.addEventListener("change", () => {
+  addTerminalEntry(`lanes staged: ${Array.from(laneGrid.querySelectorAll("input:checked")).map((input) => input.value).join(" + ") || "none"}`);
+  updateLanes();
+});
 cycleCount.addEventListener("input", updatePlanState);
 timeboxMinutes.addEventListener("input", updatePlanState);
 hardGateMode.addEventListener("change", updatePlanState);
@@ -375,6 +448,15 @@ selectCore.addEventListener("click", () => {
   laneGrid.querySelectorAll("input").forEach((input) => {
     input.checked = ["engine", "business", "coding"].includes(input.value);
   });
+  addTerminalEntry("core lane set staged");
+  updateLanes();
+});
+
+selectAllLanes.addEventListener("click", () => {
+  laneGrid.querySelectorAll("input").forEach((input) => {
+    input.checked = true;
+  });
+  addTerminalEntry("all lanes staged");
   updateLanes();
 });
 
@@ -386,14 +468,17 @@ clearPrompt.addEventListener("click", () => {
 
 copyPrompt.addEventListener("click", async () => {
   await navigator.clipboard?.writeText(promptPreview.textContent);
+  addTerminalEntry("prompt preview copied");
 });
 
 copyCommand.addEventListener("click", async () => {
   await navigator.clipboard?.writeText(commandDraft.textContent);
+  addTerminalEntry("command draft copied; still no --execute");
 });
 
 copyHandoff.addEventListener("click", async () => {
   await navigator.clipboard?.writeText(handoffDraft.textContent);
+  addTerminalEntry("handoff draft copied");
 });
 
 runButton.addEventListener("click", startRun);

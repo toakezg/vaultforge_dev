@@ -137,7 +137,9 @@ input:focus-visible {
 .panel-heading,
 .status-strip,
 .placeholder-row,
-.field.inline {
+.field.inline,
+.button-cluster,
+.terminal-heading {
   display: flex;
   align-items: center;
 }
@@ -306,6 +308,12 @@ input {
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 16px;
+}
+
+.button-cluster {
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .hero-panel {
@@ -526,6 +534,9 @@ textarea {
   border-left: 1px solid var(--line);
   padding: 22px 14px;
   background: #050606;
+  display: grid;
+  gap: 14px;
+  align-content: start;
 }
 
 .compact {
@@ -550,6 +561,89 @@ textarea {
 
 .run-dock b {
   color: var(--accent);
+}
+
+.terminal-panel {
+  background: #030404;
+}
+
+.terminal-heading {
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.terminal-heading strong {
+  display: block;
+}
+
+#executionState {
+  min-width: 58px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: var(--danger);
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.usage-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.usage-grid div {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: baseline;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: var(--panel);
+}
+
+.usage-grid span,
+.terminal-log time {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.usage-grid strong {
+  color: var(--accent-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.terminal-log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  max-height: 310px;
+  overflow: auto;
+}
+
+.terminal-log li {
+  display: grid;
+  gap: 3px;
+  border-left: 2px solid var(--accent-2);
+  padding: 0 0 0 8px;
+}
+
+.terminal-log span {
+  color: var(--text);
+  font-family: "Cascadia Mono", "Consolas", ui-monospace, monospace;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .run-meter {
@@ -773,6 +867,7 @@ body.dense .panel {
   .run-dock {
     border-left: 0;
     border-top: 1px solid var(--line);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .two-column,
@@ -865,7 +960,8 @@ body.dense .panel {
   .template-list,
   .run-plan,
   .evidence-plan,
-  .gallery-grid {
+  .gallery-grid,
+  .run-dock {
     grid-template-columns: 1fr;
   }
 }

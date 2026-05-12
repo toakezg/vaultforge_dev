@@ -84,8 +84,8 @@
             <p class="eyebrow">Mode</p>
             <strong id="modeSummary">Natural</strong>
           </div>
-          <button class="primary-action" type="button" id="runButton" data-tooltip="Ctrl+Enter">
-            Start run
+          <button class="primary-action" type="button" id="runButton" data-tooltip="Ctrl+Enter: queue draft, no execution">
+            Queue draft
           </button>
         </section>
 
@@ -115,7 +115,10 @@
                 <p class="eyebrow">Lane access</p>
                 <h2>Single or multilane</h2>
               </div>
-              <button class="small-button" type="button" id="selectCore">Core lanes</button>
+              <div class="button-cluster">
+                <button class="small-button" type="button" id="selectAllLanes">All lanes</button>
+                <button class="small-button" type="button" id="selectCore">Core lanes</button>
+              </div>
             </div>
             <div class="lane-grid" id="laneGrid">
               <label><input type="checkbox" value="engine" checked> Engine</label>
@@ -268,6 +271,30 @@
             <li><span>Review scope</span><b>Waiting</b></li>
             <li><span>Record evidence</span><b>Later</b></li>
           </ol>
+        </div>
+        <div class="panel compact terminal-panel" aria-label="Operator terminal">
+          <div class="terminal-heading">
+            <div>
+              <p class="eyebrow">Operator terminal</p>
+              <strong>Draft log</strong>
+            </div>
+            <span id="executionState">locked</span>
+          </div>
+          <div class="usage-grid" aria-label="Usage counters">
+            <div>
+              <span>Draft tokens</span>
+              <strong id="tokenEstimate">0</strong>
+            </div>
+            <div>
+              <span>Queued</span>
+              <strong id="queuedCount">0</strong>
+            </div>
+            <div>
+              <span>Command</span>
+              <strong id="commandState">draft</strong>
+            </div>
+          </div>
+          <ol class="terminal-log" id="terminalLog"></ol>
         </div>
       </aside>
     </div>

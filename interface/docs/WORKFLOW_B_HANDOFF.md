@@ -1,5 +1,26 @@
 # Workflow B Handoff
 
+## 2026-05-13 Interface Builder Operator Terminal Slice
+
+- Task: continue the interface-local draft workflow after scope review by
+  adding clearer queued-draft behavior, all-lane command drafting, and a
+  terminal-style activity surface while keeping real execution gated.
+- Current role: interface builder.
+- Last verified state: added an `All lanes` control, changed the primary
+  action to `Queue draft`, mapped friendly lane labels to full Workflow B lane
+  ids in command drafts, added a draft log terminal, queued counter, command
+  state, and approximate draft-token ticker. The terminal records local
+  draft/copy/queue activity only; it is not a real process terminal yet.
+- Files touched: `index.html`, `styles.css`, `app.js`,
+  `tests/check-interface.mjs`, `tests/smoke-interface.mjs`, and interface docs.
+- Verification run: `npm.cmd test` and `git diff --check -- interface`.
+- Blocker or decision: no hard gate. Real VaultForge command execution remains
+  locked; command drafts still omit `--execute`. A future approved task can
+  wire a real terminal/feed behind the visible gate.
+- Resume prompt: review the terminal/log surface, all-lane command draft, and
+  no-exec queue behavior; keep real execution gated unless a separate approved
+  Workflow B task opens it.
+
 ## 2026-05-13 Cycle 1 Interface Builder Launch Readiness
 
 - Task: make the VaultForge operator interface executable-app ready for local

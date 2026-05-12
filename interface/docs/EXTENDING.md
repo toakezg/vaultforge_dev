@@ -9,13 +9,19 @@ points for later mods or plugin-style additions.
 - Add default shortcuts in `defaultKeybinds`.
 - Add theme tokens in `styles.css` with a new `[data-theme="name"]` block.
 - Add lane checkboxes in `index.html` and include matching prompt copy in
-  `app.js`.
+  `app.js`. Also update the `laneIds` map so command drafts use the
+  controller's full Workflow B lane names.
 - Add draft-only planning fields by extending `currentPlan()`,
   `buildCommandDraft()`, and the matching form controls in `index.html`.
 - Add evidence or handoff fields by extending `currentEvidence()`,
   `buildHandoffDraft()`, and the matching form controls in `index.html`.
 - Add preview/gallery cards by extending `renderGallery()` without wiring those
   cards to live VaultForge command execution.
+- Add terminal-style draft log entries through `addTerminalEntry()` for local
+  operator actions. Keep it honest: log draft/copy/queue activity unless a
+  future approved task wires a real process feed.
+- Extend the usage ticker through `estimateDraftTokens()` until a real Workflow
+  B usage feed exists.
 - Adjust the local app launcher in `scripts/launch-interface.mjs` or
   `run-interface.bat` when the interface needs a different static-serving path.
 

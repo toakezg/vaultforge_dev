@@ -49,20 +49,26 @@ npm test
 
 The tests verify that the expected screens, lane controls, prompt surfaces,
 draft-only run-planning controls, command preview, evidence handoff draft,
-gallery cards, locked local execution gate, settings, tooltip styling, keybind
-registry, responsive breakpoint, and local docs are present. The smoke test also opens the page in
-local Microsoft Edge headless,
-clears the intro screen with `Enter`, toggles mode/theme/density, changes lanes,
-appends a template, updates the run plan, fills evidence fields, verifies that
-the command draft omits `--execute`, checks that the execution gate is disabled,
-starts a draft with `Ctrl+Enter`, checks localStorage persistence, checks mobile
-overflow, and saves screenshots.
+gallery cards, locked local execution gate, operator terminal, draft usage
+counters, settings, tooltip styling, keybind registry, responsive breakpoint,
+and local docs are present. The smoke test also opens the page in local
+Microsoft Edge headless, clears the intro screen with `Enter`, toggles
+mode/theme/density, changes lanes, selects all lanes, appends a template,
+updates the run plan, fills evidence fields, verifies that the command draft
+uses Workflow B lane ids and omits `--execute`, checks that the execution gate
+is disabled, queues a draft with `Ctrl+Enter`, checks localStorage persistence,
+checks mobile overflow, and saves screenshots.
 
 The launcher and interface do not run VaultForge lane commands. They only make
 the operator app available locally and prepare draft prompts, command text, and
 handoff evidence. The Workflow B command draft uses `..\run_workflow_b.bat` so
-it can be copied into a terminal opened from `interface/`; it still omits
-`--execute`.
+it can be copied into a terminal opened from `interface/`; it emits full
+Workflow B lane ids such as `vaultforge-engine`; it still omits `--execute`.
+
+The operator terminal is a local draft log, not a real process terminal. It
+records interface actions such as lane staging, template appends, copy actions,
+and queued draft entries. The token counter is an approximate draft-size ticker
+for prompt/command/handoff text until a future Workflow B usage feed is wired.
 
 Headless render artifacts from the latest builder pass are kept under:
 

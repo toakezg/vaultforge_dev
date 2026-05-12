@@ -2,6 +2,10 @@
 
 ## 2026-05-13
 
+- Added an operator terminal draft log, queued-draft counter, approximate draft
+  token ticker, `All lanes` selection, clearer `Queue draft` wording, and full
+  Workflow B lane ids in command drafts while keeping real execution locked and
+  omitting `--execute`.
 - Added a local executable app launch path with `run-interface.bat`,
   `npm.cmd start`, and a dependency-free Node static launcher bound to
   `127.0.0.1`; added a visible disabled local execution gate and expanded

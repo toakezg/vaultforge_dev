@@ -41,6 +41,7 @@ for (const id of [
   "splash",
   "quickAccess",
   "laneGrid",
+  "selectAllLanes",
   "promptInput",
   "promptPreview",
   "commandDraft",
@@ -55,6 +56,11 @@ for (const id of [
   "evidenceBlocker",
   "evidenceNext",
   "galleryGrid",
+  "terminalLog",
+  "tokenEstimate",
+  "queuedCount",
+  "commandState",
+  "executionState",
   "settingsDialog",
   "keybindList"
 ]) {
@@ -82,19 +88,28 @@ assert(js.includes("defaultKeybinds"), "missing keybind registry");
 assert(js.includes("window.VaultForgeOperator"), "missing extension surface");
 assert(js.includes("localStorage"), "missing persistent settings");
 assert(js.includes("Ctrl+Enter"), "missing run keybind");
+assert(js.includes("laneIds"), "missing lane id mapping");
+assert(js.includes("vaultforge-engine"), "missing Workflow B engine lane id");
+assert(js.includes("selectAllLanes"), "missing all-lanes control");
 assert(js.includes("buildCommandDraft"), "missing command draft builder");
 assert(js.includes("..\\\\run_workflow_b.bat"), "command draft should target parent root launcher");
 assert(js.includes("buildHandoffDraft"), "missing handoff draft builder");
 assert(js.includes("renderGallery"), "missing preview gallery renderer");
+assert(js.includes("renderRuntimeSurface"), "missing terminal/runtime surface renderer");
+assert(js.includes("estimateDraftTokens"), "missing draft usage estimate");
 assert(js.includes('event.key === "Enter"'), "missing Enter intro shortcut");
 assert(js.includes("technical"), "missing technical mode");
 assert(js.includes("natural"), "missing natural mode");
 assert(js.includes("draft only, no local command is run"), "missing no-exec preview copy");
 assert(js.includes("Evidence packet"), "missing evidence packet template");
-assert(!js.includes("--execute"), "command drafts should not add execute flag");
+assert(js.includes("commandState"), "missing command draft state indicator");
 assert(html.includes("Real VaultForge command execution locked"), "missing visible local execution gate");
 assert(html.includes('id="executionGate" disabled'), "execution gate must stay disabled");
+assert(html.includes("Operator terminal"), "missing operator terminal section");
+assert(html.includes("Queue draft"), "run button should make draft-only behavior visible");
 assert(css.includes(".execution-gate"), "missing execution gate styling");
+assert(css.includes(".terminal-log"), "missing terminal log styling");
+assert(css.includes(".usage-grid"), "missing usage counter styling");
 assert(launcher.includes("127.0.0.1"), "launcher should bind locally");
 assert(launcher.includes("no-store"), "launcher should avoid stale app cache");
 assert(packageJson.includes('"start"'), "missing npm start launch path");

@@ -240,6 +240,11 @@ try {
 
   await evaluate(client, "document.querySelector('input[value=\"business\"]').click(); document.querySelector('input[value=\"coding\"]').click();");
   assert(await evaluate(client, "document.querySelector('#laneSummary').textContent === 'engine + coding'"), "lane summary should update");
+  assert(await evaluate(client, "document.querySelector('#commandDraft').textContent.includes('--lane vaultforge-engine')"), "command draft should map engine lane id");
+  assert(await evaluate(client, "document.querySelector('#commandDraft').textContent.includes('--lane vaultforge-coding')"), "command draft should map coding lane id");
+  await evaluate(client, "document.querySelector('#selectAllLanes').click();");
+  assert(await evaluate(client, "document.querySelector('#laneSummary').textContent.includes('icon')"), "all lanes should be selectable");
+  assert(await evaluate(client, "document.querySelector('#commandDraft').textContent.includes('--lane vaultforge-icon')"), "command draft should include icon lane id");
 
   await evaluate(client, "document.querySelector('[data-template=\"build\"]').click();");
   assert(await evaluate(client, "document.querySelector('#promptInput').value.includes('Target lane:')"), "template should append to input");
@@ -257,10 +262,14 @@ try {
   assert(await evaluate(client, "document.querySelector('.execution-gate').textContent.includes('only drafts commands')"), "execution gate should describe draft-only behavior");
   assert(await evaluate(client, "document.querySelector('#handoffDraft').textContent.includes('npm.cmd test')"), "handoff draft should include evidence");
   assert(await evaluate(client, "document.querySelectorAll('#galleryGrid .gallery-card').length >= 5"), "gallery should render planning and evidence cards");
+  assert(await evaluate(client, "Number(document.querySelector('#tokenEstimate').textContent.replace(/,/g, '')) > 0"), "draft token estimate should update");
+  assert(await evaluate(client, "document.querySelector('#commandState').textContent === 'draft'"), "command state should remain draft");
 
   await key(client, "Enter", 2);
   await wait(150);
-  assert(await evaluate(client, "document.querySelector('#runQueue li span').textContent.includes('engine + coding')"), "Ctrl+Enter should add a run draft");
+  assert(await evaluate(client, "document.querySelector('#runQueue li span').textContent.includes('engine + business + coding')"), "Ctrl+Enter should add an all-lane run draft");
+  assert(await evaluate(client, "document.querySelector('#queuedCount').textContent === '1'"), "queued count should update");
+  assert(await evaluate(client, "document.querySelector('#terminalLog').textContent.includes('queued draft only')"), "terminal log should record queued draft");
 
   await evaluate(client, "location.reload();");
   await wait(900);
@@ -269,6 +278,7 @@ try {
   assert(await evaluate(client, "document.querySelector('#promptInput').value.includes('Target lane:')"), "prompt should persist");
   assert(await evaluate(client, "document.querySelector('#cycleCount').value === '3'"), "run plan should persist");
   assert(await evaluate(client, "document.querySelector('#evidenceFiles').value.includes('app.js')"), "evidence files should persist");
+  assert(await evaluate(client, "document.querySelector('#terminalLog').textContent.includes('queued draft only')"), "terminal log should persist");
   await key(client, "Enter");
   await wait(150);
   await evaluate(client, "window.scrollTo(0, 0);");
