@@ -612,7 +612,7 @@ vaultforge-icon\.env
 It sets this child-process environment variable:
 
 ```text
-IMAGE_GENERATION_KEY_B_OPENAI_API_KEY
+IMAGE_GENERATION_KEY_B_OPENAI_API_KEY 
 ```
 
 Do not print the key in logs or docs.

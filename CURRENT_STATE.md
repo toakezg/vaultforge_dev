@@ -1,6 +1,6 @@
 # CURRENT STATE
 
-Date: 2026-05-03
+Date: 2026-05-17
 
 Use this file as the quick recovery anchor when the Codex app sidebar, project list, or thread list stops showing the expected VaultForge history.
 
@@ -15,7 +15,7 @@ If the visible Codex project/thread list looks empty or incomplete, assume UI gr
 - Workspace root: `F:\vaultforge`
 - Git root: `F:\vaultforge`
 - Current branch during this refresh: `master`
-- Active section in this cleanup pass: `vaultforge-icon` lane promotion
+- Active section in this cleanup pass: `vaultforge-image` lane promotion
 - Current engine folder: `F:\vaultforge\vaultforge-engine`
 - Codex session storage exists separately under `C:\Users\nvn4_\.codex\sessions`
 - Codex memory records exist for prior `vaultforge-engine` threads
@@ -38,7 +38,10 @@ If the visible Codex project/thread list looks empty or incomplete, assume UI gr
 - Root owns coordination, cross-lane planning, section promotion, and thread routing.
 - `vaultforge-engine` owns shared generator behavior, CLI/config contracts, dry-run behavior, metadata, compatibility, and tests.
 - `vaultforge-business` owns client/business workflows, prompt banks, wrappers, output routing, galleries, and review surfaces.
-- `vaultforge-art` is the planned fresh art lane under `F:\vaultforge\vaultforge-art`; the old runtime/reference prototype is being harvested from `F:\tools\image_generation\vaultforge-art`.
+- `vaultforge-image` owns lightweight image prompt intake, lane-local output
+  routing, a thin `run_image.bat` wrapper, and the small setup path toward
+  `_v01`.
+- `vaultforge-art` is the active fresh art lane under `F:\vaultforge\vaultforge-art`; the old runtime/reference prototype remains a sibling dependency at `F:\tools\image_generation\vaultforge-art`.
 - `vaultforge-icon` owns icon workflow coordination, icon notes, icon asset review, and the existing `svg-forge` raster-to-SVG subtool.
 - `vaultforge-coding` owns the local-first code bridge and factual run/event reporting.
 - `vaultforge-xp4l` owns interpretation, XP/progression, quests, achievements, and dashboard-ready outputs.

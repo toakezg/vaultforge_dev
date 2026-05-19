@@ -1,0 +1,89 @@
+{
+  "category": "Prompt & Handoff Ops",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,filters | outputs=items,counts,source_paths | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "filters"
+    ],
+    "outputs": [
+      "items",
+      "counts",
+      "source_paths"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "prompt-handoff",
+  "gates": [],
+  "id": "T0166",
+  "implementation_shape": "path-list",
+  "operation": "scan",
+  "safety_tags": [
+    "read-only"
+  ],
+  "scan": {
+    "counts": {
+      "candidate_files": 200,
+      "matched_items": 20
+    },
+    "items": [
+      "VERIFICATION.md",
+      "tests\\helpers.py",
+      "tests\\test_bridge.py",
+      "tests\\test_config.py",
+      "tests\\test_context_builder.py",
+      "tests\\test_event_writer.py",
+      "tests\\test_tool_runtime.py",
+      "tests\\test_usage_tracker.py",
+      "tools\\tool-list-builder-workflow.md",
+      "tools\\tool-list-contracts.jsonl",
+      "tools\\tool-list-index.jsonl",
+      "tools\\tool-list.md",
+      "tools\\example-tool-result-build\\catalog-list-cycle-4\\list-output.json",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0065-workspace-test-files-export.md",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0130-context-test-snippets-export.md",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0135-context-error-excerpts-export.md",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0140-context-dependency-context-export.md",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0145-context-design-notes-export.md",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0150-context-handoff-context-export.md",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0155-prompt-task-prompts-export.md"
+    ],
+    "keywords": [
+      "prompt",
+      "test",
+      "prompts",
+      "scan",
+      "handoff",
+      "ops",
+      "agent",
+      "find",
+      "list",
+      "verification",
+      "expected",
+      "command"
+    ],
+    "source_root": "F:\\vaultforge\\vaultforge-coding"
+  },
+  "shared_handler_key": "prompt-handoff::scan::path-list",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:01:48.954296+00:00",
+  "tool": "prompt-test-prompts-scan"
+}

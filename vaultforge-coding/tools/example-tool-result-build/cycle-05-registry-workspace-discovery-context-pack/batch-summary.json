@@ -1,0 +1,607 @@
+{
+  "dry_run": false,
+  "status": "completed",
+  "tool_count": 100,
+  "tools": [
+    {
+      "id": "T0031",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "registry-output-specs-scan"
+    },
+    {
+      "id": "T0032",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "registry-output-specs-validate"
+    },
+    {
+      "id": "T0033",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "registry-output-specs-summarize"
+    },
+    {
+      "id": "T0034",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "registry-output-specs-diff"
+    },
+    {
+      "id": "T0035",
+      "operation": "export",
+      "status": "completed",
+      "tool": "registry-output-specs-export"
+    },
+    {
+      "id": "T0036",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "registry-risk-labels-scan"
+    },
+    {
+      "id": "T0037",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "registry-risk-labels-validate"
+    },
+    {
+      "id": "T0038",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "registry-risk-labels-summarize"
+    },
+    {
+      "id": "T0039",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "registry-risk-labels-diff"
+    },
+    {
+      "id": "T0040",
+      "operation": "export",
+      "status": "completed",
+      "tool": "registry-risk-labels-export"
+    },
+    {
+      "id": "T0041",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "registry-owner-notes-scan"
+    },
+    {
+      "id": "T0042",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "registry-owner-notes-validate"
+    },
+    {
+      "id": "T0043",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "registry-owner-notes-summarize"
+    },
+    {
+      "id": "T0044",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "registry-owner-notes-diff"
+    },
+    {
+      "id": "T0045",
+      "operation": "export",
+      "status": "completed",
+      "tool": "registry-owner-notes-export"
+    },
+    {
+      "id": "T0046",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "registry-version-markers-scan"
+    },
+    {
+      "id": "T0047",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "registry-version-markers-validate"
+    },
+    {
+      "id": "T0048",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "registry-version-markers-summarize"
+    },
+    {
+      "id": "T0049",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "registry-version-markers-diff"
+    },
+    {
+      "id": "T0050",
+      "operation": "export",
+      "status": "completed",
+      "tool": "registry-version-markers-export"
+    },
+    {
+      "id": "T0051",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "workspace-repo-roots-scan"
+    },
+    {
+      "id": "T0052",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "workspace-repo-roots-validate"
+    },
+    {
+      "id": "T0053",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "workspace-repo-roots-summarize"
+    },
+    {
+      "id": "T0054",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "workspace-repo-roots-diff"
+    },
+    {
+      "id": "T0055",
+      "operation": "export",
+      "status": "completed",
+      "tool": "workspace-repo-roots-export"
+    },
+    {
+      "id": "T0056",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "workspace-source-files-scan"
+    },
+    {
+      "id": "T0057",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "workspace-source-files-validate"
+    },
+    {
+      "id": "T0058",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "workspace-source-files-summarize"
+    },
+    {
+      "id": "T0059",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "workspace-source-files-diff"
+    },
+    {
+      "id": "T0060",
+      "operation": "export",
+      "status": "completed",
+      "tool": "workspace-source-files-export"
+    },
+    {
+      "id": "T0061",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "workspace-test-files-scan"
+    },
+    {
+      "id": "T0062",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "workspace-test-files-validate"
+    },
+    {
+      "id": "T0063",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "workspace-test-files-summarize"
+    },
+    {
+      "id": "T0064",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "workspace-test-files-diff"
+    },
+    {
+      "id": "T0065",
+      "operation": "export",
+      "status": "completed",
+      "tool": "workspace-test-files-export"
+    },
+    {
+      "id": "T0066",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "workspace-docs-files-scan"
+    },
+    {
+      "id": "T0067",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "workspace-docs-files-validate"
+    },
+    {
+      "id": "T0068",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "workspace-docs-files-summarize"
+    },
+    {
+      "id": "T0069",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "workspace-docs-files-diff"
+    },
+    {
+      "id": "T0070",
+      "operation": "export",
+      "status": "completed",
+      "tool": "workspace-docs-files-export"
+    },
+    {
+      "id": "T0071",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "workspace-config-files-scan"
+    },
+    {
+      "id": "T0072",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "workspace-config-files-validate"
+    },
+    {
+      "id": "T0073",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "workspace-config-files-summarize"
+    },
+    {
+      "id": "T0074",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "workspace-config-files-diff"
+    },
+    {
+      "id": "T0075",
+      "operation": "export",
+      "status": "completed",
+      "tool": "workspace-config-files-export"
+    },
+    {
+      "id": "T0076",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "workspace-generated-files-scan"
+    },
+    {
+      "id": "T0077",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "workspace-generated-files-validate"
+    },
+    {
+      "id": "T0078",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "workspace-generated-files-summarize"
+    },
+    {
+      "id": "T0079",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "workspace-generated-files-diff"
+    },
+    {
+      "id": "T0080",
+      "operation": "export",
+      "status": "completed",
+      "tool": "workspace-generated-files-export"
+    },
+    {
+      "id": "T0081",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "workspace-asset-files-scan"
+    },
+    {
+      "id": "T0082",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "workspace-asset-files-validate"
+    },
+    {
+      "id": "T0083",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "workspace-asset-files-summarize"
+    },
+    {
+      "id": "T0084",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "workspace-asset-files-diff"
+    },
+    {
+      "id": "T0085",
+      "operation": "export",
+      "status": "completed",
+      "tool": "workspace-asset-files-export"
+    },
+    {
+      "id": "T0086",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "workspace-ignored-files-scan"
+    },
+    {
+      "id": "T0087",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "workspace-ignored-files-validate"
+    },
+    {
+      "id": "T0088",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "workspace-ignored-files-summarize"
+    },
+    {
+      "id": "T0089",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "workspace-ignored-files-diff"
+    },
+    {
+      "id": "T0090",
+      "operation": "export",
+      "status": "completed",
+      "tool": "workspace-ignored-files-export"
+    },
+    {
+      "id": "T0091",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "workspace-large-files-scan"
+    },
+    {
+      "id": "T0092",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "workspace-large-files-validate"
+    },
+    {
+      "id": "T0093",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "workspace-large-files-summarize"
+    },
+    {
+      "id": "T0094",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "workspace-large-files-diff"
+    },
+    {
+      "id": "T0095",
+      "operation": "export",
+      "status": "completed",
+      "tool": "workspace-large-files-export"
+    },
+    {
+      "id": "T0096",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "workspace-stale-files-scan"
+    },
+    {
+      "id": "T0097",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "workspace-stale-files-validate"
+    },
+    {
+      "id": "T0098",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "workspace-stale-files-summarize"
+    },
+    {
+      "id": "T0099",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "workspace-stale-files-diff"
+    },
+    {
+      "id": "T0100",
+      "operation": "export",
+      "status": "completed",
+      "tool": "workspace-stale-files-export"
+    },
+    {
+      "id": "T0101",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "context-readme-anchors-scan"
+    },
+    {
+      "id": "T0102",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "context-readme-anchors-validate"
+    },
+    {
+      "id": "T0103",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "context-readme-anchors-summarize"
+    },
+    {
+      "id": "T0104",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "context-readme-anchors-diff"
+    },
+    {
+      "id": "T0105",
+      "operation": "export",
+      "status": "completed",
+      "tool": "context-readme-anchors-export"
+    },
+    {
+      "id": "T0106",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "context-system-docs-scan"
+    },
+    {
+      "id": "T0107",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "context-system-docs-validate"
+    },
+    {
+      "id": "T0108",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "context-system-docs-summarize"
+    },
+    {
+      "id": "T0109",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "context-system-docs-diff"
+    },
+    {
+      "id": "T0110",
+      "operation": "export",
+      "status": "completed",
+      "tool": "context-system-docs-export"
+    },
+    {
+      "id": "T0111",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "context-task-docs-scan"
+    },
+    {
+      "id": "T0112",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "context-task-docs-validate"
+    },
+    {
+      "id": "T0113",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "context-task-docs-summarize"
+    },
+    {
+      "id": "T0114",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "context-task-docs-diff"
+    },
+    {
+      "id": "T0115",
+      "operation": "export",
+      "status": "completed",
+      "tool": "context-task-docs-export"
+    },
+    {
+      "id": "T0116",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "context-changelog-notes-scan"
+    },
+    {
+      "id": "T0117",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "context-changelog-notes-validate"
+    },
+    {
+      "id": "T0118",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "context-changelog-notes-summarize"
+    },
+    {
+      "id": "T0119",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "context-changelog-notes-diff"
+    },
+    {
+      "id": "T0120",
+      "operation": "export",
+      "status": "completed",
+      "tool": "context-changelog-notes-export"
+    },
+    {
+      "id": "T0121",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "context-code-snippets-scan"
+    },
+    {
+      "id": "T0122",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "context-code-snippets-validate"
+    },
+    {
+      "id": "T0123",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "context-code-snippets-summarize"
+    },
+    {
+      "id": "T0124",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "context-code-snippets-diff"
+    },
+    {
+      "id": "T0125",
+      "operation": "export",
+      "status": "completed",
+      "tool": "context-code-snippets-export"
+    },
+    {
+      "id": "T0126",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "context-test-snippets-scan"
+    },
+    {
+      "id": "T0127",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "context-test-snippets-validate"
+    },
+    {
+      "id": "T0128",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "context-test-snippets-summarize"
+    },
+    {
+      "id": "T0129",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "context-test-snippets-diff"
+    },
+    {
+      "id": "T0130",
+      "operation": "export",
+      "status": "completed",
+      "tool": "context-test-snippets-export"
+    }
+  ]
+}

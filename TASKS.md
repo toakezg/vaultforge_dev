@@ -31,7 +31,9 @@ sort by priority
 
 ## Landed Work
 
+- [x] Add the thin `run_image.bat` wrapper over the shared engine plus lane-local `inbox\` and `output\` anchors for `vaultforge-image` #image #cli #docs 2026-05-17
 - [x] Promote `vaultforge-icon` as a lightweight active icon lane with section docs and SVG-Forge routed as the first existing subtool #icon #docs #threading 2026-05-03
+- [x] Promote `vaultforge-image` as a lightweight active image lane with section docs and a `_v00` baseline note for `_v01` requirements #image #docs #threading 2026-05-17
 - [x] Add Workflow B as a root long-run controller for repeated multi-agent Workflow A cycles, with a Python controller, batch launcher, cycle packets, lane scopes, and optional `codex exec` execution #root #threading #docs 2026-05-09
 - [x] Add Workflow B commit policy handling so long-run agents can commit after review or per cycle without staging unrelated dirty files #root #threading #git 2026-05-09
 - [x] Add root `WORKFLOW_REVIEW.md` and Workflow B change watching so long runs periodically review workflow health and refresh prompts when workflow docs change #root #threading #docs 2026-05-09

@@ -11,9 +11,21 @@
 - Added `tests/test_tool_runtime.py` covering catalog loading, scan/validate,
   dry versus live export, live batch result storage, selector filtering, list
   mode, and blocked outside-root targets.
+- Added gated-safety metadata, `.4` queue family validation context, Markdown
+  export artifacts, and Markdown batch summaries to the local tool runtime.
+- Added `vaultforge-tool --coverage` to summarize live-tested and untested
+  catalog ID ranges from stored example results.
 - Live-tested four local example batches under
   `tools/example-tool-result-build`: 30 registry tools, 20 `.4` queue tools,
   20 cost-route tools, and 20 tool-builder tools.
+- Added 18 more dry/live example cycles under `tools/example-tool-result-build`,
+  bringing local live-tested per-tool result coverage to all 1,825 catalog tools
+  and adding 347 Markdown export artifacts.
+- Added coverage reports under `tools/example-tool-result-build/coverage-cycle-15`
+  and `coverage-cycle-24`; the final report shows 1,825 of 1,825 catalog tools
+  live-tested locally.
+- Added review/refine audit reports under `tools/review-refine`; the second
+  pass is clean after adding explicit `id_ranges` to generated cycle summaries.
 - Added `tools/tool-runtime-build-status.md` to record the runtime surface,
   supported operations, example batches, verification commands, and next build
   slice.

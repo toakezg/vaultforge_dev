@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2026-05-17
+
+- Added the thin `run_image.bat` wrapper plus lane-local `inbox\` and
+  `output\` anchors so the image lane now has a runnable surface.
+- Promoted `vaultforge-image` as the lightweight image lane in the root
+  thread model, added root routing for the lane, and recorded the lane-local
+  `_v00` baseline and `_v01` requirements.
+- Added the first image-lane section doc spine and a README anchor so future
+  Codex threads can start from the lane itself instead of guessing at the
+  current state.
+
+- Promoted `vaultforge-art` from a planned coordination base to an active wrapper-backed art lane, added the lane-local `run_art.bat` wrapper plus inbox/output docs, and synced the root recovery and thread-map entries to point at the new active art lane.
+
 ## 2026-05-13
 
 - Recorded Workflow B cycle 1 for run

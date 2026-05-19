@@ -1,4 +1,4 @@
-@echo off
+ @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 
 REM ========================================
@@ -62,7 +62,7 @@ if /I "%LANE%"=="xp4l" goto xp4l
 if /I "%LANE%"=="coding" goto coding
 if /I "%LANE%"=="code" goto coding
 
-if /I "%LANE%"=="art" goto art
+if /I "%LANE%"=="image-gen" goto image_gen
 if /I "%LANE%"=="icons" goto icons_part_a
 if /I "%LANE%"=="icon-part-a" goto icons_part_a
 if /I "%LANE%"=="svg" goto svg_forge
@@ -130,21 +130,12 @@ set "PY_MODULE=vf_code_bridge"
 goto run_python_module
 
 
-:art
-if not defined VAULTFORGE_ART_ROOT (
-    if exist "%ROOT%\vaultforge-art\generate_art.py" (
-        set "VAULTFORGE_ART_ROOT=%ROOT%\vaultforge-art"
-    ) else if exist "F:\tools\image_generation\vaultforge-art\generate_art.py" (
-        set "VAULTFORGE_ART_ROOT=F:\tools\image_generation\vaultforge-art"
-    ) else if exist "E:\tools\image_generation\vaultforge-art\generate_art.py" (
-        set "VAULTFORGE_ART_ROOT=E:\tools\image_generation\vaultforge-art"
-    )
-)
-if not defined VAULTFORGE_ART_ROOT (
-    echo ERROR: VaultForge art generator was not found.
-    echo Set VAULTFORGE_ART_ROOT to the folder that contains generate_art.py.
-    exit /b 1
-)
+:image_gen
+set "WATCH_BAT=%ROOT%\vaultforge-image\scripts\watch-vf-image-output.bat"
+set "BAT_FILE=%ROOT%\vaultforge-image\run_image.bat"
+set "OUTPUT_DIR=%ROOT%\vaultforge-image\output"
+goto run_image_gen
+
 set "WORKDIR=%VAULTFORGE_ART_ROOT%"
 set "PY_FILE=%VAULTFORGE_ART_ROOT%\generate_art.py"
 goto run_python_file
@@ -208,6 +199,30 @@ echo Open a new terminal, then run:
 echo   VAULTFORGE where
 exit /b 0
 
+:run_image_gen
+if not exist "%BAT_FILE%" (
+    echo ERROR: Batch route not found:
+    echo %BAT_FILE%
+    exit /b 1
+)
+
+if exist "%WATCH_BAT%" (
+    start "VaultForge Image Watcher" cmd /k ""%WATCH_BAT%""
+) else (
+    echo WARNING: Watch BAT not found:
+    echo %WATCH_BAT%
+)
+
+call "%BAT_FILE%" %FORWARD_ARGS%
+set "RUN_EXIT=%ERRORLEVEL%"
+
+set /p "ASK=Open output dir? [y/N]: "
+if /I "%ASK%"=="y" (
+    echo Opening output dir...
+    explorer "%OUTPUT_DIR%"
+)
+
+exit /b %RUN_EXIT%
 
 :run_batch
 if not exist "%BAT_FILE%" (
@@ -307,7 +322,7 @@ echo   VAULTFORGE coding [args]
 echo.
 echo Art and icon lanes:
 echo.
-echo   VAULTFORGE art [args]
+echo   VAULTFORGE image-gen "PROMPT" [args]
 echo   VAULTFORGE icons [all^|quests^|achievements^|titles^|rewards] [args]
 echo   VAULTFORGE svg [args]
 echo   VAULTFORGE loop-rewards [args]

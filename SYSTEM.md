@@ -28,6 +28,8 @@ Root also acts as the overhead coordinator for dedicated section threads.
 - Shared reusable generation code now lives in `vaultforge-engine`.
 - Some older/root wrappers may still delegate to the old art runtime/reference prototype at `F:\tools\image_generation\vaultforge-art` until each lane gets an explicit compatibility pass.
 - Treat `vaultforge-art` as the art/playground lane, not the permanent shared engine.
+- Treat `vaultforge-image` as the image-only lane for quick intake and
+  lane-local outputs, not as a replacement for art or business.
 - If a wrapper depends on another local project, the dependency path must be explicit and documented.
 
 ## Documentation Rules
@@ -56,6 +58,8 @@ Root also acts as the overhead coordinator for dedicated section threads.
 - `vaultforge-business` is the client/business workflow section.
 - `vaultforge-coding` is the local-first coding bridge section.
 - `vaultforge-xp4l` is the XP4Life interpretation and progression section.
+- `vaultforge-image` is the lightweight image lane for prompt intake, thin
+  wrappers, and lane-local outputs.
 - `vaultforge-art` is the art/playground coordination section; its runtime worktree is still a sibling dependency until an explicit migration task changes that.
 - `vaultforge-icon` is the icon workflow section; it owns icon notes, icon review, and the existing `svg-forge` subtool.
 - Parked folders such as `vaultforge-core`, `vaultforge-design`, `vaultforge-system`, and `vaultforge-init` are not active thread bases until root promotes them.

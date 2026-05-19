@@ -41,6 +41,19 @@ TEXT_SUFFIXES = {
     ".yaml",
     ".yml",
 }
+GATED_SAFETY_TAGS = {
+    "external-gated": "external calls remain blocked in local proof mode",
+    "paid-gated": "paid API usage remains blocked in local proof mode",
+    "live-write-gated": "live writes are limited to approved local artifact dirs",
+    "destructive-blocked": "destructive writes are blocked",
+}
+DOT4_QUEUE_PATHS = (
+    ".4",
+    ".4/inbox",
+    ".4/processed",
+    ".4/rejected",
+    ".4/rerun",
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -269,6 +282,40 @@ def _scan(record: ToolRecord, target: Path, *, max_items: int) -> dict[str, Any]
     }
 
 
+def _tool_gates(record: ToolRecord) -> list[dict[str, str]]:
+    """Return gated behaviors declared by the tool safety tags."""
+
+    return [
+        {"tag": tag, "status": "blocked-local", "reason": GATED_SAFETY_TAGS[tag]}
+        for tag in record.safety_tags
+        if tag in GATED_SAFETY_TAGS
+    ]
+
+
+def _family_validation(record: ToolRecord, target: Path) -> dict[str, Any] | None:
+    """Return family-specific validation context without changing pass/fail."""
+
+    if record.family != "dot4-queue":
+        return None
+    queue_paths = []
+    for relative in DOT4_QUEUE_PATHS:
+        path = target / relative
+        queue_paths.append(
+            {
+                "path": relative,
+                "exists": path.exists(),
+                "kind": "dir" if path.is_dir() else "file" if path.exists() else "missing",
+            }
+        )
+    return {
+        "family": "dot4-queue",
+        "mode": "local-structure-check",
+        "queue_paths": queue_paths,
+        "missing_paths": [item["path"] for item in queue_paths if not item["exists"]],
+        "note": "Missing .4 paths are reported as context, not a catalog failure.",
+    }
+
+
 def _catalog_stats(root: Path) -> dict[str, Any]:
     """Return basic catalog statistics."""
 
@@ -291,12 +338,74 @@ def _catalog_stats(root: Path) -> dict[str, Any]:
     }
 
 
+def _markdown_tool_artifact(
+    record: ToolRecord,
+    *,
+    scan_result: dict[str, Any],
+    stats: dict[str, Any],
+    contract: ToolContract | None,
+    timestamp: str,
+) -> str:
+    """Render a compact Markdown artifact for one tool result."""
+
+    lines = [
+        f"# {record.tool}",
+        "",
+        f"- id: {record.id}",
+        f"- family: {record.family}",
+        f"- operation: {record.operation}",
+        f"- priority: {record.priority_tag}",
+        f"- safety: {', '.join(record.safety_tags) if record.safety_tags else 'none'}",
+        f"- generated_at: {timestamp}",
+        "",
+        "## Purpose",
+        "",
+        record.purpose,
+        "",
+        "## Contract",
+        "",
+    ]
+    if contract:
+        for key in ("inputs", "outputs", "reads", "writes", "blocked", "proof"):
+            value = contract.contract.get(key, [])
+            if isinstance(value, list):
+                rendered = ", ".join(str(item) for item in value) or "none"
+            else:
+                rendered = str(value)
+            lines.append(f"- {key}: {rendered}")
+    else:
+        lines.append("- missing contract")
+    lines.extend(
+        [
+            "",
+            "## Evidence",
+            "",
+            f"- matched_items: {scan_result['counts']['matched_items']}",
+            f"- catalog_tools: {stats['tool_count']}",
+            f"- catalog_missing_ids: {len(stats['missing_ids'])}",
+        ]
+    )
+    for item in scan_result["items"][:10]:
+        lines.append(f"- source: {item}")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def _write_text(path: Path, content: str) -> Path:
+    """Write one UTF-8 text artifact."""
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+    return path
+
+
 def run_tool(
     tool_name: str,
     *,
     root: Path | None = None,
     target_root: str | None = None,
     artifact_dir: str | None = None,
+    artifact_format: str = "json",
     max_items: int = 20,
     dry_run: bool = True,
 ) -> dict[str, Any]:
@@ -327,6 +436,7 @@ def run_tool(
         "implementation_shape": record.implementation_shape,
         "shared_handler_key": record.shared_handler_key,
         "contract": contract.contract if contract else None,
+        "gates": _tool_gates(record),
     }
 
     if operation == "scan":
@@ -343,6 +453,9 @@ def run_tool(
             "next_tool": "",
             "catalog": stats,
         }
+        family_validation = _family_validation(record, target)
+        if family_validation:
+            result["validation"]["family"] = family_validation
     elif operation == "summarize":
         result["summary"] = {
             "brief": (
@@ -369,18 +482,34 @@ def run_tool(
         }
     elif operation == "export":
         artifact_root = _safe_artifact_dir(workspace, artifact_dir)
-        artifact_path = artifact_root / f"{record.id}-{record.tool}.json"
+        if artifact_format not in {"json", "markdown"}:
+            raise ToolRuntimeError(f"Unsupported artifact format: {artifact_format}")
+        suffix = ".md" if artifact_format == "markdown" else ".json"
+        artifact_path = artifact_root / f"{record.id}-{record.tool}{suffix}"
         artifact_payload = {
             "record": asdict(record),
             "scan": scan_result,
             "catalog": stats,
             "contract": contract.contract if contract else None,
+            "gates": _tool_gates(record),
             "generated_at": timestamp,
         }
         if dry_run:
             result["artifact_preview"] = str(artifact_path)
         else:
-            write_json(artifact_path, artifact_payload)
+            if artifact_format == "markdown":
+                _write_text(
+                    artifact_path,
+                    _markdown_tool_artifact(
+                        record,
+                        scan_result=scan_result,
+                        stats=stats,
+                        contract=contract,
+                        timestamp=timestamp,
+                    ),
+                )
+            else:
+                write_json(artifact_path, artifact_payload)
             result["artifact_path"] = str(artifact_path)
     else:
         result["status"] = "unsupported"
@@ -394,6 +523,7 @@ def run_tool_batch(
     root: Path | None = None,
     target_root: str | None = None,
     artifact_dir: str | None = None,
+    artifact_format: str = "json",
     max_items: int = 20,
     dry_run: bool = True,
 ) -> dict[str, Any]:
@@ -408,6 +538,7 @@ def run_tool_batch(
                 root=workspace,
                 target_root=target_root,
                 artifact_dir=artifact_dir,
+                artifact_format=artifact_format,
                 max_items=max_items,
                 dry_run=dry_run,
             )
@@ -440,7 +571,47 @@ def run_tool_batch(
                 ],
             },
         )
+        _write_text(
+            artifact_root / "batch-summary.md",
+            render_batch_summary_markdown(payload),
+        )
     return payload
+
+
+def render_batch_summary_markdown(payload: dict[str, Any]) -> str:
+    """Render a compact Markdown summary for a batch payload."""
+
+    family_counts = Counter(str(result["family"]) for result in payload["results"])
+    operation_counts = Counter(str(result["operation"]) for result in payload["results"])
+    gated = [
+        result
+        for result in payload["results"]
+        if result.get("gates")
+    ]
+    lines = [
+        "# VaultForge Tool Batch Summary",
+        "",
+        f"- status: {payload['status']}",
+        f"- dry_run: {payload['dry_run']}",
+        f"- tool_count: {payload['tool_count']}",
+        f"- gated_tool_count: {len(gated)}",
+        "",
+        "## Families",
+        "",
+    ]
+    for family, count in family_counts.most_common():
+        lines.append(f"- {family}: {count}")
+    lines.extend(["", "## Operations", ""])
+    for operation, count in operation_counts.most_common():
+        lines.append(f"- {operation}: {count}")
+    lines.extend(["", "## Tools", ""])
+    for result in payload["results"]:
+        lines.append(
+            f"- {result['id']} | {result['tool']} | {result['family']} | "
+            f"{result['operation']} | {result['status']}"
+        )
+    lines.append("")
+    return "\n".join(lines)
 
 
 def select_tool_names(
@@ -502,6 +673,83 @@ def list_tools(
     ]
 
 
+def _range_labels(ids: Sequence[int]) -> list[str]:
+    """Compress sorted numeric IDs into readable ranges."""
+
+    if not ids:
+        return []
+    ranges = []
+    start = ids[0]
+    previous = ids[0]
+    for item in ids[1:]:
+        if item == previous + 1:
+            previous = item
+            continue
+        ranges.append(f"T{start:04d}" if start == previous else f"T{start:04d}-T{previous:04d}")
+        start = previous = item
+    ranges.append(f"T{start:04d}" if start == previous else f"T{start:04d}-T{previous:04d}")
+    return ranges
+
+
+def build_coverage_report(*, root: Path | None = None) -> dict[str, Any]:
+    """Report catalog IDs that have live local example results."""
+
+    workspace = (root or repository_root()).resolve()
+    records = load_tool_records(workspace)
+    catalog_ids = {record.id for record in records.values()}
+    result_root = workspace / "tools" / "example-tool-result-build"
+    tested_ids = set()
+    if result_root.exists():
+        for path in result_root.glob("**/tool-results/T*.json"):
+            tested_ids.add(path.name.split("-", 1)[0])
+    tested_ids &= catalog_ids
+    untested_ids = catalog_ids - tested_ids
+    family_counts: Counter[str] = Counter()
+    for record in records.values():
+        if record.id in tested_ids:
+            family_counts[record.family] += 1
+    tested_nums = sorted(int(item[1:]) for item in tested_ids)
+    untested_nums = sorted(int(item[1:]) for item in untested_ids)
+    return {
+        "status": "completed",
+        "catalog_tool_count": len(catalog_ids),
+        "live_tested_count": len(tested_ids),
+        "untested_count": len(untested_ids),
+        "coverage_percent": round((len(tested_ids) / len(catalog_ids)) * 100, 2)
+        if catalog_ids
+        else 0.0,
+        "tested_ranges": _range_labels(tested_nums),
+        "untested_ranges": _range_labels(untested_nums),
+        "tested_family_counts": family_counts.most_common(),
+    }
+
+
+def render_coverage_markdown(report: dict[str, Any]) -> str:
+    """Render a compact Markdown coverage report."""
+
+    lines = [
+        "# VaultForge Tool Coverage",
+        "",
+        f"- catalog_tool_count: {report['catalog_tool_count']}",
+        f"- live_tested_count: {report['live_tested_count']}",
+        f"- untested_count: {report['untested_count']}",
+        f"- coverage_percent: {report['coverage_percent']}",
+        "",
+        "## Tested Ranges",
+        "",
+    ]
+    for item in report["tested_ranges"][:30]:
+        lines.append(f"- {item}")
+    lines.extend(["", "## Untested Ranges", ""])
+    for item in report["untested_ranges"][:30]:
+        lines.append(f"- {item}")
+    lines.extend(["", "## Tested Families", ""])
+    for family, count in report["tested_family_counts"][:30]:
+        lines.append(f"- {family}: {count}")
+    lines.append("")
+    return "\n".join(lines)
+
+
 def build_parser() -> argparse.ArgumentParser:
     """Build the local tool runtime parser."""
 
@@ -519,12 +767,23 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="List selected tools without running them.",
     )
+    parser.add_argument(
+        "--coverage",
+        action="store_true",
+        help="Report live local proof coverage from example tool results.",
+    )
     parser.add_argument("--target-root", help="Workspace-relative target root.")
     parser.add_argument(
         "--artifact-dir",
         help="Workspace-relative artifact directory for export/live examples.",
     )
     parser.add_argument("--max-items", type=int, default=20)
+    parser.add_argument(
+        "--format",
+        choices=("json", "markdown"),
+        default="json",
+        help="Artifact format for export tools.",
+    )
     parser.add_argument("--live", action="store_true", help="Write approved preview artifacts.")
     parser.add_argument("--json", action="store_true", help="Print JSON output.")
     return parser
@@ -536,6 +795,25 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     namespace = parser.parse_args(argv)
     tool_names = tuple(namespace.tools)
+    if namespace.coverage:
+        payload = build_coverage_report()
+        if namespace.live:
+            artifact_root = _safe_artifact_dir(repository_root().resolve(), namespace.artifact_dir)
+            write_json(artifact_root / "tool-coverage-report.json", payload)
+            _write_text(artifact_root / "tool-coverage-report.md", render_coverage_markdown(payload))
+            payload["artifact_paths"] = [
+                str(artifact_root / "tool-coverage-report.json"),
+                str(artifact_root / "tool-coverage-report.md"),
+            ]
+        if namespace.json:
+            print(json.dumps(payload, indent=2, default=str))
+        else:
+            print(
+                "VaultForge tool coverage: "
+                f"{payload['live_tested_count']}/{payload['catalog_tool_count']} "
+                f"({payload['coverage_percent']}%)"
+            )
+        return 0
     if namespace.list:
         payload = {
             "status": "completed",
@@ -569,6 +847,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             tool_names,
             target_root=namespace.target_root,
             artifact_dir=namespace.artifact_dir,
+            artifact_format=namespace.format,
             max_items=namespace.max_items,
             dry_run=not namespace.live,
         )

@@ -52,8 +52,10 @@ rewards, or dashboard logic. That belongs in a separate sibling section:
 - environment-backed config loading now supports repo-local defaults plus
   validated overrides for section/model/provider, token rates, and asset paths
 - `tools/tool-list.md` now has a large fixed-contract tool catalog, generated
-  tag/contract artifacts, and a first local `vaultforge-tool` runtime for
-  executing known catalog tools with dry/live local example outputs
+  tag/contract artifacts, and a local `vaultforge-tool` runtime for executing
+  known catalog tools with dry/live local example outputs; current local proof
+  coverage is tracked in `tools/tool-runtime-build-status.md` and can be
+  refreshed with `vaultforge-tool --coverage`
 - prompt compilation, broader context collection, and OpenAI Responses API
   execution are still ahead
 

@@ -323,12 +323,15 @@ class PromptBuildingBlocksTests(unittest.TestCase):
     def test_direct_image_model_request_omits_image_generation_tool(self):
         calls = []
 
-        class FakeResponses:
+        class FakeRawResponse:
+            text = '{"output": []}'
+
+        class FakeRawResponses:
             def create(self, **kwargs):
                 calls.append(kwargs)
-                return SimpleNamespace(output=[])
+                return FakeRawResponse()
 
-        client = SimpleNamespace(responses=FakeResponses())
+        client = SimpleNamespace(responses=SimpleNamespace(with_raw_response=FakeRawResponses()))
         args = generate.argparse.Namespace(
             size="1024x1024",
             quality="medium",
@@ -346,6 +349,22 @@ class PromptBuildingBlocksTests(unittest.TestCase):
 
         self.assertEqual(calls[0]["model"], "gpt-image-2-2026-04-21")
         self.assertNotIn("tools", calls[0])
+
+    def test_extract_image_bytes_supports_dict_response_payload(self):
+        payload = {
+            "output": [
+                {
+                    "type": "reasoning",
+                    "content": [],
+                },
+                {
+                    "type": "image_generation_call",
+                    "result": "aGVsbG8=",
+                },
+            ]
+        }
+
+        self.assertEqual(generate.extract_image_bytes(payload), b"hello")
 
 
 class GalleryIndexTests(unittest.TestCase):

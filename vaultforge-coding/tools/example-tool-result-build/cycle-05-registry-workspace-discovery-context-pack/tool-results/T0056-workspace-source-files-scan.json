@@ -1,0 +1,89 @@
+{
+  "category": "Workspace Inventory & Discovery",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,filters | outputs=items,counts,source_paths | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "filters"
+    ],
+    "outputs": [
+      "items",
+      "counts",
+      "source_paths"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "workspace-discovery",
+  "gates": [],
+  "id": "T0056",
+  "implementation_shape": "path-list",
+  "operation": "scan",
+  "safety_tags": [
+    "read-only"
+  ],
+  "scan": {
+    "counts": {
+      "candidate_files": 200,
+      "matched_items": 20
+    },
+    "items": [
+      ".obsidian\\workspace.json",
+      "tools\\tool-list-builder-workflow.md",
+      "tools\\tool-list-contracts.jsonl",
+      "tools\\tool-list-index.jsonl",
+      "tools\\tool-list.md",
+      "tools\\example-tool-result-build\\catalog-list-cycle-4\\list-output.json",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0035-registry-output-specs-export.md",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0040-registry-risk-labels-export.md",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0045-registry-owner-notes-export.md",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0050-registry-version-markers-export.md",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0055-workspace-repo-roots-export.md",
+      "tools\\example-tool-result-build\\tool-builder-cycle-3\\tool-results\\T0951-toolbuilder-tool-blueprints-scan.json",
+      "tools\\example-tool-result-build\\tool-builder-cycle-3\\tool-results\\T0956-toolbuilder-handler-templates-scan.json",
+      "tools\\example-tool-result-build\\tool-builder-cycle-3\\tool-results\\T0961-toolbuilder-test-templates-scan.json",
+      "tools\\example-tool-result-build\\tool-builder-cycle-3\\tool-results\\T0966-toolbuilder-registry-updates-scan.json",
+      "tools\\example-tool-result-build\\registry-cycle-1\\tool-results\\T0001-registry-tool-manifests-scan.json",
+      "tools\\example-tool-result-build\\registry-cycle-1\\tool-results\\T0006-registry-tool-contracts-scan.json",
+      "tools\\example-tool-result-build\\registry-cycle-1\\tool-results\\T0011-registry-tool-schemas-scan.json",
+      "tools\\example-tool-result-build\\registry-cycle-1\\tool-results\\T0016-registry-tool-categories-scan.json",
+      "tools\\example-tool-result-build\\registry-cycle-1\\tool-results\\T0021-registry-permission-scopes-scan.json"
+    ],
+    "keywords": [
+      "workspace",
+      "source",
+      "files",
+      "scan",
+      "inventory",
+      "discovery",
+      "local",
+      "repo",
+      "find",
+      "list",
+      "implementation",
+      "language"
+    ],
+    "source_root": "F:\\vaultforge\\vaultforge-coding"
+  },
+  "shared_handler_key": "workspace-discovery::scan::path-list",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:01:11.805928+00:00",
+  "tool": "workspace-source-files-scan"
+}

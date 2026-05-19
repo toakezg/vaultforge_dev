@@ -72,3 +72,32 @@ Use this shape:
 - Handoff: next cycle should enrich family-specific validation and catalog
   status/export summaries before attempting live external or write-capable
   integrations
+
+## 2026-05-13 - tool runtime scale cycle
+
+- Role: continue the fixed-contract tool runtime build with larger local proof
+  cycles
+- Scope: gated-safety metadata, `.4` queue validation context, Markdown exports,
+  Markdown batch summaries, coverage reports, and 18 additional dry/live
+  example cycles covering all catalog tools
+- Read: `tools/tool-runtime-build-status.md`, generated tool index/contracts,
+  current runtime tests, and the active build workflow rules
+- Changed: updated `src/vf_code_bridge/tool_runtime.py`,
+  `tests/test_tool_runtime.py`, `tools/tool-runtime-build-status.md`,
+  `README.md`, `CHANGELOG.md`, `SIGN_UP.md`, and added cycle 05-23 plus
+  coverage artifacts under `tools/example-tool-result-build/`
+- Handoff: local proof coverage is complete for T0001-T1825; keep
+  external/live-gated surfaces blocked until a later explicit integration pass
+
+## 2026-05-13 - tool proof review/refine pass
+
+- Role: review and refine the full local proof set after the catalog build
+- Scope: artifact integrity, coverage stability, cycle summary clarity, and
+  workflow findings; no new external/live tool behavior
+- Read: generated catalog index/contracts, example result folders, coverage
+  reports, runtime status docs, and current test surface
+- Changed: added `tools/review-refine/tool-proof-review-cycle-1.*` and
+  `tool-proof-review-cycle-2.*`, added explicit `id_ranges` to generated cycle
+  summaries, and updated status/changelog notes
+- Handoff: use coverage plus review/refine reports as the repeatable stop check
+  for future large tool-build runs

@@ -5,6 +5,7 @@ import pytest
 
 from vf_code_bridge.tool_runtime import (
     ToolRuntimeError,
+    build_coverage_report,
     list_tools,
     load_tool_records,
     run_tool,
@@ -83,6 +84,26 @@ def _seed_catalog(root: Path) -> None:
             "shared_handler_key": "registry::export::markdown-report",
             "status": "candidate",
         },
+        {
+            "id": "T0004",
+            "num": 4,
+            "tool": "dot4-inbox-queues-validate",
+            "category": ".4 Operations and Courier Intake",
+            "rel": "alignment-high",
+            "specialty": "rule check",
+            "domain": ".4 intake",
+            "purpose": "validate .4 inbox queue state",
+            "build": "read-only; report queue folders",
+            "operation": "validate",
+            "subject_key": "dot4-inbox-queues",
+            "line": 4,
+            "priority_tag": "p1-high-use",
+            "family": "dot4-queue",
+            "implementation_shape": "status-summary",
+            "safety_tags": ["read-only", "live-write-gated"],
+            "shared_handler_key": "dot4-queue::validate::status-summary",
+            "status": "candidate",
+        },
     ]
     contracts = [
         {
@@ -147,6 +168,22 @@ def test_export_tool_dry_run_and_live_write(tmp_path: Path) -> None:
     assert json.loads(artifact_path.read_text(encoding="utf-8"))["record"]["id"] == "T0003"
 
 
+def test_export_tool_writes_markdown_artifact(tmp_path: Path) -> None:
+    _seed_catalog(tmp_path)
+
+    live = run_tool(
+        "registry-tool-manifests-export",
+        root=tmp_path,
+        artifact_dir="tools/example-tool-result-build",
+        artifact_format="markdown",
+        dry_run=False,
+    )
+
+    artifact_path = Path(live["artifact_path"])
+    assert artifact_path.suffix == ".md"
+    assert "# registry-tool-manifests-export" in artifact_path.read_text(encoding="utf-8")
+
+
 def test_run_tool_blocks_outside_target_root(tmp_path: Path) -> None:
     _seed_catalog(tmp_path)
 
@@ -178,6 +215,18 @@ def test_live_batch_stores_each_tool_result(tmp_path: Path) -> None:
     assert summary_path.exists()
     assert (result_dir / "T0001-registry-tool-manifests-scan.json").exists()
     assert (result_dir / "T0002-registry-tool-manifests-validate.json").exists()
+    assert (tmp_path / "tools" / "example-tool-result-build" / "batch-summary.md").exists()
+
+
+def test_dot4_validation_reports_family_context_and_gates(tmp_path: Path) -> None:
+    _seed_catalog(tmp_path)
+
+    validation = run_tool("dot4-inbox-queues-validate", root=tmp_path)
+
+    assert validation["validation"]["pass"] is True
+    assert validation["validation"]["family"]["family"] == "dot4-queue"
+    assert ".4/inbox" in validation["validation"]["family"]["missing_paths"]
+    assert validation["gates"][0]["tag"] == "live-write-gated"
 
 
 def test_select_tool_names_filters_catalog(tmp_path: Path) -> None:
@@ -200,3 +249,18 @@ def test_list_tools_returns_catalog_rows(tmp_path: Path) -> None:
 
     assert [row["id"] for row in rows] == ["T0001", "T0002"]
     assert rows[0]["operation"] == "scan"
+
+
+def test_build_coverage_report_reads_live_result_ids(tmp_path: Path) -> None:
+    _seed_catalog(tmp_path)
+    result_dir = tmp_path / "tools" / "example-tool-result-build" / "cycle" / "tool-results"
+    result_dir.mkdir(parents=True)
+    (result_dir / "T0001-registry-tool-manifests-scan.json").write_text("{}", encoding="utf-8")
+    (result_dir / "T0004-dot4-inbox-queues-validate.json").write_text("{}", encoding="utf-8")
+
+    report = build_coverage_report(root=tmp_path)
+
+    assert report["catalog_tool_count"] == 4
+    assert report["live_tested_count"] == 2
+    assert report["untested_count"] == 2
+    assert report["tested_ranges"] == ["T0001", "T0004"]

@@ -1,0 +1,57 @@
+{
+  "category": "Context Reading & Packing",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "max_items"
+    ],
+    "outputs": [
+      "summary",
+      "source_refs",
+      "blockers"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "context-pack",
+  "gates": [],
+  "id": "T0143",
+  "implementation_shape": "handoff-pack",
+  "operation": "summarize",
+  "safety_tags": [
+    "read-only"
+  ],
+  "shared_handler_key": "context-pack::summarize::handoff-pack",
+  "status": "completed",
+  "summary": {
+    "blockers": [],
+    "brief": "context-design-notes-summarize is a handoff summary tool in Context Reading & Packing; it uses handoff-pack and belongs to context-pack.",
+    "matched_items": [
+      "tests\\test_context_builder.py",
+      "tools\\tool-list-builder-workflow.md",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\batch-summary.json",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\batch-summary.md",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\dry-run-output.json"
+    ]
+  },
+  "timestamp": "2026-05-13T00:01:44.851238+00:00",
+  "tool": "context-design-notes-summarize"
+}

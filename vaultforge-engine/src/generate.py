@@ -661,7 +661,8 @@ def compose_prompt(
 
 
 def extract_image_bytes(response) -> bytes:
-    for output in response.output:
+    outputs = response.get("output", []) if isinstance(response, dict) else response.output
+    for output in outputs:
         result = extract_base64_image_value(output)
         if result:
             return base64.b64decode(result)
@@ -704,6 +705,23 @@ def extract_base64_image_value(value) -> str | None:
         if found:
             return found
     return None
+
+
+def parse_response_payload(raw_response) -> dict[str, object]:
+    raw_text = getattr(raw_response, "text", None)
+    if callable(raw_text):
+        raw_text = raw_text()
+    if not isinstance(raw_text, str):
+        http_response = getattr(raw_response, "http_response", None)
+        if http_response is not None:
+            raw_text = getattr(http_response, "text", None)
+    if not isinstance(raw_text, str):
+        raise RuntimeError("The API response completed, but its JSON body could not be read.")
+
+    payload = json.loads(raw_text)
+    if not isinstance(payload, dict):
+        raise RuntimeError("The API response completed, but it did not return a JSON object.")
+    return payload
 
 
 def build_output_path(
@@ -1261,12 +1279,13 @@ def request_image(
     args: argparse.Namespace,
 ):
     if is_direct_image_model(model):
-        return client.responses.create(
+        raw_response = client.responses.with_raw_response.create(
             model=model,
             input=build_responses_input(prompt, image_references),
         )
+        return parse_response_payload(raw_response)
 
-    return client.responses.create(
+    raw_response = client.responses.with_raw_response.create(
         model=model,
         input=build_responses_input(prompt, image_references),
         tools=[
@@ -1280,6 +1299,7 @@ def request_image(
         ],
         tool_choice={"type": "image_generation"},
     )
+    return parse_response_payload(raw_response)
 
 
 def generate_with_fallback(

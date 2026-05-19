@@ -1,5 +1,10 @@
 # Art Changelog
 
+## 2026-05-17
+
+- Promoted `vaultforge-art` from a coordination base into an active lane, added the thin `run_art.bat` wrapper over the shared engine, created the lane `README.md`, and added the first inbox smoke prompt plus a `vaultforge-art_v01.md` promotion note.
+- Updated the art system, plan, tasks, and Codex start docs to point at `ART_KEY`, `inbox\`, `output\`, and the shared engine contract.
+
 ## 2026-04-16
 
 - Added the art task-property rule: active and next tasks now carry stable `🆔` ids, recurring loops should use `🔁`, and dependencies should use `⛔`.

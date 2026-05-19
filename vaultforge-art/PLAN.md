@@ -1,25 +1,27 @@
-# Art Plan
+# Plan
 
 ## Section Thread Model
 
-- `vaultforge-art` is a promoted coordination base under root.
-- The runtime art worktree still lives at `E:\tools\image_generation\vaultforge-art`.
-- Art threads should read root overhead docs before changing art workflow or bridge documentation.
+- `vaultforge-art` is a promoted worker section under root coordination.
+- section threads should read root startup docs before section docs.
+- this section owns focused art work rather than root-wide coordination.
 
 ## Current Direction
 
-- Keep art experimentation separate from business/client workflow.
-- Keep shared generator behavior in `vaultforge-engine`.
-- Use this folder to track art-lane handoffs, migration decisions, and bridge expectations.
+- Keep the lane art-focused and lightweight.
+- Use the shared engine for generation work.
+- Keep direct prompts and inbox batch prompts easy to repeat.
+- Keep output routing local to `output\`.
 
 ## Watchpoints
 
-- Creating this coordination base does not mean the art runtime has been migrated.
-- Do not clean up or delete sibling art material just because it is experimental.
-- Art bridge changes can affect engine contracts and should be reported upward.
+- Do not clone shared engine behavior into this lane.
+- Keep `ART_KEY` lane-owned and documented.
+- Avoid pulling client/business rules into art prompt work.
+- Keep batch and direct prompt paths simple enough to dry-run first.
 
 ## Forward Look
 
-- Decide later whether to migrate the sibling art worktree under this root.
-- Add art-specific docs only as the art lane receives active work.
-- Promote stable shared behavior into engine only after it proves useful beyond art.
+- Add art-specific presets and style packs only when the lane actually needs them.
+- Add review and curation surfaces after the first steady run of outputs.
+- Expand tests only once the lane starts carrying more than the minimal wrapper.

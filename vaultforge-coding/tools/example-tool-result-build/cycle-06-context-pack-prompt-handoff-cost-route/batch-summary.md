@@ -1,0 +1,123 @@
+# VaultForge Tool Batch Summary
+
+- status: completed
+- dry_run: False
+- tool_count: 100
+- gated_tool_count: 5
+
+## Families
+
+- prompt-handoff: 50
+- cost-route: 30
+- context-pack: 20
+
+## Operations
+
+- scan: 20
+- validate: 20
+- summarize: 20
+- diff: 20
+- export: 20
+
+## Tools
+
+- T0131 | context-error-excerpts-scan | context-pack | scan | completed
+- T0132 | context-error-excerpts-validate | context-pack | validate | completed
+- T0133 | context-error-excerpts-summarize | context-pack | summarize | completed
+- T0134 | context-error-excerpts-diff | context-pack | diff | completed
+- T0135 | context-error-excerpts-export | context-pack | export | completed
+- T0136 | context-dependency-context-scan | context-pack | scan | completed
+- T0137 | context-dependency-context-validate | context-pack | validate | completed
+- T0138 | context-dependency-context-summarize | context-pack | summarize | completed
+- T0139 | context-dependency-context-diff | context-pack | diff | completed
+- T0140 | context-dependency-context-export | context-pack | export | completed
+- T0141 | context-design-notes-scan | context-pack | scan | completed
+- T0142 | context-design-notes-validate | context-pack | validate | completed
+- T0143 | context-design-notes-summarize | context-pack | summarize | completed
+- T0144 | context-design-notes-diff | context-pack | diff | completed
+- T0145 | context-design-notes-export | context-pack | export | completed
+- T0146 | context-handoff-context-scan | context-pack | scan | completed
+- T0147 | context-handoff-context-validate | context-pack | validate | completed
+- T0148 | context-handoff-context-summarize | context-pack | summarize | completed
+- T0149 | context-handoff-context-diff | context-pack | diff | completed
+- T0150 | context-handoff-context-export | context-pack | export | completed
+- T0151 | prompt-task-prompts-scan | prompt-handoff | scan | completed
+- T0152 | prompt-task-prompts-validate | prompt-handoff | validate | completed
+- T0153 | prompt-task-prompts-summarize | prompt-handoff | summarize | completed
+- T0154 | prompt-task-prompts-diff | prompt-handoff | diff | completed
+- T0155 | prompt-task-prompts-export | prompt-handoff | export | completed
+- T0156 | prompt-builder-prompts-scan | prompt-handoff | scan | completed
+- T0157 | prompt-builder-prompts-validate | prompt-handoff | validate | completed
+- T0158 | prompt-builder-prompts-summarize | prompt-handoff | summarize | completed
+- T0159 | prompt-builder-prompts-diff | prompt-handoff | diff | completed
+- T0160 | prompt-builder-prompts-export | prompt-handoff | export | completed
+- T0161 | prompt-reviewer-prompts-scan | prompt-handoff | scan | completed
+- T0162 | prompt-reviewer-prompts-validate | prompt-handoff | validate | completed
+- T0163 | prompt-reviewer-prompts-summarize | prompt-handoff | summarize | completed
+- T0164 | prompt-reviewer-prompts-diff | prompt-handoff | diff | completed
+- T0165 | prompt-reviewer-prompts-export | prompt-handoff | export | completed
+- T0166 | prompt-test-prompts-scan | prompt-handoff | scan | completed
+- T0167 | prompt-test-prompts-validate | prompt-handoff | validate | completed
+- T0168 | prompt-test-prompts-summarize | prompt-handoff | summarize | completed
+- T0169 | prompt-test-prompts-diff | prompt-handoff | diff | completed
+- T0170 | prompt-test-prompts-export | prompt-handoff | export | completed
+- T0171 | prompt-fix-prompts-scan | prompt-handoff | scan | completed
+- T0172 | prompt-fix-prompts-validate | prompt-handoff | validate | completed
+- T0173 | prompt-fix-prompts-summarize | prompt-handoff | summarize | completed
+- T0174 | prompt-fix-prompts-diff | prompt-handoff | diff | completed
+- T0175 | prompt-fix-prompts-export | prompt-handoff | export | completed
+- T0176 | prompt-continuation-prompts-scan | prompt-handoff | scan | completed
+- T0177 | prompt-continuation-prompts-validate | prompt-handoff | validate | completed
+- T0178 | prompt-continuation-prompts-summarize | prompt-handoff | summarize | completed
+- T0179 | prompt-continuation-prompts-diff | prompt-handoff | diff | completed
+- T0180 | prompt-continuation-prompts-export | prompt-handoff | export | completed
+- T0181 | prompt-summary-prompts-scan | prompt-handoff | scan | completed
+- T0182 | prompt-summary-prompts-validate | prompt-handoff | validate | completed
+- T0183 | prompt-summary-prompts-summarize | prompt-handoff | summarize | completed
+- T0184 | prompt-summary-prompts-diff | prompt-handoff | diff | completed
+- T0185 | prompt-summary-prompts-export | prompt-handoff | export | completed
+- T0186 | prompt-constraint-prompts-scan | prompt-handoff | scan | completed
+- T0187 | prompt-constraint-prompts-validate | prompt-handoff | validate | completed
+- T0188 | prompt-constraint-prompts-summarize | prompt-handoff | summarize | completed
+- T0189 | prompt-constraint-prompts-diff | prompt-handoff | diff | completed
+- T0190 | prompt-constraint-prompts-export | prompt-handoff | export | completed
+- T0191 | prompt-acceptance-prompts-scan | prompt-handoff | scan | completed
+- T0192 | prompt-acceptance-prompts-validate | prompt-handoff | validate | completed
+- T0193 | prompt-acceptance-prompts-summarize | prompt-handoff | summarize | completed
+- T0194 | prompt-acceptance-prompts-diff | prompt-handoff | diff | completed
+- T0195 | prompt-acceptance-prompts-export | prompt-handoff | export | completed
+- T0196 | prompt-live-pass-prompts-scan | prompt-handoff | scan | completed
+- T0197 | prompt-live-pass-prompts-validate | prompt-handoff | validate | completed
+- T0198 | prompt-live-pass-prompts-summarize | prompt-handoff | summarize | completed
+- T0199 | prompt-live-pass-prompts-diff | prompt-handoff | diff | completed
+- T0200 | prompt-live-pass-prompts-export | prompt-handoff | export | completed
+- T0221 | cost-run-costs-scan | cost-route | scan | completed
+- T0222 | cost-run-costs-validate | cost-route | validate | completed
+- T0223 | cost-run-costs-summarize | cost-route | summarize | completed
+- T0224 | cost-run-costs-diff | cost-route | diff | completed
+- T0225 | cost-run-costs-export | cost-route | export | completed
+- T0226 | cost-saved-context-scan | cost-route | scan | completed
+- T0227 | cost-saved-context-validate | cost-route | validate | completed
+- T0228 | cost-saved-context-summarize | cost-route | summarize | completed
+- T0229 | cost-saved-context-diff | cost-route | diff | completed
+- T0230 | cost-saved-context-export | cost-route | export | completed
+- T0231 | cost-duplicate-reads-scan | cost-route | scan | completed
+- T0232 | cost-duplicate-reads-validate | cost-route | validate | completed
+- T0233 | cost-duplicate-reads-summarize | cost-route | summarize | completed
+- T0234 | cost-duplicate-reads-diff | cost-route | diff | completed
+- T0235 | cost-duplicate-reads-export | cost-route | export | completed
+- T0236 | cost-expensive-steps-scan | cost-route | scan | completed
+- T0237 | cost-expensive-steps-validate | cost-route | validate | completed
+- T0238 | cost-expensive-steps-summarize | cost-route | summarize | completed
+- T0239 | cost-expensive-steps-diff | cost-route | diff | completed
+- T0240 | cost-expensive-steps-export | cost-route | export | completed
+- T0241 | cost-cache-hits-scan | cost-route | scan | completed
+- T0242 | cost-cache-hits-validate | cost-route | validate | completed
+- T0243 | cost-cache-hits-summarize | cost-route | summarize | completed
+- T0244 | cost-cache-hits-diff | cost-route | diff | completed
+- T0245 | cost-cache-hits-export | cost-route | export | completed
+- T0246 | cost-cost-reports-scan | cost-route | scan | completed
+- T0247 | cost-cost-reports-validate | cost-route | validate | completed
+- T0248 | cost-cost-reports-summarize | cost-route | summarize | completed
+- T0249 | cost-cost-reports-diff | cost-route | diff | completed
+- T0250 | cost-cost-reports-export | cost-route | export | completed

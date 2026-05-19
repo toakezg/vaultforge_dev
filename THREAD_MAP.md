@@ -227,8 +227,9 @@ Use `vaultforge-art` for:
 
 Current status:
 
-- `vaultforge-art\` under this root is a coordination base.
-- The old runtime/reference art worktree is `F:\tools\image_generation\vaultforge-art`; the planned fresh art lane is `F:\vaultforge\vaultforge-art`.
+- `vaultforge-art\` under this root is an active art lane.
+- The new lane wrapper lives at `F:\vaultforge\vaultforge-art\run_art.bat` and points at the shared engine.
+- The old runtime/reference art worktree remains `F:\tools\image_generation\vaultforge-art`.
 - Do not migrate or rewrite the sibling art worktree without an explicit art migration task.
 
 Read first:
@@ -288,6 +289,43 @@ Report changes to:
 - engine, art, or business tasks only when icon work needs shared behavior,
   art experiments, or client packaging
 
+## Image Thread
+
+Use `vaultforge-image` for:
+
+- quick image prompt intake
+- lightweight image experimentation
+- lane-local output routing
+- small wrapper or launcher helpers
+
+Current status:
+
+- `vaultforge-image\` is a promoted lightweight section.
+- `run_image.bat` is the thin lane wrapper over the shared engine.
+- `vaultforge-image_v00.md` records the current baseline and the `_v01`
+  requirements.
+- Keep the lane narrow until the minimal entrypoint, input path, and output
+  routing are verified.
+
+Read first:
+
+- `..\CODEX_START.md`
+- `..\SYSTEM.md`
+- `..\CURRENT_STATE.md`
+- `..\THREAD_MAP.md`
+- `README.md`
+- `SYSTEM.md`
+- `PLAN.md`
+- `TASKS.md`
+- `CHANGELOG.md`
+- `SIGN_UP.md`
+
+Report changes to:
+
+- `vaultforge-image\CHANGELOG.md`
+- root `CHANGELOG.md` when the change affects coordination or shared
+  contracts
+
 ## Parked Or Supporting Folders
 
 These folders exist in root but are not promoted thread bases yet:
@@ -303,7 +341,8 @@ Use root to promote one of these into an active section. Promotion means adding 
 
 Every task in root or a promoted section must include:
 
-- a section tag such as `#root`, `#engine`, `#business`, `#coding`, `#xp4l`, or `#art`
+- a section tag such as `#root`, `#engine`, `#business`, `#coding`, `#xp4l`,
+  `#image`, or `#art`
 - a task-type tag such as `#docs`, `#threading`, `#planning`, `#architecture`, `#tests`, `#gallery`, `#api`, or `#validation`
 
 This applies to active, next, later, and landed task lines so combined task views can be filtered cleanly.
@@ -320,7 +359,7 @@ tag includes engine
 ```
 
 Swap `engine` for the local section tag, such as `business`, `coding`,
-`xp4l`, `art`, or `root`.
+`xp4l`, `image`, `art`, or `root`.
 
 Root `TASKS.md` may also keep a system-wide `not done` query so overhead can see all open work across sections.
 

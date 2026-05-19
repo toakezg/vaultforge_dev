@@ -1,0 +1,123 @@
+# VaultForge Tool Batch Summary
+
+- status: completed
+- dry_run: False
+- tool_count: 100
+- gated_tool_count: 5
+
+## Families
+
+- workspace-discovery: 50
+- context-pack: 30
+- registry: 20
+
+## Operations
+
+- scan: 20
+- validate: 20
+- summarize: 20
+- diff: 20
+- export: 20
+
+## Tools
+
+- T0031 | registry-output-specs-scan | registry | scan | completed
+- T0032 | registry-output-specs-validate | registry | validate | completed
+- T0033 | registry-output-specs-summarize | registry | summarize | completed
+- T0034 | registry-output-specs-diff | registry | diff | completed
+- T0035 | registry-output-specs-export | registry | export | completed
+- T0036 | registry-risk-labels-scan | registry | scan | completed
+- T0037 | registry-risk-labels-validate | registry | validate | completed
+- T0038 | registry-risk-labels-summarize | registry | summarize | completed
+- T0039 | registry-risk-labels-diff | registry | diff | completed
+- T0040 | registry-risk-labels-export | registry | export | completed
+- T0041 | registry-owner-notes-scan | registry | scan | completed
+- T0042 | registry-owner-notes-validate | registry | validate | completed
+- T0043 | registry-owner-notes-summarize | registry | summarize | completed
+- T0044 | registry-owner-notes-diff | registry | diff | completed
+- T0045 | registry-owner-notes-export | registry | export | completed
+- T0046 | registry-version-markers-scan | registry | scan | completed
+- T0047 | registry-version-markers-validate | registry | validate | completed
+- T0048 | registry-version-markers-summarize | registry | summarize | completed
+- T0049 | registry-version-markers-diff | registry | diff | completed
+- T0050 | registry-version-markers-export | registry | export | completed
+- T0051 | workspace-repo-roots-scan | workspace-discovery | scan | completed
+- T0052 | workspace-repo-roots-validate | workspace-discovery | validate | completed
+- T0053 | workspace-repo-roots-summarize | workspace-discovery | summarize | completed
+- T0054 | workspace-repo-roots-diff | workspace-discovery | diff | completed
+- T0055 | workspace-repo-roots-export | workspace-discovery | export | completed
+- T0056 | workspace-source-files-scan | workspace-discovery | scan | completed
+- T0057 | workspace-source-files-validate | workspace-discovery | validate | completed
+- T0058 | workspace-source-files-summarize | workspace-discovery | summarize | completed
+- T0059 | workspace-source-files-diff | workspace-discovery | diff | completed
+- T0060 | workspace-source-files-export | workspace-discovery | export | completed
+- T0061 | workspace-test-files-scan | workspace-discovery | scan | completed
+- T0062 | workspace-test-files-validate | workspace-discovery | validate | completed
+- T0063 | workspace-test-files-summarize | workspace-discovery | summarize | completed
+- T0064 | workspace-test-files-diff | workspace-discovery | diff | completed
+- T0065 | workspace-test-files-export | workspace-discovery | export | completed
+- T0066 | workspace-docs-files-scan | workspace-discovery | scan | completed
+- T0067 | workspace-docs-files-validate | workspace-discovery | validate | completed
+- T0068 | workspace-docs-files-summarize | workspace-discovery | summarize | completed
+- T0069 | workspace-docs-files-diff | workspace-discovery | diff | completed
+- T0070 | workspace-docs-files-export | workspace-discovery | export | completed
+- T0071 | workspace-config-files-scan | workspace-discovery | scan | completed
+- T0072 | workspace-config-files-validate | workspace-discovery | validate | completed
+- T0073 | workspace-config-files-summarize | workspace-discovery | summarize | completed
+- T0074 | workspace-config-files-diff | workspace-discovery | diff | completed
+- T0075 | workspace-config-files-export | workspace-discovery | export | completed
+- T0076 | workspace-generated-files-scan | workspace-discovery | scan | completed
+- T0077 | workspace-generated-files-validate | workspace-discovery | validate | completed
+- T0078 | workspace-generated-files-summarize | workspace-discovery | summarize | completed
+- T0079 | workspace-generated-files-diff | workspace-discovery | diff | completed
+- T0080 | workspace-generated-files-export | workspace-discovery | export | completed
+- T0081 | workspace-asset-files-scan | workspace-discovery | scan | completed
+- T0082 | workspace-asset-files-validate | workspace-discovery | validate | completed
+- T0083 | workspace-asset-files-summarize | workspace-discovery | summarize | completed
+- T0084 | workspace-asset-files-diff | workspace-discovery | diff | completed
+- T0085 | workspace-asset-files-export | workspace-discovery | export | completed
+- T0086 | workspace-ignored-files-scan | workspace-discovery | scan | completed
+- T0087 | workspace-ignored-files-validate | workspace-discovery | validate | completed
+- T0088 | workspace-ignored-files-summarize | workspace-discovery | summarize | completed
+- T0089 | workspace-ignored-files-diff | workspace-discovery | diff | completed
+- T0090 | workspace-ignored-files-export | workspace-discovery | export | completed
+- T0091 | workspace-large-files-scan | workspace-discovery | scan | completed
+- T0092 | workspace-large-files-validate | workspace-discovery | validate | completed
+- T0093 | workspace-large-files-summarize | workspace-discovery | summarize | completed
+- T0094 | workspace-large-files-diff | workspace-discovery | diff | completed
+- T0095 | workspace-large-files-export | workspace-discovery | export | completed
+- T0096 | workspace-stale-files-scan | workspace-discovery | scan | completed
+- T0097 | workspace-stale-files-validate | workspace-discovery | validate | completed
+- T0098 | workspace-stale-files-summarize | workspace-discovery | summarize | completed
+- T0099 | workspace-stale-files-diff | workspace-discovery | diff | completed
+- T0100 | workspace-stale-files-export | workspace-discovery | export | completed
+- T0101 | context-readme-anchors-scan | context-pack | scan | completed
+- T0102 | context-readme-anchors-validate | context-pack | validate | completed
+- T0103 | context-readme-anchors-summarize | context-pack | summarize | completed
+- T0104 | context-readme-anchors-diff | context-pack | diff | completed
+- T0105 | context-readme-anchors-export | context-pack | export | completed
+- T0106 | context-system-docs-scan | context-pack | scan | completed
+- T0107 | context-system-docs-validate | context-pack | validate | completed
+- T0108 | context-system-docs-summarize | context-pack | summarize | completed
+- T0109 | context-system-docs-diff | context-pack | diff | completed
+- T0110 | context-system-docs-export | context-pack | export | completed
+- T0111 | context-task-docs-scan | context-pack | scan | completed
+- T0112 | context-task-docs-validate | context-pack | validate | completed
+- T0113 | context-task-docs-summarize | context-pack | summarize | completed
+- T0114 | context-task-docs-diff | context-pack | diff | completed
+- T0115 | context-task-docs-export | context-pack | export | completed
+- T0116 | context-changelog-notes-scan | context-pack | scan | completed
+- T0117 | context-changelog-notes-validate | context-pack | validate | completed
+- T0118 | context-changelog-notes-summarize | context-pack | summarize | completed
+- T0119 | context-changelog-notes-diff | context-pack | diff | completed
+- T0120 | context-changelog-notes-export | context-pack | export | completed
+- T0121 | context-code-snippets-scan | context-pack | scan | completed
+- T0122 | context-code-snippets-validate | context-pack | validate | completed
+- T0123 | context-code-snippets-summarize | context-pack | summarize | completed
+- T0124 | context-code-snippets-diff | context-pack | diff | completed
+- T0125 | context-code-snippets-export | context-pack | export | completed
+- T0126 | context-test-snippets-scan | context-pack | scan | completed
+- T0127 | context-test-snippets-validate | context-pack | validate | completed
+- T0128 | context-test-snippets-summarize | context-pack | summarize | completed
+- T0129 | context-test-snippets-diff | context-pack | diff | completed
+- T0130 | context-test-snippets-export | context-pack | export | completed

@@ -22,11 +22,15 @@ Date: 2026-04-27
   section around the Codex/OpenAI API bridge spec.
 - Activate `vaultforge-xp4l` as the XP4Life interpretation and progression
   section that consumes structured upstream events without taking over execution.
+- Promote `vaultforge-image` as a lightweight image-only section for quick
+  intake, experiments, and lane-local outputs.
 - Promote `vaultforge-icon` as the lightweight icon workflow section with
   SVG-Forge as its first existing subtool.
 - Keep VaultForge Code on the execution/reporting side and leave deeper XP
   interpretation for a future sibling section instead of folding it into the
   bridge lane.
+- Keep VaultForge Image narrow so it does not become a duplicate art or
+  business lane.
 - Build XP4Life Icons Part A as a concrete, repeatable lane rather than leaving it as a loose idea.
 - Keep the icon workflow editable from notes first, then runnable from a simple batch entry point.
 - Route icon outputs into this vault so prompts, docs, and results stay reviewable together.
@@ -76,6 +80,8 @@ Date: 2026-04-27
   coding events rather than push that logic back into `vaultforge-coding`.
 - The next dedicated XP4L thread should lock the event contract and output
   contract before deeper progression heuristics harden.
+- The next image-lane thread should turn the `_v00` requirements into the
+  smallest runnable `_v01` entrypoint and a predictable input/output contract.
 - The next shared-core steps are safer dry-run semantics, wrapper parity checks, and only then native shared features such as variants, input images, tweaks, and galleries.
 - If the first results are strong, Part B can add tighter naming rules, export selection, and curation notes.
 - A dedicated XP4Life preset inside `vaultforge-art` may become worthwhile later.

@@ -9,10 +9,12 @@ It now uses a root/section thread model:
 - `vaultforge-business\` = client/business workflow lane
 - `vaultforge-coding\` = local-first code bridge and API-driven coding lane
 - `vaultforge-xp4l\` = XP4Life interpretation and progression lane
+- `vaultforge-image\` = lightweight image lane for quick prompt intake and
+  lane-local outputs
 - `vaultforge-art\` = planned fresh art lane, with the old runtime/reference prototype being harvested from `F:\tools\image_generation\vaultforge-art`
 - `vaultforge-icon\` = lightweight icon workflow lane, including SVG-Forge
 
-This workspace currently does seven useful things:
+This workspace currently does eight useful things:
 
 - keeps vault creation and launcher scripts in one place
 - stores reusable notes and planning docs for future Codex threads
@@ -22,6 +24,8 @@ This workspace currently does seven useful things:
   `vaultforge-coding`
 - carries the first dedicated XP4Life interpretation section under
   `vaultforge-xp4l`
+- carries the first dedicated image-lane promotion section under
+  `vaultforge-image`
 - carries the first lightweight icon lane under `vaultforge-icon`
 
 ## Engine Direction
