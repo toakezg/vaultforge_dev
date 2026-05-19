@@ -1,0 +1,86 @@
+{
+  "category": "Figma Design and Visual Inspection",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes",
+      "ungated external calls"
+    ],
+    "contract_line": "inputs=target_root,scope,filters | outputs=items,counts,source_paths | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated external calls | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "filters"
+    ],
+    "outputs": [
+      "items",
+      "counts",
+      "source_paths"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "design-visual",
+  "gates": [
+    {
+      "reason": "external calls remain blocked in local proof mode",
+      "status": "blocked-local",
+      "tag": "external-gated"
+    }
+  ],
+  "id": "T1741",
+  "implementation_shape": "path-list",
+  "operation": "scan",
+  "safety_tags": [
+    "external-gated",
+    "read-only"
+  ],
+  "scan": {
+    "counts": {
+      "candidate_files": 200,
+      "matched_items": 9
+    },
+    "items": [
+      "tools\\tool-list-builder-workflow.md",
+      "tools\\tool-list-contracts.jsonl",
+      "tools\\tool-list-index.jsonl",
+      "tools\\tool-list.md",
+      "tools\\example-tool-result-build\\catalog-list-cycle-4\\list-output.json",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0145-context-design-notes-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0315-requirements-requirement-gaps-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0450-review-review-findings-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0605-security-secret-scans-export.md"
+    ],
+    "keywords": [
+      "visual",
+      "implementation",
+      "gaps",
+      "scan",
+      "figma",
+      "design",
+      "inspection",
+      "find",
+      "list",
+      "differences",
+      "between",
+      "intent"
+    ],
+    "source_root": "F:\\vaultforge\\vaultforge-coding"
+  },
+  "shared_handler_key": "design-visual::scan::path-list",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:13:44.929311+00:00",
+  "tool": "visual-implementation-gaps-scan"
+}

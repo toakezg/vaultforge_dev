@@ -1,0 +1,607 @@
+{
+  "dry_run": false,
+  "status": "completed",
+  "tool_count": 100,
+  "tools": [
+    {
+      "id": "T0451",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docs-docs-index-scan"
+    },
+    {
+      "id": "T0452",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docs-docs-index-validate"
+    },
+    {
+      "id": "T0453",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docs-docs-index-summarize"
+    },
+    {
+      "id": "T0454",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "docs-docs-index-diff"
+    },
+    {
+      "id": "T0455",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docs-docs-index-export"
+    },
+    {
+      "id": "T0456",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docs-api-docs-scan"
+    },
+    {
+      "id": "T0457",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docs-api-docs-validate"
+    },
+    {
+      "id": "T0458",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docs-api-docs-summarize"
+    },
+    {
+      "id": "T0459",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "docs-api-docs-diff"
+    },
+    {
+      "id": "T0460",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docs-api-docs-export"
+    },
+    {
+      "id": "T0461",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docs-workflow-docs-scan"
+    },
+    {
+      "id": "T0462",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docs-workflow-docs-validate"
+    },
+    {
+      "id": "T0463",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docs-workflow-docs-summarize"
+    },
+    {
+      "id": "T0464",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "docs-workflow-docs-diff"
+    },
+    {
+      "id": "T0465",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docs-workflow-docs-export"
+    },
+    {
+      "id": "T0466",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docs-setup-docs-scan"
+    },
+    {
+      "id": "T0467",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docs-setup-docs-validate"
+    },
+    {
+      "id": "T0468",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docs-setup-docs-summarize"
+    },
+    {
+      "id": "T0469",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "docs-setup-docs-diff"
+    },
+    {
+      "id": "T0470",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docs-setup-docs-export"
+    },
+    {
+      "id": "T0471",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docs-troubleshooting-docs-scan"
+    },
+    {
+      "id": "T0472",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docs-troubleshooting-docs-validate"
+    },
+    {
+      "id": "T0473",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docs-troubleshooting-docs-summarize"
+    },
+    {
+      "id": "T0474",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "docs-troubleshooting-docs-diff"
+    },
+    {
+      "id": "T0475",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docs-troubleshooting-docs-export"
+    },
+    {
+      "id": "T0476",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docs-examples-scan"
+    },
+    {
+      "id": "T0477",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docs-examples-validate"
+    },
+    {
+      "id": "T0478",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docs-examples-summarize"
+    },
+    {
+      "id": "T0479",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "docs-examples-diff"
+    },
+    {
+      "id": "T0480",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docs-examples-export"
+    },
+    {
+      "id": "T0481",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docs-glossary-scan"
+    },
+    {
+      "id": "T0482",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docs-glossary-validate"
+    },
+    {
+      "id": "T0483",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docs-glossary-summarize"
+    },
+    {
+      "id": "T0484",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "docs-glossary-diff"
+    },
+    {
+      "id": "T0485",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docs-glossary-export"
+    },
+    {
+      "id": "T0486",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docs-decision-notes-scan"
+    },
+    {
+      "id": "T0487",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docs-decision-notes-validate"
+    },
+    {
+      "id": "T0488",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docs-decision-notes-summarize"
+    },
+    {
+      "id": "T0489",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "docs-decision-notes-diff"
+    },
+    {
+      "id": "T0490",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docs-decision-notes-export"
+    },
+    {
+      "id": "T0491",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docs-read-order-scan"
+    },
+    {
+      "id": "T0492",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docs-read-order-validate"
+    },
+    {
+      "id": "T0493",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docs-read-order-summarize"
+    },
+    {
+      "id": "T0494",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "docs-read-order-diff"
+    },
+    {
+      "id": "T0495",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docs-read-order-export"
+    },
+    {
+      "id": "T0496",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docs-stale-docs-scan"
+    },
+    {
+      "id": "T0497",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docs-stale-docs-validate"
+    },
+    {
+      "id": "T0498",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docs-stale-docs-summarize"
+    },
+    {
+      "id": "T0499",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "docs-stale-docs-diff"
+    },
+    {
+      "id": "T0500",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docs-stale-docs-export"
+    },
+    {
+      "id": "T0501",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "git-status-snapshots-scan"
+    },
+    {
+      "id": "T0502",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "git-status-snapshots-validate"
+    },
+    {
+      "id": "T0503",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "git-status-snapshots-summarize"
+    },
+    {
+      "id": "T0504",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "git-status-snapshots-diff"
+    },
+    {
+      "id": "T0505",
+      "operation": "export",
+      "status": "completed",
+      "tool": "git-status-snapshots-export"
+    },
+    {
+      "id": "T0506",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "git-branch-info-scan"
+    },
+    {
+      "id": "T0507",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "git-branch-info-validate"
+    },
+    {
+      "id": "T0508",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "git-branch-info-summarize"
+    },
+    {
+      "id": "T0509",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "git-branch-info-diff"
+    },
+    {
+      "id": "T0510",
+      "operation": "export",
+      "status": "completed",
+      "tool": "git-branch-info-export"
+    },
+    {
+      "id": "T0511",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "git-staged-changes-scan"
+    },
+    {
+      "id": "T0512",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "git-staged-changes-validate"
+    },
+    {
+      "id": "T0513",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "git-staged-changes-summarize"
+    },
+    {
+      "id": "T0514",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "git-staged-changes-diff"
+    },
+    {
+      "id": "T0515",
+      "operation": "export",
+      "status": "completed",
+      "tool": "git-staged-changes-export"
+    },
+    {
+      "id": "T0516",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "git-untracked-files-scan"
+    },
+    {
+      "id": "T0517",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "git-untracked-files-validate"
+    },
+    {
+      "id": "T0518",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "git-untracked-files-summarize"
+    },
+    {
+      "id": "T0519",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "git-untracked-files-diff"
+    },
+    {
+      "id": "T0520",
+      "operation": "export",
+      "status": "completed",
+      "tool": "git-untracked-files-export"
+    },
+    {
+      "id": "T0521",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "git-commit-notes-scan"
+    },
+    {
+      "id": "T0522",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "git-commit-notes-validate"
+    },
+    {
+      "id": "T0523",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "git-commit-notes-summarize"
+    },
+    {
+      "id": "T0524",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "git-commit-notes-diff"
+    },
+    {
+      "id": "T0525",
+      "operation": "export",
+      "status": "completed",
+      "tool": "git-commit-notes-export"
+    },
+    {
+      "id": "T0526",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "git-patch-files-scan"
+    },
+    {
+      "id": "T0527",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "git-patch-files-validate"
+    },
+    {
+      "id": "T0528",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "git-patch-files-summarize"
+    },
+    {
+      "id": "T0529",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "git-patch-files-diff"
+    },
+    {
+      "id": "T0530",
+      "operation": "export",
+      "status": "completed",
+      "tool": "git-patch-files-export"
+    },
+    {
+      "id": "T0531",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "git-blame-context-scan"
+    },
+    {
+      "id": "T0532",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "git-blame-context-validate"
+    },
+    {
+      "id": "T0533",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "git-blame-context-summarize"
+    },
+    {
+      "id": "T0534",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "git-blame-context-diff"
+    },
+    {
+      "id": "T0535",
+      "operation": "export",
+      "status": "completed",
+      "tool": "git-blame-context-export"
+    },
+    {
+      "id": "T0536",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "git-change-ownership-scan"
+    },
+    {
+      "id": "T0537",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "git-change-ownership-validate"
+    },
+    {
+      "id": "T0538",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "git-change-ownership-summarize"
+    },
+    {
+      "id": "T0539",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "git-change-ownership-diff"
+    },
+    {
+      "id": "T0540",
+      "operation": "export",
+      "status": "completed",
+      "tool": "git-change-ownership-export"
+    },
+    {
+      "id": "T0541",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "git-merge-risks-scan"
+    },
+    {
+      "id": "T0542",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "git-merge-risks-validate"
+    },
+    {
+      "id": "T0543",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "git-merge-risks-summarize"
+    },
+    {
+      "id": "T0544",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "git-merge-risks-diff"
+    },
+    {
+      "id": "T0545",
+      "operation": "export",
+      "status": "completed",
+      "tool": "git-merge-risks-export"
+    },
+    {
+      "id": "T0546",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "git-release-diffs-scan"
+    },
+    {
+      "id": "T0547",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "git-release-diffs-validate"
+    },
+    {
+      "id": "T0548",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "git-release-diffs-summarize"
+    },
+    {
+      "id": "T0549",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "git-release-diffs-diff"
+    },
+    {
+      "id": "T0550",
+      "operation": "export",
+      "status": "completed",
+      "tool": "git-release-diffs-export"
+    }
+  ]
+}

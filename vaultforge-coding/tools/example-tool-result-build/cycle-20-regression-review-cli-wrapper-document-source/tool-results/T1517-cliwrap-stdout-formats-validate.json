@@ -1,0 +1,101 @@
+{
+  "category": "Build Tooling and CLI Wrappers",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,ruleset | outputs=pass,issues,next_tool | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test;known-pass and known-fail fixtures",
+    "inputs": [
+      "target_root",
+      "scope",
+      "ruleset"
+    ],
+    "outputs": [
+      "pass",
+      "issues",
+      "next_tool"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test",
+      "known-pass and known-fail fixtures"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "cli-wrapper",
+  "gates": [],
+  "id": "T1517",
+  "implementation_shape": "status-summary",
+  "operation": "validate",
+  "safety_tags": [
+    "read-only"
+  ],
+  "shared_handler_key": "cli-wrapper::validate::status-summary",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:12:26.582220+00:00",
+  "tool": "cliwrap-stdout-formats-validate",
+  "validation": {
+    "catalog": {
+      "duplicate_names": [],
+      "max_id": 1825,
+      "min_id": 1,
+      "missing_ids": [],
+      "tool_count": 1825,
+      "top_families": [
+        [
+          "cost-route",
+          100
+        ],
+        [
+          "dot4-queue",
+          75
+        ],
+        [
+          "vaultforge-section",
+          65
+        ],
+        [
+          "codex-run",
+          65
+        ],
+        [
+          "mcp-proof",
+          55
+        ],
+        [
+          "obsidian-plugin",
+          55
+        ],
+        [
+          "windows-local",
+          55
+        ],
+        [
+          "builder-packet",
+          55
+        ],
+        [
+          "registry",
+          50
+        ],
+        [
+          "workspace-discovery",
+          50
+        ]
+      ]
+    },
+    "issues": [],
+    "next_tool": "",
+    "pass": true
+  }
+}

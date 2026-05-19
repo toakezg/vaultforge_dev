@@ -1,0 +1,57 @@
+{
+  "category": "Data Validation & Schema",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "max_items"
+    ],
+    "outputs": [
+      "summary",
+      "source_refs",
+      "blockers"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "schema-data",
+  "gates": [],
+  "id": "T0693",
+  "implementation_shape": "handoff-pack",
+  "operation": "summarize",
+  "safety_tags": [
+    "read-only"
+  ],
+  "shared_handler_key": "schema-data::summarize::handoff-pack",
+  "status": "completed",
+  "summary": {
+    "blockers": [],
+    "brief": "schema-id-uniqueness-summarize is a handoff summary tool in Data Validation & Schema; it uses handoff-pack and belongs to schema-data.",
+    "matched_items": [
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0235-cost-duplicate-reads-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0295-artifact-artifact-ids-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0425-review-duplicate-logic-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0435-review-missing-tests-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0575-env-missing-tools-export.md"
+    ]
+  },
+  "timestamp": "2026-05-13T00:04:56.786004+00:00",
+  "tool": "schema-id-uniqueness-summarize"
+}

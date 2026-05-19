@@ -1,0 +1,122 @@
+# VaultForge Tool Batch Summary
+
+- status: completed
+- dry_run: False
+- tool_count: 100
+- gated_tool_count: 0
+
+## Families
+
+- quality-release: 50
+- vaultforge-notes: 50
+
+## Operations
+
+- scan: 20
+- validate: 20
+- summarize: 20
+- diff: 20
+- export: 20
+
+## Tools
+
+- T0851 | quality-preflight-gates-scan | quality-release | scan | completed
+- T0852 | quality-preflight-gates-validate | quality-release | validate | completed
+- T0853 | quality-preflight-gates-summarize | quality-release | summarize | completed
+- T0854 | quality-preflight-gates-diff | quality-release | diff | completed
+- T0855 | quality-preflight-gates-export | quality-release | export | completed
+- T0856 | quality-verification-matrix-scan | quality-release | scan | completed
+- T0857 | quality-verification-matrix-validate | quality-release | validate | completed
+- T0858 | quality-verification-matrix-summarize | quality-release | summarize | completed
+- T0859 | quality-verification-matrix-diff | quality-release | diff | completed
+- T0860 | quality-verification-matrix-export | quality-release | export | completed
+- T0861 | quality-readiness-score-scan | quality-release | scan | completed
+- T0862 | quality-readiness-score-validate | quality-release | validate | completed
+- T0863 | quality-readiness-score-summarize | quality-release | summarize | completed
+- T0864 | quality-readiness-score-diff | quality-release | diff | completed
+- T0865 | quality-readiness-score-export | quality-release | export | completed
+- T0866 | quality-regression-risks-scan | quality-release | scan | completed
+- T0867 | quality-regression-risks-validate | quality-release | validate | completed
+- T0868 | quality-regression-risks-summarize | quality-release | summarize | completed
+- T0869 | quality-regression-risks-diff | quality-release | diff | completed
+- T0870 | quality-regression-risks-export | quality-release | export | completed
+- T0871 | quality-release-notes-scan | quality-release | scan | completed
+- T0872 | quality-release-notes-validate | quality-release | validate | completed
+- T0873 | quality-release-notes-summarize | quality-release | summarize | completed
+- T0874 | quality-release-notes-diff | quality-release | diff | completed
+- T0875 | quality-release-notes-export | quality-release | export | completed
+- T0876 | quality-changelog-entries-scan | quality-release | scan | completed
+- T0877 | quality-changelog-entries-validate | quality-release | validate | completed
+- T0878 | quality-changelog-entries-summarize | quality-release | summarize | completed
+- T0879 | quality-changelog-entries-diff | quality-release | diff | completed
+- T0880 | quality-changelog-entries-export | quality-release | export | completed
+- T0881 | quality-version-checks-scan | quality-release | scan | completed
+- T0882 | quality-version-checks-validate | quality-release | validate | completed
+- T0883 | quality-version-checks-summarize | quality-release | summarize | completed
+- T0884 | quality-version-checks-diff | quality-release | diff | completed
+- T0885 | quality-version-checks-export | quality-release | export | completed
+- T0886 | quality-packaging-checks-scan | quality-release | scan | completed
+- T0887 | quality-packaging-checks-validate | quality-release | validate | completed
+- T0888 | quality-packaging-checks-summarize | quality-release | summarize | completed
+- T0889 | quality-packaging-checks-diff | quality-release | diff | completed
+- T0890 | quality-packaging-checks-export | quality-release | export | completed
+- T0891 | quality-signoff-checklist-scan | quality-release | scan | completed
+- T0892 | quality-signoff-checklist-validate | quality-release | validate | completed
+- T0893 | quality-signoff-checklist-summarize | quality-release | summarize | completed
+- T0894 | quality-signoff-checklist-diff | quality-release | diff | completed
+- T0895 | quality-signoff-checklist-export | quality-release | export | completed
+- T0896 | quality-final-report-scan | quality-release | scan | completed
+- T0897 | quality-final-report-validate | quality-release | validate | completed
+- T0898 | quality-final-report-summarize | quality-release | summarize | completed
+- T0899 | quality-final-report-diff | quality-release | diff | completed
+- T0900 | quality-final-report-export | quality-release | export | completed
+- T0901 | vault-vault-sections-scan | vaultforge-notes | scan | completed
+- T0902 | vault-vault-sections-validate | vaultforge-notes | validate | completed
+- T0903 | vault-vault-sections-summarize | vaultforge-notes | summarize | completed
+- T0904 | vault-vault-sections-diff | vaultforge-notes | diff | completed
+- T0905 | vault-vault-sections-export | vaultforge-notes | export | completed
+- T0906 | vault-task-notes-scan | vaultforge-notes | scan | completed
+- T0907 | vault-task-notes-validate | vaultforge-notes | validate | completed
+- T0908 | vault-task-notes-summarize | vaultforge-notes | summarize | completed
+- T0909 | vault-task-notes-diff | vaultforge-notes | diff | completed
+- T0910 | vault-task-notes-export | vaultforge-notes | export | completed
+- T0911 | vault-daily-notes-scan | vaultforge-notes | scan | completed
+- T0912 | vault-daily-notes-validate | vaultforge-notes | validate | completed
+- T0913 | vault-daily-notes-summarize | vaultforge-notes | summarize | completed
+- T0914 | vault-daily-notes-diff | vaultforge-notes | diff | completed
+- T0915 | vault-daily-notes-export | vaultforge-notes | export | completed
+- T0916 | vault-quest-notes-scan | vaultforge-notes | scan | completed
+- T0917 | vault-quest-notes-validate | vaultforge-notes | validate | completed
+- T0918 | vault-quest-notes-summarize | vaultforge-notes | summarize | completed
+- T0919 | vault-quest-notes-diff | vaultforge-notes | diff | completed
+- T0920 | vault-quest-notes-export | vaultforge-notes | export | completed
+- T0921 | vault-markdown-links-scan | vaultforge-notes | scan | completed
+- T0922 | vault-markdown-links-validate | vaultforge-notes | validate | completed
+- T0923 | vault-markdown-links-summarize | vaultforge-notes | summarize | completed
+- T0924 | vault-markdown-links-diff | vaultforge-notes | diff | completed
+- T0925 | vault-markdown-links-export | vaultforge-notes | export | completed
+- T0926 | vault-tag-maps-scan | vaultforge-notes | scan | completed
+- T0927 | vault-tag-maps-validate | vaultforge-notes | validate | completed
+- T0928 | vault-tag-maps-summarize | vaultforge-notes | summarize | completed
+- T0929 | vault-tag-maps-diff | vaultforge-notes | diff | completed
+- T0930 | vault-tag-maps-export | vaultforge-notes | export | completed
+- T0931 | vault-folder-maps-scan | vaultforge-notes | scan | completed
+- T0932 | vault-folder-maps-validate | vaultforge-notes | validate | completed
+- T0933 | vault-folder-maps-summarize | vaultforge-notes | summarize | completed
+- T0934 | vault-folder-maps-diff | vaultforge-notes | diff | completed
+- T0935 | vault-folder-maps-export | vaultforge-notes | export | completed
+- T0936 | vault-template-notes-scan | vaultforge-notes | scan | completed
+- T0937 | vault-template-notes-validate | vaultforge-notes | validate | completed
+- T0938 | vault-template-notes-summarize | vaultforge-notes | summarize | completed
+- T0939 | vault-template-notes-diff | vaultforge-notes | diff | completed
+- T0940 | vault-template-notes-export | vaultforge-notes | export | completed
+- T0941 | vault-backlink-checks-scan | vaultforge-notes | scan | completed
+- T0942 | vault-backlink-checks-validate | vaultforge-notes | validate | completed
+- T0943 | vault-backlink-checks-summarize | vaultforge-notes | summarize | completed
+- T0944 | vault-backlink-checks-diff | vaultforge-notes | diff | completed
+- T0945 | vault-backlink-checks-export | vaultforge-notes | export | completed
+- T0946 | vault-note-exports-scan | vaultforge-notes | scan | completed
+- T0947 | vault-note-exports-validate | vaultforge-notes | validate | completed
+- T0948 | vault-note-exports-summarize | vaultforge-notes | summarize | completed
+- T0949 | vault-note-exports-diff | vaultforge-notes | diff | completed
+- T0950 | vault-note-exports-export | vaultforge-notes | export | completed

@@ -1,0 +1,65 @@
+{
+  "category": "Dependency & Environment Health",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes",
+      "ungated external calls"
+    ],
+    "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated external calls | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "max_items"
+    ],
+    "outputs": [
+      "summary",
+      "source_refs",
+      "blockers"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "environment",
+  "gates": [
+    {
+      "reason": "external calls remain blocked in local proof mode",
+      "status": "blocked-local",
+      "tag": "external-gated"
+    }
+  ],
+  "id": "T0593",
+  "implementation_shape": "handoff-pack",
+  "operation": "summarize",
+  "safety_tags": [
+    "external-gated",
+    "read-only"
+  ],
+  "shared_handler_key": "environment::summarize::handoff-pack",
+  "status": "completed",
+  "summary": {
+    "blockers": [],
+    "brief": "env-service-health-summarize is a handoff summary tool in Dependency & Environment Health; it uses handoff-pack and belongs to environment.",
+    "matched_items": [
+      "setup_venv.bat",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0140-context-dependency-context-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0555-env-python-env-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0560-env-node-env-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0565-env-package-locks-export.md"
+    ]
+  },
+  "timestamp": "2026-05-13T00:04:17.936549+00:00",
+  "tool": "env-service-health-summarize"
+}

@@ -1,0 +1,89 @@
+{
+  "category": "Requirements & Acceptance",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,filters | outputs=items,counts,source_paths | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "filters"
+    ],
+    "outputs": [
+      "items",
+      "counts",
+      "source_paths"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "requirements",
+  "gates": [],
+  "id": "T0346",
+  "implementation_shape": "path-list",
+  "operation": "scan",
+  "safety_tags": [
+    "read-only"
+  ],
+  "scan": {
+    "counts": {
+      "candidate_files": 200,
+      "matched_items": 20
+    },
+    "items": [
+      "requirements.txt",
+      "tests\\test_context_builder.py",
+      "tools\\tool-list-builder-workflow.md",
+      "tools\\tool-list-contracts.jsonl",
+      "tools\\tool-list-index.jsonl",
+      "tools\\tool-list.md",
+      "tools\\example-tool-result-build\\catalog-list-cycle-4\\list-output.json",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0160-prompt-builder-prompts-export.md",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0195-prompt-acceptance-prompts-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0255-artifact-run-folders-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0260-artifact-stdout-logs-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0265-artifact-stderr-logs-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0270-artifact-smoke-results-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0275-artifact-test-results-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0280-artifact-build-results-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0285-artifact-trace-files-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0290-artifact-screenshots-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0295-artifact-artifact-ids-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0300-artifact-replay-packs-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0305-requirements-raw-requests-export.md"
+    ],
+    "keywords": [
+      "requirements",
+      "non",
+      "goals",
+      "scan",
+      "acceptance",
+      "scope",
+      "control",
+      "find",
+      "list",
+      "things",
+      "builder",
+      "must"
+    ],
+    "source_root": "F:\\vaultforge\\vaultforge-coding"
+  },
+  "shared_handler_key": "requirements::scan::path-list",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:02:35.137367+00:00",
+  "tool": "requirements-non-goals-scan"
+}

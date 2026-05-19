@@ -1,0 +1,607 @@
+{
+  "dry_run": false,
+  "status": "completed",
+  "tool_count": 100,
+  "tools": [
+    {
+      "id": "T0971",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "toolbuilder-docs-stubs-scan"
+    },
+    {
+      "id": "T0972",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "toolbuilder-docs-stubs-validate"
+    },
+    {
+      "id": "T0973",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "toolbuilder-docs-stubs-summarize"
+    },
+    {
+      "id": "T0974",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "toolbuilder-docs-stubs-diff"
+    },
+    {
+      "id": "T0975",
+      "operation": "export",
+      "status": "completed",
+      "tool": "toolbuilder-docs-stubs-export"
+    },
+    {
+      "id": "T0976",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "toolbuilder-smoke-scripts-scan"
+    },
+    {
+      "id": "T0977",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "toolbuilder-smoke-scripts-validate"
+    },
+    {
+      "id": "T0978",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "toolbuilder-smoke-scripts-summarize"
+    },
+    {
+      "id": "T0979",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "toolbuilder-smoke-scripts-diff"
+    },
+    {
+      "id": "T0980",
+      "operation": "export",
+      "status": "completed",
+      "tool": "toolbuilder-smoke-scripts-export"
+    },
+    {
+      "id": "T0981",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "toolbuilder-fixture-packs-scan"
+    },
+    {
+      "id": "T0982",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "toolbuilder-fixture-packs-validate"
+    },
+    {
+      "id": "T0983",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "toolbuilder-fixture-packs-summarize"
+    },
+    {
+      "id": "T0984",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "toolbuilder-fixture-packs-diff"
+    },
+    {
+      "id": "T0985",
+      "operation": "export",
+      "status": "completed",
+      "tool": "toolbuilder-fixture-packs-export"
+    },
+    {
+      "id": "T0986",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "toolbuilder-negative-tests-scan"
+    },
+    {
+      "id": "T0987",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "toolbuilder-negative-tests-validate"
+    },
+    {
+      "id": "T0988",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "toolbuilder-negative-tests-summarize"
+    },
+    {
+      "id": "T0989",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "toolbuilder-negative-tests-diff"
+    },
+    {
+      "id": "T0990",
+      "operation": "export",
+      "status": "completed",
+      "tool": "toolbuilder-negative-tests-export"
+    },
+    {
+      "id": "T0991",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "toolbuilder-batch-planners-scan"
+    },
+    {
+      "id": "T0992",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "toolbuilder-batch-planners-validate"
+    },
+    {
+      "id": "T0993",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "toolbuilder-batch-planners-summarize"
+    },
+    {
+      "id": "T0994",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "toolbuilder-batch-planners-diff"
+    },
+    {
+      "id": "T0995",
+      "operation": "export",
+      "status": "completed",
+      "tool": "toolbuilder-batch-planners-export"
+    },
+    {
+      "id": "T0996",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "toolbuilder-builder-scorecards-scan"
+    },
+    {
+      "id": "T0997",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "toolbuilder-builder-scorecards-validate"
+    },
+    {
+      "id": "T0998",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "toolbuilder-builder-scorecards-summarize"
+    },
+    {
+      "id": "T0999",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "toolbuilder-builder-scorecards-diff"
+    },
+    {
+      "id": "T1000",
+      "operation": "export",
+      "status": "completed",
+      "tool": "toolbuilder-builder-scorecards-export"
+    },
+    {
+      "id": "T1001",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "vfsec-root-read-order-scan"
+    },
+    {
+      "id": "T1002",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "vfsec-root-read-order-validate"
+    },
+    {
+      "id": "T1003",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "vfsec-root-read-order-summarize"
+    },
+    {
+      "id": "T1004",
+      "operation": "route",
+      "status": "completed",
+      "tool": "vfsec-root-read-order-route"
+    },
+    {
+      "id": "T1005",
+      "operation": "export",
+      "status": "completed",
+      "tool": "vfsec-root-read-order-export"
+    },
+    {
+      "id": "T1006",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "vfsec-section-status-scan"
+    },
+    {
+      "id": "T1007",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "vfsec-section-status-validate"
+    },
+    {
+      "id": "T1008",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "vfsec-section-status-summarize"
+    },
+    {
+      "id": "T1009",
+      "operation": "route",
+      "status": "completed",
+      "tool": "vfsec-section-status-route"
+    },
+    {
+      "id": "T1010",
+      "operation": "export",
+      "status": "completed",
+      "tool": "vfsec-section-status-export"
+    },
+    {
+      "id": "T1011",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "vfsec-lane-boundaries-scan"
+    },
+    {
+      "id": "T1012",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "vfsec-lane-boundaries-validate"
+    },
+    {
+      "id": "T1013",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "vfsec-lane-boundaries-summarize"
+    },
+    {
+      "id": "T1014",
+      "operation": "route",
+      "status": "completed",
+      "tool": "vfsec-lane-boundaries-route"
+    },
+    {
+      "id": "T1015",
+      "operation": "export",
+      "status": "completed",
+      "tool": "vfsec-lane-boundaries-export"
+    },
+    {
+      "id": "T1016",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "vfsec-cross-section-links-scan"
+    },
+    {
+      "id": "T1017",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "vfsec-cross-section-links-validate"
+    },
+    {
+      "id": "T1018",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "vfsec-cross-section-links-summarize"
+    },
+    {
+      "id": "T1019",
+      "operation": "route",
+      "status": "completed",
+      "tool": "vfsec-cross-section-links-route"
+    },
+    {
+      "id": "T1020",
+      "operation": "export",
+      "status": "completed",
+      "tool": "vfsec-cross-section-links-export"
+    },
+    {
+      "id": "T1021",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "vfsec-section-task-queues-scan"
+    },
+    {
+      "id": "T1022",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "vfsec-section-task-queues-validate"
+    },
+    {
+      "id": "T1023",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "vfsec-section-task-queues-summarize"
+    },
+    {
+      "id": "T1024",
+      "operation": "route",
+      "status": "completed",
+      "tool": "vfsec-section-task-queues-route"
+    },
+    {
+      "id": "T1025",
+      "operation": "export",
+      "status": "completed",
+      "tool": "vfsec-section-task-queues-export"
+    },
+    {
+      "id": "T1026",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "vfsec-coordination-drift-scan"
+    },
+    {
+      "id": "T1027",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "vfsec-coordination-drift-validate"
+    },
+    {
+      "id": "T1028",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "vfsec-coordination-drift-summarize"
+    },
+    {
+      "id": "T1029",
+      "operation": "route",
+      "status": "completed",
+      "tool": "vfsec-coordination-drift-route"
+    },
+    {
+      "id": "T1030",
+      "operation": "export",
+      "status": "completed",
+      "tool": "vfsec-coordination-drift-export"
+    },
+    {
+      "id": "T1031",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "vfsec-section-handoffs-scan"
+    },
+    {
+      "id": "T1032",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "vfsec-section-handoffs-validate"
+    },
+    {
+      "id": "T1033",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "vfsec-section-handoffs-summarize"
+    },
+    {
+      "id": "T1034",
+      "operation": "route",
+      "status": "completed",
+      "tool": "vfsec-section-handoffs-route"
+    },
+    {
+      "id": "T1035",
+      "operation": "export",
+      "status": "completed",
+      "tool": "vfsec-section-handoffs-export"
+    },
+    {
+      "id": "T1036",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "vfsec-root-sync-needs-scan"
+    },
+    {
+      "id": "T1037",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "vfsec-root-sync-needs-validate"
+    },
+    {
+      "id": "T1038",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "vfsec-root-sync-needs-summarize"
+    },
+    {
+      "id": "T1039",
+      "operation": "route",
+      "status": "completed",
+      "tool": "vfsec-root-sync-needs-route"
+    },
+    {
+      "id": "T1040",
+      "operation": "export",
+      "status": "completed",
+      "tool": "vfsec-root-sync-needs-export"
+    },
+    {
+      "id": "T1041",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "vfsec-parked-sections-scan"
+    },
+    {
+      "id": "T1042",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "vfsec-parked-sections-validate"
+    },
+    {
+      "id": "T1043",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "vfsec-parked-sections-summarize"
+    },
+    {
+      "id": "T1044",
+      "operation": "route",
+      "status": "completed",
+      "tool": "vfsec-parked-sections-route"
+    },
+    {
+      "id": "T1045",
+      "operation": "export",
+      "status": "completed",
+      "tool": "vfsec-parked-sections-export"
+    },
+    {
+      "id": "T1046",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "vfsec-live-lane-gates-scan"
+    },
+    {
+      "id": "T1047",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "vfsec-live-lane-gates-validate"
+    },
+    {
+      "id": "T1048",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "vfsec-live-lane-gates-summarize"
+    },
+    {
+      "id": "T1049",
+      "operation": "route",
+      "status": "completed",
+      "tool": "vfsec-live-lane-gates-route"
+    },
+    {
+      "id": "T1050",
+      "operation": "export",
+      "status": "completed",
+      "tool": "vfsec-live-lane-gates-export"
+    },
+    {
+      "id": "T1051",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "vfsec-decision-ledgers-scan"
+    },
+    {
+      "id": "T1052",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "vfsec-decision-ledgers-validate"
+    },
+    {
+      "id": "T1053",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "vfsec-decision-ledgers-summarize"
+    },
+    {
+      "id": "T1054",
+      "operation": "route",
+      "status": "completed",
+      "tool": "vfsec-decision-ledgers-route"
+    },
+    {
+      "id": "T1055",
+      "operation": "export",
+      "status": "completed",
+      "tool": "vfsec-decision-ledgers-export"
+    },
+    {
+      "id": "T1056",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "vfsec-lane-changelogs-scan"
+    },
+    {
+      "id": "T1057",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "vfsec-lane-changelogs-validate"
+    },
+    {
+      "id": "T1058",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "vfsec-lane-changelogs-summarize"
+    },
+    {
+      "id": "T1059",
+      "operation": "route",
+      "status": "completed",
+      "tool": "vfsec-lane-changelogs-route"
+    },
+    {
+      "id": "T1060",
+      "operation": "export",
+      "status": "completed",
+      "tool": "vfsec-lane-changelogs-export"
+    },
+    {
+      "id": "T1061",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "vfsec-local-operating-docs-scan"
+    },
+    {
+      "id": "T1062",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "vfsec-local-operating-docs-validate"
+    },
+    {
+      "id": "T1063",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "vfsec-local-operating-docs-summarize"
+    },
+    {
+      "id": "T1064",
+      "operation": "route",
+      "status": "completed",
+      "tool": "vfsec-local-operating-docs-route"
+    },
+    {
+      "id": "T1065",
+      "operation": "export",
+      "status": "completed",
+      "tool": "vfsec-local-operating-docs-export"
+    },
+    {
+      "id": "T1066",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "codexrun-run-intent-scan"
+    },
+    {
+      "id": "T1067",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "codexrun-run-intent-validate"
+    },
+    {
+      "id": "T1068",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "codexrun-run-intent-summarize"
+    },
+    {
+      "id": "T1069",
+      "operation": "route",
+      "status": "completed",
+      "tool": "codexrun-run-intent-route"
+    },
+    {
+      "id": "T1070",
+      "operation": "export",
+      "status": "completed",
+      "tool": "codexrun-run-intent-export"
+    }
+  ]
+}

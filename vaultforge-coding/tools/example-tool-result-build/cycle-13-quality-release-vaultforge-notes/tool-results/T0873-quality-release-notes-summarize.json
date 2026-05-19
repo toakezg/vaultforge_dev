@@ -1,0 +1,57 @@
+{
+  "category": "Quality Gates & Release Readiness",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "max_items"
+    ],
+    "outputs": [
+      "summary",
+      "source_refs",
+      "blockers"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "quality-release",
+  "gates": [],
+  "id": "T0873",
+  "implementation_shape": "handoff-pack",
+  "operation": "summarize",
+  "safety_tags": [
+    "read-only"
+  ],
+  "shared_handler_key": "quality-release::summarize::handoff-pack",
+  "status": "completed",
+  "summary": {
+    "blockers": [],
+    "brief": "quality-release-notes-summarize is a handoff summary tool in Quality Gates & Release Readiness; it uses handoff-pack and belongs to quality-release.",
+    "matched_items": [
+      "tests\\test_context_builder.py",
+      "tools\\tool-list-builder-workflow.md",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0045-registry-owner-notes-export.md",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0120-context-changelog-notes-export.md",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0145-context-design-notes-export.md"
+    ]
+  },
+  "timestamp": "2026-05-13T00:06:05.553117+00:00",
+  "tool": "quality-release-notes-summarize"
+}

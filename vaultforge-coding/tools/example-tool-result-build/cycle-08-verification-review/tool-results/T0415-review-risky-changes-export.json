@@ -1,0 +1,50 @@
+{
+  "artifact_path": "F:\\vaultforge\\vaultforge-coding\\tools\\example-tool-result-build\\cycle-08-verification-review\\T0415-review-risky-changes-export.md",
+  "category": "Code Review & Static Analysis",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,artifact_id,format | outputs=artifact_path,artifact_id,summary | reads=allowlisted repo roots | writes=tools/artifacts;assets/reports | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test;artifact-exists check",
+    "inputs": [
+      "target_root",
+      "scope",
+      "artifact_id",
+      "format"
+    ],
+    "outputs": [
+      "artifact_path",
+      "artifact_id",
+      "summary"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test",
+      "artifact-exists check"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "tools/artifacts",
+      "assets/reports"
+    ]
+  },
+  "dry_run": false,
+  "family": "review",
+  "gates": [],
+  "id": "T0415",
+  "implementation_shape": "markdown-report",
+  "operation": "export",
+  "safety_tags": [
+    "preview-write"
+  ],
+  "shared_handler_key": "review::export::markdown-report",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:03:05.140076+00:00",
+  "tool": "review-risky-changes-export"
+}

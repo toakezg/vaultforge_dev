@@ -1,0 +1,124 @@
+# VaultForge Tool Batch Summary
+
+- status: completed
+- dry_run: False
+- tool_count: 100
+- gated_tool_count: 5
+
+## Families
+
+- vaultforge-section: 65
+- tool-builder: 30
+- codex-run: 5
+
+## Operations
+
+- scan: 20
+- validate: 20
+- summarize: 20
+- export: 20
+- route: 14
+- diff: 6
+
+## Tools
+
+- T0971 | toolbuilder-docs-stubs-scan | tool-builder | scan | completed
+- T0972 | toolbuilder-docs-stubs-validate | tool-builder | validate | completed
+- T0973 | toolbuilder-docs-stubs-summarize | tool-builder | summarize | completed
+- T0974 | toolbuilder-docs-stubs-diff | tool-builder | diff | completed
+- T0975 | toolbuilder-docs-stubs-export | tool-builder | export | completed
+- T0976 | toolbuilder-smoke-scripts-scan | tool-builder | scan | completed
+- T0977 | toolbuilder-smoke-scripts-validate | tool-builder | validate | completed
+- T0978 | toolbuilder-smoke-scripts-summarize | tool-builder | summarize | completed
+- T0979 | toolbuilder-smoke-scripts-diff | tool-builder | diff | completed
+- T0980 | toolbuilder-smoke-scripts-export | tool-builder | export | completed
+- T0981 | toolbuilder-fixture-packs-scan | tool-builder | scan | completed
+- T0982 | toolbuilder-fixture-packs-validate | tool-builder | validate | completed
+- T0983 | toolbuilder-fixture-packs-summarize | tool-builder | summarize | completed
+- T0984 | toolbuilder-fixture-packs-diff | tool-builder | diff | completed
+- T0985 | toolbuilder-fixture-packs-export | tool-builder | export | completed
+- T0986 | toolbuilder-negative-tests-scan | tool-builder | scan | completed
+- T0987 | toolbuilder-negative-tests-validate | tool-builder | validate | completed
+- T0988 | toolbuilder-negative-tests-summarize | tool-builder | summarize | completed
+- T0989 | toolbuilder-negative-tests-diff | tool-builder | diff | completed
+- T0990 | toolbuilder-negative-tests-export | tool-builder | export | completed
+- T0991 | toolbuilder-batch-planners-scan | tool-builder | scan | completed
+- T0992 | toolbuilder-batch-planners-validate | tool-builder | validate | completed
+- T0993 | toolbuilder-batch-planners-summarize | tool-builder | summarize | completed
+- T0994 | toolbuilder-batch-planners-diff | tool-builder | diff | completed
+- T0995 | toolbuilder-batch-planners-export | tool-builder | export | completed
+- T0996 | toolbuilder-builder-scorecards-scan | tool-builder | scan | completed
+- T0997 | toolbuilder-builder-scorecards-validate | tool-builder | validate | completed
+- T0998 | toolbuilder-builder-scorecards-summarize | tool-builder | summarize | completed
+- T0999 | toolbuilder-builder-scorecards-diff | tool-builder | diff | completed
+- T1000 | toolbuilder-builder-scorecards-export | tool-builder | export | completed
+- T1001 | vfsec-root-read-order-scan | vaultforge-section | scan | completed
+- T1002 | vfsec-root-read-order-validate | vaultforge-section | validate | completed
+- T1003 | vfsec-root-read-order-summarize | vaultforge-section | summarize | completed
+- T1004 | vfsec-root-read-order-route | vaultforge-section | route | completed
+- T1005 | vfsec-root-read-order-export | vaultforge-section | export | completed
+- T1006 | vfsec-section-status-scan | vaultforge-section | scan | completed
+- T1007 | vfsec-section-status-validate | vaultforge-section | validate | completed
+- T1008 | vfsec-section-status-summarize | vaultforge-section | summarize | completed
+- T1009 | vfsec-section-status-route | vaultforge-section | route | completed
+- T1010 | vfsec-section-status-export | vaultforge-section | export | completed
+- T1011 | vfsec-lane-boundaries-scan | vaultforge-section | scan | completed
+- T1012 | vfsec-lane-boundaries-validate | vaultforge-section | validate | completed
+- T1013 | vfsec-lane-boundaries-summarize | vaultforge-section | summarize | completed
+- T1014 | vfsec-lane-boundaries-route | vaultforge-section | route | completed
+- T1015 | vfsec-lane-boundaries-export | vaultforge-section | export | completed
+- T1016 | vfsec-cross-section-links-scan | vaultforge-section | scan | completed
+- T1017 | vfsec-cross-section-links-validate | vaultforge-section | validate | completed
+- T1018 | vfsec-cross-section-links-summarize | vaultforge-section | summarize | completed
+- T1019 | vfsec-cross-section-links-route | vaultforge-section | route | completed
+- T1020 | vfsec-cross-section-links-export | vaultforge-section | export | completed
+- T1021 | vfsec-section-task-queues-scan | vaultforge-section | scan | completed
+- T1022 | vfsec-section-task-queues-validate | vaultforge-section | validate | completed
+- T1023 | vfsec-section-task-queues-summarize | vaultforge-section | summarize | completed
+- T1024 | vfsec-section-task-queues-route | vaultforge-section | route | completed
+- T1025 | vfsec-section-task-queues-export | vaultforge-section | export | completed
+- T1026 | vfsec-coordination-drift-scan | vaultforge-section | scan | completed
+- T1027 | vfsec-coordination-drift-validate | vaultforge-section | validate | completed
+- T1028 | vfsec-coordination-drift-summarize | vaultforge-section | summarize | completed
+- T1029 | vfsec-coordination-drift-route | vaultforge-section | route | completed
+- T1030 | vfsec-coordination-drift-export | vaultforge-section | export | completed
+- T1031 | vfsec-section-handoffs-scan | vaultforge-section | scan | completed
+- T1032 | vfsec-section-handoffs-validate | vaultforge-section | validate | completed
+- T1033 | vfsec-section-handoffs-summarize | vaultforge-section | summarize | completed
+- T1034 | vfsec-section-handoffs-route | vaultforge-section | route | completed
+- T1035 | vfsec-section-handoffs-export | vaultforge-section | export | completed
+- T1036 | vfsec-root-sync-needs-scan | vaultforge-section | scan | completed
+- T1037 | vfsec-root-sync-needs-validate | vaultforge-section | validate | completed
+- T1038 | vfsec-root-sync-needs-summarize | vaultforge-section | summarize | completed
+- T1039 | vfsec-root-sync-needs-route | vaultforge-section | route | completed
+- T1040 | vfsec-root-sync-needs-export | vaultforge-section | export | completed
+- T1041 | vfsec-parked-sections-scan | vaultforge-section | scan | completed
+- T1042 | vfsec-parked-sections-validate | vaultforge-section | validate | completed
+- T1043 | vfsec-parked-sections-summarize | vaultforge-section | summarize | completed
+- T1044 | vfsec-parked-sections-route | vaultforge-section | route | completed
+- T1045 | vfsec-parked-sections-export | vaultforge-section | export | completed
+- T1046 | vfsec-live-lane-gates-scan | vaultforge-section | scan | completed
+- T1047 | vfsec-live-lane-gates-validate | vaultforge-section | validate | completed
+- T1048 | vfsec-live-lane-gates-summarize | vaultforge-section | summarize | completed
+- T1049 | vfsec-live-lane-gates-route | vaultforge-section | route | completed
+- T1050 | vfsec-live-lane-gates-export | vaultforge-section | export | completed
+- T1051 | vfsec-decision-ledgers-scan | vaultforge-section | scan | completed
+- T1052 | vfsec-decision-ledgers-validate | vaultforge-section | validate | completed
+- T1053 | vfsec-decision-ledgers-summarize | vaultforge-section | summarize | completed
+- T1054 | vfsec-decision-ledgers-route | vaultforge-section | route | completed
+- T1055 | vfsec-decision-ledgers-export | vaultforge-section | export | completed
+- T1056 | vfsec-lane-changelogs-scan | vaultforge-section | scan | completed
+- T1057 | vfsec-lane-changelogs-validate | vaultforge-section | validate | completed
+- T1058 | vfsec-lane-changelogs-summarize | vaultforge-section | summarize | completed
+- T1059 | vfsec-lane-changelogs-route | vaultforge-section | route | completed
+- T1060 | vfsec-lane-changelogs-export | vaultforge-section | export | completed
+- T1061 | vfsec-local-operating-docs-scan | vaultforge-section | scan | completed
+- T1062 | vfsec-local-operating-docs-validate | vaultforge-section | validate | completed
+- T1063 | vfsec-local-operating-docs-summarize | vaultforge-section | summarize | completed
+- T1064 | vfsec-local-operating-docs-route | vaultforge-section | route | completed
+- T1065 | vfsec-local-operating-docs-export | vaultforge-section | export | completed
+- T1066 | codexrun-run-intent-scan | codex-run | scan | completed
+- T1067 | codexrun-run-intent-validate | codex-run | validate | completed
+- T1068 | codexrun-run-intent-summarize | codex-run | summarize | completed
+- T1069 | codexrun-run-intent-route | codex-run | route | completed
+- T1070 | codexrun-run-intent-export | codex-run | export | completed

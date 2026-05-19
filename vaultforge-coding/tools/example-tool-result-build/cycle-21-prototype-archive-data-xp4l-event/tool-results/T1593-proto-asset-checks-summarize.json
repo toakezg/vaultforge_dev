@@ -1,0 +1,55 @@
+{
+  "category": "Game Web and Frontend Prototype Tools",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "max_items"
+    ],
+    "outputs": [
+      "summary",
+      "source_refs",
+      "blockers"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "prototype",
+  "gates": [],
+  "id": "T1593",
+  "implementation_shape": "handoff-pack",
+  "operation": "summarize",
+  "safety_tags": [
+    "read-only"
+  ],
+  "shared_handler_key": "prototype::summarize::handoff-pack",
+  "status": "completed",
+  "summary": {
+    "blockers": [],
+    "brief": "proto-asset-checks-summarize is a handoff summary tool in Game Web and Frontend Prototype Tools; it uses handoff-pack and belongs to prototype.",
+    "matched_items": [
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0085-workspace-asset-files-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0340-requirements-success-checks-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0580-env-path-checks-export.md"
+    ]
+  },
+  "timestamp": "2026-05-13T00:12:58.733712+00:00",
+  "tool": "proto-asset-checks-summarize"
+}

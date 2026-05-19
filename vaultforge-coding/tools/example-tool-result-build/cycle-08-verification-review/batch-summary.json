@@ -1,0 +1,607 @@
+{
+  "dry_run": false,
+  "status": "completed",
+  "tool_count": 100,
+  "tools": [
+    {
+      "id": "T0351",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "verify-build-commands-scan"
+    },
+    {
+      "id": "T0352",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "verify-build-commands-validate"
+    },
+    {
+      "id": "T0353",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "verify-build-commands-summarize"
+    },
+    {
+      "id": "T0354",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "verify-build-commands-diff"
+    },
+    {
+      "id": "T0355",
+      "operation": "export",
+      "status": "completed",
+      "tool": "verify-build-commands-export"
+    },
+    {
+      "id": "T0356",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "verify-test-commands-scan"
+    },
+    {
+      "id": "T0357",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "verify-test-commands-validate"
+    },
+    {
+      "id": "T0358",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "verify-test-commands-summarize"
+    },
+    {
+      "id": "T0359",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "verify-test-commands-diff"
+    },
+    {
+      "id": "T0360",
+      "operation": "export",
+      "status": "completed",
+      "tool": "verify-test-commands-export"
+    },
+    {
+      "id": "T0361",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "verify-lint-commands-scan"
+    },
+    {
+      "id": "T0362",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "verify-lint-commands-validate"
+    },
+    {
+      "id": "T0363",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "verify-lint-commands-summarize"
+    },
+    {
+      "id": "T0364",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "verify-lint-commands-diff"
+    },
+    {
+      "id": "T0365",
+      "operation": "export",
+      "status": "completed",
+      "tool": "verify-lint-commands-export"
+    },
+    {
+      "id": "T0366",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "verify-format-commands-scan"
+    },
+    {
+      "id": "T0367",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "verify-format-commands-validate"
+    },
+    {
+      "id": "T0368",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "verify-format-commands-summarize"
+    },
+    {
+      "id": "T0369",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "verify-format-commands-diff"
+    },
+    {
+      "id": "T0370",
+      "operation": "export",
+      "status": "completed",
+      "tool": "verify-format-commands-export"
+    },
+    {
+      "id": "T0371",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "verify-coverage-runs-scan"
+    },
+    {
+      "id": "T0372",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "verify-coverage-runs-validate"
+    },
+    {
+      "id": "T0373",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "verify-coverage-runs-summarize"
+    },
+    {
+      "id": "T0374",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "verify-coverage-runs-diff"
+    },
+    {
+      "id": "T0375",
+      "operation": "export",
+      "status": "completed",
+      "tool": "verify-coverage-runs-export"
+    },
+    {
+      "id": "T0376",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "verify-smoke-tests-scan"
+    },
+    {
+      "id": "T0377",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "verify-smoke-tests-validate"
+    },
+    {
+      "id": "T0378",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "verify-smoke-tests-summarize"
+    },
+    {
+      "id": "T0379",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "verify-smoke-tests-diff"
+    },
+    {
+      "id": "T0380",
+      "operation": "export",
+      "status": "completed",
+      "tool": "verify-smoke-tests-export"
+    },
+    {
+      "id": "T0381",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "verify-fixture-setup-scan"
+    },
+    {
+      "id": "T0382",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "verify-fixture-setup-validate"
+    },
+    {
+      "id": "T0383",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "verify-fixture-setup-summarize"
+    },
+    {
+      "id": "T0384",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "verify-fixture-setup-diff"
+    },
+    {
+      "id": "T0385",
+      "operation": "export",
+      "status": "completed",
+      "tool": "verify-fixture-setup-export"
+    },
+    {
+      "id": "T0386",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "verify-failure-reproduction-scan"
+    },
+    {
+      "id": "T0387",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "verify-failure-reproduction-validate"
+    },
+    {
+      "id": "T0388",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "verify-failure-reproduction-summarize"
+    },
+    {
+      "id": "T0389",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "verify-failure-reproduction-diff"
+    },
+    {
+      "id": "T0390",
+      "operation": "export",
+      "status": "completed",
+      "tool": "verify-failure-reproduction-export"
+    },
+    {
+      "id": "T0391",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "verify-rerun-plans-scan"
+    },
+    {
+      "id": "T0392",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "verify-rerun-plans-validate"
+    },
+    {
+      "id": "T0393",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "verify-rerun-plans-summarize"
+    },
+    {
+      "id": "T0394",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "verify-rerun-plans-diff"
+    },
+    {
+      "id": "T0395",
+      "operation": "export",
+      "status": "completed",
+      "tool": "verify-rerun-plans-export"
+    },
+    {
+      "id": "T0396",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "verify-test-selection-scan"
+    },
+    {
+      "id": "T0397",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "verify-test-selection-validate"
+    },
+    {
+      "id": "T0398",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "verify-test-selection-summarize"
+    },
+    {
+      "id": "T0399",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "verify-test-selection-diff"
+    },
+    {
+      "id": "T0400",
+      "operation": "export",
+      "status": "completed",
+      "tool": "verify-test-selection-export"
+    },
+    {
+      "id": "T0401",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "review-diff-summaries-scan"
+    },
+    {
+      "id": "T0402",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "review-diff-summaries-validate"
+    },
+    {
+      "id": "T0403",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "review-diff-summaries-summarize"
+    },
+    {
+      "id": "T0404",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "review-diff-summaries-diff"
+    },
+    {
+      "id": "T0405",
+      "operation": "export",
+      "status": "completed",
+      "tool": "review-diff-summaries-export"
+    },
+    {
+      "id": "T0406",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "review-touched-files-scan"
+    },
+    {
+      "id": "T0407",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "review-touched-files-validate"
+    },
+    {
+      "id": "T0408",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "review-touched-files-summarize"
+    },
+    {
+      "id": "T0409",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "review-touched-files-diff"
+    },
+    {
+      "id": "T0410",
+      "operation": "export",
+      "status": "completed",
+      "tool": "review-touched-files-export"
+    },
+    {
+      "id": "T0411",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "review-risky-changes-scan"
+    },
+    {
+      "id": "T0412",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "review-risky-changes-validate"
+    },
+    {
+      "id": "T0413",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "review-risky-changes-summarize"
+    },
+    {
+      "id": "T0414",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "review-risky-changes-diff"
+    },
+    {
+      "id": "T0415",
+      "operation": "export",
+      "status": "completed",
+      "tool": "review-risky-changes-export"
+    },
+    {
+      "id": "T0416",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "review-dead-code-scan"
+    },
+    {
+      "id": "T0417",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "review-dead-code-validate"
+    },
+    {
+      "id": "T0418",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "review-dead-code-summarize"
+    },
+    {
+      "id": "T0419",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "review-dead-code-diff"
+    },
+    {
+      "id": "T0420",
+      "operation": "export",
+      "status": "completed",
+      "tool": "review-dead-code-export"
+    },
+    {
+      "id": "T0421",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "review-duplicate-logic-scan"
+    },
+    {
+      "id": "T0422",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "review-duplicate-logic-validate"
+    },
+    {
+      "id": "T0423",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "review-duplicate-logic-summarize"
+    },
+    {
+      "id": "T0424",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "review-duplicate-logic-diff"
+    },
+    {
+      "id": "T0425",
+      "operation": "export",
+      "status": "completed",
+      "tool": "review-duplicate-logic-export"
+    },
+    {
+      "id": "T0426",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "review-style-drift-scan"
+    },
+    {
+      "id": "T0427",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "review-style-drift-validate"
+    },
+    {
+      "id": "T0428",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "review-style-drift-summarize"
+    },
+    {
+      "id": "T0429",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "review-style-drift-diff"
+    },
+    {
+      "id": "T0430",
+      "operation": "export",
+      "status": "completed",
+      "tool": "review-style-drift-export"
+    },
+    {
+      "id": "T0431",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "review-missing-tests-scan"
+    },
+    {
+      "id": "T0432",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "review-missing-tests-validate"
+    },
+    {
+      "id": "T0433",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "review-missing-tests-summarize"
+    },
+    {
+      "id": "T0434",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "review-missing-tests-diff"
+    },
+    {
+      "id": "T0435",
+      "operation": "export",
+      "status": "completed",
+      "tool": "review-missing-tests-export"
+    },
+    {
+      "id": "T0436",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "review-api-changes-scan"
+    },
+    {
+      "id": "T0437",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "review-api-changes-validate"
+    },
+    {
+      "id": "T0438",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "review-api-changes-summarize"
+    },
+    {
+      "id": "T0439",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "review-api-changes-diff"
+    },
+    {
+      "id": "T0440",
+      "operation": "export",
+      "status": "completed",
+      "tool": "review-api-changes-export"
+    },
+    {
+      "id": "T0441",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "review-error-handling-scan"
+    },
+    {
+      "id": "T0442",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "review-error-handling-validate"
+    },
+    {
+      "id": "T0443",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "review-error-handling-summarize"
+    },
+    {
+      "id": "T0444",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "review-error-handling-diff"
+    },
+    {
+      "id": "T0445",
+      "operation": "export",
+      "status": "completed",
+      "tool": "review-error-handling-export"
+    },
+    {
+      "id": "T0446",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "review-review-findings-scan"
+    },
+    {
+      "id": "T0447",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "review-review-findings-validate"
+    },
+    {
+      "id": "T0448",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "review-review-findings-summarize"
+    },
+    {
+      "id": "T0449",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "review-review-findings-diff"
+    },
+    {
+      "id": "T0450",
+      "operation": "export",
+      "status": "completed",
+      "tool": "review-review-findings-export"
+    }
+  ]
+}

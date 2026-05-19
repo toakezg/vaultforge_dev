@@ -1,0 +1,141 @@
+{
+  "category": ".4 Operations and Courier Intake",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,ruleset | outputs=pass,issues,next_tool | reads=allowlisted repo roots;.4 inbox processed rejected rerun queues | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test;known-pass and known-fail fixtures",
+    "inputs": [
+      "target_root",
+      "scope",
+      "ruleset"
+    ],
+    "outputs": [
+      "pass",
+      "issues",
+      "next_tool"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test",
+      "known-pass and known-fail fixtures"
+    ],
+    "reads": [
+      "allowlisted repo roots",
+      ".4 inbox processed rejected rerun queues"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "dot4-queue",
+  "gates": [],
+  "id": "T1812",
+  "implementation_shape": "status-summary",
+  "operation": "validate",
+  "safety_tags": [
+    "read-only"
+  ],
+  "shared_handler_key": "dot4-queue::validate::status-summary",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:14:01.779497+00:00",
+  "tool": "dot4-event-contract-mapping-validate",
+  "validation": {
+    "catalog": {
+      "duplicate_names": [],
+      "max_id": 1825,
+      "min_id": 1,
+      "missing_ids": [],
+      "tool_count": 1825,
+      "top_families": [
+        [
+          "cost-route",
+          100
+        ],
+        [
+          "dot4-queue",
+          75
+        ],
+        [
+          "vaultforge-section",
+          65
+        ],
+        [
+          "codex-run",
+          65
+        ],
+        [
+          "mcp-proof",
+          55
+        ],
+        [
+          "obsidian-plugin",
+          55
+        ],
+        [
+          "windows-local",
+          55
+        ],
+        [
+          "builder-packet",
+          55
+        ],
+        [
+          "registry",
+          50
+        ],
+        [
+          "workspace-discovery",
+          50
+        ]
+      ]
+    },
+    "family": {
+      "family": "dot4-queue",
+      "missing_paths": [
+        ".4",
+        ".4/inbox",
+        ".4/processed",
+        ".4/rejected",
+        ".4/rerun"
+      ],
+      "mode": "local-structure-check",
+      "note": "Missing .4 paths are reported as context, not a catalog failure.",
+      "queue_paths": [
+        {
+          "exists": false,
+          "kind": "missing",
+          "path": ".4"
+        },
+        {
+          "exists": false,
+          "kind": "missing",
+          "path": ".4/inbox"
+        },
+        {
+          "exists": false,
+          "kind": "missing",
+          "path": ".4/processed"
+        },
+        {
+          "exists": false,
+          "kind": "missing",
+          "path": ".4/rejected"
+        },
+        {
+          "exists": false,
+          "kind": "missing",
+          "path": ".4/rerun"
+        }
+      ]
+    },
+    "issues": [],
+    "next_tool": "",
+    "pass": true
+  }
+}

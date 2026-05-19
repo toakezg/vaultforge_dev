@@ -1,0 +1,63 @@
+{
+  "category": "Browser UI & API Smoke",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes",
+      "ungated external calls"
+    ],
+    "contract_line": "inputs=target_root,baseline_ref,scope,filters | outputs=added,changed,missing,risk_level | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated external calls | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "baseline_ref",
+      "scope",
+      "filters"
+    ],
+    "outputs": [
+      "added",
+      "changed",
+      "missing",
+      "risk_level"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "diff": {
+    "added": [],
+    "baseline": "generated contract catalog",
+    "changed": [],
+    "missing": [],
+    "risk_level": "low"
+  },
+  "dry_run": false,
+  "family": "runtime-smoke",
+  "gates": [
+    {
+      "reason": "external calls remain blocked in local proof mode",
+      "status": "blocked-local",
+      "tag": "external-gated"
+    }
+  ],
+  "id": "T0799",
+  "implementation_shape": "diff-summary",
+  "operation": "diff",
+  "safety_tags": [
+    "external-gated",
+    "read-only"
+  ],
+  "shared_handler_key": "runtime-smoke::diff::diff-summary",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:05:33.372681+00:00",
+  "tool": "smoke-fixture-data-diff"
+}

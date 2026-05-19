@@ -1,0 +1,123 @@
+# VaultForge Tool Batch Summary
+
+- status: completed
+- dry_run: False
+- tool_count: 100
+- gated_tool_count: 40
+
+## Families
+
+- windows-local: 55
+- cost-route: 25
+- prompt-bank: 20
+
+## Operations
+
+- scan: 20
+- validate: 20
+- summarize: 20
+- route: 20
+- export: 20
+
+## Tools
+
+- T1271 | promptbank-prompt-outputs-scan | prompt-bank | scan | completed
+- T1272 | promptbank-prompt-outputs-validate | prompt-bank | validate | completed
+- T1273 | promptbank-prompt-outputs-summarize | prompt-bank | summarize | completed
+- T1274 | promptbank-prompt-outputs-route | prompt-bank | route | completed
+- T1275 | promptbank-prompt-outputs-export | prompt-bank | export | completed
+- T1276 | promptbank-prompt-reuse-scan | prompt-bank | scan | completed
+- T1277 | promptbank-prompt-reuse-validate | prompt-bank | validate | completed
+- T1278 | promptbank-prompt-reuse-summarize | prompt-bank | summarize | completed
+- T1279 | promptbank-prompt-reuse-route | prompt-bank | route | completed
+- T1280 | promptbank-prompt-reuse-export | prompt-bank | export | completed
+- T1281 | promptbank-prompt-drift-scan | prompt-bank | scan | completed
+- T1282 | promptbank-prompt-drift-validate | prompt-bank | validate | completed
+- T1283 | promptbank-prompt-drift-summarize | prompt-bank | summarize | completed
+- T1284 | promptbank-prompt-drift-route | prompt-bank | route | completed
+- T1285 | promptbank-prompt-drift-export | prompt-bank | export | completed
+- T1286 | promptbank-prompt-packs-scan | prompt-bank | scan | completed
+- T1287 | promptbank-prompt-packs-validate | prompt-bank | validate | completed
+- T1288 | promptbank-prompt-packs-summarize | prompt-bank | summarize | completed
+- T1289 | promptbank-prompt-packs-route | prompt-bank | route | completed
+- T1290 | promptbank-prompt-packs-export | prompt-bank | export | completed
+- T1291 | winlocal-path-roots-scan | windows-local | scan | completed
+- T1292 | winlocal-path-roots-validate | windows-local | validate | completed
+- T1293 | winlocal-path-roots-summarize | windows-local | summarize | completed
+- T1294 | winlocal-path-roots-route | windows-local | route | completed
+- T1295 | winlocal-path-roots-export | windows-local | export | completed
+- T1296 | winlocal-path-permissions-scan | windows-local | scan | completed
+- T1297 | winlocal-path-permissions-validate | windows-local | validate | completed
+- T1298 | winlocal-path-permissions-summarize | windows-local | summarize | completed
+- T1299 | winlocal-path-permissions-route | windows-local | route | completed
+- T1300 | winlocal-path-permissions-export | windows-local | export | completed
+- T1301 | winlocal-shell-commands-scan | windows-local | scan | completed
+- T1302 | winlocal-shell-commands-validate | windows-local | validate | completed
+- T1303 | winlocal-shell-commands-summarize | windows-local | summarize | completed
+- T1304 | winlocal-shell-commands-route | windows-local | route | completed
+- T1305 | winlocal-shell-commands-export | windows-local | export | completed
+- T1306 | winlocal-python-launchers-scan | windows-local | scan | completed
+- T1307 | winlocal-python-launchers-validate | windows-local | validate | completed
+- T1308 | winlocal-python-launchers-summarize | windows-local | summarize | completed
+- T1309 | winlocal-python-launchers-route | windows-local | route | completed
+- T1310 | winlocal-python-launchers-export | windows-local | export | completed
+- T1311 | winlocal-node-launchers-scan | windows-local | scan | completed
+- T1312 | winlocal-node-launchers-validate | windows-local | validate | completed
+- T1313 | winlocal-node-launchers-summarize | windows-local | summarize | completed
+- T1314 | winlocal-node-launchers-route | windows-local | route | completed
+- T1315 | winlocal-node-launchers-export | windows-local | export | completed
+- T1316 | winlocal-encoding-checks-scan | windows-local | scan | completed
+- T1317 | winlocal-encoding-checks-validate | windows-local | validate | completed
+- T1318 | winlocal-encoding-checks-summarize | windows-local | summarize | completed
+- T1319 | winlocal-encoding-checks-route | windows-local | route | completed
+- T1320 | winlocal-encoding-checks-export | windows-local | export | completed
+- T1321 | winlocal-locked-files-scan | windows-local | scan | completed
+- T1322 | winlocal-locked-files-validate | windows-local | validate | completed
+- T1323 | winlocal-locked-files-summarize | windows-local | summarize | completed
+- T1324 | winlocal-locked-files-route | windows-local | route | completed
+- T1325 | winlocal-locked-files-export | windows-local | export | completed
+- T1326 | winlocal-safe-cleanup-scan | windows-local | scan | completed
+- T1327 | winlocal-safe-cleanup-validate | windows-local | validate | completed
+- T1328 | winlocal-safe-cleanup-summarize | windows-local | summarize | completed
+- T1329 | winlocal-safe-cleanup-route | windows-local | route | completed
+- T1330 | winlocal-safe-cleanup-export | windows-local | export | completed
+- T1331 | winlocal-temp-artifacts-scan | windows-local | scan | completed
+- T1332 | winlocal-temp-artifacts-validate | windows-local | validate | completed
+- T1333 | winlocal-temp-artifacts-summarize | windows-local | summarize | completed
+- T1334 | winlocal-temp-artifacts-route | windows-local | route | completed
+- T1335 | winlocal-temp-artifacts-export | windows-local | export | completed
+- T1336 | winlocal-batch-wrappers-scan | windows-local | scan | completed
+- T1337 | winlocal-batch-wrappers-validate | windows-local | validate | completed
+- T1338 | winlocal-batch-wrappers-summarize | windows-local | summarize | completed
+- T1339 | winlocal-batch-wrappers-route | windows-local | route | completed
+- T1340 | winlocal-batch-wrappers-export | windows-local | export | completed
+- T1341 | winlocal-path-collision-scan | windows-local | scan | completed
+- T1342 | winlocal-path-collision-validate | windows-local | validate | completed
+- T1343 | winlocal-path-collision-summarize | windows-local | summarize | completed
+- T1344 | winlocal-path-collision-route | windows-local | route | completed
+- T1345 | winlocal-path-collision-export | windows-local | export | completed
+- T1346 | costroute-model-routing-rules-scan | cost-route | scan | completed
+- T1347 | costroute-model-routing-rules-validate | cost-route | validate | completed
+- T1348 | costroute-model-routing-rules-summarize | cost-route | summarize | completed
+- T1349 | costroute-model-routing-rules-route | cost-route | route | completed
+- T1350 | costroute-model-routing-rules-export | cost-route | export | completed
+- T1351 | costroute-token-burn-risks-scan | cost-route | scan | completed
+- T1352 | costroute-token-burn-risks-validate | cost-route | validate | completed
+- T1353 | costroute-token-burn-risks-summarize | cost-route | summarize | completed
+- T1354 | costroute-token-burn-risks-route | cost-route | route | completed
+- T1355 | costroute-token-burn-risks-export | cost-route | export | completed
+- T1356 | costroute-cache-candidates-scan | cost-route | scan | completed
+- T1357 | costroute-cache-candidates-validate | cost-route | validate | completed
+- T1358 | costroute-cache-candidates-summarize | cost-route | summarize | completed
+- T1359 | costroute-cache-candidates-route | cost-route | route | completed
+- T1360 | costroute-cache-candidates-export | cost-route | export | completed
+- T1361 | costroute-tool-versus-model-scan | cost-route | scan | completed
+- T1362 | costroute-tool-versus-model-validate | cost-route | validate | completed
+- T1363 | costroute-tool-versus-model-summarize | cost-route | summarize | completed
+- T1364 | costroute-tool-versus-model-route | cost-route | route | completed
+- T1365 | costroute-tool-versus-model-export | cost-route | export | completed
+- T1366 | costroute-preflight-estimates-scan | cost-route | scan | completed
+- T1367 | costroute-preflight-estimates-validate | cost-route | validate | completed
+- T1368 | costroute-preflight-estimates-summarize | cost-route | summarize | completed
+- T1369 | costroute-preflight-estimates-route | cost-route | route | completed
+- T1370 | costroute-preflight-estimates-export | cost-route | export | completed

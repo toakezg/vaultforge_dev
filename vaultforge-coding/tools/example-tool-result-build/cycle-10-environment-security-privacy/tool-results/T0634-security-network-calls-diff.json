@@ -1,0 +1,63 @@
+{
+  "category": "Security Secrets & Privacy",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes",
+      "ungated external calls"
+    ],
+    "contract_line": "inputs=target_root,baseline_ref,scope,filters | outputs=added,changed,missing,risk_level | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated external calls | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "baseline_ref",
+      "scope",
+      "filters"
+    ],
+    "outputs": [
+      "added",
+      "changed",
+      "missing",
+      "risk_level"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "diff": {
+    "added": [],
+    "baseline": "generated contract catalog",
+    "changed": [],
+    "missing": [],
+    "risk_level": "low"
+  },
+  "dry_run": false,
+  "family": "security-privacy",
+  "gates": [
+    {
+      "reason": "external calls remain blocked in local proof mode",
+      "status": "blocked-local",
+      "tag": "external-gated"
+    }
+  ],
+  "id": "T0634",
+  "implementation_shape": "diff-summary",
+  "operation": "diff",
+  "safety_tags": [
+    "external-gated",
+    "read-only"
+  ],
+  "shared_handler_key": "security-privacy::diff::diff-summary",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:04:28.132105+00:00",
+  "tool": "security-network-calls-diff"
+}

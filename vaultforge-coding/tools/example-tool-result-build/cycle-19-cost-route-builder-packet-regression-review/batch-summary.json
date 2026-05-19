@@ -1,0 +1,607 @@
+{
+  "dry_run": false,
+  "status": "completed",
+  "tool_count": 100,
+  "tools": [
+    {
+      "id": "T1371",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "costroute-budget-checkpoints-scan"
+    },
+    {
+      "id": "T1372",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "costroute-budget-checkpoints-validate"
+    },
+    {
+      "id": "T1373",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "costroute-budget-checkpoints-summarize"
+    },
+    {
+      "id": "T1374",
+      "operation": "route",
+      "status": "completed",
+      "tool": "costroute-budget-checkpoints-route"
+    },
+    {
+      "id": "T1375",
+      "operation": "export",
+      "status": "completed",
+      "tool": "costroute-budget-checkpoints-export"
+    },
+    {
+      "id": "T1376",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "costroute-cheap-proof-paths-scan"
+    },
+    {
+      "id": "T1377",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "costroute-cheap-proof-paths-validate"
+    },
+    {
+      "id": "T1378",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "costroute-cheap-proof-paths-summarize"
+    },
+    {
+      "id": "T1379",
+      "operation": "route",
+      "status": "completed",
+      "tool": "costroute-cheap-proof-paths-route"
+    },
+    {
+      "id": "T1380",
+      "operation": "export",
+      "status": "completed",
+      "tool": "costroute-cheap-proof-paths-export"
+    },
+    {
+      "id": "T1381",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "costroute-expensive-proof-paths-scan"
+    },
+    {
+      "id": "T1382",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "costroute-expensive-proof-paths-validate"
+    },
+    {
+      "id": "T1383",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "costroute-expensive-proof-paths-summarize"
+    },
+    {
+      "id": "T1384",
+      "operation": "route",
+      "status": "completed",
+      "tool": "costroute-expensive-proof-paths-route"
+    },
+    {
+      "id": "T1385",
+      "operation": "export",
+      "status": "completed",
+      "tool": "costroute-expensive-proof-paths-export"
+    },
+    {
+      "id": "T1386",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "costroute-run-comparison-scan"
+    },
+    {
+      "id": "T1387",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "costroute-run-comparison-validate"
+    },
+    {
+      "id": "T1388",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "costroute-run-comparison-summarize"
+    },
+    {
+      "id": "T1389",
+      "operation": "route",
+      "status": "completed",
+      "tool": "costroute-run-comparison-route"
+    },
+    {
+      "id": "T1390",
+      "operation": "export",
+      "status": "completed",
+      "tool": "costroute-run-comparison-export"
+    },
+    {
+      "id": "T1391",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "costroute-savings-reports-scan"
+    },
+    {
+      "id": "T1392",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "costroute-savings-reports-validate"
+    },
+    {
+      "id": "T1393",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "costroute-savings-reports-summarize"
+    },
+    {
+      "id": "T1394",
+      "operation": "route",
+      "status": "completed",
+      "tool": "costroute-savings-reports-route"
+    },
+    {
+      "id": "T1395",
+      "operation": "export",
+      "status": "completed",
+      "tool": "costroute-savings-reports-export"
+    },
+    {
+      "id": "T1396",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "builderpkt-builder-packet-scan"
+    },
+    {
+      "id": "T1397",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "builderpkt-builder-packet-validate"
+    },
+    {
+      "id": "T1398",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "builderpkt-builder-packet-summarize"
+    },
+    {
+      "id": "T1399",
+      "operation": "route",
+      "status": "completed",
+      "tool": "builderpkt-builder-packet-route"
+    },
+    {
+      "id": "T1400",
+      "operation": "export",
+      "status": "completed",
+      "tool": "builderpkt-builder-packet-export"
+    },
+    {
+      "id": "T1401",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "builderpkt-worker-ownership-scan"
+    },
+    {
+      "id": "T1402",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "builderpkt-worker-ownership-validate"
+    },
+    {
+      "id": "T1403",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "builderpkt-worker-ownership-summarize"
+    },
+    {
+      "id": "T1404",
+      "operation": "route",
+      "status": "completed",
+      "tool": "builderpkt-worker-ownership-route"
+    },
+    {
+      "id": "T1405",
+      "operation": "export",
+      "status": "completed",
+      "tool": "builderpkt-worker-ownership-export"
+    },
+    {
+      "id": "T1406",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "builderpkt-explorer-packet-scan"
+    },
+    {
+      "id": "T1407",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "builderpkt-explorer-packet-validate"
+    },
+    {
+      "id": "T1408",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "builderpkt-explorer-packet-summarize"
+    },
+    {
+      "id": "T1409",
+      "operation": "route",
+      "status": "completed",
+      "tool": "builderpkt-explorer-packet-route"
+    },
+    {
+      "id": "T1410",
+      "operation": "export",
+      "status": "completed",
+      "tool": "builderpkt-explorer-packet-export"
+    },
+    {
+      "id": "T1411",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "builderpkt-reviewer-packet-scan"
+    },
+    {
+      "id": "T1412",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "builderpkt-reviewer-packet-validate"
+    },
+    {
+      "id": "T1413",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "builderpkt-reviewer-packet-summarize"
+    },
+    {
+      "id": "T1414",
+      "operation": "route",
+      "status": "completed",
+      "tool": "builderpkt-reviewer-packet-route"
+    },
+    {
+      "id": "T1415",
+      "operation": "export",
+      "status": "completed",
+      "tool": "builderpkt-reviewer-packet-export"
+    },
+    {
+      "id": "T1416",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "builderpkt-verifier-packet-scan"
+    },
+    {
+      "id": "T1417",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "builderpkt-verifier-packet-validate"
+    },
+    {
+      "id": "T1418",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "builderpkt-verifier-packet-summarize"
+    },
+    {
+      "id": "T1419",
+      "operation": "route",
+      "status": "completed",
+      "tool": "builderpkt-verifier-packet-route"
+    },
+    {
+      "id": "T1420",
+      "operation": "export",
+      "status": "completed",
+      "tool": "builderpkt-verifier-packet-export"
+    },
+    {
+      "id": "T1421",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "builderpkt-integration-packet-scan"
+    },
+    {
+      "id": "T1422",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "builderpkt-integration-packet-validate"
+    },
+    {
+      "id": "T1423",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "builderpkt-integration-packet-summarize"
+    },
+    {
+      "id": "T1424",
+      "operation": "route",
+      "status": "completed",
+      "tool": "builderpkt-integration-packet-route"
+    },
+    {
+      "id": "T1425",
+      "operation": "export",
+      "status": "completed",
+      "tool": "builderpkt-integration-packet-export"
+    },
+    {
+      "id": "T1426",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "builderpkt-shared-handler-packet-scan"
+    },
+    {
+      "id": "T1427",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "builderpkt-shared-handler-packet-validate"
+    },
+    {
+      "id": "T1428",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "builderpkt-shared-handler-packet-summarize"
+    },
+    {
+      "id": "T1429",
+      "operation": "route",
+      "status": "completed",
+      "tool": "builderpkt-shared-handler-packet-route"
+    },
+    {
+      "id": "T1430",
+      "operation": "export",
+      "status": "completed",
+      "tool": "builderpkt-shared-handler-packet-export"
+    },
+    {
+      "id": "T1431",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "builderpkt-negative-test-packet-scan"
+    },
+    {
+      "id": "T1432",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "builderpkt-negative-test-packet-validate"
+    },
+    {
+      "id": "T1433",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "builderpkt-negative-test-packet-summarize"
+    },
+    {
+      "id": "T1434",
+      "operation": "route",
+      "status": "completed",
+      "tool": "builderpkt-negative-test-packet-route"
+    },
+    {
+      "id": "T1435",
+      "operation": "export",
+      "status": "completed",
+      "tool": "builderpkt-negative-test-packet-export"
+    },
+    {
+      "id": "T1436",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "builderpkt-artifact-packet-scan"
+    },
+    {
+      "id": "T1437",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "builderpkt-artifact-packet-validate"
+    },
+    {
+      "id": "T1438",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "builderpkt-artifact-packet-summarize"
+    },
+    {
+      "id": "T1439",
+      "operation": "route",
+      "status": "completed",
+      "tool": "builderpkt-artifact-packet-route"
+    },
+    {
+      "id": "T1440",
+      "operation": "export",
+      "status": "completed",
+      "tool": "builderpkt-artifact-packet-export"
+    },
+    {
+      "id": "T1441",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "builderpkt-handoff-packet-scan"
+    },
+    {
+      "id": "T1442",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "builderpkt-handoff-packet-validate"
+    },
+    {
+      "id": "T1443",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "builderpkt-handoff-packet-summarize"
+    },
+    {
+      "id": "T1444",
+      "operation": "route",
+      "status": "completed",
+      "tool": "builderpkt-handoff-packet-route"
+    },
+    {
+      "id": "T1445",
+      "operation": "export",
+      "status": "completed",
+      "tool": "builderpkt-handoff-packet-export"
+    },
+    {
+      "id": "T1446",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "builderpkt-parallel-split-scan"
+    },
+    {
+      "id": "T1447",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "builderpkt-parallel-split-validate"
+    },
+    {
+      "id": "T1448",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "builderpkt-parallel-split-summarize"
+    },
+    {
+      "id": "T1449",
+      "operation": "route",
+      "status": "completed",
+      "tool": "builderpkt-parallel-split-route"
+    },
+    {
+      "id": "T1450",
+      "operation": "export",
+      "status": "completed",
+      "tool": "builderpkt-parallel-split-export"
+    },
+    {
+      "id": "T1451",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "regress-review-scope-scan"
+    },
+    {
+      "id": "T1452",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "regress-review-scope-validate"
+    },
+    {
+      "id": "T1453",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "regress-review-scope-summarize"
+    },
+    {
+      "id": "T1454",
+      "operation": "route",
+      "status": "completed",
+      "tool": "regress-review-scope-route"
+    },
+    {
+      "id": "T1455",
+      "operation": "export",
+      "status": "completed",
+      "tool": "regress-review-scope-export"
+    },
+    {
+      "id": "T1456",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "regress-behavior-deltas-scan"
+    },
+    {
+      "id": "T1457",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "regress-behavior-deltas-validate"
+    },
+    {
+      "id": "T1458",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "regress-behavior-deltas-summarize"
+    },
+    {
+      "id": "T1459",
+      "operation": "route",
+      "status": "completed",
+      "tool": "regress-behavior-deltas-route"
+    },
+    {
+      "id": "T1460",
+      "operation": "export",
+      "status": "completed",
+      "tool": "regress-behavior-deltas-export"
+    },
+    {
+      "id": "T1461",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "regress-regression-map-scan"
+    },
+    {
+      "id": "T1462",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "regress-regression-map-validate"
+    },
+    {
+      "id": "T1463",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "regress-regression-map-summarize"
+    },
+    {
+      "id": "T1464",
+      "operation": "route",
+      "status": "completed",
+      "tool": "regress-regression-map-route"
+    },
+    {
+      "id": "T1465",
+      "operation": "export",
+      "status": "completed",
+      "tool": "regress-regression-map-export"
+    },
+    {
+      "id": "T1466",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "regress-missing-coverage-scan"
+    },
+    {
+      "id": "T1467",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "regress-missing-coverage-validate"
+    },
+    {
+      "id": "T1468",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "regress-missing-coverage-summarize"
+    },
+    {
+      "id": "T1469",
+      "operation": "route",
+      "status": "completed",
+      "tool": "regress-missing-coverage-route"
+    },
+    {
+      "id": "T1470",
+      "operation": "export",
+      "status": "completed",
+      "tool": "regress-missing-coverage-export"
+    }
+  ]
+}

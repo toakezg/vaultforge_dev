@@ -1,0 +1,65 @@
+{
+  "category": "Security Secrets & Privacy",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes",
+      "ungated paid API calls"
+    ],
+    "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated paid API calls | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "max_items"
+    ],
+    "outputs": [
+      "summary",
+      "source_refs",
+      "blockers"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "security-privacy",
+  "gates": [
+    {
+      "reason": "paid API usage remains blocked in local proof mode",
+      "status": "blocked-local",
+      "tag": "paid-gated"
+    }
+  ],
+  "id": "T0638",
+  "implementation_shape": "handoff-pack",
+  "operation": "summarize",
+  "safety_tags": [
+    "paid-gated",
+    "read-only"
+  ],
+  "shared_handler_key": "security-privacy::summarize::handoff-pack",
+  "status": "completed",
+  "summary": {
+    "blockers": [],
+    "brief": "security-paid-apis-summarize is a handoff summary tool in Security Secrets & Privacy; it uses handoff-pack and belongs to security-privacy.",
+    "matched_items": [
+      "vaultforge_code_codex_api_bridge_spec_v_2.md",
+      "tests\\test_usage_tracker.py",
+      "tools\\example-tool-result-build\\cost-route-cycle-3\\T0205-cost-usage-ledgers-export.json",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0440-review-api-changes-export.md",
+      "tools\\example-tool-result-build\\cycle-09-docs-git-change\\T0460-docs-api-docs-export.md"
+    ]
+  },
+  "timestamp": "2026-05-13T00:04:28.966456+00:00",
+  "tool": "security-paid-apis-summarize"
+}

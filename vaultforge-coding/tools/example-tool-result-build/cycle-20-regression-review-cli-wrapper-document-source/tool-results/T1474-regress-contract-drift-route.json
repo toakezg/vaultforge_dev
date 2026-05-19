@@ -1,0 +1,57 @@
+{
+  "category": "Review Surface and Regression Checks",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,item_id,available_lanes,constraints | outputs=target_lane,confidence,blockers,required_proof | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "item_id",
+      "available_lanes",
+      "constraints"
+    ],
+    "outputs": [
+      "target_lane",
+      "confidence",
+      "blockers",
+      "required_proof"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "regression-review",
+  "gates": [],
+  "id": "T1474",
+  "implementation_shape": "routing-decision",
+  "operation": "route",
+  "route": {
+    "blockers": [],
+    "confidence": "medium",
+    "required_proof": [
+      "fixture run",
+      "blocked-path negative test"
+    ],
+    "target_lane": "regression-review"
+  },
+  "safety_tags": [
+    "read-only"
+  ],
+  "shared_handler_key": "regression-review::route::routing-decision",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:12:18.318375+00:00",
+  "tool": "regress-contract-drift-route"
+}

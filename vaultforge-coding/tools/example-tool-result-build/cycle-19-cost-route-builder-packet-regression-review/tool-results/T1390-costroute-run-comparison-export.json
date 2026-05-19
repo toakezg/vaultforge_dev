@@ -1,0 +1,58 @@
+{
+  "artifact_path": "F:\\vaultforge\\vaultforge-coding\\tools\\example-tool-result-build\\cycle-19-cost-route-builder-packet-regression-review\\T1390-costroute-run-comparison-export.md",
+  "category": "Usage Cost and Model Routing",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes",
+      "ungated paid API calls"
+    ],
+    "contract_line": "inputs=target_root,scope,artifact_id,format | outputs=artifact_path,artifact_id,summary | reads=allowlisted repo roots | writes=tools/artifacts;assets/reports | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated paid API calls | proof=parse fixture;bad-input test;blocked-path test;artifact-exists check",
+    "inputs": [
+      "target_root",
+      "scope",
+      "artifact_id",
+      "format"
+    ],
+    "outputs": [
+      "artifact_path",
+      "artifact_id",
+      "summary"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test",
+      "artifact-exists check"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "tools/artifacts",
+      "assets/reports"
+    ]
+  },
+  "dry_run": false,
+  "family": "cost-route",
+  "gates": [
+    {
+      "reason": "paid API usage remains blocked in local proof mode",
+      "status": "blocked-local",
+      "tag": "paid-gated"
+    }
+  ],
+  "id": "T1390",
+  "implementation_shape": "markdown-report",
+  "operation": "export",
+  "safety_tags": [
+    "paid-gated",
+    "preview-write"
+  ],
+  "shared_handler_key": "cost-route::export::markdown-report",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:11:43.901540+00:00",
+  "tool": "costroute-run-comparison-export"
+}

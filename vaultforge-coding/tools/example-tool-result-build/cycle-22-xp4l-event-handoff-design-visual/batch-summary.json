@@ -1,0 +1,607 @@
+{
+  "dry_run": false,
+  "status": "completed",
+  "tool_count": 100,
+  "tools": [
+    {
+      "id": "T1671",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "xp4l-checklist-conversion-scan"
+    },
+    {
+      "id": "T1672",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "xp4l-checklist-conversion-validate"
+    },
+    {
+      "id": "T1673",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "xp4l-checklist-conversion-summarize"
+    },
+    {
+      "id": "T1674",
+      "operation": "route",
+      "status": "completed",
+      "tool": "xp4l-checklist-conversion-route"
+    },
+    {
+      "id": "T1675",
+      "operation": "export",
+      "status": "completed",
+      "tool": "xp4l-checklist-conversion-export"
+    },
+    {
+      "id": "T1676",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "recover-memory-hits-scan"
+    },
+    {
+      "id": "T1677",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "recover-memory-hits-validate"
+    },
+    {
+      "id": "T1678",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "recover-memory-hits-summarize"
+    },
+    {
+      "id": "T1679",
+      "operation": "route",
+      "status": "completed",
+      "tool": "recover-memory-hits-route"
+    },
+    {
+      "id": "T1680",
+      "operation": "export",
+      "status": "completed",
+      "tool": "recover-memory-hits-export"
+    },
+    {
+      "id": "T1681",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "recover-read-order-prompts-scan"
+    },
+    {
+      "id": "T1682",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "recover-read-order-prompts-validate"
+    },
+    {
+      "id": "T1683",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "recover-read-order-prompts-summarize"
+    },
+    {
+      "id": "T1684",
+      "operation": "route",
+      "status": "completed",
+      "tool": "recover-read-order-prompts-route"
+    },
+    {
+      "id": "T1685",
+      "operation": "export",
+      "status": "completed",
+      "tool": "recover-read-order-prompts-export"
+    },
+    {
+      "id": "T1686",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "recover-interrupted-work-scan"
+    },
+    {
+      "id": "T1687",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "recover-interrupted-work-validate"
+    },
+    {
+      "id": "T1688",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "recover-interrupted-work-summarize"
+    },
+    {
+      "id": "T1689",
+      "operation": "route",
+      "status": "completed",
+      "tool": "recover-interrupted-work-route"
+    },
+    {
+      "id": "T1690",
+      "operation": "export",
+      "status": "completed",
+      "tool": "recover-interrupted-work-export"
+    },
+    {
+      "id": "T1691",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "recover-status-artifacts-scan"
+    },
+    {
+      "id": "T1692",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "recover-status-artifacts-validate"
+    },
+    {
+      "id": "T1693",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "recover-status-artifacts-summarize"
+    },
+    {
+      "id": "T1694",
+      "operation": "route",
+      "status": "completed",
+      "tool": "recover-status-artifacts-route"
+    },
+    {
+      "id": "T1695",
+      "operation": "export",
+      "status": "completed",
+      "tool": "recover-status-artifacts-export"
+    },
+    {
+      "id": "T1696",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "recover-lost-coordination-scan"
+    },
+    {
+      "id": "T1697",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "recover-lost-coordination-validate"
+    },
+    {
+      "id": "T1698",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "recover-lost-coordination-summarize"
+    },
+    {
+      "id": "T1699",
+      "operation": "route",
+      "status": "completed",
+      "tool": "recover-lost-coordination-route"
+    },
+    {
+      "id": "T1700",
+      "operation": "export",
+      "status": "completed",
+      "tool": "recover-lost-coordination-export"
+    },
+    {
+      "id": "T1701",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "recover-next-action-anchors-scan"
+    },
+    {
+      "id": "T1702",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "recover-next-action-anchors-validate"
+    },
+    {
+      "id": "T1703",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "recover-next-action-anchors-summarize"
+    },
+    {
+      "id": "T1704",
+      "operation": "route",
+      "status": "completed",
+      "tool": "recover-next-action-anchors-route"
+    },
+    {
+      "id": "T1705",
+      "operation": "export",
+      "status": "completed",
+      "tool": "recover-next-action-anchors-export"
+    },
+    {
+      "id": "T1706",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "recover-evidence-recaps-scan"
+    },
+    {
+      "id": "T1707",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "recover-evidence-recaps-validate"
+    },
+    {
+      "id": "T1708",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "recover-evidence-recaps-summarize"
+    },
+    {
+      "id": "T1709",
+      "operation": "route",
+      "status": "completed",
+      "tool": "recover-evidence-recaps-route"
+    },
+    {
+      "id": "T1710",
+      "operation": "export",
+      "status": "completed",
+      "tool": "recover-evidence-recaps-export"
+    },
+    {
+      "id": "T1711",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "recover-thread-summaries-scan"
+    },
+    {
+      "id": "T1712",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "recover-thread-summaries-validate"
+    },
+    {
+      "id": "T1713",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "recover-thread-summaries-summarize"
+    },
+    {
+      "id": "T1714",
+      "operation": "route",
+      "status": "completed",
+      "tool": "recover-thread-summaries-route"
+    },
+    {
+      "id": "T1715",
+      "operation": "export",
+      "status": "completed",
+      "tool": "recover-thread-summaries-export"
+    },
+    {
+      "id": "T1716",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "visual-figma-node-links-scan"
+    },
+    {
+      "id": "T1717",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "visual-figma-node-links-validate"
+    },
+    {
+      "id": "T1718",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "visual-figma-node-links-summarize"
+    },
+    {
+      "id": "T1719",
+      "operation": "route",
+      "status": "completed",
+      "tool": "visual-figma-node-links-route"
+    },
+    {
+      "id": "T1720",
+      "operation": "export",
+      "status": "completed",
+      "tool": "visual-figma-node-links-export"
+    },
+    {
+      "id": "T1721",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "visual-design-readiness-scan"
+    },
+    {
+      "id": "T1722",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "visual-design-readiness-validate"
+    },
+    {
+      "id": "T1723",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "visual-design-readiness-summarize"
+    },
+    {
+      "id": "T1724",
+      "operation": "route",
+      "status": "completed",
+      "tool": "visual-design-readiness-route"
+    },
+    {
+      "id": "T1725",
+      "operation": "export",
+      "status": "completed",
+      "tool": "visual-design-readiness-export"
+    },
+    {
+      "id": "T1726",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "visual-visual-audit-scan"
+    },
+    {
+      "id": "T1727",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "visual-visual-audit-validate"
+    },
+    {
+      "id": "T1728",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "visual-visual-audit-summarize"
+    },
+    {
+      "id": "T1729",
+      "operation": "route",
+      "status": "completed",
+      "tool": "visual-visual-audit-route"
+    },
+    {
+      "id": "T1730",
+      "operation": "export",
+      "status": "completed",
+      "tool": "visual-visual-audit-export"
+    },
+    {
+      "id": "T1731",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "visual-code-connect-scope-scan"
+    },
+    {
+      "id": "T1732",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "visual-code-connect-scope-validate"
+    },
+    {
+      "id": "T1733",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "visual-code-connect-scope-summarize"
+    },
+    {
+      "id": "T1734",
+      "operation": "route",
+      "status": "completed",
+      "tool": "visual-code-connect-scope-route"
+    },
+    {
+      "id": "T1735",
+      "operation": "export",
+      "status": "completed",
+      "tool": "visual-code-connect-scope-export"
+    },
+    {
+      "id": "T1736",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "visual-asset-exports-scan"
+    },
+    {
+      "id": "T1737",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "visual-asset-exports-validate"
+    },
+    {
+      "id": "T1738",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "visual-asset-exports-summarize"
+    },
+    {
+      "id": "T1739",
+      "operation": "route",
+      "status": "completed",
+      "tool": "visual-asset-exports-route"
+    },
+    {
+      "id": "T1740",
+      "operation": "export",
+      "status": "completed",
+      "tool": "visual-asset-exports-export"
+    },
+    {
+      "id": "T1741",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "visual-implementation-gaps-scan"
+    },
+    {
+      "id": "T1742",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "visual-implementation-gaps-validate"
+    },
+    {
+      "id": "T1743",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "visual-implementation-gaps-summarize"
+    },
+    {
+      "id": "T1744",
+      "operation": "route",
+      "status": "completed",
+      "tool": "visual-implementation-gaps-route"
+    },
+    {
+      "id": "T1745",
+      "operation": "export",
+      "status": "completed",
+      "tool": "visual-implementation-gaps-export"
+    },
+    {
+      "id": "T1746",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "visual-design-system-rules-scan"
+    },
+    {
+      "id": "T1747",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "visual-design-system-rules-validate"
+    },
+    {
+      "id": "T1748",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "visual-design-system-rules-summarize"
+    },
+    {
+      "id": "T1749",
+      "operation": "route",
+      "status": "completed",
+      "tool": "visual-design-system-rules-route"
+    },
+    {
+      "id": "T1750",
+      "operation": "export",
+      "status": "completed",
+      "tool": "visual-design-system-rules-export"
+    },
+    {
+      "id": "T1771",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "dot4-processed-queues-scan"
+    },
+    {
+      "id": "T1772",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "dot4-processed-queues-validate"
+    },
+    {
+      "id": "T1773",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "dot4-processed-queues-summarize"
+    },
+    {
+      "id": "T1774",
+      "operation": "route",
+      "status": "completed",
+      "tool": "dot4-processed-queues-route"
+    },
+    {
+      "id": "T1775",
+      "operation": "export",
+      "status": "completed",
+      "tool": "dot4-processed-queues-export"
+    },
+    {
+      "id": "T1776",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "dot4-rejected-queues-scan"
+    },
+    {
+      "id": "T1777",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "dot4-rejected-queues-validate"
+    },
+    {
+      "id": "T1778",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "dot4-rejected-queues-summarize"
+    },
+    {
+      "id": "T1779",
+      "operation": "route",
+      "status": "completed",
+      "tool": "dot4-rejected-queues-route"
+    },
+    {
+      "id": "T1780",
+      "operation": "export",
+      "status": "completed",
+      "tool": "dot4-rejected-queues-export"
+    },
+    {
+      "id": "T1781",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "dot4-rerun-queues-scan"
+    },
+    {
+      "id": "T1782",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "dot4-rerun-queues-validate"
+    },
+    {
+      "id": "T1783",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "dot4-rerun-queues-summarize"
+    },
+    {
+      "id": "T1784",
+      "operation": "route",
+      "status": "completed",
+      "tool": "dot4-rerun-queues-route"
+    },
+    {
+      "id": "T1785",
+      "operation": "export",
+      "status": "completed",
+      "tool": "dot4-rerun-queues-export"
+    },
+    {
+      "id": "T1786",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "dot4-idempotency-keys-scan"
+    },
+    {
+      "id": "T1787",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "dot4-idempotency-keys-validate"
+    },
+    {
+      "id": "T1788",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "dot4-idempotency-keys-summarize"
+    },
+    {
+      "id": "T1789",
+      "operation": "route",
+      "status": "completed",
+      "tool": "dot4-idempotency-keys-route"
+    },
+    {
+      "id": "T1790",
+      "operation": "export",
+      "status": "completed",
+      "tool": "dot4-idempotency-keys-export"
+    }
+  ]
+}

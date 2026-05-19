@@ -1,0 +1,57 @@
+{
+  "category": "Build & Test Orchestration",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "max_items"
+    ],
+    "outputs": [
+      "summary",
+      "source_refs",
+      "blockers"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "verification",
+  "gates": [],
+  "id": "T0388",
+  "implementation_shape": "handoff-pack",
+  "operation": "summarize",
+  "safety_tags": [
+    "read-only"
+  ],
+  "shared_handler_key": "verification::summarize::handoff-pack",
+  "status": "completed",
+  "summary": {
+    "blockers": [],
+    "brief": "verify-failure-reproduction-summarize is a handoff summary tool in Build & Test Orchestration; it uses handoff-pack and belongs to verification.",
+    "matched_items": [
+      "VERIFICATION.md",
+      "tests\\helpers.py",
+      "tests\\test_bridge.py",
+      "tests\\test_config.py",
+      "tests\\test_context_builder.py"
+    ]
+  },
+  "timestamp": "2026-05-13T00:03:00.306964+00:00",
+  "tool": "verify-failure-reproduction-summarize"
+}

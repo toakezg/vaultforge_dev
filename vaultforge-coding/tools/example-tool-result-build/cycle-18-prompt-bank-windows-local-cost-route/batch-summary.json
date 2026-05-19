@@ -1,0 +1,607 @@
+{
+  "dry_run": false,
+  "status": "completed",
+  "tool_count": 100,
+  "tools": [
+    {
+      "id": "T1271",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "promptbank-prompt-outputs-scan"
+    },
+    {
+      "id": "T1272",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "promptbank-prompt-outputs-validate"
+    },
+    {
+      "id": "T1273",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "promptbank-prompt-outputs-summarize"
+    },
+    {
+      "id": "T1274",
+      "operation": "route",
+      "status": "completed",
+      "tool": "promptbank-prompt-outputs-route"
+    },
+    {
+      "id": "T1275",
+      "operation": "export",
+      "status": "completed",
+      "tool": "promptbank-prompt-outputs-export"
+    },
+    {
+      "id": "T1276",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "promptbank-prompt-reuse-scan"
+    },
+    {
+      "id": "T1277",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "promptbank-prompt-reuse-validate"
+    },
+    {
+      "id": "T1278",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "promptbank-prompt-reuse-summarize"
+    },
+    {
+      "id": "T1279",
+      "operation": "route",
+      "status": "completed",
+      "tool": "promptbank-prompt-reuse-route"
+    },
+    {
+      "id": "T1280",
+      "operation": "export",
+      "status": "completed",
+      "tool": "promptbank-prompt-reuse-export"
+    },
+    {
+      "id": "T1281",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "promptbank-prompt-drift-scan"
+    },
+    {
+      "id": "T1282",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "promptbank-prompt-drift-validate"
+    },
+    {
+      "id": "T1283",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "promptbank-prompt-drift-summarize"
+    },
+    {
+      "id": "T1284",
+      "operation": "route",
+      "status": "completed",
+      "tool": "promptbank-prompt-drift-route"
+    },
+    {
+      "id": "T1285",
+      "operation": "export",
+      "status": "completed",
+      "tool": "promptbank-prompt-drift-export"
+    },
+    {
+      "id": "T1286",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "promptbank-prompt-packs-scan"
+    },
+    {
+      "id": "T1287",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "promptbank-prompt-packs-validate"
+    },
+    {
+      "id": "T1288",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "promptbank-prompt-packs-summarize"
+    },
+    {
+      "id": "T1289",
+      "operation": "route",
+      "status": "completed",
+      "tool": "promptbank-prompt-packs-route"
+    },
+    {
+      "id": "T1290",
+      "operation": "export",
+      "status": "completed",
+      "tool": "promptbank-prompt-packs-export"
+    },
+    {
+      "id": "T1291",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "winlocal-path-roots-scan"
+    },
+    {
+      "id": "T1292",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "winlocal-path-roots-validate"
+    },
+    {
+      "id": "T1293",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "winlocal-path-roots-summarize"
+    },
+    {
+      "id": "T1294",
+      "operation": "route",
+      "status": "completed",
+      "tool": "winlocal-path-roots-route"
+    },
+    {
+      "id": "T1295",
+      "operation": "export",
+      "status": "completed",
+      "tool": "winlocal-path-roots-export"
+    },
+    {
+      "id": "T1296",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "winlocal-path-permissions-scan"
+    },
+    {
+      "id": "T1297",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "winlocal-path-permissions-validate"
+    },
+    {
+      "id": "T1298",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "winlocal-path-permissions-summarize"
+    },
+    {
+      "id": "T1299",
+      "operation": "route",
+      "status": "completed",
+      "tool": "winlocal-path-permissions-route"
+    },
+    {
+      "id": "T1300",
+      "operation": "export",
+      "status": "completed",
+      "tool": "winlocal-path-permissions-export"
+    },
+    {
+      "id": "T1301",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "winlocal-shell-commands-scan"
+    },
+    {
+      "id": "T1302",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "winlocal-shell-commands-validate"
+    },
+    {
+      "id": "T1303",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "winlocal-shell-commands-summarize"
+    },
+    {
+      "id": "T1304",
+      "operation": "route",
+      "status": "completed",
+      "tool": "winlocal-shell-commands-route"
+    },
+    {
+      "id": "T1305",
+      "operation": "export",
+      "status": "completed",
+      "tool": "winlocal-shell-commands-export"
+    },
+    {
+      "id": "T1306",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "winlocal-python-launchers-scan"
+    },
+    {
+      "id": "T1307",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "winlocal-python-launchers-validate"
+    },
+    {
+      "id": "T1308",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "winlocal-python-launchers-summarize"
+    },
+    {
+      "id": "T1309",
+      "operation": "route",
+      "status": "completed",
+      "tool": "winlocal-python-launchers-route"
+    },
+    {
+      "id": "T1310",
+      "operation": "export",
+      "status": "completed",
+      "tool": "winlocal-python-launchers-export"
+    },
+    {
+      "id": "T1311",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "winlocal-node-launchers-scan"
+    },
+    {
+      "id": "T1312",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "winlocal-node-launchers-validate"
+    },
+    {
+      "id": "T1313",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "winlocal-node-launchers-summarize"
+    },
+    {
+      "id": "T1314",
+      "operation": "route",
+      "status": "completed",
+      "tool": "winlocal-node-launchers-route"
+    },
+    {
+      "id": "T1315",
+      "operation": "export",
+      "status": "completed",
+      "tool": "winlocal-node-launchers-export"
+    },
+    {
+      "id": "T1316",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "winlocal-encoding-checks-scan"
+    },
+    {
+      "id": "T1317",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "winlocal-encoding-checks-validate"
+    },
+    {
+      "id": "T1318",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "winlocal-encoding-checks-summarize"
+    },
+    {
+      "id": "T1319",
+      "operation": "route",
+      "status": "completed",
+      "tool": "winlocal-encoding-checks-route"
+    },
+    {
+      "id": "T1320",
+      "operation": "export",
+      "status": "completed",
+      "tool": "winlocal-encoding-checks-export"
+    },
+    {
+      "id": "T1321",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "winlocal-locked-files-scan"
+    },
+    {
+      "id": "T1322",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "winlocal-locked-files-validate"
+    },
+    {
+      "id": "T1323",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "winlocal-locked-files-summarize"
+    },
+    {
+      "id": "T1324",
+      "operation": "route",
+      "status": "completed",
+      "tool": "winlocal-locked-files-route"
+    },
+    {
+      "id": "T1325",
+      "operation": "export",
+      "status": "completed",
+      "tool": "winlocal-locked-files-export"
+    },
+    {
+      "id": "T1326",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "winlocal-safe-cleanup-scan"
+    },
+    {
+      "id": "T1327",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "winlocal-safe-cleanup-validate"
+    },
+    {
+      "id": "T1328",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "winlocal-safe-cleanup-summarize"
+    },
+    {
+      "id": "T1329",
+      "operation": "route",
+      "status": "completed",
+      "tool": "winlocal-safe-cleanup-route"
+    },
+    {
+      "id": "T1330",
+      "operation": "export",
+      "status": "completed",
+      "tool": "winlocal-safe-cleanup-export"
+    },
+    {
+      "id": "T1331",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "winlocal-temp-artifacts-scan"
+    },
+    {
+      "id": "T1332",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "winlocal-temp-artifacts-validate"
+    },
+    {
+      "id": "T1333",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "winlocal-temp-artifacts-summarize"
+    },
+    {
+      "id": "T1334",
+      "operation": "route",
+      "status": "completed",
+      "tool": "winlocal-temp-artifacts-route"
+    },
+    {
+      "id": "T1335",
+      "operation": "export",
+      "status": "completed",
+      "tool": "winlocal-temp-artifacts-export"
+    },
+    {
+      "id": "T1336",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "winlocal-batch-wrappers-scan"
+    },
+    {
+      "id": "T1337",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "winlocal-batch-wrappers-validate"
+    },
+    {
+      "id": "T1338",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "winlocal-batch-wrappers-summarize"
+    },
+    {
+      "id": "T1339",
+      "operation": "route",
+      "status": "completed",
+      "tool": "winlocal-batch-wrappers-route"
+    },
+    {
+      "id": "T1340",
+      "operation": "export",
+      "status": "completed",
+      "tool": "winlocal-batch-wrappers-export"
+    },
+    {
+      "id": "T1341",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "winlocal-path-collision-scan"
+    },
+    {
+      "id": "T1342",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "winlocal-path-collision-validate"
+    },
+    {
+      "id": "T1343",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "winlocal-path-collision-summarize"
+    },
+    {
+      "id": "T1344",
+      "operation": "route",
+      "status": "completed",
+      "tool": "winlocal-path-collision-route"
+    },
+    {
+      "id": "T1345",
+      "operation": "export",
+      "status": "completed",
+      "tool": "winlocal-path-collision-export"
+    },
+    {
+      "id": "T1346",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "costroute-model-routing-rules-scan"
+    },
+    {
+      "id": "T1347",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "costroute-model-routing-rules-validate"
+    },
+    {
+      "id": "T1348",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "costroute-model-routing-rules-summarize"
+    },
+    {
+      "id": "T1349",
+      "operation": "route",
+      "status": "completed",
+      "tool": "costroute-model-routing-rules-route"
+    },
+    {
+      "id": "T1350",
+      "operation": "export",
+      "status": "completed",
+      "tool": "costroute-model-routing-rules-export"
+    },
+    {
+      "id": "T1351",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "costroute-token-burn-risks-scan"
+    },
+    {
+      "id": "T1352",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "costroute-token-burn-risks-validate"
+    },
+    {
+      "id": "T1353",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "costroute-token-burn-risks-summarize"
+    },
+    {
+      "id": "T1354",
+      "operation": "route",
+      "status": "completed",
+      "tool": "costroute-token-burn-risks-route"
+    },
+    {
+      "id": "T1355",
+      "operation": "export",
+      "status": "completed",
+      "tool": "costroute-token-burn-risks-export"
+    },
+    {
+      "id": "T1356",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "costroute-cache-candidates-scan"
+    },
+    {
+      "id": "T1357",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "costroute-cache-candidates-validate"
+    },
+    {
+      "id": "T1358",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "costroute-cache-candidates-summarize"
+    },
+    {
+      "id": "T1359",
+      "operation": "route",
+      "status": "completed",
+      "tool": "costroute-cache-candidates-route"
+    },
+    {
+      "id": "T1360",
+      "operation": "export",
+      "status": "completed",
+      "tool": "costroute-cache-candidates-export"
+    },
+    {
+      "id": "T1361",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "costroute-tool-versus-model-scan"
+    },
+    {
+      "id": "T1362",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "costroute-tool-versus-model-validate"
+    },
+    {
+      "id": "T1363",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "costroute-tool-versus-model-summarize"
+    },
+    {
+      "id": "T1364",
+      "operation": "route",
+      "status": "completed",
+      "tool": "costroute-tool-versus-model-route"
+    },
+    {
+      "id": "T1365",
+      "operation": "export",
+      "status": "completed",
+      "tool": "costroute-tool-versus-model-export"
+    },
+    {
+      "id": "T1366",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "costroute-preflight-estimates-scan"
+    },
+    {
+      "id": "T1367",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "costroute-preflight-estimates-validate"
+    },
+    {
+      "id": "T1368",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "costroute-preflight-estimates-summarize"
+    },
+    {
+      "id": "T1369",
+      "operation": "route",
+      "status": "completed",
+      "tool": "costroute-preflight-estimates-route"
+    },
+    {
+      "id": "T1370",
+      "operation": "export",
+      "status": "completed",
+      "tool": "costroute-preflight-estimates-export"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "category": "Review Surface and Regression Checks",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,filters | outputs=items,counts,source_paths | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "filters"
+    ],
+    "outputs": [
+      "items",
+      "counts",
+      "source_paths"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "regression-review",
+  "gates": [],
+  "id": "T1461",
+  "implementation_shape": "path-list",
+  "operation": "scan",
+  "safety_tags": [
+    "read-only"
+  ],
+  "scan": {
+    "counts": {
+      "candidate_files": 200,
+      "matched_items": 20
+    },
+    "items": [
+      "tools\\tool-list-builder-workflow.md",
+      "tools\\tool-list-contracts.jsonl",
+      "tools\\tool-list-index.jsonl",
+      "tools\\tool-list.md",
+      "tools\\Unknown.json",
+      "tools\\example-tool-result-build\\catalog-list-cycle-4\\list-output.json",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0165-prompt-reviewer-prompts-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0340-requirements-success-checks-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\batch-summary.json",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\batch-summary.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\dry-run-output.json",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\live-run-output.json",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0355-verify-build-commands-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0360-verify-test-commands-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0365-verify-lint-commands-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0370-verify-format-commands-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0375-verify-coverage-runs-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0380-verify-smoke-tests-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0385-verify-fixture-setup-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0390-verify-failure-reproduction-export.md"
+    ],
+    "keywords": [
+      "regress",
+      "regression",
+      "map",
+      "scan",
+      "review",
+      "surface",
+      "checks",
+      "workflows",
+      "find",
+      "list",
+      "known",
+      "behaviors"
+    ],
+    "source_root": "F:\\vaultforge\\vaultforge-coding"
+  },
+  "shared_handler_key": "regression-review::scan::path-list",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:11:57.768047+00:00",
+  "tool": "regress-regression-map-scan"
+}

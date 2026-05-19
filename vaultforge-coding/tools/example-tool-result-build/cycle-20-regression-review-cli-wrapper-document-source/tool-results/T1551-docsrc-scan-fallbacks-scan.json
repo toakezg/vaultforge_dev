@@ -1,0 +1,82 @@
+{
+  "category": "Document PDF and Source Processing",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,filters | outputs=items,counts,source_paths | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "filters"
+    ],
+    "outputs": [
+      "items",
+      "counts",
+      "source_paths"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "document-source",
+  "gates": [],
+  "id": "T1551",
+  "implementation_shape": "path-list",
+  "operation": "scan",
+  "safety_tags": [
+    "read-only"
+  ],
+  "scan": {
+    "counts": {
+      "candidate_files": 200,
+      "matched_items": 13
+    },
+    "items": [
+      "TASKS.md",
+      "tools\\tool-list-builder-workflow.md",
+      "tools\\tool-list-contracts.jsonl",
+      "tools\\tool-list-index.jsonl",
+      "tools\\tool-list.md",
+      "tools\\example-tool-result-build\\catalog-list-cycle-4\\list-output.json",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0060-workspace-source-files-export.md",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0115-context-task-docs-export.md",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0155-prompt-task-prompts-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0290-artifact-screenshots-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0450-review-review-findings-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0605-security-secret-scans-export.md",
+      "tools\\example-tool-result-build\\cycle-11-schema-data-multi-agent\\T0675-schema-task-records-export.md"
+    ],
+    "keywords": [
+      "docsrc",
+      "scan",
+      "fallbacks",
+      "document",
+      "pdf",
+      "source",
+      "processing",
+      "find",
+      "list",
+      "when",
+      "ask",
+      "screenshots"
+    ],
+    "source_root": "F:\\vaultforge\\vaultforge-coding"
+  },
+  "shared_handler_key": "document-source::scan::path-list",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:12:32.894479+00:00",
+  "tool": "docsrc-scan-fallbacks-scan"
+}

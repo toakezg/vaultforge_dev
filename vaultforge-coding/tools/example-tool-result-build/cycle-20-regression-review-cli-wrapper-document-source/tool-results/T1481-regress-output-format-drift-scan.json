@@ -1,0 +1,89 @@
+{
+  "category": "Review Surface and Regression Checks",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,filters | outputs=items,counts,source_paths | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "filters"
+    ],
+    "outputs": [
+      "items",
+      "counts",
+      "source_paths"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "regression-review",
+  "gates": [],
+  "id": "T1481",
+  "implementation_shape": "path-list",
+  "operation": "scan",
+  "safety_tags": [
+    "read-only"
+  ],
+  "scan": {
+    "counts": {
+      "candidate_files": 200,
+      "matched_items": 20
+    },
+    "items": [
+      "tools\\tool-list-builder-workflow.md",
+      "tools\\tool-list-contracts.jsonl",
+      "tools\\tool-list-index.jsonl",
+      "tools\\tool-list.md",
+      "tools\\example-tool-result-build\\coverage-cycle-15-output.json",
+      "tools\\example-tool-result-build\\catalog-list-cycle-4\\list-output.json",
+      "tools\\example-tool-result-build\\cost-route-cycle-3\\dry-run-output.json",
+      "tools\\example-tool-result-build\\cost-route-cycle-3\\live-run-output.json",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\dry-run-output.json",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\live-run-output.json",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0035-registry-output-specs-export.md",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\dry-run-output.json",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\live-run-output.json",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0165-prompt-reviewer-prompts-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\dry-run-output.json",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\live-run-output.json",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0340-requirements-success-checks-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\batch-summary.json",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\batch-summary.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\dry-run-output.json"
+    ],
+    "keywords": [
+      "regress",
+      "output",
+      "format",
+      "drift",
+      "scan",
+      "review",
+      "surface",
+      "regression",
+      "checks",
+      "workflows",
+      "find",
+      "list"
+    ],
+    "source_root": "F:\\vaultforge\\vaultforge-coding"
+  },
+  "shared_handler_key": "regression-review::scan::path-list",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:12:19.805398+00:00",
+  "tool": "regress-output-format-drift-scan"
+}

@@ -1,0 +1,123 @@
+# VaultForge Tool Batch Summary
+
+- status: completed
+- dry_run: False
+- tool_count: 100
+- gated_tool_count: 5
+
+## Families
+
+- cli-wrapper: 40
+- document-source: 35
+- regression-review: 25
+
+## Operations
+
+- scan: 20
+- validate: 20
+- summarize: 20
+- route: 20
+- export: 20
+
+## Tools
+
+- T1471 | regress-contract-drift-scan | regression-review | scan | completed
+- T1472 | regress-contract-drift-validate | regression-review | validate | completed
+- T1473 | regress-contract-drift-summarize | regression-review | summarize | completed
+- T1474 | regress-contract-drift-route | regression-review | route | completed
+- T1475 | regress-contract-drift-export | regression-review | export | completed
+- T1476 | regress-safety-regression-scan | regression-review | scan | completed
+- T1477 | regress-safety-regression-validate | regression-review | validate | completed
+- T1478 | regress-safety-regression-summarize | regression-review | summarize | completed
+- T1479 | regress-safety-regression-route | regression-review | route | completed
+- T1480 | regress-safety-regression-export | regression-review | export | completed
+- T1481 | regress-output-format-drift-scan | regression-review | scan | completed
+- T1482 | regress-output-format-drift-validate | regression-review | validate | completed
+- T1483 | regress-output-format-drift-summarize | regression-review | summarize | completed
+- T1484 | regress-output-format-drift-route | regression-review | route | completed
+- T1485 | regress-output-format-drift-export | regression-review | export | completed
+- T1486 | regress-error-clarity-scan | regression-review | scan | completed
+- T1487 | regress-error-clarity-validate | regression-review | validate | completed
+- T1488 | regress-error-clarity-summarize | regression-review | summarize | completed
+- T1489 | regress-error-clarity-route | regression-review | route | completed
+- T1490 | regress-error-clarity-export | regression-review | export | completed
+- T1491 | regress-artifact-evidence-scan | regression-review | scan | completed
+- T1492 | regress-artifact-evidence-validate | regression-review | validate | completed
+- T1493 | regress-artifact-evidence-summarize | regression-review | summarize | completed
+- T1494 | regress-artifact-evidence-route | regression-review | route | completed
+- T1495 | regress-artifact-evidence-export | regression-review | export | completed
+- T1496 | cliwrap-cli-entrypoints-scan | cli-wrapper | scan | completed
+- T1497 | cliwrap-cli-entrypoints-validate | cli-wrapper | validate | completed
+- T1498 | cliwrap-cli-entrypoints-summarize | cli-wrapper | summarize | completed
+- T1499 | cliwrap-cli-entrypoints-route | cli-wrapper | route | completed
+- T1500 | cliwrap-cli-entrypoints-export | cli-wrapper | export | completed
+- T1501 | cliwrap-argument-parsers-scan | cli-wrapper | scan | completed
+- T1502 | cliwrap-argument-parsers-validate | cli-wrapper | validate | completed
+- T1503 | cliwrap-argument-parsers-summarize | cli-wrapper | summarize | completed
+- T1504 | cliwrap-argument-parsers-route | cli-wrapper | route | completed
+- T1505 | cliwrap-argument-parsers-export | cli-wrapper | export | completed
+- T1506 | cliwrap-dry-run-modes-scan | cli-wrapper | scan | completed
+- T1507 | cliwrap-dry-run-modes-validate | cli-wrapper | validate | completed
+- T1508 | cliwrap-dry-run-modes-summarize | cli-wrapper | summarize | completed
+- T1509 | cliwrap-dry-run-modes-route | cli-wrapper | route | completed
+- T1510 | cliwrap-dry-run-modes-export | cli-wrapper | export | completed
+- T1511 | cliwrap-exit-codes-scan | cli-wrapper | scan | completed
+- T1512 | cliwrap-exit-codes-validate | cli-wrapper | validate | completed
+- T1513 | cliwrap-exit-codes-summarize | cli-wrapper | summarize | completed
+- T1514 | cliwrap-exit-codes-route | cli-wrapper | route | completed
+- T1515 | cliwrap-exit-codes-export | cli-wrapper | export | completed
+- T1516 | cliwrap-stdout-formats-scan | cli-wrapper | scan | completed
+- T1517 | cliwrap-stdout-formats-validate | cli-wrapper | validate | completed
+- T1518 | cliwrap-stdout-formats-summarize | cli-wrapper | summarize | completed
+- T1519 | cliwrap-stdout-formats-route | cli-wrapper | route | completed
+- T1520 | cliwrap-stdout-formats-export | cli-wrapper | export | completed
+- T1521 | cliwrap-stderr-formats-scan | cli-wrapper | scan | completed
+- T1522 | cliwrap-stderr-formats-validate | cli-wrapper | validate | completed
+- T1523 | cliwrap-stderr-formats-summarize | cli-wrapper | summarize | completed
+- T1524 | cliwrap-stderr-formats-route | cli-wrapper | route | completed
+- T1525 | cliwrap-stderr-formats-export | cli-wrapper | export | completed
+- T1526 | cliwrap-wrapper-sync-scan | cli-wrapper | scan | completed
+- T1527 | cliwrap-wrapper-sync-validate | cli-wrapper | validate | completed
+- T1528 | cliwrap-wrapper-sync-summarize | cli-wrapper | summarize | completed
+- T1529 | cliwrap-wrapper-sync-route | cli-wrapper | route | completed
+- T1530 | cliwrap-wrapper-sync-export | cli-wrapper | export | completed
+- T1531 | cliwrap-installation-checks-scan | cli-wrapper | scan | completed
+- T1532 | cliwrap-installation-checks-validate | cli-wrapper | validate | completed
+- T1533 | cliwrap-installation-checks-summarize | cli-wrapper | summarize | completed
+- T1534 | cliwrap-installation-checks-route | cli-wrapper | route | completed
+- T1535 | cliwrap-installation-checks-export | cli-wrapper | export | completed
+- T1536 | docsrc-pdf-text-paths-scan | document-source | scan | completed
+- T1537 | docsrc-pdf-text-paths-validate | document-source | validate | completed
+- T1538 | docsrc-pdf-text-paths-summarize | document-source | summarize | completed
+- T1539 | docsrc-pdf-text-paths-route | document-source | route | completed
+- T1540 | docsrc-pdf-text-paths-export | document-source | export | completed
+- T1541 | docsrc-pdf-render-paths-scan | document-source | scan | completed
+- T1542 | docsrc-pdf-render-paths-validate | document-source | validate | completed
+- T1543 | docsrc-pdf-render-paths-summarize | document-source | summarize | completed
+- T1544 | docsrc-pdf-render-paths-route | document-source | route | completed
+- T1545 | docsrc-pdf-render-paths-export | document-source | export | completed
+- T1546 | docsrc-source-excerpts-scan | document-source | scan | completed
+- T1547 | docsrc-source-excerpts-validate | document-source | validate | completed
+- T1548 | docsrc-source-excerpts-summarize | document-source | summarize | completed
+- T1549 | docsrc-source-excerpts-route | document-source | route | completed
+- T1550 | docsrc-source-excerpts-export | document-source | export | completed
+- T1551 | docsrc-scan-fallbacks-scan | document-source | scan | completed
+- T1552 | docsrc-scan-fallbacks-validate | document-source | validate | completed
+- T1553 | docsrc-scan-fallbacks-summarize | document-source | summarize | completed
+- T1554 | docsrc-scan-fallbacks-route | document-source | route | completed
+- T1555 | docsrc-scan-fallbacks-export | document-source | export | completed
+- T1556 | docsrc-note-transforms-scan | document-source | scan | completed
+- T1557 | docsrc-note-transforms-validate | document-source | validate | completed
+- T1558 | docsrc-note-transforms-summarize | document-source | summarize | completed
+- T1559 | docsrc-note-transforms-route | document-source | route | completed
+- T1560 | docsrc-note-transforms-export | document-source | export | completed
+- T1561 | docsrc-report-drafts-scan | document-source | scan | completed
+- T1562 | docsrc-report-drafts-validate | document-source | validate | completed
+- T1563 | docsrc-report-drafts-summarize | document-source | summarize | completed
+- T1564 | docsrc-report-drafts-route | document-source | route | completed
+- T1565 | docsrc-report-drafts-export | document-source | export | completed
+- T1566 | docsrc-table-extraction-scan | document-source | scan | completed
+- T1567 | docsrc-table-extraction-validate | document-source | validate | completed
+- T1568 | docsrc-table-extraction-summarize | document-source | summarize | completed
+- T1569 | docsrc-table-extraction-route | document-source | route | completed
+- T1570 | docsrc-table-extraction-export | document-source | export | completed

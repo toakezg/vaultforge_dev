@@ -1,0 +1,57 @@
+{
+  "category": "VaultForge Section Coordination",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "max_items"
+    ],
+    "outputs": [
+      "summary",
+      "source_refs",
+      "blockers"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "vaultforge-section",
+  "gates": [],
+  "id": "T1003",
+  "implementation_shape": "handoff-pack",
+  "operation": "summarize",
+  "safety_tags": [
+    "read-only"
+  ],
+  "shared_handler_key": "vaultforge-section::summarize::handoff-pack",
+  "status": "completed",
+  "summary": {
+    "blockers": [],
+    "brief": "vfsec-root-read-order-summarize is a handoff summary tool in VaultForge Section Coordination; it uses handoff-pack and belongs to vaultforge-section.",
+    "matched_items": [
+      "Changelog-Auto.md",
+      "CHANGELOG.md",
+      "CODEX_START.md",
+      "PLAN.md",
+      "pyproject.toml"
+    ]
+  },
+  "timestamp": "2026-05-13T00:06:43.222808+00:00",
+  "tool": "vfsec-root-read-order-summarize"
+}

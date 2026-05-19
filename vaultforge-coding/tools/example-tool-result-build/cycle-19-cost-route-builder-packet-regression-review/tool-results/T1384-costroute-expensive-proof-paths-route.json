@@ -1,0 +1,72 @@
+{
+  "category": "Usage Cost and Model Routing",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes",
+      "ungated external calls",
+      "ungated paid API calls"
+    ],
+    "contract_line": "inputs=target_root,item_id,available_lanes,constraints | outputs=target_lane,confidence,blockers,required_proof | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated external calls;ungated paid API calls | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "item_id",
+      "available_lanes",
+      "constraints"
+    ],
+    "outputs": [
+      "target_lane",
+      "confidence",
+      "blockers",
+      "required_proof"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "cost-route",
+  "gates": [
+    {
+      "reason": "external calls remain blocked in local proof mode",
+      "status": "blocked-local",
+      "tag": "external-gated"
+    },
+    {
+      "reason": "paid API usage remains blocked in local proof mode",
+      "status": "blocked-local",
+      "tag": "paid-gated"
+    }
+  ],
+  "id": "T1384",
+  "implementation_shape": "routing-decision",
+  "operation": "route",
+  "route": {
+    "blockers": [],
+    "confidence": "medium",
+    "required_proof": [
+      "fixture run",
+      "blocked-path negative test"
+    ],
+    "target_lane": "cost-route"
+  },
+  "safety_tags": [
+    "external-gated",
+    "paid-gated",
+    "read-only"
+  ],
+  "shared_handler_key": "cost-route::route::routing-decision",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:11:42.700566+00:00",
+  "tool": "costroute-expensive-proof-paths-route"
+}

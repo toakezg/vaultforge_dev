@@ -1,0 +1,89 @@
+{
+  "category": "XP4Life Quest and Event Tracking",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,filters | outputs=items,counts,source_paths | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "filters"
+    ],
+    "outputs": [
+      "items",
+      "counts",
+      "source_paths"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "xp4l-event",
+  "gates": [],
+  "id": "T1656",
+  "implementation_shape": "path-list",
+  "operation": "scan",
+  "safety_tags": [
+    "read-only"
+  ],
+  "scan": {
+    "counts": {
+      "candidate_files": 200,
+      "matched_items": 20
+    },
+    "items": [
+      "tests\\test_event_writer.py",
+      "tools\\tool-list-builder-workflow.md",
+      "tools\\tool-list-contracts.jsonl",
+      "tools\\tool-list-index.jsonl",
+      "tools\\tool-list.md",
+      "tools\\example-tool-result-build\\catalog-list-cycle-4\\list-output.json",
+      "tools\\example-tool-result-build\\cost-route-cycle-3\\batch-summary.json",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\batch-summary.json",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\batch-summary.md",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\batch-summary.json",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\batch-summary.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\batch-summary.json",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\batch-summary.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0305-requirements-raw-requests-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\batch-summary.json",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\batch-summary.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0450-review-review-findings-export.md",
+      "tools\\example-tool-result-build\\cycle-09-docs-git-change\\batch-summary.json",
+      "tools\\example-tool-result-build\\cycle-09-docs-git-change\\batch-summary.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\batch-summary.json"
+    ],
+    "keywords": [
+      "xp4l",
+      "event",
+      "batches",
+      "scan",
+      "xp4life",
+      "quest",
+      "tracking",
+      "systems",
+      "find",
+      "list",
+      "batch",
+      "validation"
+    ],
+    "source_root": "F:\\vaultforge\\vaultforge-coding"
+  },
+  "shared_handler_key": "xp4l-event::scan::path-list",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:13:10.509714+00:00",
+  "tool": "xp4l-event-batches-scan"
+}

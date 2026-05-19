@@ -1,0 +1,122 @@
+# VaultForge Tool Batch Summary
+
+- status: completed
+- dry_run: False
+- tool_count: 100
+- gated_tool_count: 50
+
+## Families
+
+- runtime-smoke: 50
+- refactor-migration: 50
+
+## Operations
+
+- scan: 20
+- validate: 20
+- summarize: 20
+- diff: 20
+- export: 20
+
+## Tools
+
+- T0751 | smoke-local-urls-scan | runtime-smoke | scan | completed
+- T0752 | smoke-local-urls-validate | runtime-smoke | validate | completed
+- T0753 | smoke-local-urls-summarize | runtime-smoke | summarize | completed
+- T0754 | smoke-local-urls-diff | runtime-smoke | diff | completed
+- T0755 | smoke-local-urls-export | runtime-smoke | export | completed
+- T0756 | smoke-api-endpoints-scan | runtime-smoke | scan | completed
+- T0757 | smoke-api-endpoints-validate | runtime-smoke | validate | completed
+- T0758 | smoke-api-endpoints-summarize | runtime-smoke | summarize | completed
+- T0759 | smoke-api-endpoints-diff | runtime-smoke | diff | completed
+- T0760 | smoke-api-endpoints-export | runtime-smoke | export | completed
+- T0761 | smoke-form-flows-scan | runtime-smoke | scan | completed
+- T0762 | smoke-form-flows-validate | runtime-smoke | validate | completed
+- T0763 | smoke-form-flows-summarize | runtime-smoke | summarize | completed
+- T0764 | smoke-form-flows-diff | runtime-smoke | diff | completed
+- T0765 | smoke-form-flows-export | runtime-smoke | export | completed
+- T0766 | smoke-screenshot-checks-scan | runtime-smoke | scan | completed
+- T0767 | smoke-screenshot-checks-validate | runtime-smoke | validate | completed
+- T0768 | smoke-screenshot-checks-summarize | runtime-smoke | summarize | completed
+- T0769 | smoke-screenshot-checks-diff | runtime-smoke | diff | completed
+- T0770 | smoke-screenshot-checks-export | runtime-smoke | export | completed
+- T0771 | smoke-console-errors-scan | runtime-smoke | scan | completed
+- T0772 | smoke-console-errors-validate | runtime-smoke | validate | completed
+- T0773 | smoke-console-errors-summarize | runtime-smoke | summarize | completed
+- T0774 | smoke-console-errors-diff | runtime-smoke | diff | completed
+- T0775 | smoke-console-errors-export | runtime-smoke | export | completed
+- T0776 | smoke-network-errors-scan | runtime-smoke | scan | completed
+- T0777 | smoke-network-errors-validate | runtime-smoke | validate | completed
+- T0778 | smoke-network-errors-summarize | runtime-smoke | summarize | completed
+- T0779 | smoke-network-errors-diff | runtime-smoke | diff | completed
+- T0780 | smoke-network-errors-export | runtime-smoke | export | completed
+- T0781 | smoke-accessibility-labels-scan | runtime-smoke | scan | completed
+- T0782 | smoke-accessibility-labels-validate | runtime-smoke | validate | completed
+- T0783 | smoke-accessibility-labels-summarize | runtime-smoke | summarize | completed
+- T0784 | smoke-accessibility-labels-diff | runtime-smoke | diff | completed
+- T0785 | smoke-accessibility-labels-export | runtime-smoke | export | completed
+- T0786 | smoke-responsive-states-scan | runtime-smoke | scan | completed
+- T0787 | smoke-responsive-states-validate | runtime-smoke | validate | completed
+- T0788 | smoke-responsive-states-summarize | runtime-smoke | summarize | completed
+- T0789 | smoke-responsive-states-diff | runtime-smoke | diff | completed
+- T0790 | smoke-responsive-states-export | runtime-smoke | export | completed
+- T0791 | smoke-auth-gates-scan | runtime-smoke | scan | completed
+- T0792 | smoke-auth-gates-validate | runtime-smoke | validate | completed
+- T0793 | smoke-auth-gates-summarize | runtime-smoke | summarize | completed
+- T0794 | smoke-auth-gates-diff | runtime-smoke | diff | completed
+- T0795 | smoke-auth-gates-export | runtime-smoke | export | completed
+- T0796 | smoke-fixture-data-scan | runtime-smoke | scan | completed
+- T0797 | smoke-fixture-data-validate | runtime-smoke | validate | completed
+- T0798 | smoke-fixture-data-summarize | runtime-smoke | summarize | completed
+- T0799 | smoke-fixture-data-diff | runtime-smoke | diff | completed
+- T0800 | smoke-fixture-data-export | runtime-smoke | export | completed
+- T0801 | refactor-rename-plans-scan | refactor-migration | scan | completed
+- T0802 | refactor-rename-plans-validate | refactor-migration | validate | completed
+- T0803 | refactor-rename-plans-summarize | refactor-migration | summarize | completed
+- T0804 | refactor-rename-plans-diff | refactor-migration | diff | completed
+- T0805 | refactor-rename-plans-export | refactor-migration | export | completed
+- T0806 | refactor-move-plans-scan | refactor-migration | scan | completed
+- T0807 | refactor-move-plans-validate | refactor-migration | validate | completed
+- T0808 | refactor-move-plans-summarize | refactor-migration | summarize | completed
+- T0809 | refactor-move-plans-diff | refactor-migration | diff | completed
+- T0810 | refactor-move-plans-export | refactor-migration | export | completed
+- T0811 | refactor-import-rewrites-scan | refactor-migration | scan | completed
+- T0812 | refactor-import-rewrites-validate | refactor-migration | validate | completed
+- T0813 | refactor-import-rewrites-summarize | refactor-migration | summarize | completed
+- T0814 | refactor-import-rewrites-diff | refactor-migration | diff | completed
+- T0815 | refactor-import-rewrites-export | refactor-migration | export | completed
+- T0816 | refactor-function-splits-scan | refactor-migration | scan | completed
+- T0817 | refactor-function-splits-validate | refactor-migration | validate | completed
+- T0818 | refactor-function-splits-summarize | refactor-migration | summarize | completed
+- T0819 | refactor-function-splits-diff | refactor-migration | diff | completed
+- T0820 | refactor-function-splits-export | refactor-migration | export | completed
+- T0821 | refactor-module-boundaries-scan | refactor-migration | scan | completed
+- T0822 | refactor-module-boundaries-validate | refactor-migration | validate | completed
+- T0823 | refactor-module-boundaries-summarize | refactor-migration | summarize | completed
+- T0824 | refactor-module-boundaries-diff | refactor-migration | diff | completed
+- T0825 | refactor-module-boundaries-export | refactor-migration | export | completed
+- T0826 | refactor-legacy-adapters-scan | refactor-migration | scan | completed
+- T0827 | refactor-legacy-adapters-validate | refactor-migration | validate | completed
+- T0828 | refactor-legacy-adapters-summarize | refactor-migration | summarize | completed
+- T0829 | refactor-legacy-adapters-diff | refactor-migration | diff | completed
+- T0830 | refactor-legacy-adapters-export | refactor-migration | export | completed
+- T0831 | refactor-migration-notes-scan | refactor-migration | scan | completed
+- T0832 | refactor-migration-notes-validate | refactor-migration | validate | completed
+- T0833 | refactor-migration-notes-summarize | refactor-migration | summarize | completed
+- T0834 | refactor-migration-notes-diff | refactor-migration | diff | completed
+- T0835 | refactor-migration-notes-export | refactor-migration | export | completed
+- T0836 | refactor-compatibility-shims-scan | refactor-migration | scan | completed
+- T0837 | refactor-compatibility-shims-validate | refactor-migration | validate | completed
+- T0838 | refactor-compatibility-shims-summarize | refactor-migration | summarize | completed
+- T0839 | refactor-compatibility-shims-diff | refactor-migration | diff | completed
+- T0840 | refactor-compatibility-shims-export | refactor-migration | export | completed
+- T0841 | refactor-deprecation-paths-scan | refactor-migration | scan | completed
+- T0842 | refactor-deprecation-paths-validate | refactor-migration | validate | completed
+- T0843 | refactor-deprecation-paths-summarize | refactor-migration | summarize | completed
+- T0844 | refactor-deprecation-paths-diff | refactor-migration | diff | completed
+- T0845 | refactor-deprecation-paths-export | refactor-migration | export | completed
+- T0846 | refactor-rollback-notes-scan | refactor-migration | scan | completed
+- T0847 | refactor-rollback-notes-validate | refactor-migration | validate | completed
+- T0848 | refactor-rollback-notes-summarize | refactor-migration | summarize | completed
+- T0849 | refactor-rollback-notes-diff | refactor-migration | diff | completed
+- T0850 | refactor-rollback-notes-export | refactor-migration | export | completed

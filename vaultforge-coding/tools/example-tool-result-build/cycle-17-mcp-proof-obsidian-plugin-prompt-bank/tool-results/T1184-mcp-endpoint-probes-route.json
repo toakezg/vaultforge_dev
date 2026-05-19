@@ -1,0 +1,66 @@
+{
+  "category": "MCP Connector Proof and Capability",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes",
+      "ungated external calls"
+    ],
+    "contract_line": "inputs=target_root,item_id,available_lanes,constraints | outputs=target_lane,confidence,blockers,required_proof | reads=allowlisted repo roots;configured MCP metadata and safe probe outputs | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated external calls | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "item_id",
+      "available_lanes",
+      "constraints"
+    ],
+    "outputs": [
+      "target_lane",
+      "confidence",
+      "blockers",
+      "required_proof"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots",
+      "configured MCP metadata and safe probe outputs"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "mcp-proof",
+  "gates": [
+    {
+      "reason": "external calls remain blocked in local proof mode",
+      "status": "blocked-local",
+      "tag": "external-gated"
+    }
+  ],
+  "id": "T1184",
+  "implementation_shape": "routing-decision",
+  "operation": "route",
+  "route": {
+    "blockers": [],
+    "confidence": "medium",
+    "required_proof": [
+      "fixture run",
+      "blocked-path negative test"
+    ],
+    "target_lane": "mcp-proof"
+  },
+  "safety_tags": [
+    "external-gated",
+    "read-only"
+  ],
+  "shared_handler_key": "mcp-proof::route::routing-decision",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:10:28.701326+00:00",
+  "tool": "mcp-endpoint-probes-route"
+}

@@ -1,0 +1,85 @@
+{
+  "category": "Data Validation & Schema",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,filters | outputs=items,counts,source_paths | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "filters"
+    ],
+    "outputs": [
+      "items",
+      "counts",
+      "source_paths"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "schema-data",
+  "gates": [],
+  "id": "T0696",
+  "implementation_shape": "path-list",
+  "operation": "scan",
+  "safety_tags": [
+    "read-only"
+  ],
+  "scan": {
+    "counts": {
+      "candidate_files": 200,
+      "matched_items": 16
+    },
+    "items": [
+      "tools\\tool-list-builder-workflow.md",
+      "tools\\tool-list-contracts.jsonl",
+      "tools\\tool-list-index.jsonl",
+      "tools\\tool-list.md",
+      "tools\\example-tool-result-build\\catalog-list-cycle-4\\list-output.json",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0450-review-review-findings-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0605-security-secret-scans-export.md",
+      "tools\\example-tool-result-build\\cycle-11-schema-data-multi-agent\\T0655-schema-json-files-export.md",
+      "tools\\example-tool-result-build\\cycle-11-schema-data-multi-agent\\T0660-schema-yaml-files-export.md",
+      "tools\\example-tool-result-build\\cycle-11-schema-data-multi-agent\\T0665-schema-markdown-frontmatter-export.md",
+      "tools\\example-tool-result-build\\cycle-11-schema-data-multi-agent\\T0670-schema-csv-tables-export.md",
+      "tools\\example-tool-result-build\\cycle-11-schema-data-multi-agent\\T0675-schema-task-records-export.md",
+      "tools\\example-tool-result-build\\cycle-11-schema-data-multi-agent\\T0680-schema-event-records-export.md",
+      "tools\\example-tool-result-build\\cycle-11-schema-data-multi-agent\\T0685-schema-config-records-export.md",
+      "tools\\example-tool-result-build\\cycle-11-schema-data-multi-agent\\T0690-schema-schema-drift-export.md",
+      "tools\\example-tool-result-build\\cycle-11-schema-data-multi-agent\\T0695-schema-id-uniqueness-export.md"
+    ],
+    "keywords": [
+      "schema",
+      "date",
+      "fields",
+      "scan",
+      "data",
+      "validation",
+      "structured",
+      "find",
+      "list",
+      "parsing",
+      "timezone",
+      "ordering"
+    ],
+    "source_root": "F:\\vaultforge\\vaultforge-coding"
+  },
+  "shared_handler_key": "schema-data::scan::path-list",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:04:57.281844+00:00",
+  "tool": "schema-date-fields-scan"
+}

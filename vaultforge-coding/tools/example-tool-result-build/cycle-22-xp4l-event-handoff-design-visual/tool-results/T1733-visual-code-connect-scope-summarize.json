@@ -1,0 +1,65 @@
+{
+  "category": "Figma Design and Visual Inspection",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes",
+      "ungated external calls"
+    ],
+    "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes;ungated external calls | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "max_items"
+    ],
+    "outputs": [
+      "summary",
+      "source_refs",
+      "blockers"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "design-visual",
+  "gates": [
+    {
+      "reason": "external calls remain blocked in local proof mode",
+      "status": "blocked-local",
+      "tag": "external-gated"
+    }
+  ],
+  "id": "T1733",
+  "implementation_shape": "handoff-pack",
+  "operation": "summarize",
+  "safety_tags": [
+    "external-gated",
+    "read-only"
+  ],
+  "shared_handler_key": "design-visual::summarize::handoff-pack",
+  "status": "completed",
+  "summary": {
+    "blockers": [],
+    "brief": "visual-code-connect-scope-summarize is a handoff summary tool in Figma Design and Visual Inspection; it uses handoff-pack and belongs to design-visual.",
+    "matched_items": [
+      "CODEX_START.md",
+      "vaultforge_code_codex_api_bridge_spec_v_2.md",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0125-context-code-snippets-export.md",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0145-context-design-notes-export.md",
+      "tools\\example-tool-result-build\\cycle-07-run-artifact-requirements\\T0320-requirements-scope-boundaries-export.md"
+    ]
+  },
+  "timestamp": "2026-05-13T00:13:43.373467+00:00",
+  "tool": "visual-code-connect-scope-summarize"
+}

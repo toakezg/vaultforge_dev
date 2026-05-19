@@ -1,0 +1,89 @@
+{
+  "category": "Security Secrets & Privacy",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,filters | outputs=items,counts,source_paths | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "filters"
+    ],
+    "outputs": [
+      "items",
+      "counts",
+      "source_paths"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "security-privacy",
+  "gates": [],
+  "id": "T0641",
+  "implementation_shape": "path-list",
+  "operation": "scan",
+  "safety_tags": [
+    "read-only"
+  ],
+  "scan": {
+    "counts": {
+      "candidate_files": 200,
+      "matched_items": 20
+    },
+    "items": [
+      "tools\\tool-list-builder-workflow.md",
+      "tools\\tool-list-contracts.jsonl",
+      "tools\\tool-list-index.jsonl",
+      "tools\\tool-list.md",
+      "tools\\example-tool-result-build\\catalog-list-cycle-4\\list-output.json",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0045-registry-owner-notes-export.md",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0120-context-changelog-notes-export.md",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0145-context-design-notes-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0445-review-error-handling-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0450-review-review-findings-export.md",
+      "tools\\example-tool-result-build\\cycle-09-docs-git-change\\T0490-docs-decision-notes-export.md",
+      "tools\\example-tool-result-build\\cycle-09-docs-git-change\\T0525-git-commit-notes-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0555-env-python-env-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0560-env-node-env-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0565-env-package-locks-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0570-env-dependency-versions-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0575-env-missing-tools-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0580-env-path-checks-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0585-env-env-vars-export.md",
+      "tools\\example-tool-result-build\\cycle-10-environment-security-privacy\\T0590-env-local-ports-export.md"
+    ],
+    "keywords": [
+      "security",
+      "privacy",
+      "notes",
+      "scan",
+      "secrets",
+      "safety",
+      "controls",
+      "find",
+      "list",
+      "data",
+      "handling",
+      "local"
+    ],
+    "source_root": "F:\\vaultforge\\vaultforge-coding"
+  },
+  "shared_handler_key": "security-privacy::scan::path-list",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:04:29.470706+00:00",
+  "tool": "security-privacy-notes-scan"
+}

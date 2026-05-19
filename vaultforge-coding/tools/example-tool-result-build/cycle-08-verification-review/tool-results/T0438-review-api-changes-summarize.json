@@ -1,0 +1,57 @@
+{
+  "category": "Code Review & Static Analysis",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "max_items"
+    ],
+    "outputs": [
+      "summary",
+      "source_refs",
+      "blockers"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "review",
+  "gates": [],
+  "id": "T0438",
+  "implementation_shape": "handoff-pack",
+  "operation": "summarize",
+  "safety_tags": [
+    "read-only"
+  ],
+  "shared_handler_key": "review::summarize::handoff-pack",
+  "status": "completed",
+  "summary": {
+    "blockers": [],
+    "brief": "review-api-changes-summarize is a handoff summary tool in Code Review & Static Analysis; it uses handoff-pack and belongs to review.",
+    "matched_items": [
+      "CODEX_START.md",
+      "vaultforge_code_codex_api_bridge_spec_v_2.md",
+      "tools\\example-tool-result-build\\cycle-05-registry-workspace-discovery-context-pack\\T0125-context-code-snippets-export.md",
+      "tools\\example-tool-result-build\\cycle-06-context-pack-prompt-handoff-cost-route\\T0165-prompt-reviewer-prompts-export.md",
+      "tools\\example-tool-result-build\\cycle-08-verification-review\\T0355-verify-build-commands-export.md"
+    ]
+  },
+  "timestamp": "2026-05-13T00:03:09.369744+00:00",
+  "tool": "review-api-changes-summarize"
+}

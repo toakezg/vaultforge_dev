@@ -1,0 +1,57 @@
+{
+  "category": "Multi-Agent Builder Packets",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,max_items | outputs=summary,source_refs,blockers | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "scope",
+      "max_items"
+    ],
+    "outputs": [
+      "summary",
+      "source_refs",
+      "blockers"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "builder-packet",
+  "gates": [],
+  "id": "T1418",
+  "implementation_shape": "handoff-pack",
+  "operation": "summarize",
+  "safety_tags": [
+    "read-only"
+  ],
+  "shared_handler_key": "builder-packet::summarize::handoff-pack",
+  "status": "completed",
+  "summary": {
+    "blockers": [],
+    "brief": "builderpkt-verifier-packet-summarize is a handoff summary tool in Multi-Agent Builder Packets; it uses handoff-pack and belongs to builder-packet.",
+    "matched_items": [
+      "tests\\helpers.py",
+      "tests\\test_bridge.py",
+      "tests\\test_config.py",
+      "tests\\test_context_builder.py",
+      "tests\\test_event_writer.py"
+    ]
+  },
+  "timestamp": "2026-05-13T00:11:49.898057+00:00",
+  "tool": "builderpkt-verifier-packet-summarize"
+}

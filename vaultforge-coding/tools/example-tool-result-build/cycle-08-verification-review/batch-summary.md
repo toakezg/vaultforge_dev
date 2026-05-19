@@ -1,0 +1,122 @@
+# VaultForge Tool Batch Summary
+
+- status: completed
+- dry_run: False
+- tool_count: 100
+- gated_tool_count: 5
+
+## Families
+
+- verification: 50
+- review: 50
+
+## Operations
+
+- scan: 20
+- validate: 20
+- summarize: 20
+- diff: 20
+- export: 20
+
+## Tools
+
+- T0351 | verify-build-commands-scan | verification | scan | completed
+- T0352 | verify-build-commands-validate | verification | validate | completed
+- T0353 | verify-build-commands-summarize | verification | summarize | completed
+- T0354 | verify-build-commands-diff | verification | diff | completed
+- T0355 | verify-build-commands-export | verification | export | completed
+- T0356 | verify-test-commands-scan | verification | scan | completed
+- T0357 | verify-test-commands-validate | verification | validate | completed
+- T0358 | verify-test-commands-summarize | verification | summarize | completed
+- T0359 | verify-test-commands-diff | verification | diff | completed
+- T0360 | verify-test-commands-export | verification | export | completed
+- T0361 | verify-lint-commands-scan | verification | scan | completed
+- T0362 | verify-lint-commands-validate | verification | validate | completed
+- T0363 | verify-lint-commands-summarize | verification | summarize | completed
+- T0364 | verify-lint-commands-diff | verification | diff | completed
+- T0365 | verify-lint-commands-export | verification | export | completed
+- T0366 | verify-format-commands-scan | verification | scan | completed
+- T0367 | verify-format-commands-validate | verification | validate | completed
+- T0368 | verify-format-commands-summarize | verification | summarize | completed
+- T0369 | verify-format-commands-diff | verification | diff | completed
+- T0370 | verify-format-commands-export | verification | export | completed
+- T0371 | verify-coverage-runs-scan | verification | scan | completed
+- T0372 | verify-coverage-runs-validate | verification | validate | completed
+- T0373 | verify-coverage-runs-summarize | verification | summarize | completed
+- T0374 | verify-coverage-runs-diff | verification | diff | completed
+- T0375 | verify-coverage-runs-export | verification | export | completed
+- T0376 | verify-smoke-tests-scan | verification | scan | completed
+- T0377 | verify-smoke-tests-validate | verification | validate | completed
+- T0378 | verify-smoke-tests-summarize | verification | summarize | completed
+- T0379 | verify-smoke-tests-diff | verification | diff | completed
+- T0380 | verify-smoke-tests-export | verification | export | completed
+- T0381 | verify-fixture-setup-scan | verification | scan | completed
+- T0382 | verify-fixture-setup-validate | verification | validate | completed
+- T0383 | verify-fixture-setup-summarize | verification | summarize | completed
+- T0384 | verify-fixture-setup-diff | verification | diff | completed
+- T0385 | verify-fixture-setup-export | verification | export | completed
+- T0386 | verify-failure-reproduction-scan | verification | scan | completed
+- T0387 | verify-failure-reproduction-validate | verification | validate | completed
+- T0388 | verify-failure-reproduction-summarize | verification | summarize | completed
+- T0389 | verify-failure-reproduction-diff | verification | diff | completed
+- T0390 | verify-failure-reproduction-export | verification | export | completed
+- T0391 | verify-rerun-plans-scan | verification | scan | completed
+- T0392 | verify-rerun-plans-validate | verification | validate | completed
+- T0393 | verify-rerun-plans-summarize | verification | summarize | completed
+- T0394 | verify-rerun-plans-diff | verification | diff | completed
+- T0395 | verify-rerun-plans-export | verification | export | completed
+- T0396 | verify-test-selection-scan | verification | scan | completed
+- T0397 | verify-test-selection-validate | verification | validate | completed
+- T0398 | verify-test-selection-summarize | verification | summarize | completed
+- T0399 | verify-test-selection-diff | verification | diff | completed
+- T0400 | verify-test-selection-export | verification | export | completed
+- T0401 | review-diff-summaries-scan | review | scan | completed
+- T0402 | review-diff-summaries-validate | review | validate | completed
+- T0403 | review-diff-summaries-summarize | review | summarize | completed
+- T0404 | review-diff-summaries-diff | review | diff | completed
+- T0405 | review-diff-summaries-export | review | export | completed
+- T0406 | review-touched-files-scan | review | scan | completed
+- T0407 | review-touched-files-validate | review | validate | completed
+- T0408 | review-touched-files-summarize | review | summarize | completed
+- T0409 | review-touched-files-diff | review | diff | completed
+- T0410 | review-touched-files-export | review | export | completed
+- T0411 | review-risky-changes-scan | review | scan | completed
+- T0412 | review-risky-changes-validate | review | validate | completed
+- T0413 | review-risky-changes-summarize | review | summarize | completed
+- T0414 | review-risky-changes-diff | review | diff | completed
+- T0415 | review-risky-changes-export | review | export | completed
+- T0416 | review-dead-code-scan | review | scan | completed
+- T0417 | review-dead-code-validate | review | validate | completed
+- T0418 | review-dead-code-summarize | review | summarize | completed
+- T0419 | review-dead-code-diff | review | diff | completed
+- T0420 | review-dead-code-export | review | export | completed
+- T0421 | review-duplicate-logic-scan | review | scan | completed
+- T0422 | review-duplicate-logic-validate | review | validate | completed
+- T0423 | review-duplicate-logic-summarize | review | summarize | completed
+- T0424 | review-duplicate-logic-diff | review | diff | completed
+- T0425 | review-duplicate-logic-export | review | export | completed
+- T0426 | review-style-drift-scan | review | scan | completed
+- T0427 | review-style-drift-validate | review | validate | completed
+- T0428 | review-style-drift-summarize | review | summarize | completed
+- T0429 | review-style-drift-diff | review | diff | completed
+- T0430 | review-style-drift-export | review | export | completed
+- T0431 | review-missing-tests-scan | review | scan | completed
+- T0432 | review-missing-tests-validate | review | validate | completed
+- T0433 | review-missing-tests-summarize | review | summarize | completed
+- T0434 | review-missing-tests-diff | review | diff | completed
+- T0435 | review-missing-tests-export | review | export | completed
+- T0436 | review-api-changes-scan | review | scan | completed
+- T0437 | review-api-changes-validate | review | validate | completed
+- T0438 | review-api-changes-summarize | review | summarize | completed
+- T0439 | review-api-changes-diff | review | diff | completed
+- T0440 | review-api-changes-export | review | export | completed
+- T0441 | review-error-handling-scan | review | scan | completed
+- T0442 | review-error-handling-validate | review | validate | completed
+- T0443 | review-error-handling-summarize | review | summarize | completed
+- T0444 | review-error-handling-diff | review | diff | completed
+- T0445 | review-error-handling-export | review | export | completed
+- T0446 | review-review-findings-scan | review | scan | completed
+- T0447 | review-review-findings-validate | review | validate | completed
+- T0448 | review-review-findings-summarize | review | summarize | completed
+- T0449 | review-review-findings-diff | review | diff | completed
+- T0450 | review-review-findings-export | review | export | completed

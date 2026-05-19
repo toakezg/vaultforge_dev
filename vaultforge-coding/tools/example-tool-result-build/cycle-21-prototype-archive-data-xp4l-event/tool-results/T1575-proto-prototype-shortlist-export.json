@@ -1,0 +1,50 @@
+{
+  "artifact_path": "F:\\vaultforge\\vaultforge-coding\\tools\\example-tool-result-build\\cycle-21-prototype-archive-data-xp4l-event\\T1575-proto-prototype-shortlist-export.md",
+  "category": "Game Web and Frontend Prototype Tools",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,scope,artifact_id,format | outputs=artifact_path,artifact_id,summary | reads=allowlisted repo roots | writes=tools/artifacts;assets/reports | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test;artifact-exists check",
+    "inputs": [
+      "target_root",
+      "scope",
+      "artifact_id",
+      "format"
+    ],
+    "outputs": [
+      "artifact_path",
+      "artifact_id",
+      "summary"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test",
+      "artifact-exists check"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "tools/artifacts",
+      "assets/reports"
+    ]
+  },
+  "dry_run": false,
+  "family": "prototype",
+  "gates": [],
+  "id": "T1575",
+  "implementation_shape": "markdown-report",
+  "operation": "export",
+  "safety_tags": [
+    "preview-write"
+  ],
+  "shared_handler_key": "prototype::export::markdown-report",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:12:55.320502+00:00",
+  "tool": "proto-prototype-shortlist-export"
+}

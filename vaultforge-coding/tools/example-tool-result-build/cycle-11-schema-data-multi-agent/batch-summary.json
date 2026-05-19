@@ -1,0 +1,607 @@
+{
+  "dry_run": false,
+  "status": "completed",
+  "tool_count": 100,
+  "tools": [
+    {
+      "id": "T0651",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "schema-json-files-scan"
+    },
+    {
+      "id": "T0652",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "schema-json-files-validate"
+    },
+    {
+      "id": "T0653",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "schema-json-files-summarize"
+    },
+    {
+      "id": "T0654",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "schema-json-files-diff"
+    },
+    {
+      "id": "T0655",
+      "operation": "export",
+      "status": "completed",
+      "tool": "schema-json-files-export"
+    },
+    {
+      "id": "T0656",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "schema-yaml-files-scan"
+    },
+    {
+      "id": "T0657",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "schema-yaml-files-validate"
+    },
+    {
+      "id": "T0658",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "schema-yaml-files-summarize"
+    },
+    {
+      "id": "T0659",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "schema-yaml-files-diff"
+    },
+    {
+      "id": "T0660",
+      "operation": "export",
+      "status": "completed",
+      "tool": "schema-yaml-files-export"
+    },
+    {
+      "id": "T0661",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "schema-markdown-frontmatter-scan"
+    },
+    {
+      "id": "T0662",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "schema-markdown-frontmatter-validate"
+    },
+    {
+      "id": "T0663",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "schema-markdown-frontmatter-summarize"
+    },
+    {
+      "id": "T0664",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "schema-markdown-frontmatter-diff"
+    },
+    {
+      "id": "T0665",
+      "operation": "export",
+      "status": "completed",
+      "tool": "schema-markdown-frontmatter-export"
+    },
+    {
+      "id": "T0666",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "schema-csv-tables-scan"
+    },
+    {
+      "id": "T0667",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "schema-csv-tables-validate"
+    },
+    {
+      "id": "T0668",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "schema-csv-tables-summarize"
+    },
+    {
+      "id": "T0669",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "schema-csv-tables-diff"
+    },
+    {
+      "id": "T0670",
+      "operation": "export",
+      "status": "completed",
+      "tool": "schema-csv-tables-export"
+    },
+    {
+      "id": "T0671",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "schema-task-records-scan"
+    },
+    {
+      "id": "T0672",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "schema-task-records-validate"
+    },
+    {
+      "id": "T0673",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "schema-task-records-summarize"
+    },
+    {
+      "id": "T0674",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "schema-task-records-diff"
+    },
+    {
+      "id": "T0675",
+      "operation": "export",
+      "status": "completed",
+      "tool": "schema-task-records-export"
+    },
+    {
+      "id": "T0676",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "schema-event-records-scan"
+    },
+    {
+      "id": "T0677",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "schema-event-records-validate"
+    },
+    {
+      "id": "T0678",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "schema-event-records-summarize"
+    },
+    {
+      "id": "T0679",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "schema-event-records-diff"
+    },
+    {
+      "id": "T0680",
+      "operation": "export",
+      "status": "completed",
+      "tool": "schema-event-records-export"
+    },
+    {
+      "id": "T0681",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "schema-config-records-scan"
+    },
+    {
+      "id": "T0682",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "schema-config-records-validate"
+    },
+    {
+      "id": "T0683",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "schema-config-records-summarize"
+    },
+    {
+      "id": "T0684",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "schema-config-records-diff"
+    },
+    {
+      "id": "T0685",
+      "operation": "export",
+      "status": "completed",
+      "tool": "schema-config-records-export"
+    },
+    {
+      "id": "T0686",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "schema-schema-drift-scan"
+    },
+    {
+      "id": "T0687",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "schema-schema-drift-validate"
+    },
+    {
+      "id": "T0688",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "schema-schema-drift-summarize"
+    },
+    {
+      "id": "T0689",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "schema-schema-drift-diff"
+    },
+    {
+      "id": "T0690",
+      "operation": "export",
+      "status": "completed",
+      "tool": "schema-schema-drift-export"
+    },
+    {
+      "id": "T0691",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "schema-id-uniqueness-scan"
+    },
+    {
+      "id": "T0692",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "schema-id-uniqueness-validate"
+    },
+    {
+      "id": "T0693",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "schema-id-uniqueness-summarize"
+    },
+    {
+      "id": "T0694",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "schema-id-uniqueness-diff"
+    },
+    {
+      "id": "T0695",
+      "operation": "export",
+      "status": "completed",
+      "tool": "schema-id-uniqueness-export"
+    },
+    {
+      "id": "T0696",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "schema-date-fields-scan"
+    },
+    {
+      "id": "T0697",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "schema-date-fields-validate"
+    },
+    {
+      "id": "T0698",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "schema-date-fields-summarize"
+    },
+    {
+      "id": "T0699",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "schema-date-fields-diff"
+    },
+    {
+      "id": "T0700",
+      "operation": "export",
+      "status": "completed",
+      "tool": "schema-date-fields-export"
+    },
+    {
+      "id": "T0701",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "agents-agent-roles-scan"
+    },
+    {
+      "id": "T0702",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "agents-agent-roles-validate"
+    },
+    {
+      "id": "T0703",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "agents-agent-roles-summarize"
+    },
+    {
+      "id": "T0704",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "agents-agent-roles-diff"
+    },
+    {
+      "id": "T0705",
+      "operation": "export",
+      "status": "completed",
+      "tool": "agents-agent-roles-export"
+    },
+    {
+      "id": "T0706",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "agents-task-slices-scan"
+    },
+    {
+      "id": "T0707",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "agents-task-slices-validate"
+    },
+    {
+      "id": "T0708",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "agents-task-slices-summarize"
+    },
+    {
+      "id": "T0709",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "agents-task-slices-diff"
+    },
+    {
+      "id": "T0710",
+      "operation": "export",
+      "status": "completed",
+      "tool": "agents-task-slices-export"
+    },
+    {
+      "id": "T0711",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "agents-shared-context-scan"
+    },
+    {
+      "id": "T0712",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "agents-shared-context-validate"
+    },
+    {
+      "id": "T0713",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "agents-shared-context-summarize"
+    },
+    {
+      "id": "T0714",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "agents-shared-context-diff"
+    },
+    {
+      "id": "T0715",
+      "operation": "export",
+      "status": "completed",
+      "tool": "agents-shared-context-export"
+    },
+    {
+      "id": "T0716",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "agents-handoff-queues-scan"
+    },
+    {
+      "id": "T0717",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "agents-handoff-queues-validate"
+    },
+    {
+      "id": "T0718",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "agents-handoff-queues-summarize"
+    },
+    {
+      "id": "T0719",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "agents-handoff-queues-diff"
+    },
+    {
+      "id": "T0720",
+      "operation": "export",
+      "status": "completed",
+      "tool": "agents-handoff-queues-export"
+    },
+    {
+      "id": "T0721",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "agents-ownership-maps-scan"
+    },
+    {
+      "id": "T0722",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "agents-ownership-maps-validate"
+    },
+    {
+      "id": "T0723",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "agents-ownership-maps-summarize"
+    },
+    {
+      "id": "T0724",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "agents-ownership-maps-diff"
+    },
+    {
+      "id": "T0725",
+      "operation": "export",
+      "status": "completed",
+      "tool": "agents-ownership-maps-export"
+    },
+    {
+      "id": "T0726",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "agents-conflict-risks-scan"
+    },
+    {
+      "id": "T0727",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "agents-conflict-risks-validate"
+    },
+    {
+      "id": "T0728",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "agents-conflict-risks-summarize"
+    },
+    {
+      "id": "T0729",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "agents-conflict-risks-diff"
+    },
+    {
+      "id": "T0730",
+      "operation": "export",
+      "status": "completed",
+      "tool": "agents-conflict-risks-export"
+    },
+    {
+      "id": "T0731",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "agents-progress-states-scan"
+    },
+    {
+      "id": "T0732",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "agents-progress-states-validate"
+    },
+    {
+      "id": "T0733",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "agents-progress-states-summarize"
+    },
+    {
+      "id": "T0734",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "agents-progress-states-diff"
+    },
+    {
+      "id": "T0735",
+      "operation": "export",
+      "status": "completed",
+      "tool": "agents-progress-states-export"
+    },
+    {
+      "id": "T0736",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "agents-review-gates-scan"
+    },
+    {
+      "id": "T0737",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "agents-review-gates-validate"
+    },
+    {
+      "id": "T0738",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "agents-review-gates-summarize"
+    },
+    {
+      "id": "T0739",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "agents-review-gates-diff"
+    },
+    {
+      "id": "T0740",
+      "operation": "export",
+      "status": "completed",
+      "tool": "agents-review-gates-export"
+    },
+    {
+      "id": "T0741",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "agents-parallel-batches-scan"
+    },
+    {
+      "id": "T0742",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "agents-parallel-batches-validate"
+    },
+    {
+      "id": "T0743",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "agents-parallel-batches-summarize"
+    },
+    {
+      "id": "T0744",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "agents-parallel-batches-diff"
+    },
+    {
+      "id": "T0745",
+      "operation": "export",
+      "status": "completed",
+      "tool": "agents-parallel-batches-export"
+    },
+    {
+      "id": "T0746",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "agents-merge-notes-scan"
+    },
+    {
+      "id": "T0747",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "agents-merge-notes-validate"
+    },
+    {
+      "id": "T0748",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "agents-merge-notes-summarize"
+    },
+    {
+      "id": "T0749",
+      "operation": "diff",
+      "status": "completed",
+      "tool": "agents-merge-notes-diff"
+    },
+    {
+      "id": "T0750",
+      "operation": "export",
+      "status": "completed",
+      "tool": "agents-merge-notes-export"
+    }
+  ]
+}

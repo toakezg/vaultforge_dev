@@ -1,0 +1,57 @@
+{
+  "category": "XP4Life Quest and Event Tracking",
+  "contract": {
+    "blocked": [
+      "arbitrary shell",
+      "arbitrary paths",
+      "secret printing",
+      "destructive writes"
+    ],
+    "contract_line": "inputs=target_root,item_id,available_lanes,constraints | outputs=target_lane,confidence,blockers,required_proof | reads=allowlisted repo roots | writes=none | blocked=arbitrary shell;arbitrary paths;secret printing;destructive writes | proof=parse fixture;bad-input test;blocked-path test",
+    "inputs": [
+      "target_root",
+      "item_id",
+      "available_lanes",
+      "constraints"
+    ],
+    "outputs": [
+      "target_lane",
+      "confidence",
+      "blockers",
+      "required_proof"
+    ],
+    "proof": [
+      "parse fixture",
+      "bad-input test",
+      "blocked-path test"
+    ],
+    "reads": [
+      "allowlisted repo roots"
+    ],
+    "writes": [
+      "none"
+    ]
+  },
+  "dry_run": false,
+  "family": "xp4l-event",
+  "gates": [],
+  "id": "T1664",
+  "implementation_shape": "routing-decision",
+  "operation": "route",
+  "route": {
+    "blockers": [],
+    "confidence": "medium",
+    "required_proof": [
+      "fixture run",
+      "blocked-path negative test"
+    ],
+    "target_lane": "xp4l-event"
+  },
+  "safety_tags": [
+    "read-only"
+  ],
+  "shared_handler_key": "xp4l-event::route::routing-decision",
+  "status": "completed",
+  "timestamp": "2026-05-13T00:13:12.165591+00:00",
+  "tool": "xp4l-reward-pools-route"
+}

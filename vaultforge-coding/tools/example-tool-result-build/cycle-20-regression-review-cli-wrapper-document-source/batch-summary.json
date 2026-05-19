@@ -1,0 +1,607 @@
+{
+  "dry_run": false,
+  "status": "completed",
+  "tool_count": 100,
+  "tools": [
+    {
+      "id": "T1471",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "regress-contract-drift-scan"
+    },
+    {
+      "id": "T1472",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "regress-contract-drift-validate"
+    },
+    {
+      "id": "T1473",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "regress-contract-drift-summarize"
+    },
+    {
+      "id": "T1474",
+      "operation": "route",
+      "status": "completed",
+      "tool": "regress-contract-drift-route"
+    },
+    {
+      "id": "T1475",
+      "operation": "export",
+      "status": "completed",
+      "tool": "regress-contract-drift-export"
+    },
+    {
+      "id": "T1476",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "regress-safety-regression-scan"
+    },
+    {
+      "id": "T1477",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "regress-safety-regression-validate"
+    },
+    {
+      "id": "T1478",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "regress-safety-regression-summarize"
+    },
+    {
+      "id": "T1479",
+      "operation": "route",
+      "status": "completed",
+      "tool": "regress-safety-regression-route"
+    },
+    {
+      "id": "T1480",
+      "operation": "export",
+      "status": "completed",
+      "tool": "regress-safety-regression-export"
+    },
+    {
+      "id": "T1481",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "regress-output-format-drift-scan"
+    },
+    {
+      "id": "T1482",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "regress-output-format-drift-validate"
+    },
+    {
+      "id": "T1483",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "regress-output-format-drift-summarize"
+    },
+    {
+      "id": "T1484",
+      "operation": "route",
+      "status": "completed",
+      "tool": "regress-output-format-drift-route"
+    },
+    {
+      "id": "T1485",
+      "operation": "export",
+      "status": "completed",
+      "tool": "regress-output-format-drift-export"
+    },
+    {
+      "id": "T1486",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "regress-error-clarity-scan"
+    },
+    {
+      "id": "T1487",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "regress-error-clarity-validate"
+    },
+    {
+      "id": "T1488",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "regress-error-clarity-summarize"
+    },
+    {
+      "id": "T1489",
+      "operation": "route",
+      "status": "completed",
+      "tool": "regress-error-clarity-route"
+    },
+    {
+      "id": "T1490",
+      "operation": "export",
+      "status": "completed",
+      "tool": "regress-error-clarity-export"
+    },
+    {
+      "id": "T1491",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "regress-artifact-evidence-scan"
+    },
+    {
+      "id": "T1492",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "regress-artifact-evidence-validate"
+    },
+    {
+      "id": "T1493",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "regress-artifact-evidence-summarize"
+    },
+    {
+      "id": "T1494",
+      "operation": "route",
+      "status": "completed",
+      "tool": "regress-artifact-evidence-route"
+    },
+    {
+      "id": "T1495",
+      "operation": "export",
+      "status": "completed",
+      "tool": "regress-artifact-evidence-export"
+    },
+    {
+      "id": "T1496",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "cliwrap-cli-entrypoints-scan"
+    },
+    {
+      "id": "T1497",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "cliwrap-cli-entrypoints-validate"
+    },
+    {
+      "id": "T1498",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "cliwrap-cli-entrypoints-summarize"
+    },
+    {
+      "id": "T1499",
+      "operation": "route",
+      "status": "completed",
+      "tool": "cliwrap-cli-entrypoints-route"
+    },
+    {
+      "id": "T1500",
+      "operation": "export",
+      "status": "completed",
+      "tool": "cliwrap-cli-entrypoints-export"
+    },
+    {
+      "id": "T1501",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "cliwrap-argument-parsers-scan"
+    },
+    {
+      "id": "T1502",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "cliwrap-argument-parsers-validate"
+    },
+    {
+      "id": "T1503",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "cliwrap-argument-parsers-summarize"
+    },
+    {
+      "id": "T1504",
+      "operation": "route",
+      "status": "completed",
+      "tool": "cliwrap-argument-parsers-route"
+    },
+    {
+      "id": "T1505",
+      "operation": "export",
+      "status": "completed",
+      "tool": "cliwrap-argument-parsers-export"
+    },
+    {
+      "id": "T1506",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "cliwrap-dry-run-modes-scan"
+    },
+    {
+      "id": "T1507",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "cliwrap-dry-run-modes-validate"
+    },
+    {
+      "id": "T1508",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "cliwrap-dry-run-modes-summarize"
+    },
+    {
+      "id": "T1509",
+      "operation": "route",
+      "status": "completed",
+      "tool": "cliwrap-dry-run-modes-route"
+    },
+    {
+      "id": "T1510",
+      "operation": "export",
+      "status": "completed",
+      "tool": "cliwrap-dry-run-modes-export"
+    },
+    {
+      "id": "T1511",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "cliwrap-exit-codes-scan"
+    },
+    {
+      "id": "T1512",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "cliwrap-exit-codes-validate"
+    },
+    {
+      "id": "T1513",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "cliwrap-exit-codes-summarize"
+    },
+    {
+      "id": "T1514",
+      "operation": "route",
+      "status": "completed",
+      "tool": "cliwrap-exit-codes-route"
+    },
+    {
+      "id": "T1515",
+      "operation": "export",
+      "status": "completed",
+      "tool": "cliwrap-exit-codes-export"
+    },
+    {
+      "id": "T1516",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "cliwrap-stdout-formats-scan"
+    },
+    {
+      "id": "T1517",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "cliwrap-stdout-formats-validate"
+    },
+    {
+      "id": "T1518",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "cliwrap-stdout-formats-summarize"
+    },
+    {
+      "id": "T1519",
+      "operation": "route",
+      "status": "completed",
+      "tool": "cliwrap-stdout-formats-route"
+    },
+    {
+      "id": "T1520",
+      "operation": "export",
+      "status": "completed",
+      "tool": "cliwrap-stdout-formats-export"
+    },
+    {
+      "id": "T1521",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "cliwrap-stderr-formats-scan"
+    },
+    {
+      "id": "T1522",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "cliwrap-stderr-formats-validate"
+    },
+    {
+      "id": "T1523",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "cliwrap-stderr-formats-summarize"
+    },
+    {
+      "id": "T1524",
+      "operation": "route",
+      "status": "completed",
+      "tool": "cliwrap-stderr-formats-route"
+    },
+    {
+      "id": "T1525",
+      "operation": "export",
+      "status": "completed",
+      "tool": "cliwrap-stderr-formats-export"
+    },
+    {
+      "id": "T1526",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "cliwrap-wrapper-sync-scan"
+    },
+    {
+      "id": "T1527",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "cliwrap-wrapper-sync-validate"
+    },
+    {
+      "id": "T1528",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "cliwrap-wrapper-sync-summarize"
+    },
+    {
+      "id": "T1529",
+      "operation": "route",
+      "status": "completed",
+      "tool": "cliwrap-wrapper-sync-route"
+    },
+    {
+      "id": "T1530",
+      "operation": "export",
+      "status": "completed",
+      "tool": "cliwrap-wrapper-sync-export"
+    },
+    {
+      "id": "T1531",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "cliwrap-installation-checks-scan"
+    },
+    {
+      "id": "T1532",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "cliwrap-installation-checks-validate"
+    },
+    {
+      "id": "T1533",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "cliwrap-installation-checks-summarize"
+    },
+    {
+      "id": "T1534",
+      "operation": "route",
+      "status": "completed",
+      "tool": "cliwrap-installation-checks-route"
+    },
+    {
+      "id": "T1535",
+      "operation": "export",
+      "status": "completed",
+      "tool": "cliwrap-installation-checks-export"
+    },
+    {
+      "id": "T1536",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docsrc-pdf-text-paths-scan"
+    },
+    {
+      "id": "T1537",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docsrc-pdf-text-paths-validate"
+    },
+    {
+      "id": "T1538",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docsrc-pdf-text-paths-summarize"
+    },
+    {
+      "id": "T1539",
+      "operation": "route",
+      "status": "completed",
+      "tool": "docsrc-pdf-text-paths-route"
+    },
+    {
+      "id": "T1540",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docsrc-pdf-text-paths-export"
+    },
+    {
+      "id": "T1541",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docsrc-pdf-render-paths-scan"
+    },
+    {
+      "id": "T1542",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docsrc-pdf-render-paths-validate"
+    },
+    {
+      "id": "T1543",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docsrc-pdf-render-paths-summarize"
+    },
+    {
+      "id": "T1544",
+      "operation": "route",
+      "status": "completed",
+      "tool": "docsrc-pdf-render-paths-route"
+    },
+    {
+      "id": "T1545",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docsrc-pdf-render-paths-export"
+    },
+    {
+      "id": "T1546",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docsrc-source-excerpts-scan"
+    },
+    {
+      "id": "T1547",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docsrc-source-excerpts-validate"
+    },
+    {
+      "id": "T1548",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docsrc-source-excerpts-summarize"
+    },
+    {
+      "id": "T1549",
+      "operation": "route",
+      "status": "completed",
+      "tool": "docsrc-source-excerpts-route"
+    },
+    {
+      "id": "T1550",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docsrc-source-excerpts-export"
+    },
+    {
+      "id": "T1551",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docsrc-scan-fallbacks-scan"
+    },
+    {
+      "id": "T1552",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docsrc-scan-fallbacks-validate"
+    },
+    {
+      "id": "T1553",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docsrc-scan-fallbacks-summarize"
+    },
+    {
+      "id": "T1554",
+      "operation": "route",
+      "status": "completed",
+      "tool": "docsrc-scan-fallbacks-route"
+    },
+    {
+      "id": "T1555",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docsrc-scan-fallbacks-export"
+    },
+    {
+      "id": "T1556",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docsrc-note-transforms-scan"
+    },
+    {
+      "id": "T1557",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docsrc-note-transforms-validate"
+    },
+    {
+      "id": "T1558",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docsrc-note-transforms-summarize"
+    },
+    {
+      "id": "T1559",
+      "operation": "route",
+      "status": "completed",
+      "tool": "docsrc-note-transforms-route"
+    },
+    {
+      "id": "T1560",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docsrc-note-transforms-export"
+    },
+    {
+      "id": "T1561",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docsrc-report-drafts-scan"
+    },
+    {
+      "id": "T1562",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docsrc-report-drafts-validate"
+    },
+    {
+      "id": "T1563",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docsrc-report-drafts-summarize"
+    },
+    {
+      "id": "T1564",
+      "operation": "route",
+      "status": "completed",
+      "tool": "docsrc-report-drafts-route"
+    },
+    {
+      "id": "T1565",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docsrc-report-drafts-export"
+    },
+    {
+      "id": "T1566",
+      "operation": "scan",
+      "status": "completed",
+      "tool": "docsrc-table-extraction-scan"
+    },
+    {
+      "id": "T1567",
+      "operation": "validate",
+      "status": "completed",
+      "tool": "docsrc-table-extraction-validate"
+    },
+    {
+      "id": "T1568",
+      "operation": "summarize",
+      "status": "completed",
+      "tool": "docsrc-table-extraction-summarize"
+    },
+    {
+      "id": "T1569",
+      "operation": "route",
+      "status": "completed",
+      "tool": "docsrc-table-extraction-route"
+    },
+    {
+      "id": "T1570",
+      "operation": "export",
+      "status": "completed",
+      "tool": "docsrc-table-extraction-export"
+    }
+  ]
+}
