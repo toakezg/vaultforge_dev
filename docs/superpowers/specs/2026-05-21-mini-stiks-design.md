@@ -20,7 +20,9 @@ the engine contract.
 - Force `--quality high` for all `mini-stiks` runs.
 - Prepend a built-in mini-sticker prompt brief so the user does not need to
   repeat the same constraints on every run.
-- Keep output routing on the existing `vaultforge-image\output\` path.
+- Keep `mini-stiks` input/output routing inside a lane-local
+  `vaultforge-image\mini-stiks\i-o\` tree.
+- Add `--batch` support for folder-based runs.
 - Make the first pass easy to test with dry-run and one live smoke run.
 
 ## Non-Goals
@@ -28,7 +30,6 @@ the engine contract.
 - No shared engine changes in this pass.
 - No pool system yet.
 - No loop launcher implementation yet.
-- No output root split for `mini-stiks`.
 - No future engine alias work unless the wrapper-only approach proves too
   narrow later.
 
@@ -45,6 +46,7 @@ The canonical user-facing form should be:
 run_mini_stiks.bat --mini-stiks micro "user prompt here"
 run_mini_stiks.bat --mini-stiks small "user prompt here"
 run_mini_stiks.bat --mini-stiks medium "user prompt here"
+run_mini_stiks.bat --batch
 ```
 
 The launcher should:
@@ -54,6 +56,8 @@ The launcher should:
 - add `--quality high`
 - prepend the built-in sticker brief to the user prompt
 - forward the final args into the existing lane image path
+- when `--batch` is used, read prompt files from the lane-local active input
+  folder
 
 ### Prompt composition
 
@@ -76,11 +80,36 @@ The composed prompt order should be:
 That order keeps the run focused on sticker constraints first while still
 letting the user control the subject.
 
+### Pathing and I/O layout
+
+The `mini-stiks` sublane should use its own lane-local pathing system so the
+user can keep the input/output structure consistent and easy to follow.
+
+Expected structure:
+
+```text
+.\i-o\in
+.\i-o\in\active        (default)
+.\i-o\in\templates
+.\i-o\in\archive
+
+.\i-o\out
+.\i-o\out\generated    (default)
+.\i-o\out\runs         (not yet implemented)
+.\i-o\out\runs\*.json  (not yet implemented)
+```
+
+For the first pass:
+
+- `.\i-o\in\active` is the default batch input folder
+- `.\i-o\out\generated` is the default output folder
+- `runs\` and its JSON contents are reserved for later
+
 ### Output and routing
 
-The new launcher should not create a new output root. It should reuse the
-existing `vaultforge-image\output\` lane folder so mini-stiks results stay in
-the same review path as other image-lane generations.
+The new launcher should not write directly to the lane root output folder for
+this sublane. It should route through the `mini-stiks\i-o\` tree so the
+sub-lane can keep its own input and output organization.
 
 If filename prefixes or other mode markers are needed for clarity, they should
 stay lightweight and local to the launcher. The wrapper should not force a new
@@ -91,8 +120,9 @@ directory layout in this pass.
 - `vaultforge-image\mini-stiks\run_mini_stiks.bat`
 - `vaultforge-image\mini-stiks\README.md`
 - `vaultforge-image\mini-stiks\mini-stiks_idea-build.txt`
-- `vaultforge-image\README.md`
+- `vaultforge-image\mini-stiks\i-o\`
 - `vaultforge-image\CHANGELOG.md`
+- `vaultforge-image\README.md`
 
 The existing idea note remains the source seed for the mini-stiks contract.
 
@@ -110,7 +140,7 @@ The first pass should be verified in two layers:
 2. Live smoke run
    - run one low-risk sample prompt in a single mode
    - confirm the lane key is used
-   - confirm an image is written under `vaultforge-image\output\`
+   - confirm an image is written under `vaultforge-image\mini-stiks\i-o\out\generated\`
    - confirm the mode-specific prompt behavior is visible in the run output or
      sidecar metadata if present
 
