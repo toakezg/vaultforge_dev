@@ -34,6 +34,9 @@ Expected consumers:
 - `vaultforge-art` for art experiments and playground output
 - `vaultforge-business` for client logos, icons, covers, brand boards, and galleries
 - future lanes such as icons, social, print, or project-specific packs
+- `vaultforge-image` for image generation.
+- `vaultforge-icon` for icon dedicated imagery.
+
 
 ## Current Status
 
