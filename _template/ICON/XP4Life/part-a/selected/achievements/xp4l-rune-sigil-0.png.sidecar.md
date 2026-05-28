@@ -1,7 +1,0 @@
----
-MC-colors: []
-MC-size:
-  - 1024
-  - 1024
-MC-last-updated: 2026-04-15T07:09:37.069Z
----

@@ -1,1 +1,0 @@
-![[ICON/XP4Life/part-a/selected/quests/xp4l-quest-scroll.png|201]]

@@ -1,1 +1,0 @@
-A minimal colored Glyph that can represent the task  pipeline stabilization with Colors made to stand out and grab the eye

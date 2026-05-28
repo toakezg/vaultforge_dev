@@ -1,2 +1,0 @@
-$prompt = Get-Content .\simple-plumber-logo.txt -Raw
-.\run_business.bat $prompt
