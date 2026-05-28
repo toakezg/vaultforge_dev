@@ -140,7 +140,7 @@ QR/
 Reference/
 desktop.ini
 h --force-with-lease origin dev
-
+_template/
 
 # ART
 vaultforge-art/inbox/
