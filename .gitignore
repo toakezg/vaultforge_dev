@@ -244,3 +244,9 @@ vaultforge-xp4l/tests/
 vaultforge-xp4l/.live_run/
 
 
+
+
+
+
+# Ignore Smart Environment folder
+.smart-env
